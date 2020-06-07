@@ -15,8 +15,21 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.ve
         public abstract ICollection<IFlowchartSequenceNode<IPipelineTool>> InputNodes { get; set; }
         public abstract ICollection<IFlowchartSequenceNode<IPipelineTool>> OutputNodes { get; set; }
         public abstract string FlowChartSequenceNodeId { get; set; }
-        public abstract EvaluateFlowchartNode ProcessNodeEvaulator { get; set; }
+        public abstract EvaluateFlowchartNode InjectedNodeEvaluator { get; set; }
+        public IPipelineTool PipelineTool { get; set; }
 
-        public abstract void EvaluateNode();
+        protected virtual void EvaluateNode()
+        {
+            if(InjectedNodeEvaluator != null)
+            {
+                foreach(var registeredDelegate in InjectedNodeEvaluator.GetInvocationList())
+                    registeredDelegate.Method?.Invoke(null,null);
+            }
+        }
+
+        void IFlowchartSequenceNode<IPipelineTool>.EvaluateNode()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

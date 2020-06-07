@@ -28,11 +28,8 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/com.ataxlab.alfwm%40Local/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/electricruciblenugets/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets%40Local/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/mrgncy/nuget/v3/index.json": {}
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/current/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets%40Local/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
@@ -101,11 +98,8 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/com.ataxlab.alfwm%40Local/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/electricruciblenugets/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets%40Local/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/mrgncy/nuget/v3/index.json": {}
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/current/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets%40Local/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
@@ -173,11 +167,8 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/com.ataxlab.alfwm%40Local/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/electricruciblenugets/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets%40Local/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/mrgncy/nuget/v3/index.json": {}
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/current/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets%40Local/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {

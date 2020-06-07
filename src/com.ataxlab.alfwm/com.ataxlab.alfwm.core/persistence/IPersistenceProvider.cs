@@ -41,7 +41,7 @@ namespace com.ataxlab.alfwm.core.persistence
         /// <param name="config"></param>
         /// <param name="configureProviderOperation"></param>
         /// <returns></returns>
-        TConfigureResult ConfigureProvider<TConfigureResult, TProviderConfiguration>(TProviderConfiguration config, Func<TConfigureResult, TProviderConfiguration> configureProviderOperation);
+        TConfigureResult ConfigureProvider<TConfigureResult, TProviderConfiguration>(TProviderConfiguration config, Func<TProviderConfiguration, TConfigureResult> configureProviderOperation);
 
         /// <summary>
         /// 
@@ -53,7 +53,7 @@ namespace com.ataxlab.alfwm.core.persistence
         /// <param name="createExpression"></param>
         /// <param name="createOperation"></param>
         /// <returns></returns>
-        TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, Func<TCreateResult, TCreateExpression, TCreatedEntity> createOperation = null);
+        TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, Func<TCreateExpression, TCreatedEntity, TCreateResult> createOperation = null);
 
         /// <summary>
         /// support providing a method implementing the operation
@@ -68,7 +68,7 @@ namespace com.ataxlab.alfwm.core.persistence
         /// <param name="updateExpression"></param>
         /// <param name="updateOperation"></param>
         /// <returns></returns>
-        TUpdateResult Update<TUpdatedEntity, TUpdateExpression, TUpdateResult>(TUpdatedEntity entity, TUpdateExpression updateExpression, Func<TUpdateResult, TUpdateExpression, TUpdatedEntity> updateOperation = null);
+        TUpdateResult Update<TUpdatedEntity, TUpdateExpression, TUpdateResult>(TUpdatedEntity entity, TUpdateExpression updateExpression, Func<TUpdateExpression, TUpdatedEntity, TUpdateResult> updateOperation = null);
 
         /// <summary>
         /// 
@@ -80,7 +80,7 @@ namespace com.ataxlab.alfwm.core.persistence
         /// <param name="deleteExpression"></param>
         /// <param name="deleeOperation"></param>
         /// <returns></returns>
-        TDeleteOperationResult Delete<TDeletedEntity, TDeleteExpression, TDeleteOperationResult>(TDeletedEntity entity, TDeleteExpression deleteExpression, Func<TDeleteOperationResult, TDeletedEntity, TDeleteExpression> deleeOperation = null);
+        TDeleteOperationResult Delete<TDeletedEntity, TDeleteExpression, TDeleteOperationResult>(TDeletedEntity entity, TDeleteExpression deleteExpression, Func<TDeletedEntity, TDeleteExpression, TDeleteOperationResult> deleeOperation = null);
 
         /// <summary>
         /// designed to delegate read operations and specification 
@@ -92,7 +92,7 @@ namespace com.ataxlab.alfwm.core.persistence
         /// <param name="searchExpression"></param>
         /// <param name="readOperation"></param>
         /// <returns></returns>
-        TReadOperationResult Read<TReadOperationResult, TSearchExpression>(TSearchExpression searchExpression, Func<TReadOperationResult, TSearchExpression> readOperation);
+        TReadOperationResult Read<TReadOperationResult, TSearchExpression>(TSearchExpression searchExpression, Func<TSearchExpression, TReadOperationResult> readOperation);
 
         /// <summary>
         /// support input caching
@@ -139,7 +139,7 @@ namespace com.ataxlab.alfwm.core.persistence
         /// <param name="queue"></param>
         /// <param name="setInputQueueOperation"></param>
         /// <returns></returns>
-        TSetInputQueueResult SetInputQueue<TSetInputQueueResult, TInputQueue>(TInputQueue queue, Func<TSetInputQueueResult, TInputQueue> setInputQueueOperation = null);
+        TSetInputQueueResult SetInputQueue<TSetInputQueueResult, TInputQueue>(TInputQueue queue, Func<TInputQueue, TSetInputQueueResult> setInputQueueOperation = null);
 
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace com.ataxlab.alfwm.core.persistence
         /// <param name="queue"></param>
         /// <param name="setOutputQueueOperation"></param>
         /// <returns></returns>
-        TSetOutputQueueResult SetOutputQueue<TSetOutputQueueResult, TOutputQueue>(TOutputQueue queue, Func<TSetOutputQueueResult, TOutputQueue> setOutputQueueOperation = null);
+        TSetOutputQueueResult SetOutputQueue<TSetOutputQueueResult, TOutputQueue>(TOutputQueue queue, Func<TOutputQueue, TSetOutputQueueResult> setOutputQueueOperation = null);
 
     }
 }

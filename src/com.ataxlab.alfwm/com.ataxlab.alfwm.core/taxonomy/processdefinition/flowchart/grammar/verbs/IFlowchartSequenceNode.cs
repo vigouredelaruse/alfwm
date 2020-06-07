@@ -18,12 +18,17 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.ve
     /// </summary>
     public interface IFlowchartSequenceNode<TFlowchartNode> where TFlowchartNode : IPipelineTool
     {
+        /// <summary>
+        /// the associated pipeline tooling
+        /// </summary>
+        TFlowchartNode PipelineTool { get; set; }
+
         string FlowChartSequenceNodeId { get; set; }
 
         /// <summary>
         /// entry point for logic executed by the node
         /// </summary>
-        EvaluateFlowchartNode ProcessNodeEvaulator { get; set; }
+        EvaluateFlowchartNode InjectedNodeEvaluator { get; set; }
 
         /// <summary>
         /// canonical parameterless evaluator
