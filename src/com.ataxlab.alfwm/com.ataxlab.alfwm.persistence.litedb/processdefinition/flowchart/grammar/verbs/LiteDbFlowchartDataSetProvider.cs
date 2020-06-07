@@ -6,25 +6,35 @@ using System.Text;
 namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.grammar.verbs
 {
 
-    public class LiteDbFlowchartDataSetProvider : FlowchartDataSetProvider
+    public class LiteDbFlowchartDataSetProvider : FlowchartDataSetProvider, ILiteDbFlowchartDataSetProvider
     {
+
+        public LiteDbFlowchartDataSetProviderConfiguration LiteDbProviderConfiguration {get; set; }
+
         public override string PersistenceProviderId { get; set; }
         public override string PersistenceProviderName { get; set; }
         public override string PersistenceProviderDisplayName { get; set; }
         public override string PersistenceProviderHostClassName { get; set; }
         public override string PersistenceProviderAssemblyName { get; set; }
 
-        public override TConfigureResult ConfigureProvider<TConfigureResult, TProviderConfiguration>(TProviderConfiguration config, Func<TConfigureResult, TProviderConfiguration> configureProviderOperation)
+        public override LiteDbFlowchartDataSetProviderConfigResult ConfigureProvider<LiteDbFlowchartDataSetProviderConfigResult, LiteDbFlowchartDataSetProviderConfiguration>(LiteDbFlowchartDataSetProviderConfiguration config, Func<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult> configureProviderOperation)
+        {
+            this.LiteDbProviderConfiguration = config;
+
+            return new LiteDbFlowchartDataSetProviderConfigResult()
+            {
+
+            };
+
+
+        }
+
+        public override TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, Func<TCreateExpression, TCreatedEntity, TCreateResult> createOperation = null)
         {
             throw new NotImplementedException();
         }
 
-        public override TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, Func<TCreateResult, TCreateExpression, TCreatedEntity> createOperation = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override TDeleteOperationResult Delete<TDeletedEntity, TDeleteExpression, TDeleteOperationResult>(TDeletedEntity entity, TDeleteExpression deleteExpression, Func<TDeleteOperationResult, TDeletedEntity, TDeleteExpression> deleeOperation = null)
+        public override TDeleteOperationResult Delete<TDeletedEntity, TDeleteExpression, TDeleteOperationResult>(TDeletedEntity entity, TDeleteExpression deleteExpression, Func<TDeletedEntity, TDeleteExpression, TDeleteOperationResult> deleeOperation = null)
         {
             throw new NotImplementedException();
         }
@@ -49,22 +59,22 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
             throw new NotImplementedException();
         }
 
-        public override TReadOperationResult Read<TReadOperationResult, TSearchExpression>(TSearchExpression searchExpression, Func<TReadOperationResult, TSearchExpression> readOperation)
+        public override TReadOperationResult Read<TReadOperationResult, TSearchExpression>(TSearchExpression searchExpression, Func<TSearchExpression, TReadOperationResult> readOperation)
         {
             throw new NotImplementedException();
         }
 
-        public override TSetInputQueueResult SetInputQueue<TSetInputQueueResult, TInputQueue>(TInputQueue queue, Func<TSetInputQueueResult, TInputQueue> setInputQueueOperation = null)
+        public override TSetInputQueueResult SetInputQueue<TSetInputQueueResult, TInputQueue>(TInputQueue queue, Func<TInputQueue, TSetInputQueueResult> setInputQueueOperation = null)
         {
             throw new NotImplementedException();
         }
 
-        public override TSetOutputQueueResult SetOutputQueue<TSetOutputQueueResult, TOutputQueue>(TOutputQueue queue, Func<TSetOutputQueueResult, TOutputQueue> setOutputQueueOperation = null)
+        public override TSetOutputQueueResult SetOutputQueue<TSetOutputQueueResult, TOutputQueue>(TOutputQueue queue, Func<TOutputQueue, TSetOutputQueueResult> setOutputQueueOperation = null)
         {
             throw new NotImplementedException();
         }
 
-        public override TUpdateResult Update<TUpdatedEntity, TUpdateExpression, TUpdateResult>(TUpdatedEntity entity, TUpdateExpression updateExpression, Func<TUpdateResult, TUpdateExpression, TUpdatedEntity> updateOperation = null)
+        public override TUpdateResult Update<TUpdatedEntity, TUpdateExpression, TUpdateResult>(TUpdatedEntity entity, TUpdateExpression updateExpression, Func<TUpdateExpression, TUpdatedEntity, TUpdateResult> updateOperation = null)
         {
             throw new NotImplementedException();
         }
