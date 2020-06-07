@@ -1,20 +1,46 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+current modernity in system design is best left with the concise description, complexity
+
+i am developing an application that runs on windows (at first) and integrates data flows
+from hetregenous sources while permitting random users to conduct analytics on pipelines
+consructed from these random data flows
+
+the requirement for something like this will lead you towards providing a palette of 
+data sources, a palette of operations, and a mechanism for property mapping and projection
+of arbitrary objects
+
+additionally the ingress and egress operations need to be schedulable and filterable,
+re-authenticate semi-autonomously, expose a human readable log etc
+
+long before the clown wars looked obsolete one would have approached the problem 
+with a few asynchronous interfaces and a service oriented architecture
+
+but autonomous services need autonomous management. that's where this effort comes in
+
+this is not a rebel open source full featured workflow manager. it's a low footprint workflow
+manager for coders. 
+
+enjoy
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+Current state as of the timestamp on the document: 
+  * building towards supporting flowchart type process definitions, with bpm obviously in mind
+  * nothing resembling running code with a 'built-in' gui currently in sight
+  * major wins, specification of an 'active compound document' subsystem wherein ingressed data 
+    is 'effectively' typed and composable with attachable UI behaviour
+    
+    that is, tuples expose their properties, can exist in mixed collections, and contain
+    type information about their assignable consumers
+    
+    that is, a taxonomy has been defined based around process definitions 
+    that contain pipelines
+    that contain pipeline tools
+    that can contain other pipeline tools
+    with current archetypes of Pipeline, Workflow and Activity
+    supported by Func<x,x> userSuppliedPredicates for execution tree scheduling decisions
+    
+For now, look at the code, maybe try compiling it and implementing the interfaces and extending 
+the abstract classes and finding the pain points.
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
-
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+Use Visual Studio 
