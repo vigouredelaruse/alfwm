@@ -1,0 +1,489 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.uwp.mstests\\com.ataxlab.alfwm.uwp.mstests.csproj": {}
+  },
+  "projects": {
+    "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj",
+        "projectName": "com.ataxlab.alfwm.core",
+        "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj",
+        "packagesPath": "C:\\Users\\foresthacker.FURRAY\\.nuget\\packages\\",
+        "outputPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\NuGet.Config",
+          "C:\\Users\\foresthacker.FURRAY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/com.ataxlab.alfwm%40Local/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/electricruciblenugets/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets%40Local/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/mrgncy/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "Newtonsoft.Json.Schema": {
+              "target": "Package",
+              "version": "[3.0.13, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj",
+        "projectName": "com.ataxlab.alfwm.library.activity",
+        "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj",
+        "packagesPath": "C:\\Users\\foresthacker.FURRAY\\.nuget\\packages\\",
+        "outputPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\NuGet.Config",
+          "C:\\Users\\foresthacker.FURRAY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/com.ataxlab.alfwm%40Local/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/electricruciblenugets/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets%40Local/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/mrgncy/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj": {
+                "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj"
+              },
+              "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj": {
+                "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj",
+        "projectName": "com.ataxlab.alfwm.library.uwp.activity",
+        "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj",
+        "packagesPath": "C:\\Users\\foresthacker.FURRAY\\.nuget\\packages\\",
+        "outputPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
+        ],
+        "configFilePaths": [
+          "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\NuGet.Config",
+          "C:\\Users\\foresthacker.FURRAY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "uap10.0.17763"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/com.ataxlab.alfwm%40Local/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/electricruciblenugets/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets%40Local/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/mrgncy/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "uap10.0.17763": {
+            "projectReferences": {
+              "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj": {
+                "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "uap10.0.17763": {
+          "dependencies": {
+            "Microsoft.NETCore.UniversalWindowsPlatform": {
+              "target": "Package",
+              "version": "[6.2.9, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      },
+      "runtimes": {
+        "win10-arm": {
+          "#import": []
+        },
+        "win10-arm-aot": {
+          "#import": []
+        },
+        "win10-arm64-aot": {
+          "#import": []
+        },
+        "win10-x64": {
+          "#import": []
+        },
+        "win10-x64-aot": {
+          "#import": []
+        },
+        "win10-x86": {
+          "#import": []
+        },
+        "win10-x86-aot": {
+          "#import": []
+        }
+      }
+    },
+    "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj",
+        "projectName": "com.ataxlab.alfwm.scheduler.uwp",
+        "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj",
+        "packagesPath": "C:\\Users\\foresthacker.FURRAY\\.nuget\\packages\\",
+        "outputPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
+        ],
+        "configFilePaths": [
+          "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\NuGet.Config",
+          "C:\\Users\\foresthacker.FURRAY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "uap10.0.17763"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/com.ataxlab.alfwm%40Local/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/electricruciblenugets/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets%40Local/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/mrgncy/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "uap10.0.17763": {
+            "projectReferences": {
+              "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj": {
+                "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj"
+              },
+              "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj": {
+                "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj"
+              },
+              "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj": {
+                "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "uap10.0.17763": {
+          "dependencies": {
+            "Microsoft.NETCore.UniversalWindowsPlatform": {
+              "target": "Package",
+              "version": "[6.2.9, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      },
+      "runtimes": {
+        "win10-arm": {
+          "#import": []
+        },
+        "win10-arm-aot": {
+          "#import": []
+        },
+        "win10-arm64-aot": {
+          "#import": []
+        },
+        "win10-x64": {
+          "#import": []
+        },
+        "win10-x64-aot": {
+          "#import": []
+        },
+        "win10-x86": {
+          "#import": []
+        },
+        "win10-x86-aot": {
+          "#import": []
+        }
+      }
+    },
+    "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.uwp.mstests\\com.ataxlab.alfwm.uwp.mstests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.uwp.mstests\\com.ataxlab.alfwm.uwp.mstests.csproj",
+        "projectName": "com.ataxlab.alfwm.uwp.mstests",
+        "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.uwp.mstests\\com.ataxlab.alfwm.uwp.mstests.csproj",
+        "packagesPath": "C:\\Users\\foresthacker.FURRAY\\.nuget\\packages\\",
+        "outputPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.uwp.mstests\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
+        ],
+        "configFilePaths": [
+          "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\NuGet.Config",
+          "C:\\Users\\foresthacker.FURRAY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "uap10.0.17763"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/com.ataxlab.alfwm%40Local/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/electricruciblenugets/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets%40Local/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/mrgncy/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "uap10.0.17763": {
+            "projectReferences": {
+              "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj": {
+                "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj"
+              },
+              "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj": {
+                "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj"
+              },
+              "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj": {
+                "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj"
+              },
+              "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj": {
+                "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "uap10.0.17763": {
+          "dependencies": {
+            "MSTest.TestAdapter": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "MSTest.TestFramework": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.0.1, )"
+            },
+            "Microsoft.NETCore.UniversalWindowsPlatform": {
+              "target": "Package",
+              "version": "[6.2.9, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      },
+      "runtimes": {
+        "win10-arm": {
+          "#import": []
+        },
+        "win10-arm-aot": {
+          "#import": []
+        },
+        "win10-arm64-aot": {
+          "#import": []
+        },
+        "win10-x64": {
+          "#import": []
+        },
+        "win10-x64-aot": {
+          "#import": []
+        },
+        "win10-x86": {
+          "#import": []
+        },
+        "win10-x86-aot": {
+          "#import": []
+        }
+      }
+    },
+    "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj",
+        "projectName": "com.ataxlab.alfwm",
+        "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj",
+        "packagesPath": "C:\\Users\\foresthacker.FURRAY\\.nuget\\packages\\",
+        "outputPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\NuGet.Config",
+          "C:\\Users\\foresthacker.FURRAY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/com.ataxlab.alfwm%40Local/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/electricruciblenugets/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets%40Local/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/mrgncy/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj": {
+                "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

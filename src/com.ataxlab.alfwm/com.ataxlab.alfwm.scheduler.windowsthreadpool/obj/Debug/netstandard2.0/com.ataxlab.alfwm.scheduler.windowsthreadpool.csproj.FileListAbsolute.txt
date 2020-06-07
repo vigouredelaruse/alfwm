@@ -1,0 +1,12 @@
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.windowsthreadpool\obj\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.windowsthreadpool.csprojAssemblyReference.cache
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.windowsthreadpool\obj\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.windowsthreadpool.csproj.CoreCompileInputs.cache
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.windowsthreadpool\obj\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.windowsthreadpool.AssemblyInfoInputs.cache
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.windowsthreadpool\obj\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.windowsthreadpool.AssemblyInfo.cs
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.windowsthreadpool\bin\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.windowsthreadpool.deps.json
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.windowsthreadpool\bin\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.windowsthreadpool.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.windowsthreadpool\bin\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.windowsthreadpool.pdb
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.windowsthreadpool\bin\Debug\netstandard2.0\com.ataxlab.alfwm.core.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.windowsthreadpool\bin\Debug\netstandard2.0\com.ataxlab.alfwm.core.pdb
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.windowsthreadpool\obj\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.windowsthreadpool.csproj.CopyComplete
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.windowsthreadpool\obj\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.windowsthreadpool.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.windowsthreadpool\obj\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.windowsthreadpool.pdb

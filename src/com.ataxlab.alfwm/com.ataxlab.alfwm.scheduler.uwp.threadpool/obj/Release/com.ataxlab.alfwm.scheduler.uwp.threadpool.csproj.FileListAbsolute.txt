@@ -1,0 +1,2 @@
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.uwp.threadpool\obj\Release\com.ataxlab.alfwm.scheduler.uwp.threadpool.csprojAssemblyReference.cache
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.uwp.threadpool\obj\Release\com.ataxlab.alfwm.scheduler.uwp.threadpool.csproj.CoreCompileInputs.cache

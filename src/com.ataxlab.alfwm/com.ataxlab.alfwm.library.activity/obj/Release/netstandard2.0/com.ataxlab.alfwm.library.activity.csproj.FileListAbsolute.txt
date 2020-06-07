@@ -1,0 +1,14 @@
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Release\netstandard2.0\com.ataxlab.alfwm.library.activity.deps.json
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Release\netstandard2.0\com.ataxlab.alfwm.library.activity.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Release\netstandard2.0\com.ataxlab.alfwm.library.activity.pdb
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Release\netstandard2.0\com.ataxlab.alfwm.core.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Release\netstandard2.0\com.ataxlab.alfwm.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Release\netstandard2.0\com.ataxlab.alfwm.core.pdb
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Release\netstandard2.0\com.ataxlab.alfwm.pdb
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Release\netstandard2.0\com.ataxlab.alfwm.library.activity.csprojAssemblyReference.cache
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Release\netstandard2.0\com.ataxlab.alfwm.library.activity.AssemblyInfoInputs.cache
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Release\netstandard2.0\com.ataxlab.alfwm.library.activity.AssemblyInfo.cs
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Release\netstandard2.0\com.ataxlab.alfwm.library.activity.csproj.CoreCompileInputs.cache
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Release\netstandard2.0\com.ataxlab.alfwm.library.activity.csproj.CopyComplete
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Release\netstandard2.0\com.ataxlab.alfwm.library.activity.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Release\netstandard2.0\com.ataxlab.alfwm.library.activity.pdb

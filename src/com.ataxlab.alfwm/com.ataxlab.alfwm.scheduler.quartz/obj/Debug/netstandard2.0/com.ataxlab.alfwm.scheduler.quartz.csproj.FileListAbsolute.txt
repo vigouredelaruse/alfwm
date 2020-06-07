@@ -1,0 +1,12 @@
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.quartz\obj\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.quartz.csprojAssemblyReference.cache
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.quartz\obj\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.quartz.csproj.CoreCompileInputs.cache
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.quartz\obj\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.quartz.AssemblyInfoInputs.cache
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.quartz\obj\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.quartz.AssemblyInfo.cs
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.quartz\bin\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.quartz.deps.json
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.quartz\bin\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.quartz.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.quartz\bin\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.quartz.pdb
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.quartz\bin\Debug\netstandard2.0\com.ataxlab.alfwm.core.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.quartz\bin\Debug\netstandard2.0\com.ataxlab.alfwm.core.pdb
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.quartz\obj\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.quartz.csproj.CopyComplete
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.quartz\obj\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.quartz.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.quartz\obj\Debug\netstandard2.0\com.ataxlab.alfwm.scheduler.quartz.pdb

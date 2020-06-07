@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>A Low Footprint Workflow Manager (For Coders)A Low Footprint Workflow Manager (For Coders)</Description>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\com.ataxlab.alfwm.core\com.ataxlab.alfwm.core.csproj" />
+    <ProjectReference Include="..\com.ataxlab.alfwm\com.ataxlab.alfwm.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,168 @@
+# Universal Windows Platform
+# Build a Universal Windows Platform project using Visual Studio.
+# Add steps that test and distribute an app, save build artifacts, and more:
+# https://aka.ms/yaml
+name: '$(Major).$(Minor).$(Year:yy)$(date:MM)$(date:dd)$(Rev:.rr)-pre'
+#name: ' $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)'
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'x86'
+  buildConfiguration: 'Release'
+  appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
+  major : '0'
+  minor : '2'
+  patch : '$(Build.BuildNumber)'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    platform: 'x86'
+    solution: '$(solution)'
+    configuration: '$(buildConfiguration)'
+    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/com.ataxlab.alfwm.scheduler.uwp.csproj'
+#    versioningScheme: byPrereleaseNumber
+    configuration: '$(buildConfiguration)'
+    versioningScheme: byBuildNumber
+    majorVersion: '$(Major)'
+    minorVersion: '$(Minor)'
+    patchVersion: '$(Patch)'
+    verbosityPack: Detailed
+    includeSymbols: true
+    includeReferencedProjects : true    
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/com.ataxlab.alfwm.scheduler.uwp*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '78cc214a-dbb8-48cf-b259-cd57eb9653f6/e61b2123-2891-435e-9b0f-d263a623867c'
+    allowPackageConflicts: true
+    verbosityPush: Detailed
+    includeSymbols: true   
+
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/com.ataxlab.alfwm.core.csproj'
+#    versioningScheme: byPrereleaseNumber
+    configuration: '$(buildConfiguration)'
+    versioningScheme: byBuildNumber
+    majorVersion: '$(Major)'
+    minorVersion: '$(Minor)'
+    patchVersion: '$(Patch)'
+    verbosityPack: Detailed
+    includeSymbols: true
+    includeReferencedProjects : true
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/com.ataxlab.alfwm.core*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '78cc214a-dbb8-48cf-b259-cd57eb9653f6/e61b2123-2891-435e-9b0f-d263a623867c'
+    allowPackageConflicts: true
+    verbosityPush: Detailed
+    includeSymbols: true   
+
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/com.ataxlab.alfwm.persistence.dbcontext.csproj'
+#    versioningScheme: byPrereleaseNumber
+    configuration: '$(buildConfiguration)'
+    versioningScheme: byBuildNumber
+    majorVersion: '$(Major)'
+    minorVersion: '$(Minor)'
+    patchVersion: '$(Patch)'
+    verbosityPack: Detailed
+    includeSymbols: true
+    includeReferencedProjects : true
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/com.ataxlab.alfwm.persistence.*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '78cc214a-dbb8-48cf-b259-cd57eb9653f6/e61b2123-2891-435e-9b0f-d263a623867c'
+    allowPackageConflicts: true
+    verbosityPush: Detailed
+    includeSymbols: true   
+
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/com.ataxlab.alfwm.csproj'
+#    versioningScheme: byPrereleaseNumber
+    configuration: '$(buildConfiguration)'
+    versioningScheme: byBuildNumber
+    majorVersion: '$(Major)'
+    minorVersion: '$(Minor)'
+    patchVersion: '$(Patch)'
+    verbosityPack: Detailed
+    includeSymbols: true
+    includeReferencedProjects : true
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/com.ataxlab.alfwm.*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '78cc214a-dbb8-48cf-b259-cd57eb9653f6/e61b2123-2891-435e-9b0f-d263a623867c'
+    allowPackageConflicts: true
+    verbosityPush: Detailed
+    includeSymbols: true   
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/com.ataxlab.alfwm.library.uwp.activity.csproj'
+#    versioningScheme: byPrereleaseNumber
+    configuration: '$(buildConfiguration)'
+    versioningScheme: byBuildNumber
+    majorVersion: '$(Major)'
+    minorVersion: '$(Minor)'
+    patchVersion: '$(Patch)'
+    verbosityPack: Detailed
+    includeSymbols: true
+    includeReferencedProjects : true
+
+    
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/com.ataxlab.alfwm.library.uwp.activity*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '78cc214a-dbb8-48cf-b259-cd57eb9653f6/e61b2123-2891-435e-9b0f-d263a623867c'
+    allowPackageConflicts: true
+    verbosityPush: Detailed
+    includeSymbols: true   
+    
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    allowPackageConflicts: true
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '78cc214a-dbb8-48cf-b259-cd57eb9653f6/3a1ed579-4813-4659-9c65-93e08a6b3005'

@@ -1,0 +1,12 @@
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.threadpool\bin\Release\netstandard2.0\com.ataxlab.alfwm.scheduler.threadpool.deps.json
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.threadpool\bin\Release\netstandard2.0\com.ataxlab.alfwm.scheduler.threadpool.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.threadpool\bin\Release\netstandard2.0\com.ataxlab.alfwm.scheduler.threadpool.pdb
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.threadpool\bin\Release\netstandard2.0\com.ataxlab.alfwm.core.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.threadpool\bin\Release\netstandard2.0\com.ataxlab.alfwm.core.pdb
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.threadpool\obj\Release\netstandard2.0\com.ataxlab.alfwm.scheduler.threadpool.csprojAssemblyReference.cache
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.threadpool\obj\Release\netstandard2.0\com.ataxlab.alfwm.scheduler.threadpool.csproj.CoreCompileInputs.cache
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.threadpool\obj\Release\netstandard2.0\com.ataxlab.alfwm.scheduler.threadpool.AssemblyInfoInputs.cache
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.threadpool\obj\Release\netstandard2.0\com.ataxlab.alfwm.scheduler.threadpool.AssemblyInfo.cs
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.threadpool\obj\Release\netstandard2.0\com.ataxlab.alfwm.scheduler.threadpool.csproj.CopyComplete
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.threadpool\obj\Release\netstandard2.0\com.ataxlab.alfwm.scheduler.threadpool.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.threadpool\obj\Release\netstandard2.0\com.ataxlab.alfwm.scheduler.threadpool.pdb

@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "8uU5fHPkSjFvJmXIhkAOCuMloxTBO+zWNRVxZXCilbwUJo9XW5oBGL2/78KE+ZIfDhBeedPJ1bIYdeGeWixOYw==",
+  "success": true,
+  "projectFilePath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.threadpool\\com.ataxlab.alfwm.scheduler.threadpool.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\foresthacker.FURRAY\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\foresthacker.FURRAY\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\foresthacker.FURRAY\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
