@@ -11,17 +11,9 @@ namespace com.ataxlab.alfwm.core.grammar.verbs
     /// a pipeline dataset provider is a persistence provider
     /// that exposes a pipeline binding biased for weak typing
     /// </summary>
-    public interface IPipelineDataSetProvider : IPersistenceProvider, IPipelineBinding
+    public interface IPipelineDataSetProvider<TPersistenceProviderConfig> : IPersistenceProvider<TPersistenceProviderConfig>, IPipelineBinding where TPersistenceProviderConfig : class, new()
     {  
          
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface IPipelineDataSetProvider<T> : IPersistenceProvider, IPipelineBinding<T>
-        where T : JObject
-    {
-    }
 }

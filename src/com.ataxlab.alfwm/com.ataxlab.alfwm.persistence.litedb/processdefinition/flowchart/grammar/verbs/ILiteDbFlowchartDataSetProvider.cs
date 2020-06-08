@@ -2,6 +2,6 @@
 {
     public interface ILiteDbFlowchartDataSetProvider
     {
-        LiteDbFlowchartDataSetProviderConfiguration LiteDbProviderConfiguration { get; set; }
+
     }
 }

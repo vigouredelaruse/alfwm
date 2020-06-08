@@ -7,8 +7,5 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.grammar.verbs
 {
-    public interface IPipelineToolDataSetProvider<T> : IPersistenceProvider, IPipelineToolBinding<T> 
-        where T : JObject
-    {
-    }
+
 }

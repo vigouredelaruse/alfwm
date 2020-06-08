@@ -6,27 +6,21 @@ using System.Text;
 namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.grammar.verbs
 {
 
-    public class LiteDbFlowchartDataSetProvider : FlowchartDataSetProvider, ILiteDbFlowchartDataSetProvider
+    /// <summary>
+    /// a litedb implementation of a persistence provider
+    /// </summary>
+    public class LiteDbFlowchartDataSetProvider : FlowchartDataSetProvider<LiteDbFlowchartDataSetProviderConfiguration>, ILiteDbFlowchartDataSetProvider
     {
+        public override string PersistenceProviderId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string PersistenceProviderName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string PersistenceProviderDisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string PersistenceProviderHostClassName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string PersistenceProviderAssemblyName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override LiteDbFlowchartDataSetProviderConfiguration ProviderConfiguration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public LiteDbFlowchartDataSetProviderConfiguration LiteDbProviderConfiguration {get; set; }
-
-        public override string PersistenceProviderId { get; set; }
-        public override string PersistenceProviderName { get; set; }
-        public override string PersistenceProviderDisplayName { get; set; }
-        public override string PersistenceProviderHostClassName { get; set; }
-        public override string PersistenceProviderAssemblyName { get; set; }
-
-        public override LiteDbFlowchartDataSetProviderConfigResult ConfigureProvider<LiteDbFlowchartDataSetProviderConfigResult, LiteDbFlowchartDataSetProviderConfiguration>(LiteDbFlowchartDataSetProviderConfiguration config, Func<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult> configureProviderOperation)
+        public override TConfigureResult ConfigureProvider<TConfigureResult>(LiteDbFlowchartDataSetProviderConfiguration config, Func<LiteDbFlowchartDataSetProviderConfiguration, TConfigureResult> configureProviderOperation)
         {
-            this.LiteDbProviderConfiguration = config;
-
-            return new LiteDbFlowchartDataSetProviderConfigResult()
-            {
-
-            };
-
-
+            throw new NotImplementedException();
         }
 
         public override TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, Func<TCreateExpression, TCreatedEntity, TCreateResult> createOperation = null)

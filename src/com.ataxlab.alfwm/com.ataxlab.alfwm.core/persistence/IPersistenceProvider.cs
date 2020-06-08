@@ -12,7 +12,7 @@ namespace com.ataxlab.alfwm.core.persistence
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="U"></typeparam>
-    public interface IPersistenceProvider
+    public interface IPersistenceProvider<TProviderConfiguration> where TProviderConfiguration : class, new()
     {
         /// <summary>
         /// support persistable entity semantics
@@ -33,6 +33,8 @@ namespace com.ataxlab.alfwm.core.persistence
         /// </summary>
         string PersistenceProviderAssemblyName { get; set; }
 
+        TProviderConfiguration ProviderConfiguration { get; set; }
+
         /// <summary>
         /// managing a context from the configuration left as an exercise to other code
         /// </summary>
@@ -41,9 +43,8 @@ namespace com.ataxlab.alfwm.core.persistence
         /// <param name="config"></param>
         /// <param name="configureProviderOperation"></param>
         /// <returns></returns>
-        TConfigureResult ConfigureProvider<TConfigureResult, TProviderConfiguration>(TProviderConfiguration config, Func<TProviderConfiguration, TConfigureResult> configureProviderOperation)
-                                                    where TConfigureResult : class, new() 
-                                                    where TProviderConfiguration : class, new();
+        TConfigureResult ConfigureProvider<TConfigureResult>(TProviderConfiguration config, Func<TProviderConfiguration, TConfigureResult> configureProviderOperation)
+                                                    where TConfigureResult : class, new();
 
         /// <summary>
         /// 

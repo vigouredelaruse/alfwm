@@ -13,7 +13,7 @@ namespace com.ataxlab.alfwm.core.persistence
     /// for instance the need needs to be proved
     /// that CRUD can be generalized in this way for a random situation
     /// </summary>
-    public abstract class PersistenceProvider : IPersistenceProvider
+    public abstract class PersistenceProvider<TProviderConfiguration> : IPersistenceProvider<TProviderConfiguration> where TProviderConfiguration : class, new()
     {
         public PersistenceProvider()
         { }
@@ -23,11 +23,11 @@ namespace com.ataxlab.alfwm.core.persistence
         public abstract string PersistenceProviderDisplayName { get; set; }
         public abstract string PersistenceProviderHostClassName { get; set; }
         public abstract string PersistenceProviderAssemblyName { get; set; }
+        public abstract TProviderConfiguration ProviderConfiguration { get; set; }
 
-        public abstract TConfigureResult ConfigureProvider<TConfigureResult, TProviderConfiguration>(TProviderConfiguration config, 
+        public abstract TConfigureResult ConfigureProvider<TConfigureResult>(TProviderConfiguration config,
                                                             Func<TProviderConfiguration, TConfigureResult> configureProviderOperation)
-                                                            where TConfigureResult : class, new()
-                                                            where TProviderConfiguration : class, new();
+                                                            where TConfigureResult : class, new();
         public abstract TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, Func<TCreateExpression, TCreatedEntity, TCreateResult> createOperation = null);
         public abstract TDeleteOperationResult Delete<TDeletedEntity, TDeleteExpression, TDeleteOperationResult>(TDeletedEntity entity, TDeleteExpression deleteExpression, Func<TDeletedEntity, TDeleteExpression, TDeleteOperationResult> deleeOperation = null);
         public abstract TInputItemCache GetInputItemCache<TInputItemCache>(Func<TInputItemCache> getInputItemCacheOperation = null);
