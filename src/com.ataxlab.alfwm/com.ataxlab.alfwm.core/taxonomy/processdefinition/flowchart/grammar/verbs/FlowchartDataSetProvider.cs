@@ -12,7 +12,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.ve
     /// the real meat of the implementation will depend on 
     /// the persistence api, whether disk or network based
     /// </summary>
-    public abstract class FlowchartDataSetProvider<TProviderConfig> : PersistenceProvider<TProviderConfig> where TProviderConfig : class, new()
+    public abstract class FlowchartDataSetProvider<TProviderConfig, TProviderConfigResult> : PersistenceProvider<TProviderConfig, TProviderConfigResult> 
+        where TProviderConfig : class, new()
+        where TProviderConfigResult : class, new()
     {
+
     }
 }

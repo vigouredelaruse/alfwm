@@ -10,8 +10,13 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
         Success
     }
 
-    public class LiteDbFlowchartDataSetProviderConfigResult
+    public class LiteDbFlowchartDataSetProviderConfigResult : ILiteDbFlowchartDataSetProviderConfigResult
     {
+        public LiteDbFlowchartDataSetProviderConfigResult()
+        {
+
+        }
+
         /// <summary>
         /// hopefully empty
         /// </summary>

@@ -12,7 +12,9 @@ namespace com.ataxlab.alfwm.core.persistence
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="U"></typeparam>
-    public interface IPersistenceProvider<TProviderConfiguration> where TProviderConfiguration : class, new()
+    public interface IPersistenceProvider<TProviderConfiguration, TConfigureResult> 
+        where TProviderConfiguration : class, new()
+        where TConfigureResult : class, new()
     {
         /// <summary>
         /// support persistable entity semantics
@@ -37,123 +39,28 @@ namespace com.ataxlab.alfwm.core.persistence
 
         /// <summary>
         /// managing a context from the configuration left as an exercise to other code
+        /// 
+        /// one has to be particular about covariance and contravariance
+        /// when defining a Configure method for a random persistence
+        /// provider implementation. 
+        /// 
+        /// the thinking seems to be that it should be contravariant
+        /// that is, the generic method should onlhy use the generic
+        /// method type as an output parameter
+        /// 
+        /// otherwise your abstract implementations will become twisted
+        /// and you will find yourself staring at the prospect of
+        /// adding each generic method type parameter to the generic interface definition
+        /// an obviously silly proposition
         /// </summary>
         /// <typeparam name="TConfigureResult"></typeparam>
         /// <typeparam name="TProviderConfiguration"></typeparam>
         /// <param name="config"></param>
         /// <param name="configureProviderOperation"></param>
         /// <returns></returns>
-        TConfigureResult ConfigureProvider<TConfigureResult>(TProviderConfiguration config, Func<TProviderConfiguration, TConfigureResult> configureProviderOperation)
-                                                    where TConfigureResult : class, new();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TCreateResult"></typeparam>
-        /// <typeparam name="TCreateExpression"></typeparam>
-        /// <typeparam name="TCreatedEntity"></typeparam>
-        /// <param name="entity"></param>
-        /// <param name="createExpression"></param>
-        /// <param name="createOperation"></param>
-        /// <returns></returns>
-        TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, Func<TCreateExpression, TCreatedEntity, TCreateResult> createOperation = null);
-
-        /// <summary>
-        /// support providing a method implementing the operation
-        /// that takes as parameters the entity to be updated
-        /// and optional update operation expressions 
-        /// and a method for implementing the update
-        /// </summary>
-        /// <typeparam name="TUpdatedEntity"></typeparam>
-        /// <typeparam name="TUpdateExpression"></typeparam>
-        /// <typeparam name="TUpdateResult"></typeparam>
-        /// <param name="entity"></param>
-        /// <param name="updateExpression"></param>
-        /// <param name="updateOperation"></param>
-        /// <returns></returns>
-        TUpdateResult Update<TUpdatedEntity, TUpdateExpression, TUpdateResult>(TUpdatedEntity entity, TUpdateExpression updateExpression, Func<TUpdateExpression, TUpdatedEntity, TUpdateResult> updateOperation = null);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TDeletedEntity"></typeparam>
-        /// <typeparam name="TDeleteExpression"></typeparam>
-        /// <typeparam name="TDeleteOperationResult"></typeparam>
-        /// <param name="entity"></param>
-        /// <param name="deleteExpression"></param>
-        /// <param name="deleeOperation"></param>
-        /// <returns></returns>
-        TDeleteOperationResult Delete<TDeletedEntity, TDeleteExpression, TDeleteOperationResult>(TDeletedEntity entity, TDeleteExpression deleteExpression, Func<TDeletedEntity, TDeleteExpression, TDeleteOperationResult> deleeOperation = null);
-
-        /// <summary>
-        /// designed to delegate read operations and specification 
-        /// of their associated search expressions, the vast variety 
-        /// of which cannot be known at library design time
-        /// </summary>
-        /// <typeparam name="TReadOperationResult"></typeparam>
-        /// <typeparam name="TSearchExpression"></typeparam>
-        /// <param name="searchExpression"></param>
-        /// <param name="readOperation"></param>
-        /// <returns></returns>
-        TReadOperationResult Read<TReadOperationResult, TSearchExpression>(TSearchExpression searchExpression, Func<TSearchExpression, TReadOperationResult> readOperation);
-
-        /// <summary>
-        /// support input caching
-        /// supports injection of the mechanism for 
-        /// getting a reference to the input cache api
-        /// </summary>
-        /// <typeparam name="TInputItemCache"></typeparam>
-        /// <param name="getInputItemCacheOperation"></param>
-        /// <returns></returns>
-        TInputItemCache GetInputItemCache<TInputItemCache>(Func<TInputItemCache> getInputItemCacheOperation = null);
-
-        /// <summary>
-        /// support injection of mechanism for getting
-        /// a reference to output item cache
-        /// </summary>
-        /// <typeparam name="TOutputItemCache"></typeparam>
-        /// <param name="getOutputItemCacheOperation"></param>
-        /// <returns></returns>
-        TOutputItemCache GetOutputItemCache<TOutputItemCache>(Func<TOutputItemCache> getOutputItemCacheOperation = null);
-
-        /// <summary>
-        /// support injection of logic for getting a 
-        /// reference to the input queue api, of whatever type
-        /// </summary>
-        /// <typeparam name="TInputQueue"></typeparam>
-        /// <param name="getInputQueueOperation"></param>
-        /// <returns></returns>
-        TInputQueue GetInputQueue<TInputQueue>(Func<TInputQueue> getInputQueueOperation = null);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TOutputQueue"></typeparam>
-        /// <param name="getOutputQueueOperation"></param>
-        /// <returns></returns>
-        TOutputQueue GetOutputQueue<TOutputQueue>(Func<TOutputQueue> getOutputQueueOperation = null);
-
-        /// <summary>
-        /// support injection of logic for setting a queue
-        /// of whatever implementation type
-        /// </summary>
-        /// <typeparam name="TSetInputQueueResult"></typeparam>
-        /// <typeparam name="TInputQueue"></typeparam>
-        /// <param name="queue"></param>
-        /// <param name="setInputQueueOperation"></param>
-        /// <returns></returns>
-        TSetInputQueueResult SetInputQueue<TSetInputQueueResult, TInputQueue>(TInputQueue queue, Func<TInputQueue, TSetInputQueueResult> setInputQueueOperation = null);
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TSetOutputQueueResult"></typeparam>
-        /// <typeparam name="TOutputQueue"></typeparam>
-        /// <param name="queue"></param>
-        /// <param name="setOutputQueueOperation"></param>
-        /// <returns></returns>
-        TSetOutputQueueResult SetOutputQueue<TSetOutputQueueResult, TOutputQueue>(TOutputQueue queue, Func<TOutputQueue, TSetOutputQueueResult> setOutputQueueOperation = null);
+        TConfigureResult ConfigureProvider(TProviderConfiguration config);
+        TConfigureResult ConfigureProvider(Func<TProviderConfiguration, TConfigureResult> configureProviderOperation);
+                                                   
 
     }
 }
