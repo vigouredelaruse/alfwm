@@ -59,7 +59,7 @@ namespace com.ataxlab.alfwm.core.persistence
         /// <param name="configureProviderOperation"></param>
         /// <returns></returns>
         TConfigureResult ConfigureProvider(TProviderConfiguration config);
-        TConfigureResult ConfigureProvider(Func<TProviderConfiguration, TConfigureResult> configureProviderOperation);
+        TConfigureResult ConfigureProvider(TProviderConfiguration config, Func<TProviderConfiguration, TConfigureResult> configureProviderOperation);
                                                    
 
     }

@@ -6,7 +6,7 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
 {
     public enum LiteDbFlowchartDataSetProviderConfigResultType
     {
-        Exception,
+        Exception_Invalid_Connection_String,
         Success
     }
 

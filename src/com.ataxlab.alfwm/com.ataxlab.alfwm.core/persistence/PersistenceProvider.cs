@@ -54,7 +54,7 @@ namespace com.ataxlab.alfwm.core.persistence
 
         public abstract TConfigureResult ConfigureProvider(TProviderConfiguration config);
 
-        public abstract TConfigureResult ConfigureProvider(Func<TProviderConfiguration, TConfigureResult> configureProviderOperation);
+        public abstract TConfigureResult ConfigureProvider(TProviderConfiguration config, Func<TProviderConfiguration, TConfigureResult> configureProviderOperation);
        
     }
 }

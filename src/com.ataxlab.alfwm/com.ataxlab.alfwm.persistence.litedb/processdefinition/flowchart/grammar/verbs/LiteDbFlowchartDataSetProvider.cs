@@ -17,22 +17,25 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
         public string PersistenceProviderDisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string PersistenceProviderHostClassName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string PersistenceProviderAssemblyName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public LiteDbFlowchartDataSetProviderConfiguration ProviderConfiguration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public LiteDbFlowchartDataSetProviderConfiguration ProviderConfiguration { get; set; }
 
-        public LiteDbFlowchartDataSetProviderConfigResult ConfigureProvider(LiteDbFlowchartDataSetProviderConfiguration config)
+        /// <summary>
+        /// this merely sets the config property on the class
+        /// use an overload of this method to supply your own operation
+        /// </summary>
+        /// <param name="config"></param>
+        /// <returns></returns>
+        public virtual LiteDbFlowchartDataSetProviderConfigResult ConfigureProvider(LiteDbFlowchartDataSetProviderConfiguration config)
         {
-            LiteDbFlowchartDataSetProviderConfigResult ret = default(LiteDbFlowchartDataSetProviderConfigResult); // new LiteDbFlowchartDataSetProviderConfigResult() { };
-            //ILiteDbFlowchartDataSetProviderConfigResult thing = new ILiteDbFlowchartDataSetProviderConfigResult();
-           
-           
+
+            this.ProviderConfiguration = config;
+            LiteDbFlowchartDataSetProviderConfigResult ret = default(LiteDbFlowchartDataSetProviderConfigResult); // new LiteDbFlowchartDataSetProviderConfigResult() { };     
             return ret;
         }
 
-        public LiteDbFlowchartDataSetProviderConfigResult ConfigureProvider(Func<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult> configureProviderOperation)
+        public virtual LiteDbFlowchartDataSetProviderConfigResult ConfigureProvider(LiteDbFlowchartDataSetProviderConfiguration config, Func<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult> configureProviderOperation)
         {
-            LiteDbFlowchartDataSetProviderConfigResult ret = new LiteDbFlowchartDataSetProviderConfigResult();
-
-            return ret;
+            return configureProviderOperation(this.ProviderConfiguration);
         }
 
         public TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, Func<TCreateExpression, TCreatedEntity, TCreateResult> createOperation = null)
