@@ -790,3 +790,13 @@ C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\obj
 C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\obj\x86\Release\ilc\intermediate\SgGenerated\System.Runtime.Serialization.Generated.Intermediate.dll
 C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\obj\x86\Release\ilc\intermediate\SgGenerated\System.Runtime.Serialization.Generated.pdb
 C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\obj\x86\Release\ilc\intermediate\System.Private.com.ataxlab.alfwm.uwp.mstests.Generated.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Release\LiteDB.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Release\com.ataxlab.alfwm.persistence.litedb.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Release\com.ataxlab.alfwm.persistence.litedb.pdb
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\obj\x86\Release\ilc\in\com.ataxlab.alfwm.persistence.litedb.pdb
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\obj\x86\Release\ilc\in\LiteDB.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\obj\x86\Release\ilc\in\com.ataxlab.alfwm.persistence.litedb.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\obj\x86\Release\ilc\intermediate\ILTransformed\com.ataxlab.alfwm.persistence.litedb.ildll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\obj\x86\Release\ilc\intermediate\ILTransformed\com.ataxlab.alfwm.persistence.litedb.ilpdb
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\obj\x86\Release\ilc\intermediate\ILTransformed\LiteDB.ildll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\obj\x86\Release\ilc\intermediate\ILTransformed\LiteDB.ilpdb

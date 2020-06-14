@@ -3,6 +3,7 @@ using com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.verbs;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq.Expressions;
 
 namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.grammar.verbs
 {
@@ -12,11 +13,16 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
     /// </summary>
     public class LiteDbFlowchartDataSetProvider : IPersistenceProvider<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult>, ILiteDbFlowchartDataSetProvider
     {
-        public string PersistenceProviderId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PersistenceProviderName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PersistenceProviderDisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PersistenceProviderHostClassName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PersistenceProviderAssemblyName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public LiteDbFlowchartDataSetProvider()
+        {
+
+        }
+
+        public string PersistenceProviderId { get; set; }
+        public string PersistenceProviderName { get; set; }
+        public string PersistenceProviderDisplayName { get; set; }
+        public string PersistenceProviderHostClassName { get; set; }
+        public string PersistenceProviderAssemblyName { get; set; }
         public LiteDbFlowchartDataSetProviderConfiguration ProviderConfiguration { get; set; }
 
         /// <summary>
@@ -38,7 +44,7 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
             return configureProviderOperation(this.ProviderConfiguration);
         }
 
-        public TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, Func<TCreateExpression, TCreatedEntity, TCreateResult> createOperation = null)
+        TCreateResult ILiteDbFlowchartDataSetProvider.Create<TCreateResult, Query, TCreatedEntity>(TCreatedEntity entity, Query createExpression, Func<Query, TCreatedEntity, TCreateResult> createOperation)
         {
             throw new NotImplementedException();
         }

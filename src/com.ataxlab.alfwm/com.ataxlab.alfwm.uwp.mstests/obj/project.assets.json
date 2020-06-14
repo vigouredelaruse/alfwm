@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "UAP,Version=v10.0.17763": {
+      "LiteDB/5.0.8": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        }
+      },
       "Microsoft.Net.Native.Compiler/2.2.7-rel-27913-00": {
         "type": "package",
         "dependencies": {
@@ -612,6 +621,20 @@
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
         }
       },
+      "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "LiteDB": "5.0.8",
+          "com.ataxlab.alfwm.core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        }
+      },
       "com.ataxlab.alfwm.scheduler.uwp/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
@@ -630,6 +653,15 @@
       }
     },
     "UAP,Version=v10.0.17763/win10-arm": {
+      "LiteDB/5.0.8": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        }
+      },
       "Microsoft.Net.Native.Compiler/2.2.7-rel-27913-00": {
         "type": "package",
         "dependencies": {
@@ -1502,6 +1534,20 @@
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
         }
       },
+      "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "LiteDB": "5.0.8",
+          "com.ataxlab.alfwm.core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        }
+      },
       "com.ataxlab.alfwm.scheduler.uwp/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
@@ -1520,6 +1566,15 @@
       }
     },
     "UAP,Version=v10.0.17763/win10-arm-aot": {
+      "LiteDB/5.0.8": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        }
+      },
       "Microsoft.Net.Native.Compiler/2.2.7-rel-27913-00": {
         "type": "package",
         "dependencies": {
@@ -2435,6 +2490,20 @@
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
         }
       },
+      "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "LiteDB": "5.0.8",
+          "com.ataxlab.alfwm.core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        }
+      },
       "com.ataxlab.alfwm.scheduler.uwp/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
@@ -2453,6 +2522,15 @@
       }
     },
     "UAP,Version=v10.0.17763/win10-arm64-aot": {
+      "LiteDB/5.0.8": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        }
+      },
       "Microsoft.Net.Native.Compiler/2.2.7-rel-27913-00": {
         "type": "package",
         "dependencies": {
@@ -3368,6 +3446,20 @@
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
         }
       },
+      "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "LiteDB": "5.0.8",
+          "com.ataxlab.alfwm.core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        }
+      },
       "com.ataxlab.alfwm.scheduler.uwp/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
@@ -3386,6 +3478,15 @@
       }
     },
     "UAP,Version=v10.0.17763/win10-x64": {
+      "LiteDB/5.0.8": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        }
+      },
       "Microsoft.Net.Native.Compiler/2.2.7-rel-27913-00": {
         "type": "package",
         "dependencies": {
@@ -4258,6 +4359,20 @@
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
         }
       },
+      "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "LiteDB": "5.0.8",
+          "com.ataxlab.alfwm.core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        }
+      },
       "com.ataxlab.alfwm.scheduler.uwp/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
@@ -4276,6 +4391,15 @@
       }
     },
     "UAP,Version=v10.0.17763/win10-x64-aot": {
+      "LiteDB/5.0.8": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        }
+      },
       "Microsoft.Net.Native.Compiler/2.2.7-rel-27913-00": {
         "type": "package",
         "dependencies": {
@@ -5191,6 +5315,20 @@
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
         }
       },
+      "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "LiteDB": "5.0.8",
+          "com.ataxlab.alfwm.core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        }
+      },
       "com.ataxlab.alfwm.scheduler.uwp/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
@@ -5209,6 +5347,15 @@
       }
     },
     "UAP,Version=v10.0.17763/win10-x86": {
+      "LiteDB/5.0.8": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        }
+      },
       "Microsoft.Net.Native.Compiler/2.2.7-rel-27913-00": {
         "type": "package",
         "dependencies": {
@@ -6081,6 +6228,20 @@
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
         }
       },
+      "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "LiteDB": "5.0.8",
+          "com.ataxlab.alfwm.core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        }
+      },
       "com.ataxlab.alfwm.scheduler.uwp/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
@@ -6099,6 +6260,15 @@
       }
     },
     "UAP,Version=v10.0.17763/win10-x86-aot": {
+      "LiteDB/5.0.8": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/LiteDB.dll": {}
+        }
+      },
       "Microsoft.Net.Native.Compiler/2.2.7-rel-27913-00": {
         "type": "package",
         "dependencies": {
@@ -7014,6 +7184,20 @@
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
         }
       },
+      "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "LiteDB": "5.0.8",
+          "com.ataxlab.alfwm.core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.persistence.litedb.dll": {}
+        }
+      },
       "com.ataxlab.alfwm.scheduler.uwp/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
@@ -7033,6 +7217,26 @@
     }
   },
   "libraries": {
+    "LiteDB/5.0.8": {
+      "sha512": "lqwQnweoa3Lko87uo9FzZYf6BFh3AULas5yosG95LPVHIoACtJJ2BjBPQ7d7vUYDQYSV3rUco2+vMilVoBQ3WA==",
+      "type": "package",
+      "path": "litedb/5.0.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "AppVeyorSettings.json",
+        "LICENSE",
+        "icon_64x64.png",
+        "lib/net45/LiteDB.dll",
+        "lib/net45/LiteDB.xml",
+        "lib/netstandard1.3/LiteDB.dll",
+        "lib/netstandard1.3/LiteDB.xml",
+        "lib/netstandard2.0/LiteDB.dll",
+        "lib/netstandard2.0/LiteDB.xml",
+        "litedb.5.0.8.nupkg.sha512",
+        "litedb.nuspec"
+      ]
+    },
     "Microsoft.Net.Native.Compiler/2.2.7-rel-27913-00": {
       "sha512": "EtGDVRBaNWEqQDJTfkeHOLiiKUOzlr4UVK2KciIt3zYOZeLEnhsshTR6D+1ADetJRKluYR7s0HruAtw1kbc0Xg==",
       "type": "package",
@@ -12941,6 +13145,11 @@
       "path": "../com.ataxlab.alfwm.library.uwp.activity/com.ataxlab.alfwm.library.uwp.activity.csproj",
       "msbuildProject": "../com.ataxlab.alfwm.library.uwp.activity/com.ataxlab.alfwm.library.uwp.activity.csproj"
     },
+    "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
+      "type": "project",
+      "path": "../com.ataxlab.alfwm.persistence.litedb/com.ataxlab.alfwm.persistence.litedb.csproj",
+      "msbuildProject": "../com.ataxlab.alfwm.persistence.litedb/com.ataxlab.alfwm.persistence.litedb.csproj"
+    },
     "com.ataxlab.alfwm.scheduler.uwp/1.0.0": {
       "type": "project",
       "path": "../com.ataxlab.alfwm.scheduler.uwp/com.ataxlab.alfwm.scheduler.uwp.csproj",
@@ -12956,6 +13165,7 @@
       "com.ataxlab.alfwm.core >= 1.0.0",
       "com.ataxlab.alfwm.library.activity >= 1.0.0",
       "com.ataxlab.alfwm.library.uwp.activity >= 1.0.0",
+      "com.ataxlab.alfwm.persistence.litedb >= 1.0.0",
       "com.ataxlab.alfwm.scheduler.uwp >= 1.0.0"
     ]
   },
@@ -13001,6 +13211,9 @@
             },
             "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj": {
               "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj"
+            },
+            "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.persistence.litedb\\com.ataxlab.alfwm.persistence.litedb.csproj": {
+              "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.persistence.litedb\\com.ataxlab.alfwm.persistence.litedb.csproj"
             },
             "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj": {
               "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj"
