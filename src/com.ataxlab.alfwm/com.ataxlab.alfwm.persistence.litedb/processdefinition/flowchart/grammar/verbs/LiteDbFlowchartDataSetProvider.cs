@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq.Expressions;
+using System.IO;
+using LiteDB;
 
 namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.grammar.verbs
 {
@@ -24,24 +26,67 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
         public string PersistenceProviderHostClassName { get; set; }
         public string PersistenceProviderAssemblyName { get; set; }
         public LiteDbFlowchartDataSetProviderConfiguration ProviderConfiguration { get; set; }
+        public FileInfo DatabaseFilePath { get; private set; }
 
         /// <summary>
         /// this merely sets the config property on the class
+        /// and initializes some basic LiteDb properties
+        /// 
         /// use an overload of this method to supply your own operation
         /// </summary>
         /// <param name="config"></param>
         /// <returns></returns>
         public virtual LiteDbFlowchartDataSetProviderConfigResult ConfigureProvider(LiteDbFlowchartDataSetProviderConfiguration config)
         {
-
+            LiteDbFlowchartDataSetProviderConfigResult ret = new LiteDbFlowchartDataSetProviderConfigResult();
             this.ProviderConfiguration = config;
-            LiteDbFlowchartDataSetProviderConfigResult ret = default(LiteDbFlowchartDataSetProviderConfigResult); // new LiteDbFlowchartDataSetProviderConfigResult() { };     
+
+
+            try
+            {
+                this.DatabaseFilePath = new FileInfo(config.ConnectionString.Filename);
+
+                if (config.IsMustEnsureExists)
+                {
+                    if (!this.DatabaseFilePath.Exists)
+                    {
+                        // initialize the database
+                        using (var db = new LiteDatabase(config.ConnectionString))
+                        {
+                            if (!db.CollectionExists(config.CollectionName))
+                            {
+                                var validCollection = db.GetCollection(config.CollectionName);
+                                if (config.IndexExpression != null && config.IndexName != String.Empty)
+                                {
+                                    // initialize index with supplied 
+                                    // index expression and index name
+                                    validCollection.EnsureIndex(config.IndexName, config.IndexExpression);
+                                }
+                            }
+
+
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new LiteDbFlowchartDataSetProviderConfigurationException(ex.Message);
+            }
+
+           
             return ret;
         }
 
         public virtual LiteDbFlowchartDataSetProviderConfigResult ConfigureProvider(LiteDbFlowchartDataSetProviderConfiguration config, Func<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult> configureProviderOperation)
         {
-            return configureProviderOperation(this.ProviderConfiguration);
+            if (configureProviderOperation == null)
+            {
+                throw new LiteDbFlowchartDataSetProviderException("null provider operation exception");               
+            }
+
+            return configureProviderOperation(config);
         }
 
         TCreateResult ILiteDbFlowchartDataSetProvider.Create<TCreateResult, Query, TCreatedEntity>(TCreatedEntity entity, Query createExpression, Func<Query, TCreatedEntity, TCreateResult> createOperation)

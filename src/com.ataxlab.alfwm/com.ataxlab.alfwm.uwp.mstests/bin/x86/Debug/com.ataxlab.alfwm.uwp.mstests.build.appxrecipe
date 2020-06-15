@@ -40,6 +40,9 @@
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\TestPlatform.Universal\16.0\References\CommonConfiguration\neutral\testhost.dll">
       <PackagePath>testhost.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\foresthacker.FURRAY\.nuget\packages\litedb\5.0.8\lib\netstandard2.0\LiteDB.dll">
+      <PackagePath>LiteDB.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\foresthacker.FURRAY\.nuget\packages\mstest.testframework\2.1.0\lib\uap10.0\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll">
       <PackagePath>Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</PackagePath>
     </AppxPackagedFile>
@@ -49,7 +52,10 @@
     <AppxPackagedFile Include="C:\Users\foresthacker.FURRAY\.nuget\packages\newtonsoft.json\12.0.3\lib\netstandard2.0\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.netcore.universalwindowsplatform\6.2.9\runtimes\win10-x86\lib\uap10.0.15138\System.Runtime.dll">
+    <AppxPackagedFile Include="C:\Users\foresthacker.FURRAY\.nuget\packages\newtonsoft.json.schema\3.0.13\lib\netstandard2.0\Newtonsoft.Json.Schema.dll">
+      <PackagePath>Newtonsoft.Json.Schema.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\foresthacker.FURRAY\.nuget\packages\runtime.win10-x86.microsoft.netcore.universalwindowsplatform\6.2.9\runtimes\win10-x86\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.core\bin\Debug\netstandard2.0\com.ataxlab.alfwm.core.dll">
@@ -60,6 +66,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.uwp.activity\bin\x86\Debug\com.ataxlab.alfwm.library.uwp.activity.dll">
       <PackagePath>com.ataxlab.alfwm.library.uwp.activity.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.persistence.litedb\bin\Debug\netstandard2.0\com.ataxlab.alfwm.persistence.litedb.dll">
+      <PackagePath>com.ataxlab.alfwm.persistence.litedb.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.uwp\bin\x86\Debug\com.ataxlab.alfwm.scheduler.uwp.dll">
       <PackagePath>com.ataxlab.alfwm.scheduler.uwp.dll</PackagePath>
@@ -75,6 +84,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.pdb">
       <PackagePath>com.ataxlab.alfwm.library.activity.pdb</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.persistence.litedb\bin\Debug\netstandard2.0\com.ataxlab.alfwm.persistence.litedb.pdb">
+      <PackagePath>com.ataxlab.alfwm.persistence.litedb.pdb</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm\bin\Debug\netstandard2.0\com.ataxlab.alfwm.pdb">
       <PackagePath>com.ataxlab.alfwm.pdb</PackagePath>
@@ -159,52 +171,52 @@
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
-    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
+    <ResolvedSDKReference Include="C:\Users\foresthacker.FURRAY\.nuget\packages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
       <Name>Microsoft.NET.CoreRuntime.2.2</Name>
       <Version>2.2.27902.3</Version>
       <Architecture>x86</Architecture>
       <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.2.2, MinVersion = 2.2.27902.3, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
+      <AppxLocation>C:\Users\foresthacker.FURRAY\.nuget\packages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
+    <ResolvedSDKReference Include="C:\Users\foresthacker.FURRAY\.nuget\packages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
       <Name>Microsoft.NET.CoreRuntime.2.2</Name>
       <Version>2.2.27902.3</Version>
       <Architecture>x64</Architecture>
       <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.2.2, MinVersion = 2.2.27902.3, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
+      <AppxLocation>C:\Users\foresthacker.FURRAY\.nuget\packages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
+    <ResolvedSDKReference Include="C:\Users\foresthacker.FURRAY\.nuget\packages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
       <Name>Microsoft.NET.CoreRuntime.2.2</Name>
       <Version>2.2.27902.3</Version>
       <Architecture>arm</Architecture>
       <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.2.2, MinVersion = 2.2.27902.3, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
+      <AppxLocation>C:\Users\foresthacker.FURRAY\.nuget\packages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
+    <ResolvedSDKReference Include="C:\Users\foresthacker.FURRAY\.nuget\packages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
       <Name>Microsoft.NET.CoreFramework.Debug.2.2</Name>
       <Version>2.2.27909.0</Version>
       <Architecture>x86</Architecture>
       <FrameworkIdentity>Name = Microsoft.NET.CoreFramework.Debug.2.2, MinVersion = 2.2.27909.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
+      <AppxLocation>C:\Users\foresthacker.FURRAY\.nuget\packages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
+    <ResolvedSDKReference Include="C:\Users\foresthacker.FURRAY\.nuget\packages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
       <Name>Microsoft.NET.CoreFramework.Debug.2.2</Name>
       <Version>2.2.27909.0</Version>
       <Architecture>x64</Architecture>
       <FrameworkIdentity>Name = Microsoft.NET.CoreFramework.Debug.2.2, MinVersion = 2.2.27909.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
+      <AppxLocation>C:\Users\foresthacker.FURRAY\.nuget\packages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
+    <ResolvedSDKReference Include="C:\Users\foresthacker.FURRAY\.nuget\packages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
       <Name>Microsoft.NET.CoreFramework.Debug.2.2</Name>
       <Version>2.2.27909.0</Version>
       <Architecture>arm</Architecture>
       <FrameworkIdentity>Name = Microsoft.NET.CoreFramework.Debug.2.2, MinVersion = 2.2.27909.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
+      <AppxLocation>C:\Users\foresthacker.FURRAY\.nuget\packages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.9\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">

@@ -31,6 +31,17 @@
           }
         }
       },
+      "Newtonsoft.Json.Schema/3.0.13": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.Schema.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.13.24127"
+          }
+        }
+      },
       "com.ataxlab.alfwm/1.0.0": {
         "dependencies": {
           "com.ataxlab.alfwm.core": "1.0.0"
@@ -41,7 +52,8 @@
       },
       "com.ataxlab.alfwm.core/1.0.0": {
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3"
+          "Newtonsoft.Json": "12.0.3",
+          "Newtonsoft.Json.Schema": "3.0.13"
         },
         "runtime": {
           "com.ataxlab.alfwm.core.dll": {}
@@ -75,6 +87,13 @@
       "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "path": "newtonsoft.json/12.0.3",
       "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+    },
+    "Newtonsoft.Json.Schema/3.0.13": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pzMg9rlInZIyQQvHnmVgO2QfNsivd8fuuBKv7Yw1eV4EmqXLtG76sZBzjRbNqbYbsYnekIo++RSvkP1s7e8N4Q==",
+      "path": "newtonsoft.json.schema/3.0.13",
+      "hashPath": "newtonsoft.json.schema.3.0.13.nupkg.sha512"
     },
     "com.ataxlab.alfwm/1.0.0": {
       "type": "project",

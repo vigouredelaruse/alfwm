@@ -16,42 +16,29 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
         /// throws exception on invalid file path
         /// </summary>
         /// <param name="connectionString"></param>
-        public LiteDbFlowchartDataSetProviderConfiguration(ConnectionString connectionString, LiteDB.BsonExpression indexExpression, string collectionName = "", string indexName = "",  bool isMustEnsureEsists = false)
+        public LiteDbFlowchartDataSetProviderConfiguration( ConnectionString connectionString, 
+                                                            LiteDB.BsonExpression indexExpression, 
+                                                            string collectionName = "", 
+                                                            string indexName = "",  
+                                                            bool isMustEnsureEsists = false)
         {
-            try
-            {
-                this.DatabaseFilePath = new FileInfo(connectionString.Filename);
+            this.ConnectionString = connectionString;
 
-                if(isMustEnsureEsists)
-                {
-                    if(!this.DatabaseFilePath.Exists)
-                    {
-                        // initialize the database
-                        using (var db = new LiteDatabase(connectionString))
-                        {
-                            if (!db.CollectionExists(collectionName))
-                            {
-                                var validCollection = db.GetCollection(collectionName);
-                                if (indexExpression != null && indexName != String.Empty)
-                                {
-                                    // initialize index with supplied 
-                                    // index expression and index name
-                                    validCollection.EnsureIndex(indexName, indexExpression);
-                                }
-                            }
+            this.CollectionName = collectionName;
 
+            this.IndexName = indexName;
 
+            this.IndexExpression = indexExpression;
 
-                        }
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                throw new LiteDbFlowchartDataSetProviderConfigurationException(ex.Message);
-            }
+            this.IsMustEnsureExists = isMustEnsureEsists;
+
         }
 
         public FileInfo DatabaseFilePath { get; set; }
+        public ConnectionString ConnectionString { get; private set; }
+        public string CollectionName { get; private set; }
+        public string IndexName { get; private set; }
+        public BsonExpression IndexExpression { get; private set; }
+        public bool IsMustEnsureExists { get; private set; }
     }
 }

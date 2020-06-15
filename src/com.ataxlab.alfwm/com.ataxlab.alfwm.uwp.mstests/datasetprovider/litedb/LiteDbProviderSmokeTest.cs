@@ -29,7 +29,13 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             //// testClass.
             ///
 
-            TestConnectionString = new ConnectionString("test.litedb")
+            Windows.Storage.StorageFolder storageFolder =
+                Windows.Storage.ApplicationData.Current.LocalFolder;
+
+            var filePath = storageFolder.Path;
+            var dbFileName = filePath + "\\test.litedb";
+
+            TestConnectionString = new ConnectionString(dbFileName)
             {
                 Password = "password",
             };
@@ -39,9 +45,11 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             IndexExpression = "$.JsonValue";  /// https://www.litedb.org/docs/expressions/
             TestIndexName = "TestIndex";
 
-            TestedProvider =
+            TestedProviderConfiguration =
                 new LiteDbFlowchartDataSetProviderConfiguration(TestConnectionString,
                 IndexExpression, TestCollectionName, TestIndexName, true);
+
+           
 
         }
 
@@ -55,11 +63,22 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
         public string TestCollectionName { get; private set; }
         public string IndexExpression { get; private set; }
         public string TestIndexName { get; private set; }
-        public LiteDbFlowchartDataSetProviderConfiguration TestedProvider { get; private set; }
+        public LiteDbFlowchartDataSetProviderConfiguration TestedProviderConfiguration { get; private set; }
 
-        public LiteDbFlowchartDataSetProviderConfigResult ConfigureProvider(LiteDbFlowchartDataSetProviderConfiguration config)
+        [TestMethod]
+        public void TestConfigureProvider()
         {
-            throw new NotImplementedException();
+            Exception e = null;
+            try
+            {
+                var results = testedClass.ConfigureProvider(this.TestedProviderConfiguration);
+            }
+            catch(Exception ee)
+            {
+                e = ee;
+            }
+
+            Assert.IsNull(e, "failed with exception " + e?.Message);
         }
 
         public LiteDbFlowchartDataSetProviderConfigResult ConfigureProvider(LiteDbFlowchartDataSetProviderConfiguration config, Func<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult> configureProviderOperation)
@@ -113,6 +132,31 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
         }
 
         public TUpdateResult Update<TUpdatedEntity, TUpdateExpression, TUpdateResult>(TUpdatedEntity entity, TUpdateExpression updateExpression, Func<TUpdateExpression, TUpdatedEntity, TUpdateResult> updateOperation = null)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        [TestMethod]
+        public void TestConfigureProvideOperation()
+        {
+            Exception e = null;
+
+            try
+            {
+                var result = testedClass.ConfigureProvider(this.ProviderConfiguration,
+                    config => testedClass.ConfigureProvider(config)
+                    );
+            }
+            catch(Exception ee)
+            {
+                e = ee;
+            }
+
+            Assert.IsNull(e, "exception configuring provider " + e?.Message);
+        }
+
+        public LiteDbFlowchartDataSetProviderConfigResult ConfigureProvider(LiteDbFlowchartDataSetProviderConfiguration config)
         {
             throw new NotImplementedException();
         }

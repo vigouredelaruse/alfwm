@@ -68,3 +68,7 @@ C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin
 C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\com.ataxlab.alfwm.library.uwp.activity.pri
 C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\obj\x86\Debug\com.ataxlab.alfwm.library.uwp.activity.pri.xml
 C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\obj\x86\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_636885454160000000.json
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\LiteDB.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\Newtonsoft.Json.Schema.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\com.ataxlab.alfwm.persistence.litedb.dll
+C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\com.ataxlab.alfwm.persistence.litedb.pdb
