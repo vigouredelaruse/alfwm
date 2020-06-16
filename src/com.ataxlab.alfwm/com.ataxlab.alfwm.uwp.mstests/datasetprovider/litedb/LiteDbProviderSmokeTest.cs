@@ -136,27 +136,53 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// required method implementation for user supplied 
+        /// provider configure operation
+        /// </summary>
+        /// <param name="config"></param>
+        /// <returns></returns>
         LiteDbFlowchartDataSetProviderConfigResult ConfigureProviderOperation(LiteDbFlowchartDataSetProviderConfiguration config)
         {
             int i = 0;
+
+            // this operation can do something else
+            // besides or instead of calling
+            // the provider's builtin configure method
+            // 
+            // this user supplied operation should perform operations
+            // that match those inferred by the moethod signature
+            // of the builtin provider configuration method
+            //
+            // at least the operation should operate against
+            // the populated properties of the configuration
             return this.testedClass.ConfigureProvider(config);
         }
 
+        /// <summary>
+        /// test configuring the provider 
+        /// by supplying configuration and
+        /// a delegate
+        /// </summary>
         [TestMethod]
         public void TestConfigureProvideOperation()
         {
             Exception e = null;
 
 
+            // initialize the func parameter with the required user supplied method signature implementation
             Func<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult> configProviderOperation =
                 new Func<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult>(ConfigureProviderOperation);
 
             try
             {
+                // call the provider's configure method
+                // with your initialized configuration and func
                 var result = testedClass.ConfigureProvider(TestedProviderConfiguration,
                    configProviderOperation
                     );
 
+                // examine the result 
                 Assert.IsNotNull(result);
             }
             catch(Exception ee)
