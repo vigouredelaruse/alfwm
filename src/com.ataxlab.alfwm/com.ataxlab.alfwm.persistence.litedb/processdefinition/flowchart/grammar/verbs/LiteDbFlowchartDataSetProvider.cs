@@ -93,14 +93,73 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
             return configureProviderOperation(config);
         }
 
+        /// <summary>
+        /// an insert operation to rule them all is a challenge to implement
+        /// not to be attempted here
+        /// 
+        /// clients of this provider will supply their own types
+        /// and their own operation to perform the insert
+        /// operation, it's associated logging etc
+        /// 
+        /// see the unit tests for this method for an implementation
+        /// </summary>
+        /// <typeparam name="TCreateResult"></typeparam>
+        /// <typeparam name="Query"></typeparam>
+        /// <typeparam name="TCreatedEntity"></typeparam>
+        /// <param name="entity"></param>
+        /// <param name="createExpression"></param>
+        /// <param name="createOperation"></param>
+        /// <returns></returns>
         TCreateResult ILiteDbFlowchartDataSetProvider.Create<TCreateResult, Query, TCreatedEntity>(TCreatedEntity entity, Query createExpression, Func<Query, TCreatedEntity, TCreateResult> createOperation)
         {
-            throw new NotImplementedException();
+            TCreateResult ret = default(TCreateResult); ;
+
+            if(createOperation == null)
+            {
+
+                /// here because the required delegate has not been provided
+                throw new LiteDbFlowchartDataSetProviderException("invalid method invocation. you must hydrate the createOperation delegate");
+            }
+            else
+            {
+                try
+                {
+                    /// here because the required delegate has been provided. invoke it
+                    ret = createOperation(createExpression, entity);
+                }
+                catch(Exception ex)
+                {
+                    throw new LiteDbFlowchartDataSetProviderException(ex.Message);
+                }
+            }
+
+            return ret;
         }
 
-        public TDeleteOperationResult Delete<TDeletedEntity, TDeleteExpression, TDeleteOperationResult>(TDeletedEntity entity, TDeleteExpression deleteExpression, Func<TDeletedEntity, TDeleteExpression, TDeleteOperationResult> deleeOperation = null)
+        public TDeleteOperationResult Delete<TDeletedEntity, TDeleteExpression, TDeleteOperationResult>(TDeletedEntity entity, TDeleteExpression deleteExpression, Func<TDeletedEntity, TDeleteExpression, TDeleteOperationResult> deleteOperation = null)
         {
-            throw new NotImplementedException();
+            TDeleteOperationResult ret = default(TDeleteOperationResult);
+
+            if (deleteOperation == null)
+            {
+                /// here because the required delegate has not been provided
+                throw new LiteDbFlowchartDataSetProviderException("invalid method invocation. you must hydrate the createOperation delegate");
+            }
+            else
+            {
+
+                try
+                {
+                    /// here because the required delegate has been provided. invoke it
+                    ret = deleteOperation(entity, deleteExpression);
+                }
+                catch (Exception e)
+                {
+                    throw new LiteDbFlowchartDataSetProviderException(e.Message);
+                }
+            }
+
+            return ret;
         }
 
         public TInputItemCache GetInputItemCache<TInputItemCache>(Func<TInputItemCache> getInputItemCacheOperation = null)
@@ -125,7 +184,25 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
 
         public TReadOperationResult Read<TReadOperationResult, TSearchExpression>(TSearchExpression searchExpression, Func<TSearchExpression, TReadOperationResult> readOperation)
         {
-            throw new NotImplementedException();
+            TReadOperationResult ret = default(TReadOperationResult);
+
+            if(readOperation == null)
+            {
+                throw new LiteDbFlowchartDataSetProviderException("invalid method invocation. you must hydrate the createOperation delegate");
+            }
+            else
+            {
+                try
+                {
+                    ret = readOperation(searchExpression);
+                }
+                catch(Exception e)
+                {
+                    throw new LiteDbFlowchartDataSetProviderException(e.Message);
+                }
+            }
+
+            return ret;
         }
 
         public TSetInputQueueResult SetInputQueue<TSetInputQueueResult, TInputQueue>(TInputQueue queue, Func<TInputQueue, TSetInputQueueResult> setInputQueueOperation = null)
@@ -140,7 +217,29 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
 
         public TUpdateResult Update<TUpdatedEntity, TUpdateExpression, TUpdateResult>(TUpdatedEntity entity, TUpdateExpression updateExpression, Func<TUpdateExpression, TUpdatedEntity, TUpdateResult> updateOperation = null)
         {
-            throw new NotImplementedException();
+
+            TUpdateResult ret = default(TUpdateResult);
+
+            if (updateOperation == null)
+            {
+                /// here because the required delegate has not been provided
+                throw new LiteDbFlowchartDataSetProviderException("invalid method invocation. you must hydrate the createOperation delegate");
+
+            }
+            else
+            {
+                try
+                {
+                    ret = updateOperation(updateExpression, entity);
+                }
+                catch(Exception e)
+                {
+                    throw new LiteDbFlowchartDataSetProviderException(e.Message);
+                }
+            }
+
+
+            return ret;
         }
     }
 }
