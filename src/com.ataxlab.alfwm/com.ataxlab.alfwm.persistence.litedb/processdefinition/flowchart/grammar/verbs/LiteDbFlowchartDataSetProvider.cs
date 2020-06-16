@@ -10,11 +10,14 @@ using LiteDB;
 namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.grammar.verbs
 {
 
+
     /// <summary>
     /// a litedb implementation of a persistence provider
     /// </summary>
     public class LiteDbFlowchartDataSetProvider : IPersistenceProvider<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult>, ILiteDbFlowchartDataSetProvider
     {
+
+
         public LiteDbFlowchartDataSetProvider()
         {
 
@@ -78,6 +81,7 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
            
             return ret;
         }
+
 
         public virtual LiteDbFlowchartDataSetProviderConfigResult ConfigureProvider(LiteDbFlowchartDataSetProviderConfiguration config, Func<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult> configureProviderOperation)
         {

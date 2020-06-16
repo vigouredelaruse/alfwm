@@ -136,16 +136,25 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             throw new NotImplementedException();
         }
 
+        LiteDbFlowchartDataSetProviderConfigResult ConfigureProviderOperation(LiteDbFlowchartDataSetProviderConfiguration config)
+        {
+            int i = 0;
+            return this.testedClass.ConfigureProvider(config);
+        }
 
         [TestMethod]
         public void TestConfigureProvideOperation()
         {
             Exception e = null;
 
+
+            Func<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult> configProvider =
+                new Func<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult>(ConfigureProviderOperation);
+
             try
             {
                 var result = testedClass.ConfigureProvider(this.ProviderConfiguration,
-                    config => testedClass.ConfigureProvider(config)
+                   configProvider
                     );
             }
             catch(Exception ee)

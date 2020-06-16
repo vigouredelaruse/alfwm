@@ -2,6 +2,9 @@
 
 namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.grammar.verbs
 {
+
+    public delegate LiteDbFlowchartDataSetProviderConfigResult ConfigureProviderOperation(LiteDbFlowchartDataSetProviderConfiguration config);
+
     public interface ILiteDbFlowchartDataSetProvider
     {
         /// <summary>

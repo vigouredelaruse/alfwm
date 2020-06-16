@@ -30,17 +30,17 @@
     <AppXManifest Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2020-06-15T02:59:39.132</Modified>
+      <Modified>2020-06-15T16:46:37.145</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\com.ataxlab.alfwm.uwp.mstests.exe">
       <PackagePath>entrypoint\com.ataxlab.alfwm.uwp.mstests.exe</PackagePath>
-      <Modified>2020-06-15T02:59:37.251</Modified>
+      <Modified>2020-06-15T16:46:35.626</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\com.ataxlab.alfwm.uwp.mstests.pdb">
       <PackagePath>com.ataxlab.alfwm.uwp.mstests.pdb</PackagePath>
-      <Modified>2020-06-15T02:59:37.251</Modified>
+      <Modified>2020-06-15T16:46:35.626</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.uwp.activity\bin\x86\Debug\com.ataxlab.alfwm.library.uwp.activity.pdb">
       <PackagePath>com.ataxlab.alfwm.library.uwp.activity.pdb</PackagePath>
@@ -218,11 +218,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2020-06-15T02:59:38.534</Modified>
+      <Modified>2020-06-15T16:46:36.667</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\Core\com.ataxlab.alfwm.uwp.mstests.exe">
       <PackagePath>com.ataxlab.alfwm.uwp.mstests.exe</PackagePath>
-      <Modified>2020-06-15T02:59:39.124</Modified>
+      <Modified>2020-06-15T16:46:37.135</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
