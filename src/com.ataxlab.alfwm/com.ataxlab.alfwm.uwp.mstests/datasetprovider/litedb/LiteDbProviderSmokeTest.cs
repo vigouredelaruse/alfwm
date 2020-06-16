@@ -53,17 +53,17 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
 
         }
 
-        public string PersistenceProviderId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PersistenceProviderName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PersistenceProviderDisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PersistenceProviderHostClassName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PersistenceProviderAssemblyName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public LiteDbFlowchartDataSetProviderConfiguration ProviderConfiguration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ConnectionString TestConnectionString { get; private set; }
-        public string TestCollectionName { get; private set; }
-        public string IndexExpression { get; private set; }
-        public string TestIndexName { get; private set; }
-        public LiteDbFlowchartDataSetProviderConfiguration TestedProviderConfiguration { get; private set; }
+        public string PersistenceProviderId { get; set; }
+        public string PersistenceProviderName { get; set; }
+        public string PersistenceProviderDisplayName { get; set; }
+        public string PersistenceProviderHostClassName { get; set; }
+        public string PersistenceProviderAssemblyName { get; set; }
+        public LiteDbFlowchartDataSetProviderConfiguration ProviderConfiguration { get; set; }
+        public ConnectionString TestConnectionString { get; set; }
+        public string TestCollectionName { get; set; }
+        public string IndexExpression { get; set; }
+        public string TestIndexName { get; set; }
+        public LiteDbFlowchartDataSetProviderConfiguration TestedProviderConfiguration { get; set; }
 
         [TestMethod]
         public void TestConfigureProvider()
@@ -148,14 +148,16 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             Exception e = null;
 
 
-            Func<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult> configProvider =
+            Func<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult> configProviderOperation =
                 new Func<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult>(ConfigureProviderOperation);
 
             try
             {
-                var result = testedClass.ConfigureProvider(this.ProviderConfiguration,
-                   configProvider
+                var result = testedClass.ConfigureProvider(TestedProviderConfiguration,
+                   configProviderOperation
                     );
+
+                Assert.IsNotNull(result);
             }
             catch(Exception ee)
             {
