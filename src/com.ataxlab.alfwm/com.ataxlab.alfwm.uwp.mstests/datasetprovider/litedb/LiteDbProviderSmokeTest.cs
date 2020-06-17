@@ -1,4 +1,5 @@
 ﻿using com.ataxlab.alfwm.core.persistence;
+using com.ataxlab.alfwm.utility.extension;
 using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.grammar.verbs;
 using com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb.model;
@@ -18,23 +19,6 @@ using Windows.Media.Protection.PlayReady;
 namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
 {
 
-
-    public class TestPipelineVariable : PipelineVariable<TaskItem, List<TaskItem>, TestPipelineVariable>
-    {
-        public TestPipelineVariable()
-        {
-
-        }
-
-        /// <summary>
-        /// test entity
-        /// concrete implementation of IPipelineVariable<>
-        /// </summary>
-        /// <param name="payload"></param>
-        public TestPipelineVariable(TaskItem payload) : base(payload)
-        {
-        }
-    }
 
     [TestClass]
     public class LiteDbProviderSmokeTest : IPersistenceProvider<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult>, ILiteDbFlowchartDataSetProvider
@@ -144,6 +128,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             throw new NotImplementedException();
         }
 
+
         [TestMethod]
         public void TestCreate()
         {
@@ -177,8 +162,92 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
         public CreateResult CreateOperation(CreateExpression<TestPipelineVariable> createExpression, TestPipelineVariable entity)
         {
             CreateResult ret = new CreateResult();
+            try
+            {
+                // conveniently our delegate has access to the enclosing class
+                // should that be a viewmodel or a service or a test harness
+                using (var db = new LiteDatabase(this.TestConnectionString.Filename))
+                {
+                    var col = db.GetCollection<TestPipelineVariable>(createExpression.CollectionName);
+                    col.Insert(entity);
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
 
             return ret;
+        }
+
+        [TestMethod]
+        public void TestCreateWithCreateOperationDelegate()
+        {
+            Exception e = null;
+
+            var clonedEntity = TestEntity.Clone() as TestPipelineVariable;
+            clonedEntity.ID = Guid.NewGuid().ToString();
+
+            // initialize a create expression for
+            // the delegate
+            var createExpression = new CreateExpression<TestPipelineVariable>();
+            createExpression.CollectionName = this.TestCollectionName;
+            createExpression.NewEntity = this.TestEntity;
+
+            // initialize the delegate
+            EntityCreateOperation<CreateExpression<TestPipelineVariable>, TestPipelineVariable, CreateResult> testOperation =
+                new EntityCreateOperation<CreateExpression<TestPipelineVariable>, TestPipelineVariable, CreateResult>
+                (CreateWithOperationDelegate);
+
+            try
+            {
+
+                // test the method
+                var result = testedClass.Create(TestEntity, createExpression, testOperation);
+
+                Assert.IsNotNull(result, "test failed with null result");
+            }
+            catch(Exception ex)
+            {
+                e = ex;
+            }
+
+            Assert.IsNull(e, "failed test with exception " + e?.Message);
+        }
+
+        /// <summary>
+        /// delegate implementation for Create operation
+        /// </summary>
+        /// <param name="createExpression"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        private CreateResult CreateWithOperationDelegate(CreateExpression<TestPipelineVariable> createExpression, TestPipelineVariable entity)
+        {
+            CreateResult ret = new CreateResult();
+            try
+            {
+                // conveniently our delegate has access to the enclosing class
+                // should that be a viewmodel or a service or a test harness
+                using (var db = new LiteDatabase(this.TestConnectionString))
+                {
+                    var col = db.GetCollection<TestPipelineVariable>(createExpression.CollectionName);
+                    col.Insert(entity);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return ret;
+        }
+
+        public TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, EntityCreateOperation<TCreateExpression, TCreatedEntity, TCreateResult> createOperation = null)
+            where TCreateResult : class
+            where TCreateExpression : class
+            where TCreatedEntity : class
+        {
+            throw new NotImplementedException();
         }
 
         public TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, Func<TCreateExpression, TCreatedEntity, TCreateResult> createOperation = null)
@@ -190,6 +259,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
 
             return ret;
         }
+
 
         public TDeleteOperationResult Delete<TDeletedEntity, TDeleteExpression, TDeleteOperationResult>(TDeletedEntity entity, TDeleteExpression deleteExpression, Func<TDeletedEntity, TDeleteExpression, TDeleteOperationResult> deleeOperation = null)
         {
@@ -297,5 +367,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

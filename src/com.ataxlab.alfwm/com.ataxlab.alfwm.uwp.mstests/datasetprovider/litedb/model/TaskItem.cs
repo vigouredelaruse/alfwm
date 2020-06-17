@@ -9,7 +9,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb.model
     /// <summary>
     /// sample POCO for our provider test
     /// </summary>
-    public class TaskItem
+    public class TaskItem : ICloneable
     {
         public TaskItem() 
         {
@@ -27,5 +27,10 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb.model
         public DateTime StartTimme { get; set; }
 
         public DateTime EndTime { get; set; }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

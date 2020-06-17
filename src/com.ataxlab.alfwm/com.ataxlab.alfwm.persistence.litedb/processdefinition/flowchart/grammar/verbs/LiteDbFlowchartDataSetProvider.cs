@@ -136,6 +136,46 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
             return ret;
         }
 
+        /// <summary>
+        /// use of a generic delegate allows us to pass type 
+        /// information through to generic API methods
+        /// </summary>
+        /// <typeparam name="TCreateResult"></typeparam>
+        /// <typeparam name="TCreateExpression"></typeparam>
+        /// <typeparam name="TCreatedEntity"></typeparam>
+        /// <param name="entity"></param>
+        /// <param name="createExpression"></param>
+        /// <param name="createOperation"></param>
+        /// <returns></returns>
+        public TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, EntityCreateOperation<TCreateExpression, TCreatedEntity, TCreateResult> createOperation = null)
+            where TCreateResult : class
+            where TCreateExpression : class
+            where TCreatedEntity : class
+        {
+            TCreateResult ret = default(TCreateResult); ;
+
+            if (createOperation == null)
+            {
+
+                /// here because the required delegate has not been provided
+                throw new LiteDbFlowchartDataSetProviderException("invalid method invocation. you must hydrate the createOperation delegate");
+            }
+            else
+            {
+                try
+                {
+                    /// here because the required delegate has been provided. invoke it
+                    ret = createOperation(createExpression, entity);
+                }
+                catch (Exception ex)
+                {
+                    throw new LiteDbFlowchartDataSetProviderException(ex.Message);
+                }
+            }
+
+            return ret;
+        }
+
         public TDeleteOperationResult Delete<TDeletedEntity, TDeleteExpression, TDeleteOperationResult>(TDeletedEntity entity, TDeleteExpression deleteExpression, Func<TDeletedEntity, TDeleteExpression, TDeleteOperationResult> deleteOperation = null)
         {
             TDeleteOperationResult ret = default(TDeleteOperationResult);

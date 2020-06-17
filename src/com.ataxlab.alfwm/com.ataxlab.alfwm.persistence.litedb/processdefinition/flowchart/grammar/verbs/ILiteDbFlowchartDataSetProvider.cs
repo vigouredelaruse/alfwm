@@ -5,8 +5,29 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
 
     public delegate LiteDbFlowchartDataSetProviderConfigResult ConfigureProviderOperation(LiteDbFlowchartDataSetProviderConfiguration config);
 
+    /// <summary>
+    /// delegate signature callers need to implement to supply their own Create operation against the provider
+    /// there is no default implementation of CRUD operations against this provider
+    /// </summary>
+    /// <typeparam name="TCreateExpression"></typeparam>
+    /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="TCreateOperationResult"></typeparam>
+    /// <param name="createExpression"></param>
+    /// <param name="entity"></param>
+    /// <returns></returns>
+    public delegate TCreateOperationResult EntityCreateOperation<TCreateExpression, TEntity, TCreateOperationResult>(TCreateExpression createExpression, TEntity entity)
+        where TCreateOperationResult : class
+        where TCreateExpression : class
+        where TEntity : class;
+
     public interface ILiteDbFlowchartDataSetProvider
     {
+
+        #region delegate signatures
+
+   
+        #endregion delegate signatures
+
         /// <summary>
         /// 
         /// </summary>
@@ -18,6 +39,11 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
         /// <param name="createOperation"></param>
         /// <returns></returns>
         TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, Func<TCreateExpression, TCreatedEntity, TCreateResult> createOperation = null);
+
+        TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, EntityCreateOperation<TCreateExpression, TCreatedEntity, TCreateResult> createOperation = null)
+                            where TCreateResult : class
+                            where TCreateExpression : class
+                            where TCreatedEntity : class;
 
         /// <summary>
         /// support providing a method implementing the operation
