@@ -30,25 +30,25 @@
     <AppXManifest Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2020-06-16T17:43:39.848</Modified>
+      <Modified>2020-06-17T00:12:24.295</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\com.ataxlab.alfwm.uwp.mstests.exe">
       <PackagePath>entrypoint\com.ataxlab.alfwm.uwp.mstests.exe</PackagePath>
-      <Modified>2020-06-16T17:43:37.711</Modified>
+      <Modified>2020-06-17T00:12:21.798</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\com.ataxlab.alfwm.uwp.mstests.pdb">
       <PackagePath>com.ataxlab.alfwm.uwp.mstests.pdb</PackagePath>
-      <Modified>2020-06-16T17:43:37.711</Modified>
+      <Modified>2020-06-17T00:12:21.798</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.uwp.activity\bin\x86\Debug\com.ataxlab.alfwm.library.uwp.activity.pdb">
       <PackagePath>com.ataxlab.alfwm.library.uwp.activity.pdb</PackagePath>
-      <Modified>2020-06-14T22:41:20.930</Modified>
+      <Modified>2020-06-16T23:38:33.138</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.uwp\bin\x86\Debug\com.ataxlab.alfwm.scheduler.uwp.pdb">
       <PackagePath>com.ataxlab.alfwm.scheduler.uwp.pdb</PackagePath>
-      <Modified>2020-06-14T22:41:23.649</Modified>
+      <Modified>2020-06-16T23:38:36.696</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\TestPlatform.Universal\16.0\References\CommonConfiguration\neutral\testhost.dll">
       <PackagePath>testhost.dll</PackagePath>
@@ -80,27 +80,27 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.core\bin\Debug\netstandard2.0\com.ataxlab.alfwm.core.dll">
       <PackagePath>com.ataxlab.alfwm.core.dll</PackagePath>
-      <Modified>2020-06-14T22:41:18.684</Modified>
+      <Modified>2020-06-16T23:38:30.954</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.dll">
       <PackagePath>com.ataxlab.alfwm.library.activity.dll</PackagePath>
-      <Modified>2020-06-14T22:41:22.515</Modified>
+      <Modified>2020-06-16T23:38:35.109</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.uwp.activity\bin\x86\Debug\com.ataxlab.alfwm.library.uwp.activity.dll">
       <PackagePath>com.ataxlab.alfwm.library.uwp.activity.dll</PackagePath>
-      <Modified>2020-06-14T22:41:20.930</Modified>
+      <Modified>2020-06-16T23:38:33.138</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.persistence.litedb\bin\Debug\netstandard2.0\com.ataxlab.alfwm.persistence.litedb.dll">
       <PackagePath>com.ataxlab.alfwm.persistence.litedb.dll</PackagePath>
-      <Modified>2020-06-16T15:58:09.168</Modified>
+      <Modified>2020-06-16T23:38:34.257</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.uwp\bin\x86\Debug\com.ataxlab.alfwm.scheduler.uwp.dll">
       <PackagePath>com.ataxlab.alfwm.scheduler.uwp.dll</PackagePath>
-      <Modified>2020-06-14T22:41:23.649</Modified>
+      <Modified>2020-06-16T23:38:36.696</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm\bin\Debug\netstandard2.0\com.ataxlab.alfwm.dll">
       <PackagePath>com.ataxlab.alfwm.dll</PackagePath>
-      <Modified>2020-06-14T22:41:21.930</Modified>
+      <Modified>2020-06-16T23:38:34.574</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.18362.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
@@ -108,19 +108,19 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.core\bin\Debug\netstandard2.0\com.ataxlab.alfwm.core.pdb">
       <PackagePath>com.ataxlab.alfwm.core.pdb</PackagePath>
-      <Modified>2020-06-14T22:41:18.681</Modified>
+      <Modified>2020-06-16T23:38:30.934</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.pdb">
       <PackagePath>com.ataxlab.alfwm.library.activity.pdb</PackagePath>
-      <Modified>2020-06-14T22:41:22.516</Modified>
+      <Modified>2020-06-16T23:38:35.110</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.persistence.litedb\bin\Debug\netstandard2.0\com.ataxlab.alfwm.persistence.litedb.pdb">
       <PackagePath>com.ataxlab.alfwm.persistence.litedb.pdb</PackagePath>
-      <Modified>2020-06-16T15:58:09.169</Modified>
+      <Modified>2020-06-16T23:38:34.257</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm\bin\Debug\netstandard2.0\com.ataxlab.alfwm.pdb">
       <PackagePath>com.ataxlab.alfwm.pdb</PackagePath>
-      <Modified>2020-06-14T22:41:21.930</Modified>
+      <Modified>2020-06-16T23:38:34.574</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\TestPlatform.Universal\16.0\Redist\CommonConfiguration\neutral\Microsoft.TestPlatform.CommunicationUtilities.dll">
       <PackagePath>Microsoft.TestPlatform.CommunicationUtilities.dll</PackagePath>
@@ -210,7 +210,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\UnitTestApp.xbf">
       <PackagePath>UnitTestApp.xbf</PackagePath>
-      <Modified>2020-06-16T17:43:37.502</Modified>
+      <Modified>2020-06-17T00:01:04.528</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.18362.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -218,11 +218,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2020-06-16T17:43:39.123</Modified>
+      <Modified>2020-06-17T00:01:08.656</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\Core\com.ataxlab.alfwm.uwp.mstests.exe">
       <PackagePath>com.ataxlab.alfwm.uwp.mstests.exe</PackagePath>
-      <Modified>2020-06-16T17:43:39.834</Modified>
+      <Modified>2020-06-17T00:12:24.280</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

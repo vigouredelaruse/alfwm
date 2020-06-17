@@ -60,8 +60,18 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TItems"></typeparam>
     /// <typeparam name="TParent"></typeparam>
-    public class PipelineVariable<T, TItems, TParent> : IPipelineVariable<T, TItems, TParent> where T : class where TItems : class where TParent : class
+    public class PipelineVariable<T, TItems, TParent> : IPipelineVariable<T, TItems, TParent> 
+        where T : class where TItems : class where TParent : class
     {
+        /// <summary>
+        /// calling this constructor definitely leaves
+        /// the PipelineVariable unitialized
+        /// </summary>
+        public PipelineVariable()
+        {
+
+        }
+
         /// <summary>
         /// initialize the json type system 
         /// with the supplied payload

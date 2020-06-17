@@ -110,7 +110,7 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
         /// <param name="createExpression"></param>
         /// <param name="createOperation"></param>
         /// <returns></returns>
-        TCreateResult ILiteDbFlowchartDataSetProvider.Create<TCreateResult, Query, TCreatedEntity>(TCreatedEntity entity, Query createExpression, Func<Query, TCreatedEntity, TCreateResult> createOperation)
+        public TCreateResult Create<TCreateResult, Query, TCreatedEntity>(TCreatedEntity entity, Query createExpression, Func<Query, TCreatedEntity, TCreateResult> createOperation)
         {
             TCreateResult ret = default(TCreateResult); ;
 

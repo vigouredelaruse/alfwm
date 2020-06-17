@@ -1,9 +1,12 @@
 ﻿using com.ataxlab.alfwm.core.persistence;
+using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.grammar.verbs;
+using com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb.model;
 using LiteDB;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
@@ -14,13 +17,59 @@ using Windows.Media.Protection.PlayReady;
 
 namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
 {
+
+
+    public class TestPipelineVariable : PipelineVariable<TaskItem, List<TaskItem>, TestPipelineVariable>
+    {
+        public TestPipelineVariable()
+        {
+
+        }
+
+        /// <summary>
+        /// test entity
+        /// concrete implementation of IPipelineVariable<>
+        /// </summary>
+        /// <param name="payload"></param>
+        public TestPipelineVariable(TaskItem payload) : base(payload)
+        {
+        }
+    }
+
     [TestClass]
     public class LiteDbProviderSmokeTest : IPersistenceProvider<LiteDbFlowchartDataSetProviderConfiguration, LiteDbFlowchartDataSetProviderConfigResult>, ILiteDbFlowchartDataSetProvider
     {
         LiteDbFlowchartDataSetProvider testedClass = new LiteDbFlowchartDataSetProvider();
 
+        TestPipelineVariable TestEntity;
+
+        public void InitializeTestEntity()
+        {
+            // initialize the payload of the pipeline variable
+            var testTask = new TaskItem()
+            {
+                Id = Guid.NewGuid().ToString(),
+                StartTimme = DateTime.UtcNow,
+                EndTime = DateTime.UtcNow.AddHours(1),
+                TaskName = "Task Name",
+                TaskSummary = "Task Summary."
+            };
+
+            /// initialize the test entity with it's 
+            /// payload
+            TestEntity  = new TestPipelineVariable(testTask);
+
+            TestEntity.ID = Guid.NewGuid().ToString();
+            TestEntity.Key = "TestVariableKey";
+            TestEntity.TimeStamp = DateTime.UtcNow;
+            TestEntity.CreateDate = DateTime.UtcNow;
+            TestEntity.Description = "Test Entity Description";
+            TestEntity.DisplayName = "Test Entity Display Name";
+            
+        }
+
         [TestInitialize]
-        public void PlayReadyDecryptorSetup()
+        public void Setup()
         {
             //Expression<Func<bool>> indexExpr = 
             //var config =
@@ -49,10 +98,16 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
                 new LiteDbFlowchartDataSetProviderConfiguration(TestConnectionString,
                 IndexExpression, TestCollectionName, TestIndexName, true);
 
-           
+            // implicit test of provider builtin config operation 
+            // used ere to configure a provider uniformly for these tests
+            testedClass.ConfigureProvider(TestedProviderConfiguration);
+
+            /// initialize a test entity
+            InitializeTestEntity();
 
         }
 
+        #region interface properties
         public string PersistenceProviderId { get; set; }
         public string PersistenceProviderName { get; set; }
         public string PersistenceProviderDisplayName { get; set; }
@@ -63,6 +118,9 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
         public string TestCollectionName { get; set; }
         public string IndexExpression { get; set; }
         public string TestIndexName { get; set; }
+
+        #endregion interface properties
+
         public LiteDbFlowchartDataSetProviderConfiguration TestedProviderConfiguration { get; set; }
 
         [TestMethod]
@@ -86,9 +144,51 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             throw new NotImplementedException();
         }
 
+        [TestMethod]
+        public void TestCreate()
+        {
+            Exception e = null;
+
+            // initialize a create expression for
+            // the delegate
+            var createExpression = new CreateExpression<TestPipelineVariable>();
+            createExpression.CollectionName = this.TestCollectionName;
+            createExpression.NewEntity = this.TestEntity;
+
+            // initialize the func
+            Func<CreateExpression<TestPipelineVariable>, TestPipelineVariable, CreateResult> createOperation =
+                new Func<CreateExpression<TestPipelineVariable>, TestPipelineVariable, CreateResult>(CreateOperation);
+
+            try
+            {
+                var result = testedClass.Create(TestEntity, createExpression, createOperation);
+
+                Assert.IsNotNull(result, "create operation failed. null result");
+            }
+            catch(Exception ex)
+            {
+                e = ex;
+            }
+
+
+            Assert.IsNull(e, "test failed, exception");
+        }
+
+        public CreateResult CreateOperation(CreateExpression<TestPipelineVariable> createExpression, TestPipelineVariable entity)
+        {
+            CreateResult ret = new CreateResult();
+
+            return ret;
+        }
+
         public TCreateResult Create<TCreateResult, TCreateExpression, TCreatedEntity>(TCreatedEntity entity, TCreateExpression createExpression, Func<TCreateExpression, TCreatedEntity, TCreateResult> createOperation = null)
         {
-            throw new NotImplementedException();
+            //Func<TCreateExpression, TCreatedEntity, TCreateResult> targetOperation = 
+            //    new Func<TCreateExpression, TCreatedEntity, TCreateResult>()
+
+            TCreateResult ret = default(TCreateResult);
+
+            return ret;
         }
 
         public TDeleteOperationResult Delete<TDeletedEntity, TDeleteExpression, TDeleteOperationResult>(TDeletedEntity entity, TDeleteExpression deleteExpression, Func<TDeletedEntity, TDeleteExpression, TDeleteOperationResult> deleeOperation = null)
