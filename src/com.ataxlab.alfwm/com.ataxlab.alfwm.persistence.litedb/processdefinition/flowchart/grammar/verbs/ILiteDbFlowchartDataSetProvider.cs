@@ -20,6 +20,19 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
         where TCreateExpression : class
         where TEntity : class;
 
+    /// <summary>
+    /// delegate signature callers need to implement to supply their own Read operation against the provider
+    /// there is no default implementation of CRUD operations against this provider
+    /// </summary>
+    /// <typeparam name="TReadExpression"></typeparam>
+    /// <typeparam name="TReadOperationResult"></typeparam>
+    /// <param name="createExpression"></param>
+    /// <param name="entity"></param>
+    /// <returns></returns>
+    public delegate TReadOperationResult EntityReadOperation<TReadExpression, TReadOperationResult>(TReadExpression createExpression)
+    where TReadOperationResult : class
+    where TReadExpression : class;
+
     public interface ILiteDbFlowchartDataSetProvider
     {
 
@@ -82,7 +95,9 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
         /// <param name="searchExpression"></param>
         /// <param name="readOperation"></param>
         /// <returns></returns>
-        TReadOperationResult Read<TReadOperationResult, TSearchExpression>(TSearchExpression searchExpression, Func<TSearchExpression, TReadOperationResult> readOperation);
+        TReadOperationResult Read<TReadOperationResult, TSearchExpression>(TSearchExpression searchExpression, EntityReadOperation<TSearchExpression, TReadOperationResult> readOperation)
+                    where TReadOperationResult : class
+                    where TSearchExpression : class;
 
         /// <summary>
         /// support input caching

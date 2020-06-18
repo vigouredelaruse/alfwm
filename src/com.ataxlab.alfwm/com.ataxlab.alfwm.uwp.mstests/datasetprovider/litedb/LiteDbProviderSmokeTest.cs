@@ -260,7 +260,12 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             return ret;
         }
 
-
+        public TReadOperationResult Read<TReadOperationResult, TSearchExpression>(TSearchExpression searchExpression, EntityReadOperation<TSearchExpression, TReadOperationResult> readOperation)
+            where TReadOperationResult : class
+            where TSearchExpression : class
+        {
+            throw new NotImplementedException();
+        }
         public TDeleteOperationResult Delete<TDeletedEntity, TDeleteExpression, TDeleteOperationResult>(TDeletedEntity entity, TDeleteExpression deleteExpression, Func<TDeletedEntity, TDeleteExpression, TDeleteOperationResult> deleeOperation = null)
         {
             throw new NotImplementedException();
@@ -282,11 +287,6 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
         }
 
         public TOutputQueue GetOutputQueue<TOutputQueue>(Func<TOutputQueue> getOutputQueueOperation = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TReadOperationResult Read<TReadOperationResult, TSearchExpression>(TSearchExpression searchExpression, Func<TSearchExpression, TReadOperationResult> readOperation)
         {
             throw new NotImplementedException();
         }

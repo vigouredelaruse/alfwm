@@ -222,7 +222,9 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
             throw new NotImplementedException();
         }
 
-        public TReadOperationResult Read<TReadOperationResult, TSearchExpression>(TSearchExpression searchExpression, Func<TSearchExpression, TReadOperationResult> readOperation)
+        public TReadOperationResult Read<TReadOperationResult, TSearchExpression>(TSearchExpression searchExpression, EntityReadOperation<TSearchExpression, TReadOperationResult> readOperation)
+                    where TReadOperationResult : class
+                    where TSearchExpression : class
         {
             TReadOperationResult ret = default(TReadOperationResult);
 
