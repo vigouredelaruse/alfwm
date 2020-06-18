@@ -26,20 +26,16 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
     /// </summary>
     /// <typeparam name="TReadExpression"></typeparam>
     /// <typeparam name="TReadOperationResult"></typeparam>
-    /// <param name="createExpression"></param>
+    /// <param name="queryExpression"></param>
     /// <param name="entity"></param>
     /// <returns></returns>
-    public delegate TReadOperationResult EntityReadOperation<TReadExpression, TReadOperationResult>(TReadExpression createExpression)
+    public delegate TReadOperationResult EntityReadOperation<TReadExpression, TReadOperationResult>(TReadExpression queryExpression)
     where TReadOperationResult : class
     where TReadExpression : class;
 
     public interface ILiteDbFlowchartDataSetProvider
     {
 
-        #region delegate signatures
-
-   
-        #endregion delegate signatures
 
         /// <summary>
         /// 

@@ -260,6 +260,68 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             return ret;
         }
 
+        /// <summary>
+        /// test a thinly sliced selection of default search expression supported by this provider
+        /// ideally a provider permits runtime speicification of query parameters and predicates
+        /// which the LiteDb BsonExpression accomplishes
+        /// </summary>
+        [TestMethod]
+        public void TestEntityReadOperationWithBsonExpressionQuery()
+        {
+            Exception e = null;
+
+            // define the sql
+            var searchExpression = Query.Contains("Description", "Test");
+
+            // define the func
+            EntityReadOperation<BsonExpression, List<TestPipelineVariable>> testSqlReadOperation =
+                new EntityReadOperation<BsonExpression, List<TestPipelineVariable>>(EntityReadOperationWithSqlQuery);
+
+            // execute the query logic in the caller supplied delegate
+            try
+            {
+                var result = testSqlReadOperation(searchExpression);
+
+                Assert.IsNotNull(result, "failed test with null result");
+
+                Assert.IsTrue(result.Count > 1, "failed test. you probably forgot to insert a record before running this test");
+            }
+            catch(Exception ee)
+            {
+                e = ee;
+            }
+
+            Assert.IsNull(e, "Failed test with exception " + e?.Message);
+        }
+
+        /// <summary>
+        /// implementation of user supplied delegate for BsonExpression queryExpression
+        /// BsonExpression is sufficiently expressive to support a couple of nice pipeline provider requirements
+        ///  viz: 1) fairly type-safe expression of search parameters at runtime as opposed to linq where lamdas are specified at compile time
+        /// currently todo - ensure a record is inserted prior to calling this test
+        /// </summary>
+        /// <param name="queryExpression"></param>
+        /// <returns></returns>
+        private List<TestPipelineVariable> EntityReadOperationWithSqlQuery(BsonExpression queryExpression)
+        {
+            List<TestPipelineVariable> ret = new List<TestPipelineVariable>();
+
+            using (var db = new LiteDatabase(this.TestConnectionString))
+            {
+                // var result = db.GetCollection<TestPipelineVariable>(this.TestCollectionName).FindById(this.TestEntity.ID);
+                // ret = result;
+                
+                var result = db.GetCollection<TestPipelineVariable>(this.TestCollectionName).Find(queryExpression);
+                foreach(var item in result)
+                {
+                    ret.Add(item);
+                }
+
+            }
+
+            return ret;
+        }
+
         public TReadOperationResult Read<TReadOperationResult, TSearchExpression>(TSearchExpression searchExpression, EntityReadOperation<TSearchExpression, TReadOperationResult> readOperation)
             where TReadOperationResult : class
             where TSearchExpression : class
