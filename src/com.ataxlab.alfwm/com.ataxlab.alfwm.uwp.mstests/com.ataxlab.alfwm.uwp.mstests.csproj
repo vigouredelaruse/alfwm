@@ -123,6 +123,8 @@
     <Compile Include="datasetprovider\litedb\model\Contact.cs" />
     <Compile Include="datasetprovider\litedb\model\CreateExpression.cs" />
     <Compile Include="datasetprovider\litedb\model\CreateResult.cs" />
+    <Compile Include="datasetprovider\litedb\model\DeleteExpression.cs" />
+    <Compile Include="datasetprovider\litedb\model\DeleteOperationResult.cs" />
     <Compile Include="datasetprovider\litedb\model\TaskItem.cs" />
     <Compile Include="datasetprovider\litedb\model\TestPipelineVariable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

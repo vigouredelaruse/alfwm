@@ -33,6 +33,31 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
     where TReadOperationResult : class
     where TReadExpression : class;
 
+    /// <summary>
+    /// delegate signature callers need to implement to supply their own Read operation against the provider
+    /// there is no default implementation of CRUD operations against this provider
+    /// </summary>
+    /// <typeparam name="TUpdateExpression"></typeparam>
+    /// <typeparam name="TUpdateOperationResult"></typeparam>
+    /// <param name="updateExpression"></param>
+    /// <returns></returns>
+    public delegate TUpdateOperationResult EntityUpdateOperation<TUpdateExpression, TUpdateOperationResult>(TUpdateExpression updateExpression)
+        where TUpdateOperationResult : class
+        where TUpdateExpression : class;
+
+    /// <summary>
+    /// delegate signature callers need to implement to supply their own Read operation against the provider
+    /// there is no default implementation of CRUD operations against this provider
+
+    /// </summary>
+    /// <typeparam name="TDeleteExpression"></typeparam>
+    /// <typeparam name="TDeleteOperationResult"></typeparam>
+    /// <param name="deleteExpression"></param>
+    /// <returns></returns>
+    public delegate TDeleteOperationResult EntityDeleteOperation<TDeleteExpression, TDeleteOperationResult>(TDeleteExpression deleteExpression)
+    where TDeleteOperationResult : class
+    where TDeleteExpression : class;
+
     public interface ILiteDbFlowchartDataSetProvider
     {
 
