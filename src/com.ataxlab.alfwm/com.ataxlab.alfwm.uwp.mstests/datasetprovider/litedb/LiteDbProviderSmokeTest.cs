@@ -94,7 +94,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             SearchExpression = Query.Contains("Description", "Test");
 
             // definte the insert query
-            CreateExpression = InitializeCreateExpression();
+            CreateExpression = InitializeCreateExpression(this.TestCollectionName, this.TestEntity);
         }
 
         #region interface properties
@@ -161,13 +161,13 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             Assert.IsNull(e, "test failed, exception");
         }
 
-        private CreateExpression<TestPipelineVariable> InitializeCreateExpression()
+        private CreateExpression<TestPipelineVariable> InitializeCreateExpression(string collectionName, TestPipelineVariable entity)
         {
             // initialize a create expression for
             // the delegate
             var createExpression = new CreateExpression<TestPipelineVariable>();
-            createExpression.CollectionName = this.TestCollectionName;
-            createExpression.NewEntity = this.TestEntity;
+            createExpression.CollectionName = collectionName;
+            createExpression.NewEntity = entity;
             return createExpression;
         }
 
@@ -284,7 +284,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
 
             // define the func
             EntityReadOperation<BsonExpression, List<TestPipelineVariable>> testSqlReadOperation =
-                new EntityReadOperation<BsonExpression, List<TestPipelineVariable>>(EntityReadOperationWithSqlQuery);
+                new EntityReadOperation<BsonExpression, List<TestPipelineVariable>>(EntityReadOperationWithBsonQuery);
 
             // execute the query logic in the caller supplied delegate
             try
@@ -311,7 +311,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
         /// </summary>
         /// <param name="queryExpression"></param>
         /// <returns></returns>
-        private List<TestPipelineVariable> EntityReadOperationWithSqlQuery(BsonExpression queryExpression)
+        private List<TestPipelineVariable> EntityReadOperationWithBsonQuery(BsonExpression queryExpression)
         {
             List<TestPipelineVariable> ret = new List<TestPipelineVariable>();
 
@@ -459,6 +459,115 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
         public TSetOutputQueueResult SetOutputQueue<TSetOutputQueueResult, TOutputQueue>(TOutputQueue queue, Func<TOutputQueue, TSetOutputQueueResult> setOutputQueueOperation = null)
         {
             throw new NotImplementedException();
+        }
+
+        [TestMethod]
+        public void TestUpdateOperation()
+        {
+            Exception e = null;
+
+            try
+            {
+                // used to track deletion
+                int initialRecordCount = 0;
+
+                // count the number of entities
+                // assumes synchronous test execution!!!!!!!
+                using (var db = new LiteDatabase(this.TestConnectionString))
+                {
+                    initialRecordCount = db.GetCollection<TestPipelineVariable>(this.TestCollectionName).Count();
+                }
+
+                // initialize the entity
+                this.TestEntity.ID = Guid.NewGuid().ToString();
+                this.TestEntity.DisplayName = "entity to be updated";
+
+                // insert the entity
+                var createExpression = InitializeCreateExpression(this.TestCollectionName, this.TestEntity);
+                var insertResult = this.CreateWithOperationDelegate(createExpression, this.TestEntity);
+
+                int currentCount = 0;
+                using (var db = new LiteDatabase(this.TestConnectionString))
+                {
+                    currentCount = db.GetCollection<TestPipelineVariable>(this.TestCollectionName).Count();
+                }
+
+                Assert.IsTrue(currentCount == initialRecordCount + 1, "Test failed, failed to insert");
+
+                // update the entity
+                const string updatedString = "Updated Entity";
+                this.TestEntity.DisplayName = updatedString;
+                UpdateExpression<TestPipelineVariable> updateExpression = new UpdateExpression<TestPipelineVariable>(TestEntity);
+                updateExpression.CollectionName = this.TestCollectionName;
+              
+
+                var updateOperation = new EntityUpdateOperation<UpdateExpression<TestPipelineVariable>, TestPipelineVariable, UpdateOperationResult>(EntityUpdateOperation);
+                var updateOperationResult = updateOperation(updateExpression);
+
+                // search for the updated entity
+                var searchExpression = Query.Contains("displayname", updatedString);
+                var searchResult = this.EntityReadOperationWithBsonQuery(searchExpression);
+
+                Assert.IsNotNull(searchResult, "test failed to find updated entity");
+                Assert.IsTrue(searchResult.Count > 0, "test failed to find updated entihy");
+                var firstResult = searchResult.Where(x => x.ID.ToLower().Contains("") && x.DisplayName.ToLower().Contains("updated")).ToList();
+                Assert.IsTrue(firstResult.Count > 0 && firstResult != null, "test failed, null result searching for updated entity");
+ 
+
+                // delete the entity
+                // initialize the delete expression
+                DeleteExpression<TestPipelineVariable> deleteExpression = new DeleteExpression<TestPipelineVariable>(this.TestEntity);
+                deleteExpression.CollectionName = this.TestCollectionName;
+
+                // create the delete delegate
+                var deleteOperation = new EntityDeleteOperation<DeleteExpression<TestPipelineVariable>, DeleteOperationResult>(DeleteOperation);
+
+                // invoke the delete delegate
+                var result = deleteOperation(deleteExpression);
+
+                Assert.IsNotNull(result, "test failed with null delete operation result"); ;
+
+                int updatedCount = 0;
+                // validate the object is missing
+                using (var db = new LiteDatabase(this.TestConnectionString))
+                {
+                    updatedCount = db.GetCollection<TestPipelineVariable>(this.TestCollectionName).Count();
+                }
+
+                Assert.IsTrue(updatedCount == initialRecordCount, "test failed, delete operation did not change record count");
+            }
+
+            catch (Exception ee)
+            {
+                e = ee;
+            }
+
+            Assert.IsNull(e, "failed test with exception " + e?.Message);
+        }
+
+        private UpdateOperationResult EntityUpdateOperation(UpdateExpression<TestPipelineVariable> updateExpression)
+        {
+            UpdateOperationResult ret = new UpdateOperationResult();
+
+            try
+            {
+
+                using (var db = new LiteDatabase(this.TestConnectionString))
+                {
+
+                    var result = db.GetCollection<TestPipelineVariable>(updateExpression.CollectionName).Update(updateExpression.UpdatedEntity.ID, updateExpression.UpdatedEntity);
+                    if (result == true)
+                    {
+                        ret.UpdatedItemCount = 1;
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return ret;
         }
 
         public TUpdateResult Update<TUpdatedEntity, TUpdateExpression, TUpdateResult>(TUpdatedEntity entity, TUpdateExpression updateExpression, Func<TUpdateExpression, TUpdatedEntity, TUpdateResult> updateOperation = null)

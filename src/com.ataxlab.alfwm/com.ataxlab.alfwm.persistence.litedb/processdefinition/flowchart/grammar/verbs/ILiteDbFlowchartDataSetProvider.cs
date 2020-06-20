@@ -41,8 +41,9 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
     /// <typeparam name="TUpdateOperationResult"></typeparam>
     /// <param name="updateExpression"></param>
     /// <returns></returns>
-    public delegate TUpdateOperationResult EntityUpdateOperation<TUpdateExpression, TUpdateOperationResult>(TUpdateExpression updateExpression)
+    public delegate TUpdateOperationResult EntityUpdateOperation<TUpdateExpression, TUpdatedEntity, TUpdateOperationResult>(TUpdateExpression updateExpression)
         where TUpdateOperationResult : class
+        where TUpdatedEntity : class
         where TUpdateExpression : class;
 
     /// <summary>
@@ -57,6 +58,10 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
     public delegate TDeleteOperationResult EntityDeleteOperation<TDeleteExpression, TDeleteOperationResult>(TDeleteExpression deleteExpression)
     where TDeleteOperationResult : class
     where TDeleteExpression : class;
+
+    public delegate TCollectionIndexOperationResult CollectionIndexOperation<CollectionIndexExpression, TCollectionIndexOperationResult>(CollectionIndexExpression collectionIndexExpression)
+        where TCollectionIndexOperationResult : class
+        where CollectionIndexExpression : class;
 
     public interface ILiteDbFlowchartDataSetProvider
     {
@@ -93,6 +98,8 @@ namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.gramm
         /// <param name="updateOperation"></param>
         /// <returns></returns>
         TUpdateResult Update<TUpdatedEntity, TUpdateExpression, TUpdateResult>(TUpdatedEntity entity, TUpdateExpression updateExpression, Func<TUpdateExpression, TUpdatedEntity, TUpdateResult> updateOperation = null);
+
+
 
         /// <summary>
         /// 
