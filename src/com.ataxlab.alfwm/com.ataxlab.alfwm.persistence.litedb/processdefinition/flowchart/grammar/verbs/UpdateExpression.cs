@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb.model
+namespace com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.grammar.verbs
 {
     public class UpdateExpression
     {
         public UpdateExpression() { }
 
         public BsonExpression UpdateCriteria { get; set; }
-        public string CollectionName { get; internal set; }
+        public string CollectionName { get; set; }
     }
 
     public class UpdateExpression<TUpdatedEntity> : UpdateExpression
