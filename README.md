@@ -1,3 +1,5 @@
+mrgnc => triage => release
+
 # Introduction 
 current modernity in system design is best left with the concise description, complexity
 
