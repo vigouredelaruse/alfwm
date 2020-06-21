@@ -4,6 +4,9 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
+    /// <summary>
+    /// support a serialiazable config
+    /// </summary>
     public interface IPipelineToolConfiguration
     {
 
@@ -21,5 +24,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// changed with a schema update
         /// </summary>
         string ConfigurationJsonSchema { get; set; }
+    }
+
+    /// <summary>
+    /// support generic semantics
+    /// </summary>
+    /// <typeparam name="TConfiguration"></typeparam>
+    public interface IPipelineToolConfiguration<TConfiguration> : IPipelineToolConfiguration
+    {
+        TConfiguration Configuration { get; set; }
     }
 }
