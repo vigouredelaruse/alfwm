@@ -11,7 +11,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     /// Tuples of a type you specify
     /// </summary>
     /// <typeparam name="TQueueEntity"></typeparam>
-    interface IQueueProducerPipelineToolBinding<TQueueEntity> : IPipelineToolBinding 
+    public interface IQueueProducerPipelineToolBinding<TQueueEntity> : IPipelineToolBinding 
         where TQueueEntity : class
     {
         ConcurrentQueue<TQueueEntity> OutputQueue { get; set; }
