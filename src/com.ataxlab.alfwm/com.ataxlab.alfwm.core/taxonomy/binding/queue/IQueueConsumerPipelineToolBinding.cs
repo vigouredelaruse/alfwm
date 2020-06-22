@@ -17,6 +17,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     /// <typeparam name="TQueueEntity"></typeparam>
     public interface IQueueConsumerPipelineToolBinding<TQueueEntity, TPollingTimer> : IPipelineToolBinding
         where TQueueEntity : class
+        where TPollingTimer : class
     {
         ConcurrentQueue<TQueueEntity> InputQueue { get; set; }
          
