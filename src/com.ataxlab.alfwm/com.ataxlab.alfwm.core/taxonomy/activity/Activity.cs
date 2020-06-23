@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace com.ataxlab.alfwm.core.taxonomy.activity
 {
+    [Obsolete]
     public abstract class Activity : IPipelineTool
     {
         public abstract string InstanceId { get; set; }
@@ -28,6 +29,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
                 handler(sender, args);
             }
         }
+
+        public abstract void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class;
 
         public virtual void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
         {
@@ -55,10 +58,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
                 handler(sender, args);
             }
         }
-        public abstract void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Action<StartResult> callback)
-            where StartResult : IPipelineToolStatus, new()
-            where StartConfiguration : IPipelineToolConfiguration, new();
-        public abstract void Start<StartResult>(Action<StartResult> callback) where StartResult : IPipelineToolStatus, new();
+
+        public abstract void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+            where StartResult : class, new()
+            where StartConfiguration : class, new();
+        public abstract void Start<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class;
         public abstract StopResult Stop<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }
 }

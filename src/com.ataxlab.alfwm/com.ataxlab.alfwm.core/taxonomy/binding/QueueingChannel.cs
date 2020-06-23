@@ -19,9 +19,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         where TQueueEntity : class
     {
         /// <summary>
-        /// failrly slow default polling interval
+        /// 
         /// </summary>
-        private double DefaultPollingInterval = 1000;
+        private double DefaultPollingInterval = 50;
 
         /// <summary>
         /// synchronization entity for mitigation

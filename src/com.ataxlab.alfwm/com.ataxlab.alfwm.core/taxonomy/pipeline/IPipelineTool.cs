@@ -28,7 +28,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args);
 
         event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
-        void OnPipelineToolCompleted(object sender, PipelineToolCompletedEventArgs args);
+
+        /// <summary>
+        /// support reporting completion with a payload
+        /// </summary>
+        /// <typeparam name="TPayload"></typeparam>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class;
 
 
         IPipelineToolStatus Status { get; set; }
@@ -36,8 +43,29 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         IPipelineToolConfiguration Configuration { get; set; }
 
         IPipelineToolBinding OutputBinding { get; set; }
-        void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Action<StartResult> callback) where StartConfiguration : IPipelineToolConfiguration, new() where StartResult : IPipelineToolStatus, new();
-        void Start<StartResult>(Action<StartResult> callback) where StartResult : IPipelineToolStatus, new();
+
+        /// <summary>
+        /// a start method for a delegate that has a user specified output
+        /// an implementation may choose to for instance, pass the output
+        /// to new activities
+        /// </summary>
+        /// <typeparam name="StartResult"></typeparam>
+        /// <typeparam name="StartConfiguration"></typeparam>
+        /// <param name="configuration"></param>
+        /// <param name="callback"></param>
+        void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback) 
+            where StartConfiguration : class, new() 
+            where StartResult : class, new();
+        
+
+        /// <summary>
+        /// a start method for a delegate that has no output
+        /// </summary>
+        /// <typeparam name="StartConfiguration"></typeparam>
+        /// <param name="configuration"></param>
+        /// <param name="callback"></param>
+        void Start<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) 
+            where StartConfiguration : class;
 
         StopResult Stop<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
 

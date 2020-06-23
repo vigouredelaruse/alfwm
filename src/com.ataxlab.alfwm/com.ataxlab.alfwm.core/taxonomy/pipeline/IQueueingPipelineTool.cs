@@ -25,7 +25,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     public interface IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TQueueEntity> : IPipelineTool 
         where TLatchingInputBinding : class
         where TOutputBinding : class
-        where TQueueEntity : class
+        where TQueueEntity : class, new()
     {
         /// <summary>
         /// latching input binding that latches signalling
@@ -49,6 +49,15 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// </summary>
         /// <param name="timestamp"></param>
         void OnQueueHasData(object sender, TQueueEntity availableData);
+
+        /// <summary>
+        /// clients of the queue pipeline tool can listen to this event
+        /// for notificaton of new arrivals on the quueue
+        /// 
+        /// the result is could be reflected on the queuing output binding collection of the tool, for instance
+        /// </summary>
+        event Func<TQueueEntity, TQueueEntity> QueueHasAvailableDataEvent;
+
 
         /// <summary>
         /// support fanout scenarious

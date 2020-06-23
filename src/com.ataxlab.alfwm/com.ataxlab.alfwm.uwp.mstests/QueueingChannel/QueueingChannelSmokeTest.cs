@@ -43,19 +43,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingChannel
             // iterate over varing versions of the payload and queue message
             for(int i = 0; i < itemsToSend; i++)
             {
-                // initialize some test data
-                TaskItem payload = new TaskItem()
-                {
-                    EndTime = DateTime.UtcNow.AddDays(1),
-                    StartTimme = DateTime.UtcNow,
-                    Id = Guid.NewGuid().ToString(),
-                    TaskName = "Task Name" + i,
-                    TaskSummary = "Task Summary. This is the task summary " + i
-                };
-
-                TaskItemPipelineVariable queueEntity = new TaskItemPipelineVariable(payload);
-                queueEntity.ID = Guid.NewGuid().ToString();
-                queueEntity.TimeStamp = DateTime.UtcNow;
+                TaskItemPipelineVariable queueEntity = GetNewQueueEntity(i);
 
                 // call the method under test
                 channel.InputQueue.Enqueue(queueEntity);
@@ -83,6 +71,24 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingChannel
 
                 Assert.IsTrue(receivedCachedItem == true, "test failed, could not find cached item in received items");
             }
+        }
+
+        private TaskItemPipelineVariable GetNewQueueEntity(int i)
+        {
+            // initialize some test data
+            TaskItem payload = new TaskItem()
+            {
+                EndTime = DateTime.UtcNow.AddDays(1),
+                StartTimme = DateTime.UtcNow,
+                Id = Guid.NewGuid().ToString(),
+                TaskName = "Task Name" + i,
+                TaskSummary = "Task Summary. This is the task summary " + i
+            };
+
+            TaskItemPipelineVariable queueEntity = new TaskItemPipelineVariable(payload);
+            queueEntity.ID = Guid.NewGuid().ToString();
+            queueEntity.TimeStamp = DateTime.UtcNow;
+            return queueEntity;
         }
 
         /// <summary>

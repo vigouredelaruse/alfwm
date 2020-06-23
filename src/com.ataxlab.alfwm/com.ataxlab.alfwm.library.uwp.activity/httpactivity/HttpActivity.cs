@@ -29,27 +29,17 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
         public override IPipelineToolConfiguration Configuration { get; set; }
         public override IPipelineToolBinding OutputBinding { get; set; }
 
-        /// <summary>
-        /// todo implement this
-        /// </summary>
-        /// <typeparam name="StartResult"></typeparam>
-        /// <typeparam name="StartConfiguration"></typeparam>
-        /// <param name="configuration"></param>
-        /// <returns></returns>
-        public override void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Action<StartResult> callback)
-        {
-
-        }
 
         public override StopResult Stop<StopResult>(string instanceId)
         {
             throw new NotImplementedException();
         }
 
-        public async override void Start<StartResult>(Action<StartResult> callback)
+        [Obsolete]
+        public async void Start<StartResult>(Action<StartResult> callback)
         {
 
-            StartResult result = new StartResult();
+            StartResult result = default(StartResult); // = new StartResult();
             var config = Configuration as HttpActivityConfiguration;
 
             try
@@ -76,7 +66,7 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
                     // for returning results
                     PipelineToolCompletedEventArgs completionArgs = new PipelineToolCompletedEventArgs();
                     completionArgs.Payload = data;
-                    result.StatusJson = data;
+                    // result.StatusJson = data;
                     callback(result);
                     OnPipelineToolCompleted(this, completionArgs);
                 }
@@ -89,6 +79,21 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
             { 
                 throw new HttpActivityException(e.Message); 
             } 
+        }
+
+        public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Start<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
+        {
+            throw new NotImplementedException();
         }
     }
 }
