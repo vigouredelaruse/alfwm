@@ -25,8 +25,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
     {
         LiteDbFlowchartDataSetProvider testedClass = new LiteDbFlowchartDataSetProvider();
 
-        TestPipelineVariable TestEntity;
-        private CreateExpression<TestPipelineVariable> CreateExpression;
+        TaskItemPipelineVariable TestEntity;
+        private CreateExpression<TaskItemPipelineVariable> CreateExpression;
 
         public void InitializeTestEntity()
         {
@@ -42,7 +42,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
 
             /// initialize the test entity with it's 
             /// payload
-            TestEntity  = new TestPipelineVariable(testTask);
+            TestEntity  = new TaskItemPipelineVariable(testTask);
 
             TestEntity.ID = Guid.NewGuid().ToString();
             TestEntity.Key = "TestVariableKey";
@@ -143,8 +143,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
 
 
             // initialize the func
-            Func<CreateExpression<TestPipelineVariable>, TestPipelineVariable, CreateResult> createOperation =
-                new Func<CreateExpression<TestPipelineVariable>, TestPipelineVariable, CreateResult>(CreateOperation);
+            Func<CreateExpression<TaskItemPipelineVariable>, TaskItemPipelineVariable, CreateResult> createOperation =
+                new Func<CreateExpression<TaskItemPipelineVariable>, TaskItemPipelineVariable, CreateResult>(CreateOperation);
 
             try
             {
@@ -161,17 +161,17 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             Assert.IsNull(e, "test failed, exception");
         }
 
-        private CreateExpression<TestPipelineVariable> InitializeCreateExpression(string collectionName, TestPipelineVariable entity)
+        private CreateExpression<TaskItemPipelineVariable> InitializeCreateExpression(string collectionName, TaskItemPipelineVariable entity)
         {
             // initialize a create expression for
             // the delegate
-            var createExpression = new CreateExpression<TestPipelineVariable>();
+            var createExpression = new CreateExpression<TaskItemPipelineVariable>();
             createExpression.CollectionName = collectionName;
             createExpression.NewEntity = entity;
             return createExpression;
         }
 
-        public CreateResult CreateOperation(CreateExpression<TestPipelineVariable> createExpression, TestPipelineVariable entity)
+        public CreateResult CreateOperation(CreateExpression<TaskItemPipelineVariable> createExpression, TaskItemPipelineVariable entity)
         {
             CreateResult ret = new CreateResult();
             try
@@ -180,7 +180,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
                 // should that be a viewmodel or a service or a test harness
                 using (var db = new LiteDatabase(this.TestConnectionString.Filename))
                 {
-                    var col = db.GetCollection<TestPipelineVariable>(createExpression.CollectionName);
+                    var col = db.GetCollection<TaskItemPipelineVariable>(createExpression.CollectionName);
                     col.Insert(entity);
                 }
             }
@@ -197,18 +197,18 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
         {
             Exception e = null;
 
-            var clonedEntity = TestEntity.Clone() as TestPipelineVariable;
+            var clonedEntity = TestEntity.Clone() as TaskItemPipelineVariable;
             clonedEntity.ID = Guid.NewGuid().ToString();
 
             // initialize a create expression for
             // the delegate
-            var createExpression = new CreateExpression<TestPipelineVariable>();
+            var createExpression = new CreateExpression<TaskItemPipelineVariable>();
             createExpression.CollectionName = this.TestCollectionName;
             createExpression.NewEntity = this.TestEntity;
 
             // initialize the delegate
-            EntityCreateOperation<CreateExpression<TestPipelineVariable>, TestPipelineVariable, CreateResult> testOperation =
-                new EntityCreateOperation<CreateExpression<TestPipelineVariable>, TestPipelineVariable, CreateResult>
+            EntityCreateOperation<CreateExpression<TaskItemPipelineVariable>, TaskItemPipelineVariable, CreateResult> testOperation =
+                new EntityCreateOperation<CreateExpression<TaskItemPipelineVariable>, TaskItemPipelineVariable, CreateResult>
                 (CreateWithOperationDelegate);
 
             try
@@ -233,7 +233,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
         /// <param name="createExpression"></param>
         /// <param name="entity"></param>
         /// <returns></returns>
-        private CreateResult CreateWithOperationDelegate(CreateExpression<TestPipelineVariable> createExpression, TestPipelineVariable entity)
+        private CreateResult CreateWithOperationDelegate(CreateExpression<TaskItemPipelineVariable> createExpression, TaskItemPipelineVariable entity)
         {
             CreateResult ret = new CreateResult();
             try
@@ -242,7 +242,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
                 // should that be a viewmodel or a service or a test harness
                 using (var db = new LiteDatabase(this.TestConnectionString))
                 {
-                    var col = db.GetCollection<TestPipelineVariable>(createExpression.CollectionName);
+                    var col = db.GetCollection<TaskItemPipelineVariable>(createExpression.CollectionName);
                     col.Insert(entity);
                 }
             }
@@ -283,8 +283,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             Exception e = null;
 
             // define the func
-            EntityReadOperation<BsonExpression, List<TestPipelineVariable>> testSqlReadOperation =
-                new EntityReadOperation<BsonExpression, List<TestPipelineVariable>>(EntityReadOperationWithBsonQuery);
+            EntityReadOperation<BsonExpression, List<TaskItemPipelineVariable>> testSqlReadOperation =
+                new EntityReadOperation<BsonExpression, List<TaskItemPipelineVariable>>(EntityReadOperationWithBsonQuery);
 
             // execute the query logic in the caller supplied delegate
             try
@@ -311,16 +311,16 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
         /// </summary>
         /// <param name="queryExpression"></param>
         /// <returns></returns>
-        private List<TestPipelineVariable> EntityReadOperationWithBsonQuery(BsonExpression queryExpression)
+        private List<TaskItemPipelineVariable> EntityReadOperationWithBsonQuery(BsonExpression queryExpression)
         {
-            List<TestPipelineVariable> ret = new List<TestPipelineVariable>();
+            List<TaskItemPipelineVariable> ret = new List<TaskItemPipelineVariable>();
 
             using (var db = new LiteDatabase(this.TestConnectionString))
             {
                 // var result = db.GetCollection<TestPipelineVariable>(this.TestCollectionName).FindById(this.TestEntity.ID);
                 // ret = result;
                 
-                var result = db.GetCollection<TestPipelineVariable>(this.TestCollectionName).Find(queryExpression);
+                var result = db.GetCollection<TaskItemPipelineVariable>(this.TestCollectionName).Find(queryExpression);
                 foreach (var item in result)
                 {
                     ret.Add(item);
@@ -352,7 +352,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
                 // assumes synchronous test execution!!!!!!!
                 using (var db = new LiteDatabase(this.TestConnectionString))
                 {
-                    initialRecordCount = db.GetCollection<TestPipelineVariable>(this.TestCollectionName).Count();
+                    initialRecordCount = db.GetCollection<TaskItemPipelineVariable>(this.TestCollectionName).Count();
                 }
 
                 // initialize the entity
@@ -364,18 +364,18 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
                 int currentCount = 0;
                 using (var db = new LiteDatabase(this.TestConnectionString))
                 {
-                    currentCount = db.GetCollection<TestPipelineVariable>(this.TestCollectionName).Count();
+                    currentCount = db.GetCollection<TaskItemPipelineVariable>(this.TestCollectionName).Count();
                 }
 
                 Assert.IsTrue(currentCount == initialRecordCount + 1, "Test failed, failed to insert");
 
                 // delete the entity
                 // initialize the delete expression
-                DeleteExpression<TestPipelineVariable> deleteExpression = new DeleteExpression<TestPipelineVariable>(this.TestEntity);
+                DeleteExpression<TaskItemPipelineVariable> deleteExpression = new DeleteExpression<TaskItemPipelineVariable>(this.TestEntity);
                 deleteExpression.CollectionName = this.TestCollectionName;
 
                 // create the delete delegate
-                var deleteOperation = new EntityDeleteOperation<DeleteExpression<TestPipelineVariable>, DeleteOperationResult>(DeleteOperation);
+                var deleteOperation = new EntityDeleteOperation<DeleteExpression<TaskItemPipelineVariable>, DeleteOperationResult>(DeleteOperation);
 
                 // invoke the delete delegate
                 var result = deleteOperation(deleteExpression);
@@ -386,7 +386,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
                 // validate the object is missing
                 using (var db = new LiteDatabase(this.TestConnectionString))
                 {
-                    updatedCount = db.GetCollection<TestPipelineVariable>(this.TestCollectionName).Count();
+                    updatedCount = db.GetCollection<TaskItemPipelineVariable>(this.TestCollectionName).Count();
                 }
 
                 Assert.IsTrue(updatedCount == initialRecordCount, "test failed, delete operation did not change record count");
@@ -405,7 +405,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
         /// </summary>
         /// <param name="deleteExpression"></param>
         /// <returns></returns>
-        private DeleteOperationResult DeleteOperation(DeleteExpression<TestPipelineVariable> deleteExpression)
+        private DeleteOperationResult DeleteOperation(DeleteExpression<TaskItemPipelineVariable> deleteExpression)
         {
             DeleteOperationResult ret = new DeleteOperationResult();
 
@@ -415,7 +415,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
                 using (var db = new LiteDatabase(this.TestConnectionString))
                 {
 
-                    var result = db.GetCollection<TestPipelineVariable>(deleteExpression.CollectionName).Delete(deleteExpression.TargetEntityType.ID);
+                    var result = db.GetCollection<TaskItemPipelineVariable>(deleteExpression.CollectionName).Delete(deleteExpression.TargetEntityType.ID);
 
                 }
             }
@@ -475,7 +475,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
                 // assumes synchronous test execution!!!!!!!
                 using (var db = new LiteDatabase(this.TestConnectionString))
                 {
-                    initialRecordCount = db.GetCollection<TestPipelineVariable>(this.TestCollectionName).Count();
+                    initialRecordCount = db.GetCollection<TaskItemPipelineVariable>(this.TestCollectionName).Count();
                 }
 
                 // initialize the entity
@@ -489,7 +489,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
                 int currentCount = 0;
                 using (var db = new LiteDatabase(this.TestConnectionString))
                 {
-                    currentCount = db.GetCollection<TestPipelineVariable>(this.TestCollectionName).Count();
+                    currentCount = db.GetCollection<TaskItemPipelineVariable>(this.TestCollectionName).Count();
                 }
 
                 Assert.IsTrue(currentCount == initialRecordCount + 1, "Test failed, failed to insert");
@@ -497,11 +497,11 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
                 // update the entity
                 const string updatedString = "Updated Entity";
                 this.TestEntity.DisplayName = updatedString;
-                UpdateExpression<TestPipelineVariable> updateExpression = new UpdateExpression<TestPipelineVariable>(TestEntity);
+                UpdateExpression<TaskItemPipelineVariable> updateExpression = new UpdateExpression<TaskItemPipelineVariable>(TestEntity);
                 updateExpression.CollectionName = this.TestCollectionName;
               
 
-                var updateOperation = new EntityUpdateOperation<UpdateExpression<TestPipelineVariable>, TestPipelineVariable, UpdateOperationResult>(EntityUpdateOperation);
+                var updateOperation = new EntityUpdateOperation<UpdateExpression<TaskItemPipelineVariable>, TaskItemPipelineVariable, UpdateOperationResult>(EntityUpdateOperation);
                 var updateOperationResult = updateOperation(updateExpression);
 
                 // search for the updated entity
@@ -516,11 +516,11 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
 
                 // delete the entity
                 // initialize the delete expression
-                DeleteExpression<TestPipelineVariable> deleteExpression = new DeleteExpression<TestPipelineVariable>(this.TestEntity);
+                DeleteExpression<TaskItemPipelineVariable> deleteExpression = new DeleteExpression<TaskItemPipelineVariable>(this.TestEntity);
                 deleteExpression.CollectionName = this.TestCollectionName;
 
                 // create the delete delegate
-                var deleteOperation = new EntityDeleteOperation<DeleteExpression<TestPipelineVariable>, DeleteOperationResult>(DeleteOperation);
+                var deleteOperation = new EntityDeleteOperation<DeleteExpression<TaskItemPipelineVariable>, DeleteOperationResult>(DeleteOperation);
 
                 // invoke the delete delegate
                 var result = deleteOperation(deleteExpression);
@@ -531,7 +531,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
                 // validate the object is missing
                 using (var db = new LiteDatabase(this.TestConnectionString))
                 {
-                    updatedCount = db.GetCollection<TestPipelineVariable>(this.TestCollectionName).Count();
+                    updatedCount = db.GetCollection<TaskItemPipelineVariable>(this.TestCollectionName).Count();
                 }
 
                 Assert.IsTrue(updatedCount == initialRecordCount, "test failed, delete operation did not change record count");
@@ -545,7 +545,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             Assert.IsNull(e, "failed test with exception " + e?.Message);
         }
 
-        private UpdateOperationResult EntityUpdateOperation(UpdateExpression<TestPipelineVariable> updateExpression)
+        private UpdateOperationResult EntityUpdateOperation(UpdateExpression<TaskItemPipelineVariable> updateExpression)
         {
             UpdateOperationResult ret = new UpdateOperationResult();
 
@@ -555,7 +555,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
                 using (var db = new LiteDatabase(this.TestConnectionString))
                 {
 
-                    var result = db.GetCollection<TestPipelineVariable>(updateExpression.CollectionName).Update(updateExpression.UpdatedEntity.ID, updateExpression.UpdatedEntity);
+                    var result = db.GetCollection<TaskItemPipelineVariable>(updateExpression.CollectionName).Update(updateExpression.UpdatedEntity.ID, updateExpression.UpdatedEntity);
                     if (result == true)
                     {
                         ret.UpdatedItemCount = 1;

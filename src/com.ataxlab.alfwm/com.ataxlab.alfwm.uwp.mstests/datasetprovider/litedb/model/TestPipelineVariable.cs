@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb.model
 {
 
-    public class TestPipelineVariable : PipelineVariable<TaskItem, List<TaskItem>, TestPipelineVariable>, ICloneable
+    public class TaskItemPipelineVariable : PipelineVariable<TaskItem, List<TaskItem>, TaskItemPipelineVariable>, ICloneable
     {
-        public TestPipelineVariable()
+        public TaskItemPipelineVariable()
         {
 
         }
@@ -20,7 +20,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb.model
         /// concrete implementation of IPipelineVariable<>
         /// </summary>
         /// <param name="payload"></param>
-        public TestPipelineVariable(TaskItem payload) : base(payload)
+        public TaskItemPipelineVariable(TaskItem payload) : base(payload)
         {
         }
 

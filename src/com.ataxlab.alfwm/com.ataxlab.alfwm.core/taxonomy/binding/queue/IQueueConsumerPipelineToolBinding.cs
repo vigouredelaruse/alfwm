@@ -23,7 +23,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         /// <summary>
         /// period after which the timer elapsed event fires
         /// </summary>
-        int PollingintervalMilliseconds { get; set; }
+        double PollingintervalMilliseconds { get; set; }
 
         /// <summary>
         /// set false to pause the timer

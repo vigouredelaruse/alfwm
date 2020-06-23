@@ -21,7 +21,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         /// <summary>
         /// failrly slow default polling interval
         /// </summary>
-        private int DefaultPollingInterval = 1000;
+        private double DefaultPollingInterval = 1000;
 
         /// <summary>
         /// synchronization entity for mitigation
@@ -38,19 +38,54 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         }
 
 
-        public QueueingChannel(int pollingInterval)
+        public QueueingChannel(double pollingInterval)
         {
 
             InputQueue = new ConcurrentQueue<TQueueEntity>();
-            this.PollingintervalMilliseconds = pollingInterval;
+
             ConsumerPollingTimer = new System.Timers.Timer(pollingInterval);
+            this.PollingintervalMilliseconds = pollingInterval;
             ConsumerPollingTimer.Elapsed += ConsumerPollingTimer_Elapsed;
         }
 
-        public ConcurrentQueue<TQueueEntity> InputQueue { get; set; }
-        public int PollingintervalMilliseconds { get; set; }
-        public bool IsAutoResetPollingTimer { get; set; }
-        public bool IsQueuePollingEnabled { get; set; }
+        public virtual ConcurrentQueue<TQueueEntity> InputQueue { get; set; }
+        
+        public virtual double PollingintervalMilliseconds 
+        { 
+            get
+            {
+                return ConsumerPollingTimer.Interval;
+            }
+
+            set
+            {
+                ConsumerPollingTimer.Interval = value;
+            }
+        }
+ 
+        public virtual bool IsAutoResetPollingTimer 
+        { 
+            get
+            {
+                return ConsumerPollingTimer.AutoReset;
+            }
+            set
+            {
+                ConsumerPollingTimer.AutoReset = value;
+            }
+        }
+        
+        public virtual bool IsQueuePollingEnabled 
+        { 
+            get
+            {
+                return ConsumerPollingTimer.Enabled;
+            }
+            set
+            {
+                ConsumerPollingTimer.Enabled = value;
+            }
+        }
         public System.Timers.Timer ConsumerPollingTimer { get; set; }
         public string PipelineToolBindingDisplayName { get; set; }
         public string PipelineToolBindingKey { get; set; }
@@ -70,7 +105,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         /// </summary>
         /// <param name="timestamp"></param>
         /// <param name="availableData"></param>
-        public void OnQueueHasData(DateTime timestamp, TQueueEntity availableData)
+        public virtual void OnQueueHasData(DateTime timestamp, TQueueEntity availableData)
         {
             // prepare the eventArgs
             QueueDataAvailableEventArgs<TQueueEntity> eventArgs = new QueueDataAvailableEventArgs<TQueueEntity>(availableData);
@@ -93,7 +128,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ConsumerPollingTimer_Elapsed(object sender, ElapsedEventArgs e)
+        public virtual void ConsumerPollingTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             // pause the timer
             int sync = Interlocked.CompareExchange(ref this.SyncPoint, 1, 0);
@@ -126,7 +161,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         /// <summary>
         /// delegates logic for polling timer elapsed event handler
         /// </summary>
-        private void HandleTimerElapsedNotOverlapping()
+        public virtual void HandleTimerElapsedNotOverlapping()
         {
 
             // examine the queue
