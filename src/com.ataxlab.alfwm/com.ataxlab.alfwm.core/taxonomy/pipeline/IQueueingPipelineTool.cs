@@ -22,9 +22,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     /// <typeparam name="TLatchingInputBinding"></typeparam>
     /// <typeparam name="TOutputBinding"></typeparam>
-    public interface IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding> : IPipelineTool 
+    public interface IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TQueueEntity> : IPipelineTool 
         where TLatchingInputBinding : class
         where TOutputBinding : class
+        where TQueueEntity : class
     {
         /// <summary>
         /// latching input binding that latches signalling
@@ -47,17 +48,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// equivalent to ICommand.Execute()
         /// </summary>
         /// <param name="timestamp"></param>
-        void OnQueueHasDataSignallingLatched(DateTime timestamp);
-
-        /// <summary>
-        /// resets the signal latch on the input binding
-        /// </summary>
-        void ResumeInputBindingSignalling();
+        void OnQueueHasData(object sender, TQueueEntity availableData);
 
         /// <summary>
         /// support fanout scenarious
         /// where a tool produces data on multiple outputs
         /// </summary>
-        new Collection<TOutputBinding> OutputBinding { get; set; }
+        List<TOutputBinding> QueueingOutputBindingCollection { get; set; }
     }
 }
