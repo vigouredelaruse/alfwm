@@ -152,7 +152,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             Windows.Storage.ApplicationData.Current.LocalFolder;
 
             StorageFile sampleFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///sample.png"));
-
+            
             //Windows.Storage.StorageFile sampleFile =
             //    await storageFolder.GetFileAsync("sample.png");
 

@@ -3,7 +3,9 @@ using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using com.ataxlab.alfwm.library.activity.ocr.tesseract.model;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -26,10 +28,14 @@ namespace com.ataxlab.alfwm.library.activity.ocr.tesseract
         /// </summary>
         private string TesseractLanguateFilesPath { get; set; }
 
+        private System.Timers.Timer WorkQueueProcessTimer { get; set; }
+
+        private ConcurrentQueue<TesseractPipelineVariable> WorkQueue = new ConcurrentQueue<TesseractPipelineVariable>();
+
         public TesseractActivity()
         {
             // get the path to the tesseract trained files
-            // TesseractLanguateFilesPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"tessdata");
+            TesseractLanguateFilesPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"tessdata");
 
             // initialize the input channel
             this.InputBinding = new QueueingChannel<TesseractPipelineVariable>();
@@ -38,9 +44,63 @@ namespace com.ataxlab.alfwm.library.activity.ocr.tesseract
             // register a listener to the input queue
             InputBinding.QueueHasData += OnInputBindingQueueHasData;
 
+            // this timer event handler pulls items from the 
+            // work item queue
+            // it is autoreset = false to prevent 
+            // overlapping event requests
+            WorkQueueProcessTimer = new System.Timers.Timer();
+            WorkQueueProcessTimer.AutoReset = false;
+            WorkQueueProcessTimer.Interval = 50;
+            WorkQueueProcessTimer.Elapsed += WorkQueueProcessTimer_Elapsed;
+            WorkQueueProcessTimer.Enabled = true;
 
         }
 
+        private void WorkQueueProcessTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+
+            if (WorkQueue.Count > 0)
+            {
+                try
+                {
+                    TesseractPipelineVariable workitem;
+                    WorkQueue.TryDequeue(out workitem);
+
+                    byte[] sample = workitem.Payload as byte[];
+                    
+                    using (var engine = new TesseractEngine(TesseractLanguateFilesPath, "eng", EngineMode.LstmOnly))
+                    {
+                        using (var img = Pix.LoadFromMemory(sample))
+                        {
+                            using (var page = engine.Process(img))
+                            {
+                                var text = page.GetText();
+                                Console.WriteLine("Mean confidence: {0}", page.GetMeanConfidence());
+
+                                Console.WriteLine("Text (GetText): \r\n{0}", text);
+                                Console.WriteLine("Text (iterator):");
+                            }
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    int i = 0;
+                }
+            }
+            else
+            {
+                // nothing to do queue is empty
+            }
+
+            // restart the timer
+            WorkQueueProcessTimer.Enabled = true;
+
+            Debug.WriteLine("work queue timer elapsed");
+        }
+
+        
         /// <summary>
         /// handle the tesseract job
         /// </summary>
@@ -48,32 +108,9 @@ namespace com.ataxlab.alfwm.library.activity.ocr.tesseract
         /// <param name="e"></param>
         private void OnInputBindingQueueHasData(object sender, core.taxonomy.binding.queue.QueueDataAvailableEventArgs<TesseractPipelineVariable> e)
         {
-
-            try
-            {
-
-                byte[] sample = e.EventPayload.Payload as byte[];
-
-                using (var engine = new TesseractEngine(TesseractLanguateFilesPath, "eng", EngineMode.Default))
-                {
-                    using (var img = Pix.LoadFromMemory(sample))
-                    {
-                        using (var page = engine.Process(img))
-                        {
-                            var text = page.GetText();
-                            Console.WriteLine("Mean confidence: {0}", page.GetMeanConfidence());
-
-                            Console.WriteLine("Text (GetText): \r\n{0}", text);
-                            Console.WriteLine("Text (iterator):");
-                        }
-                    }
-                }
-
-            }
-            catch(Exception ex)
-            {
-
-            }
+            // cache arrivals on the queue for processing 
+            // in the event processing timer elapsed handler
+            WorkQueue.Enqueue(e.EventPayload);
         }
 
         public QueueingChannel<TesseractPipelineVariable> InputBinding { get; set ; }
