@@ -48,12 +48,12 @@ namespace com.ataxlab.alfwm.core.scheduler
         //where TPipeline : IPipeline, new();
 
         Task<TStatus> StartPipeline<TStatus, TPipeline>(TPipeline pipeline) 
-            where TPipeline : IPipeline, new() 
-            where TStatus : IPipelineStatus, new();
+            where TPipeline : class, IPipeline, new() 
+            where TStatus : class,  IPipelineStatus, new();
 
         void StartActivity<TActivity, TStatus, TConfiguration>(TActivity activity, TConfiguration activityConfiguration, Action<TStatus> callback)
-            where TActivity : IPipelineTool,  new()
-            where TConfiguration : IPipelineToolConfiguration, new()
+            where TActivity : class, IPipelineTool,  new() 
+            where TConfiguration : class, IPipelineToolConfiguration, new()
             where TStatus : ActivityStatus, new();
 
         Task<T> StopPipeline<T>(string instanceId) 
@@ -63,9 +63,9 @@ namespace com.ataxlab.alfwm.core.scheduler
             where T : IPipelineConfiguration;
 
         Task<TStatus> StartWorkflow<TWorkflow, TStatus, TConfiguration>(TConfiguration workflowConfiguration) 
-            where TWorkflow : IPipelineTool, new()
-            where TConfiguration : IPipelineToolConfiguration, new() 
-            where TStatus : IPipelineToolStatus, new();
+            where TWorkflow : class, IPipelineTool, new()
+            where TConfiguration : class, IPipelineToolConfiguration, new() 
+            where TStatus : class,  IPipelineToolStatus, new();
 
         Task<TStatus> ShutdownWorkflow<TStatus>(string instanceId) 
             where TStatus : IPipelineToolStatus, new();
