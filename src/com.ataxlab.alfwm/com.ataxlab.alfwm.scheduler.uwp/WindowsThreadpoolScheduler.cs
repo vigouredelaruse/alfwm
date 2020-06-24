@@ -63,12 +63,12 @@ namespace com.ataxlab.alfwm.scheduler.windowsthreadpool
                            try
                            {
                                TStatus s = new TStatus();
-                               activity.Start<ActivityStatus>(c =>
-                               {
+    
+                               //activity.Start<TConfiguration>(activityConfiguration, c =>
+                               //{
 
-                                   s.StatusJson = c.StatusJson;
-                                   callback(s);
-                               });
+                               //    callback(s);
+                               //});
 
 
                            }

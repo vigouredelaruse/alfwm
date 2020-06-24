@@ -1,3 +1,0 @@
-C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.uwp.activity\com.ataxlab.alfwm.library.uwp.activity.csproj;x86
-C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.uwp\com.ataxlab.alfwm.scheduler.uwp.csproj;x86
-C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\com.ataxlab.alfwm.uwp.mstests.csproj;x86
