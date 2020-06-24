@@ -52,6 +52,42 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
     }
 
     /// <summary>
+    /// support a tuple with generic semantics
+    /// </summary>
+    /// <typeparam name="TPayload"></typeparam>
+    /// <typeparam name="TPayloadCollection"></typeparam>
+    public class PipelineVariable<TPayload, TPayloadCollection> : IPipelineVariable<TPayload, TPayloadCollection>
+    {
+        public PipelineVariable()
+        {
+            this.ID = Guid.NewGuid().ToString();
+        }
+
+        public PipelineVariable(TPayload payload, bool isGenerateJSONValue = false, bool isGenerateJSONSchema = false)
+        {
+            this.ID = Guid.NewGuid().ToString();
+            this.Payload = payload;
+        }
+
+        public PipelineVariable(TPayloadCollection payloadItems, bool isGenerateJSONValue = false, bool isGenerateJSONSchema = false)
+        {
+            this.ID = Guid.NewGuid().ToString();
+            this.Items = payloadItems;
+        }
+
+        public string ID { get; set; }
+        public string Key { get; set; }
+        public string JsonValue { get; set; }
+        public TPayload Payload { get; set; }
+        public JSchema JsonValueSchema { get; set; }
+        public DateTime TimeStamp { get; set; }
+        public DateTime CreateDate { get; set; }
+        public string DisplayName { get; set; }
+        public string Description { get; set; }
+        public TPayloadCollection Items { get; set; }
+    }
+
+    /// <summary>
     /// support a hierarchal weakly typed tuple type system
     /// with independent types for payload
     /// parent item

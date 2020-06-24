@@ -30,25 +30,25 @@
     <AppXManifest Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2020-06-22T23:36:57.100</Modified>
+      <Modified>2020-06-24T17:07:45.565</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\com.ataxlab.alfwm.uwp.mstests.exe">
       <PackagePath>entrypoint\com.ataxlab.alfwm.uwp.mstests.exe</PackagePath>
-      <Modified>2020-06-22T23:36:55.413</Modified>
+      <Modified>2020-06-24T17:07:43.794</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\com.ataxlab.alfwm.uwp.mstests.pdb">
       <PackagePath>com.ataxlab.alfwm.uwp.mstests.pdb</PackagePath>
-      <Modified>2020-06-22T23:36:55.413</Modified>
+      <Modified>2020-06-24T17:07:43.794</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.uwp.activity\bin\x86\Debug\com.ataxlab.alfwm.library.uwp.activity.pdb">
       <PackagePath>com.ataxlab.alfwm.library.uwp.activity.pdb</PackagePath>
-      <Modified>2020-06-22T23:16:01.650</Modified>
+      <Modified>2020-06-24T16:32:36.462</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.uwp\bin\x86\Debug\com.ataxlab.alfwm.scheduler.uwp.pdb">
       <PackagePath>com.ataxlab.alfwm.scheduler.uwp.pdb</PackagePath>
-      <Modified>2020-06-22T23:16:02.802</Modified>
+      <Modified>2020-06-24T16:32:38.714</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\TestPlatform.Universal\16.0\References\CommonConfiguration\neutral\testhost.dll">
       <PackagePath>testhost.dll</PackagePath>
@@ -78,29 +78,33 @@
       <PackagePath>System.Runtime.dll</PackagePath>
       <Modified>2019-07-22T18:01:14.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\foresthacker.FURRAY\.nuget\packages\tesseract\4.1.0-beta1\lib\netstandard2.0\Tesseract.dll">
+      <PackagePath>Tesseract.dll</PackagePath>
+      <Modified>2019-10-12T10:59:50.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.core\bin\Debug\netstandard2.0\com.ataxlab.alfwm.core.dll">
       <PackagePath>com.ataxlab.alfwm.core.dll</PackagePath>
-      <Modified>2020-06-22T23:16:00.981</Modified>
+      <Modified>2020-06-24T16:32:35.441</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm\bin\Debug\netstandard2.0\com.ataxlab.alfwm.dll">
       <PackagePath>com.ataxlab.alfwm.dll</PackagePath>
-      <Modified>2020-06-22T23:16:01.878</Modified>
+      <Modified>2020-06-24T16:32:37.126</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.dll">
       <PackagePath>com.ataxlab.alfwm.library.activity.dll</PackagePath>
-      <Modified>2020-06-22T23:16:02.170</Modified>
+      <Modified>2020-06-24T16:32:37.386</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.uwp.activity\bin\x86\Debug\com.ataxlab.alfwm.library.uwp.activity.dll">
       <PackagePath>com.ataxlab.alfwm.library.uwp.activity.dll</PackagePath>
-      <Modified>2020-06-22T23:16:01.650</Modified>
+      <Modified>2020-06-24T16:32:36.462</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.persistence.litedb\bin\Debug\netstandard2.0\com.ataxlab.alfwm.persistence.litedb.dll">
       <PackagePath>com.ataxlab.alfwm.persistence.litedb.dll</PackagePath>
-      <Modified>2020-06-22T23:16:01.966</Modified>
+      <Modified>2020-06-24T16:32:36.799</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.scheduler.uwp\bin\x86\Debug\com.ataxlab.alfwm.scheduler.uwp.dll">
       <PackagePath>com.ataxlab.alfwm.scheduler.uwp.dll</PackagePath>
-      <Modified>2020-06-22T23:16:02.802</Modified>
+      <Modified>2020-06-24T16:32:38.714</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.18362.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
@@ -108,19 +112,95 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.core\bin\Debug\netstandard2.0\com.ataxlab.alfwm.core.pdb">
       <PackagePath>com.ataxlab.alfwm.core.pdb</PackagePath>
-      <Modified>2020-06-22T23:16:00.981</Modified>
+      <Modified>2020-06-24T16:32:35.440</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.pdb">
       <PackagePath>com.ataxlab.alfwm.library.activity.pdb</PackagePath>
-      <Modified>2020-06-22T23:16:02.170</Modified>
+      <Modified>2020-06-24T16:32:37.386</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.persistence.litedb\bin\Debug\netstandard2.0\com.ataxlab.alfwm.persistence.litedb.pdb">
       <PackagePath>com.ataxlab.alfwm.persistence.litedb.pdb</PackagePath>
-      <Modified>2020-06-22T23:16:01.966</Modified>
+      <Modified>2020-06-24T16:32:36.799</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm\bin\Debug\netstandard2.0\com.ataxlab.alfwm.pdb">
       <PackagePath>com.ataxlab.alfwm.pdb</PackagePath>
-      <Modified>2020-06-22T23:16:01.878</Modified>
+      <Modified>2020-06-24T16:32:37.127</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\Configs\bazzar">
+      <PackagePath>tessdata\Configs\bazzar</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\eng.cube.bigrams">
+      <PackagePath>tessdata\eng.cube.bigrams</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\eng.cube.fold">
+      <PackagePath>tessdata\eng.cube.fold</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\eng.cube.lm">
+      <PackagePath>tessdata\eng.cube.lm</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\eng.cube.nn">
+      <PackagePath>tessdata\eng.cube.nn</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\eng.tesseract_cube.nn">
+      <PackagePath>tessdata\eng.tesseract_cube.nn</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\eng.cube.params">
+      <PackagePath>tessdata\eng.cube.params</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\eng.cube.size">
+      <PackagePath>tessdata\eng.cube.size</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\eng.cube.word-freq">
+      <PackagePath>tessdata\eng.cube.word-freq</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\eng.traineddata">
+      <PackagePath>tessdata\eng.traineddata</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\osd.traineddata">
+      <PackagePath>tessdata\osd.traineddata</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\eng.user-patterns">
+      <PackagePath>tessdata\eng.user-patterns</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\eng.user-words">
+      <PackagePath>tessdata\eng.user-words</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\pdf.ttf">
+      <PackagePath>tessdata\pdf.ttf</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\tessdata\pdf.ttx">
+      <PackagePath>tessdata\pdf.ttx</PackagePath>
+      <Modified>2018-12-16T05:00:30.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\foresthacker.FURRAY\.nuget\packages\tesseract\4.1.0-beta1\x86\leptonica-1.78.0.dll">
+      <PackagePath>x86\leptonica-1.78.0.dll</PackagePath>
+      <Modified>2019-10-12T08:58:48.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\foresthacker.FURRAY\.nuget\packages\tesseract\4.1.0-beta1\x86\tesseract41.dll">
+      <PackagePath>x86\tesseract41.dll</PackagePath>
+      <Modified>2019-10-12T08:58:50.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\foresthacker.FURRAY\.nuget\packages\tesseract\4.1.0-beta1\x64\leptonica-1.78.0.dll">
+      <PackagePath>x64\leptonica-1.78.0.dll</PackagePath>
+      <Modified>2019-10-12T08:58:48.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\foresthacker.FURRAY\.nuget\packages\tesseract\4.1.0-beta1\x64\tesseract41.dll">
+      <PackagePath>x64\tesseract41.dll</PackagePath>
+      <Modified>2019-10-12T08:58:48.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\TestPlatform.Universal\16.0\Redist\CommonConfiguration\neutral\Microsoft.TestPlatform.CommunicationUtilities.dll">
       <PackagePath>Microsoft.TestPlatform.CommunicationUtilities.dll</PackagePath>
@@ -204,13 +284,17 @@
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2020-02-10T18:19:12.877</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\sample.png">
+      <PackagePath>sample.png</PackagePath>
+      <Modified>2020-06-24T14:55:43.034</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\com.ataxlab.alfwm.uwp.mstests.xr.xml">
       <PackagePath>com.ataxlab.alfwm.uwp.mstests.xr.xml</PackagePath>
       <Modified>2020-03-02T16:38:27.350</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\UnitTestApp.xbf">
       <PackagePath>UnitTestApp.xbf</PackagePath>
-      <Modified>2020-06-22T23:34:17.339</Modified>
+      <Modified>2020-06-24T17:07:43.586</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.18362.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -218,11 +302,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2020-06-22T23:36:56.484</Modified>
+      <Modified>2020-06-24T17:07:44.867</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.uwp.mstests\bin\x86\Debug\Core\com.ataxlab.alfwm.uwp.mstests.exe">
       <PackagePath>com.ataxlab.alfwm.uwp.mstests.exe</PackagePath>
-      <Modified>2020-06-22T23:36:57.093</Modified>
+      <Modified>2020-06-24T17:07:45.558</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

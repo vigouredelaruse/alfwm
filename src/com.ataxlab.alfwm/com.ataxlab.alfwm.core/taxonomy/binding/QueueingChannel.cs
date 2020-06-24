@@ -35,6 +35,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
             InputQueue = new ConcurrentQueue<TQueueEntity>();
             ConsumerPollingTimer = new System.Timers.Timer(DefaultPollingInterval);
             ConsumerPollingTimer.Elapsed += ConsumerPollingTimer_Elapsed;
+
+            IsQueuePollingEnabled = true;
+
         }
 
 
@@ -46,6 +49,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
             ConsumerPollingTimer = new System.Timers.Timer(pollingInterval);
             this.PollingintervalMilliseconds = pollingInterval;
             ConsumerPollingTimer.Elapsed += ConsumerPollingTimer_Elapsed;
+
+            IsQueuePollingEnabled = true;
         }
 
         public virtual ConcurrentQueue<TQueueEntity> InputQueue { get; set; }
