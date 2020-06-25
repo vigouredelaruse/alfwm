@@ -16,13 +16,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// - supply your own derived class overriding the virtuals as you see fit
     /// </summary>
     /// <typeparam name="TQueueEntity"></typeparam>
-    public class QueueingPipelineTool<TQueueEntity> : IQueueingPipelineTool<QueueingChannel<TQueueEntity>, QueueingChannel<TQueueEntity>, TQueueEntity>
+    public class QueueingPipelineToolObsolete<TQueueEntity> : IQueueingPipelineTool<QueueingChannel<TQueueEntity>, QueueingChannel<TQueueEntity>, TQueueEntity>
     where TQueueEntity : class, new()
     {
         /// <summary>
         /// 
         /// </summary>
-        public QueueingPipelineTool()
+        public QueueingPipelineToolObsolete()
         {
 
             this.InstanceId = Guid.NewGuid().ToString();
@@ -159,6 +159,64 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             {
                 callback(configuration);
             });
+        }
+    }
+
+    public class QueueingPipelineTool<TQueueEntity> : QueueingPipelineToolBase<TQueueEntity>
+        where TQueueEntity : class, new()
+    {
+        public override QueueingChannel<TQueueEntity> InputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override List<QueueingChannel<TQueueEntity>> QueueingOutputBindingCollection { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string InstanceId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override IPipelineToolStatus Status { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override IPipelineToolContext Context { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override IPipelineToolConfiguration Configuration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override IPipelineToolBinding OutputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public override event Func<TQueueEntity, TQueueEntity> QueueHasAvailableDataEvent;
+        public override event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
+        public override event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
+        public override event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
+        public override event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
+
+        public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnQueueHasData(object sender, TQueueEntity availableData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Start<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override StopResult Stop<StopResult>(string instanceId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
