@@ -10,11 +10,18 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// <summary>
     /// canonical implementation of a Queueing Pipeline Tool 
     /// - supply your own queue entity
+    /// - supply your own queue processing event handler 
+    /// - expect automatic notification of queue data arrival
+    /// or
+    /// - supply your own derived class overriding the virtuals as you see fit
     /// </summary>
     /// <typeparam name="TQueueEntity"></typeparam>
     public class QueueingPipelineTool<TQueueEntity> : IQueueingPipelineTool<QueueingChannel<TQueueEntity>, QueueingChannel<TQueueEntity>, TQueueEntity>
     where TQueueEntity : class, new()
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public QueueingPipelineTool()
         {
 
@@ -52,24 +59,24 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
         public event Func<TQueueEntity, TQueueEntity> QueueHasAvailableDataEvent;
 
-        public void OnPipelineToolCompleted(object sender, PipelineToolCompletedEventArgs args)
+        public virtual void OnPipelineToolCompleted(object sender, PipelineToolCompletedEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineToolCompleted?.Invoke(this, args);
         }
 
-        public void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
+        public virtual void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineToolFailed?.Invoke(this, args);
         }
 
-        public void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
+        public virtual void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineToolProgressUpdated?.Invoke(this, args);
         }
 
-        public void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
+        public virtual void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineToolStarted?.Invoke(this, args);
         }
 
         /// <summary>
@@ -107,14 +114,16 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             // 
         }
 
-        public StopResult Stop<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
+        public virtual StopResult Stop<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
         {
             throw new NotImplementedException();
         }
 
-        public void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class
+        public virtual void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class
         {
-            throw new NotImplementedException();
+            PipelineToolCompletedEventArgs completedArgs = new PipelineToolCompletedEventArgs();
+            completedArgs.Payload = args.Payload;
+            PipelineToolCompleted?.Invoke(this, completedArgs);
         }
 
         /// <summary>
@@ -127,7 +136,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <typeparam name="StartConfiguration"></typeparam>
         /// <param name="configuration"></param>
         /// <param name="callback"></param>
-        public void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+        public virtual void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
             where StartResult : class, new()
             where StartConfiguration : class, new()
         {
@@ -144,7 +153,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <typeparam name="StartConfiguration"></typeparam>
         /// <param name="configuration"></param>
         /// <param name="callback"></param>
-        public void Start<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class
+        public virtual void Start<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class
         {
             ThreadPool.QueueUserWorkItem((ccc) =>
             {
