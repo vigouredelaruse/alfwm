@@ -165,13 +165,29 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     public class QueueingPipelineTool<TQueueEntity> : QueueingPipelineToolBase<TQueueEntity>
         where TQueueEntity : class, new()
     {
-        public override QueueingChannel<TQueueEntity> InputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override List<QueueingChannel<TQueueEntity>> QueueingOutputBindingCollection { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string InstanceId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override IPipelineToolStatus Status { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override IPipelineToolContext Context { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override IPipelineToolConfiguration Configuration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override IPipelineToolBinding OutputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public QueueingPipelineTool()
+        {
+            this.InstanceId = Guid.NewGuid().ToString();
+
+            InputBinding = new QueueingChannel<TQueueEntity>();
+            QueueingOutputBindingCollection = new List<QueueingChannel<TQueueEntity>>();
+
+            InputBinding.QueueHasData += InputBinding_QueueHasData;
+        }
+
+        private void InputBinding_QueueHasData(object sender, binding.queue.QueueDataAvailableEventArgs<TQueueEntity> e)
+        {
+            // delegate the logic of the queue event handler 
+            this.OnQueueHasData(sender, e.EventPayload);
+        }
+
+        public override QueueingChannel<TQueueEntity> InputBinding { get; set; }
+        public override List<QueueingChannel<TQueueEntity>> QueueingOutputBindingCollection { get; set; }
+        public override string InstanceId { get; set; }
+        public override IPipelineToolStatus Status { get; set; }
+        public override IPipelineToolContext Context { get; set; }
+        public override IPipelineToolConfiguration Configuration { get; set; }
+        public override IPipelineToolBinding OutputBinding { get; set; }
 
         public override event Func<TQueueEntity, TQueueEntity> QueueHasAvailableDataEvent;
         public override event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
@@ -181,27 +197,54 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
         {
-            throw new NotImplementedException();
+            PipelineToolCompletedEventArgs evt = new PipelineToolCompletedEventArgs();
+            evt.Payload = args.Payload;
+
+            PipelineToolCompleted?.Invoke(this, evt);
         }
 
         public override void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
-        {
-            throw new NotImplementedException();
+        { 
+
+            PipelineToolFailed?.Invoke(this, args);
         }
 
         public override void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineToolProgressUpdated?.Invoke(this, args);
         }
 
         public override void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineToolStarted?.Invoke(this, args);
         }
 
         public override void OnQueueHasData(object sender, TQueueEntity availableData)
         {
-            throw new NotImplementedException();
+            Func<TQueueEntity, TQueueEntity> handler = this.QueueHasAvailableDataEvent;
+            if (handler != null)
+            {
+                try
+                {
+                    var threadStarted = ThreadPool.QueueUserWorkItem((arg) =>
+                    {
+                        // invoke the client's delegate logic
+                        var result = handler(availableData);
+
+                        // reflect the result on the output binding
+                        foreach (var channel in this.QueueingOutputBindingCollection)
+                        {
+                            channel.InputQueue.Enqueue(result);
+                        }
+                    });
+
+                }
+                catch (Exception e)
+                {
+                    // job failed, signal listeners
+                }
+            }
+
         }
 
         public override void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
