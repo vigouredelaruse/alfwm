@@ -20,9 +20,12 @@ namespace com.ataxlab.alfwm
     /// but how this occurs is not 'visible' on the Workflow Manager's external 
     /// interace
     /// </summary>
+    [Obsolete]
     public interface IWorkflowManager
     {
         IScheduler Scheduler { get; set; }
+
+        [Obsolete]
         WorkflowManagerContext WorkflowManagerContext { get; set; }
 
         Task Start();
@@ -38,12 +41,16 @@ namespace com.ataxlab.alfwm
         /// </summary>
         /// <param name="workflow"></param>
         /// <returns></returns>
+        [Obsolete]
         Task<DeploymentStatus> DeployWorkflow(WorkflowConfiguration workflow);
 
+        [Obsolete]
         Task<DeploymentStatus> SuspendWorkflowByWorkflowId(string workflowId);
 
+        [Obsolete]
         Task<DeploymentStatus> DeleteWorkflowByWorkflowId(string workflowId);
 
+        [Obsolete]
         Task<WorkflowStatus> GetWorkflowStatusByWorkflowId(string workflowId);
     }
 }
