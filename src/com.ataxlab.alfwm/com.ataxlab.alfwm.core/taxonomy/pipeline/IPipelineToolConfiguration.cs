@@ -7,6 +7,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// <summary>
     /// support a serialiazable config
     /// </summary>
+    [Obsolete]
     public interface IPipelineToolConfiguration
     {
 

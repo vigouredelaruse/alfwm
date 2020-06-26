@@ -4,6 +4,7 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
+    [Obsolete]
     public interface IPipelineStatus
     {
         string StatusJson { get; set; }

@@ -8,6 +8,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// optimistically assuming IPipelineToolConfiguration is a suitable
     /// archetype for IPipelineConfiguration
     /// </summary>
+    [Obsolete]
     public interface IPipelineConfiguration : IPipelineToolConfiguration
     {
     }

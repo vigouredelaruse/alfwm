@@ -5,6 +5,7 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
+    [Obsolete]
     public interface IPipelineProgressUpdatedStatus : IPipelineToolStatus
     {
         IPipelineBinding OutputBinding { get; set; }

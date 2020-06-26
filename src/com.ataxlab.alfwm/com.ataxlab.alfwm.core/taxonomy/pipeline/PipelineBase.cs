@@ -10,6 +10,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// so implementors don't have to begin from the bare
     /// interface specification
     /// </summary>
+    [Obsolete]
     public abstract class PipelineBase : IPipeline
     {
         public PipelineBase()

@@ -5,6 +5,8 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
+
+    [Obsolete]
     public abstract class PipelineContext : IPipelineContext
     {
         public PipelineContext()

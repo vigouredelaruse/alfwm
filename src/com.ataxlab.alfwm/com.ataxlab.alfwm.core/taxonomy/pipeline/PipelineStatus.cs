@@ -12,6 +12,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// 
     /// inherit their own arbitrary self-describing Status object
     /// </summary>
+    [Obsolete]
     public abstract class PipelineStatus : IPipelineStatus
     {
         public PipelineStatus()

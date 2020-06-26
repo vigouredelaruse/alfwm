@@ -3,6 +3,7 @@ using System;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
+    [Obsolete]
     public interface IPipelineToolContext
     {
         IPipelineToolConfiguration Configuration { get; set; }

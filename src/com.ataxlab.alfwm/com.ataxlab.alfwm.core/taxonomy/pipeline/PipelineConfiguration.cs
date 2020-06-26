@@ -4,6 +4,7 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
+    [Obsolete]
     public abstract class PipelineConfiguration : IPipelineConfiguration
     {
         public virtual string DisplayName { get; set; }
