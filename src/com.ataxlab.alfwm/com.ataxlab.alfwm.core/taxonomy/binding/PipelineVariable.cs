@@ -57,6 +57,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
     /// <typeparam name="TPayload"></typeparam>
     /// <typeparam name="TPayloadCollection"></typeparam>
     public class PipelineVariable<TPayload, TPayloadCollection> : IPipelineVariable<TPayload, TPayloadCollection>
+        where TPayload : class
+        where TPayloadCollection : class
     {
         public PipelineVariable()
         {

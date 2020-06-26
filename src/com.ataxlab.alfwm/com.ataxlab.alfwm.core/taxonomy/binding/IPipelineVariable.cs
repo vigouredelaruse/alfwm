@@ -52,6 +52,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
     /// </summary>
     /// <typeparam name="TPayload"></typeparam>
     public interface IPipelineVariable<TPayload, TPayloadCollection>
+        where TPayload : class
+        where TPayloadCollection : class
     {
         /// support lookup by composite key ID.Key
         /// </summary>
