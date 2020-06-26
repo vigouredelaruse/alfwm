@@ -13,65 +13,26 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     [Obsolete]
     public abstract class PipelineBase : IPipeline
     {
-        public PipelineBase()
-        {
-        }
+        public abstract string InstanceId { get; set; }
+        public abstract IPipelineBinding InputBinding { get; set; }
+        public abstract IPipelineBinding OutputBinding { get; set; }
 
-        public PipelineBase(IPipelineConfiguration configuration) : base()
-        {
-            Configuration = configuration;
-        }
+        public abstract event EventHandler<PipelineStartedEventArgs> PipelineStarted;
+        public abstract event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
+        public abstract event EventHandler<PipelineFailedEventArgs> PipelineFailed;
+        public abstract event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
 
-        public virtual IPipelineConfiguration Configuration { get; set; }
+        public abstract void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args);
+        public abstract void OnPipelineFailed(object sender, PipelineFailedEventArgs args);
+        public abstract void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args);
+        public abstract void OnPipelineStarted(object sender, PipelineStartedEventArgs args);
 
-        public virtual PipelineContext Context { get; set; }
 
-        public  string InstanceId { get; set; }
-        public virtual IPipelineBinding InputBinding { get; set; }
-        public virtual IPipelineBinding OutputBinding { get; set; }
 
-        public event EventHandler<PipelineStartedEventArgs> PipelineStarted;
-        public event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
-        public event EventHandler<PipelineFailedEventArgs> PipelineFailed;
-        public event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
 
-        public virtual void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args)
-        {
-            EventHandler<PipelineCompletedEventArgs> handler = PipelineCompleted;
-            if (handler != null)
-            {
-                handler(sender, args);
-            }
-        }
-        public virtual void OnPipelineFailed(object sender, PipelineFailedEventArgs args)
-        {
-            EventHandler<PipelineFailedEventArgs> handler = PipelineFailed;
-            if (handler != null)
-            {
-                handler(sender, args);
-            }
-        }
-
-        public virtual void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args)
-        {
-            EventHandler<PipelineProgressUpdatedEventArgs> handler = PipelineProgressUpdated;
-            if (handler != null)
-            {
-                handler(sender, args);
-            }
-        }
-
-        public virtual void OnPipelineStarted(object sender, PipelineStartedEventArgs args)
-        {
-            EventHandler<PipelineStartedEventArgs> handler = PipelineStarted;
-            if (handler != null)
-            {
-                handler(sender, args);
-            }
-        }
-
-        public abstract StartResult Start<StartResult, StartConfiguration>(StartConfiguration configuration) where StartConfiguration : IPipelineConfiguration where StartResult : IPipelineStatus;
-
-        public abstract StopResult Stop<StopResult>(string instanceId) where StopResult : IPipelineStatus;
+        public abstract StartResult Start<StartResult, StartConfiguration>(StartConfiguration configuration)
+            where StartResult : class
+            where StartConfiguration : class;
+        public abstract StopResult Stop<StopResult>(string instanceId) where StopResult : class;
     }
 }

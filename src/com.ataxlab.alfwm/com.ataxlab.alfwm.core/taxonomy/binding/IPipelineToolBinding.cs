@@ -5,6 +5,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
 {
     public interface IPipelineToolBinding
     {
+        /// <summary>
+        /// bases specification for a Pipeline Tool binding
+        /// Binding implies active message transport (ingress/egress)
+        /// the most likely use for this is to specify
+        /// the base of another specification for
+        /// ingress/egress
+        /// </summary>
         string PipelineToolBindingDisplayName { get; set; }
         string PipelineToolBindingKey { get; set; }
         PipelineVariableDictionary PipelineToolBindingValue { get; set; }

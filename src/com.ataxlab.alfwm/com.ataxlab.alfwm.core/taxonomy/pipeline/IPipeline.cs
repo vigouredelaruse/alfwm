@@ -24,6 +24,45 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args);
         string InstanceId { get; set; }
 
+        IPipelineBinding InputBinding { get; set; }
+
+        IPipelineBinding OutputBinding { get; set; }
+
+
+        /// <summary>
+        /// designed to permit implementers to supply their own
+        /// Configuration and Pipeline types
+        /// 
+        /// since this is the initial entry point here one should
+        /// construct a suitable context 
+        /// </summary>
+        /// <typeparam name="StartResult"></typeparam>
+        /// <typeparam name="StartConfiguration"></typeparam>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        StartResult Start<StartResult, StartConfiguration>(StartConfiguration configuration) 
+            where StartConfiguration : class 
+            where StartResult : class;
+
+        StopResult Stop<StopResult>(string instanceId) where StopResult : class;
+
+
+    }
+    public interface IPipelineObsolete
+    {
+        event EventHandler<PipelineStartedEventArgs> PipelineStarted;
+        void OnPipelineStarted(object sender, PipelineStartedEventArgs args);
+
+        event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
+        void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args);
+
+        event EventHandler<PipelineFailedEventArgs> PipelineFailed;
+        void OnPipelineFailed(object sender, PipelineFailedEventArgs args);
+
+        event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
+        void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args);
+        string InstanceId { get; set; }
+
         PipelineContext Context { get; set; }
 
         IPipelineBinding InputBinding { get; set; }
