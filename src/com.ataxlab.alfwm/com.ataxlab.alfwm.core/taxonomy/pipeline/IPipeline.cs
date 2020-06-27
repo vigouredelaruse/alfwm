@@ -11,6 +11,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     public interface IPipeline
     {
+        string PipelineId { get; set; }
+        string InstanceId { get; set; }
+        string DisplayName { get; set; }
+        string Description { get; set; }
         event EventHandler<PipelineStartedEventArgs> PipelineStarted;
         void OnPipelineStarted(object sender, PipelineStartedEventArgs args);
 
@@ -22,8 +26,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
         void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args);
-        string InstanceId { get; set; }
-
+ 
         IPipelineBinding InputBinding { get; set; }
 
         IPipelineBinding OutputBinding { get; set; }
@@ -47,6 +50,20 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         StopResult Stop<StopResult>(string instanceId) where StopResult : class;
 
 
+    }
+   
+    /// <summary>
+    /// this is probably the least viable composition for an implementation
+    /// of a pipeline
+    /// </summary>
+    /// <typeparam name="TProcessDefinition"></typeparam>
+    public interface IPipeline<TProcessDefinition> : IPipeline
+    {
+        /// <summary>
+        /// this collection will be determined by 
+        /// the nature of your process definition 
+        /// </summary>
+        TProcessDefinition PipelineTools { get; set; }
     }
     public interface IPipelineObsolete
     {

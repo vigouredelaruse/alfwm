@@ -16,8 +16,17 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     public interface IPipelineTool
     {
+        /// <summary>
+        /// transient machine readable id
+        /// </summary>
         string InstanceId { get; set; }
 
+        /// <summary>
+        /// static machine readable id
+        /// </summary>
+        string PipelineToolId { get; set; }
+        string DisplayName { get; set; }
+        string Description { get; set; }
         event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
         void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args);
 
