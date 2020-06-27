@@ -6,6 +6,10 @@ using System.Text;
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
     /// <summary>
+    /// base interface for a process definition ie pipeline
+    /// specialization of process definition type is delegated
+    /// to interfaces inheriting from this
+    /// 
     /// resist the temptation to not prove the need
     /// to base this on IPipelineTool
     /// </summary>
@@ -58,6 +62,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     /// <typeparam name="TProcessDefinition"></typeparam>
     public interface IPipeline<TProcessDefinition> : IPipeline
+        where TProcessDefinition : class, new()
     {
         /// <summary>
         /// this collection will be determined by 
