@@ -16,6 +16,11 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
     {
         private HttpClient httpClient = new HttpClient();
 
+        public override event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
+        public override event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
+        public override event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
+        public override event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
+
         HttpActivityConfiguration RequiredParameters { get; set; }
 
         public HttpActivity() : base()
@@ -28,7 +33,9 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
         public override IPipelineToolContext Context { get; set; }
         public override IPipelineToolConfiguration Configuration { get; set; }
         public override IPipelineToolBinding OutputBinding { get; set; }
-
+        public override string PipelineToolId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string Description { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public override StopResult Stop<StopResult>(string instanceId)
         {
@@ -68,7 +75,7 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
                     completionArgs.Payload = data;
                     // result.StatusJson = data;
                     callback(result);
-                    OnPipelineToolCompleted(this, completionArgs);
+                    // OnPipelineToolCompleted<>(this, completionArgs);
                 }
                 catch(Exception ex)
                 {
@@ -92,6 +99,21 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
         }
 
         public override void Start<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
         {
             throw new NotImplementedException();
         }
