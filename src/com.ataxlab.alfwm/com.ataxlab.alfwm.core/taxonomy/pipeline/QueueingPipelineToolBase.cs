@@ -11,6 +11,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract QueueingChannel<TQueueEntity> InputBinding { get; set; }
         public abstract List<QueueingChannel<TQueueEntity>> QueueingOutputBindingCollection { get; set; }
         public abstract string InstanceId { get; set; }
+        public abstract string PipelineToolId { get; set; }
+        public abstract string DisplayName { get; set; }
+        public abstract string Description { get; set; }
         public abstract IPipelineToolStatus Status { get; set; }
         public abstract IPipelineToolContext Context { get; set; }
         public abstract IPipelineToolConfiguration Configuration { get; set; }

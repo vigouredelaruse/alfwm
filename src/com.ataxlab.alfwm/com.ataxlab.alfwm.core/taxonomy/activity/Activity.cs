@@ -11,54 +11,23 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
     public abstract class Activity : IPipelineTool
     {
         public abstract string InstanceId { get; set; }
+        public abstract string PipelineToolId { get; set; }
+        public abstract string DisplayName { get; set; }
+        public abstract string Description { get; set; }
         public abstract IPipelineToolStatus Status { get; set; }
         public abstract IPipelineToolContext Context { get; set; }
         public abstract IPipelineToolConfiguration Configuration { get; set; }
         public abstract IPipelineToolBinding OutputBinding { get; set; }
 
-        public virtual event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
-        public virtual event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
-        public virtual event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
-        public virtual event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
-
-        public virtual void OnPipelineToolCompleted(object sender, PipelineToolCompletedEventArgs args)
-        {
-            EventHandler<PipelineToolCompletedEventArgs> handler = PipelineToolCompleted;
-            if (handler != null)
-            {
-                handler(sender, args);
-            }
-        }
+        public abstract event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
+        public abstract event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
+        public abstract event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
+        public abstract event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
 
         public abstract void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class;
-
-        public virtual void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
-        {
-            EventHandler<PipelineToolFailedEventArgs> handler = PipelineToolFailed;
-            if(handler != null)
-            {
-                handler(sender, args);
-            }
-        }
-
-        public virtual void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
-        {
-            EventHandler<PipelineToolProgressUpdatedEventArgs> handler = PipelineToolProgressUpdated;
-            if (handler != null)
-            {
-                handler(sender, args);
-            }
-        }
-
-        public virtual void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
-        {
-            EventHandler<PipelineToolStartEventArgs> handler = PipelineToolStarted;
-            if (handler != null)
-            {
-                handler(sender, args);
-            }
-        }
-
+        public abstract void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args);
+        public abstract void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args);
+        public abstract void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args);
         public abstract void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
             where StartResult : class, new()
             where StartConfiguration : class, new();

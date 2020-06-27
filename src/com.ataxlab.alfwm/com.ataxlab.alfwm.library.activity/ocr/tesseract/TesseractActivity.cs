@@ -120,6 +120,9 @@ namespace com.ataxlab.alfwm.library.activity.ocr.tesseract
         public IPipelineToolContext Context { get; set; }
         public IPipelineToolConfiguration Configuration { get; set; }
         public IPipelineToolBinding OutputBinding { get; set; }
+        public string PipelineToolId { get; set; }
+        public string DisplayName { get; set ; }
+        public string Description { get; set ; }
 
         public event Func<TesseractPipelineVariable, TesseractPipelineVariable> QueueHasAvailableDataEvent;
         public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;

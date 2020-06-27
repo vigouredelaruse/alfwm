@@ -24,6 +24,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         public IPipelineToolContext Context { get; set; }
         public IPipelineToolConfiguration Configuration { get; set; }
         public IPipelineToolBinding OutputBinding { get; set; }
+        public string PipelineToolId { get; set; }
+        public string DisplayName { get; set; }
+        public string Description { get; set ; }
 
         public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
         public event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;

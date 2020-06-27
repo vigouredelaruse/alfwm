@@ -13,7 +13,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     [Obsolete]
     public abstract class PipelineBase : IPipeline
     {
+        public abstract string PipelineId { get; set; }
         public abstract string InstanceId { get; set; }
+        public abstract string DisplayName { get; set; }
+        public abstract string Description { get; set; }
         public abstract IPipelineBinding InputBinding { get; set; }
         public abstract IPipelineBinding OutputBinding { get; set; }
 
@@ -26,10 +29,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract void OnPipelineFailed(object sender, PipelineFailedEventArgs args);
         public abstract void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args);
         public abstract void OnPipelineStarted(object sender, PipelineStartedEventArgs args);
-
-
-
-
         public abstract StartResult Start<StartResult, StartConfiguration>(StartConfiguration configuration)
             where StartResult : class
             where StartConfiguration : class;

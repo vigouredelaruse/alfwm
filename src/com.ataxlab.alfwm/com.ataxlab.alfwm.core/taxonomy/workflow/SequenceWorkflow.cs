@@ -16,6 +16,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.workflow
         public virtual IPipelineToolContext Context { get; set; }
         public virtual IPipelineToolConfiguration Configuration { get; set; }
         public virtual IPipelineToolBinding OutputBinding { get; set; }
+        public abstract string PipelineToolId { get; set; }
+        public abstract string DisplayName { get; set; }
+        public abstract string Description { get; set; }
 
         public virtual event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
         public virtual event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;

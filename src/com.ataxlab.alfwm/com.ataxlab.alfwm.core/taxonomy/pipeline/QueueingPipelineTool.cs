@@ -52,6 +52,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public IPipelineToolContext Context { get; set; }
         public IPipelineToolConfiguration Configuration { get; set; }
         public IPipelineToolBinding OutputBinding { get; set; }
+        public string PipelineToolId { get; set; }
+        public string DisplayName { get; set ; }
+        public string Description { get ; set ; }
 
         public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
         public event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
@@ -188,6 +191,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public override IPipelineToolContext Context { get; set; }
         public override IPipelineToolConfiguration Configuration { get; set; }
         public override IPipelineToolBinding OutputBinding { get; set; }
+        public override string PipelineToolId { get ; set; }
+        public override string DisplayName { get; set; }
+        public override string Description { get; set; }
 
         public override event Func<TQueueEntity, TQueueEntity> QueueHasAvailableDataEvent;
         public override event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
