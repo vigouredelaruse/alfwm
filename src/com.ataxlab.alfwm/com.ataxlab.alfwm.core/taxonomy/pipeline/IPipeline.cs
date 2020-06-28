@@ -37,6 +37,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
 
         /// <summary>
+        /// obsolete because implements should probably
+        /// provide this method according to their own needs
+        /// 
         /// designed to permit implementers to supply their own
         /// Configuration and Pipeline types
         /// 
@@ -47,6 +50,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <typeparam name="StartConfiguration"></typeparam>
         /// <param name="configuration"></param>
         /// <returns></returns>
+        [Obsolete]
         StartResult StartPipeline<StartResult, StartConfiguration>(StartConfiguration configuration) 
             where StartConfiguration : class 
             where StartResult : class;
@@ -69,6 +73,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// the nature of your process definition 
         /// </summary>
         TProcessDefinition PipelineTools { get; set; }
+
+        StartResult StartPipeline<StartResult>(TProcessDefinition configuration)
+            where StartResult : class;
     }
     public interface IPipelineObsolete
     {
