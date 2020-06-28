@@ -165,6 +165,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         }
     }
 
+    /// <summary>
+    /// minimal implementation of a queueing pipeline tool
+    /// supply your own Queue Entity and Queue event arrival handler logic
+    /// </summary>
+    /// <typeparam name="TQueueEntity"></typeparam>
     public class QueueingPipelineTool<TQueueEntity> : QueueingPipelineToolBase<TQueueEntity>
         where TQueueEntity : class, new()
     {
