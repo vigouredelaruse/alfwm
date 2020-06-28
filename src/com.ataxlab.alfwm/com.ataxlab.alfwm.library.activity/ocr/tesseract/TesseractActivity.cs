@@ -115,14 +115,14 @@ namespace com.ataxlab.alfwm.library.activity.ocr.tesseract
 
         public QueueingChannel<TesseractPipelineVariable> InputBinding { get; set ; }
         public List<QueueingChannel<TesseractPipelineVariable>> QueueingOutputBindingCollection { get; set; }
-        public string InstanceId { get; set; }
-        public IPipelineToolStatus Status { get; set; }
-        public IPipelineToolContext Context { get; set; }
-        public IPipelineToolConfiguration Configuration { get; set; }
-        public IPipelineToolBinding OutputBinding { get; set; }
+        public string PipelineToolInstanceId { get; set; }
+        public IPipelineToolStatus PipelineToolStatus { get; set; }
+        public IPipelineToolContext PipelineToolContext { get; set; }
+        public IPipelineToolConfiguration PipelineToolConfiguration { get; set; }
+        public IPipelineToolBinding PipelineToolOutputBinding { get; set; }
         public string PipelineToolId { get; set; }
-        public string DisplayName { get; set ; }
-        public string Description { get; set ; }
+        public string PipelineToolDisplayName { get; set ; }
+        public string PipelineToolDescription { get; set ; }
 
         public event Func<TesseractPipelineVariable, TesseractPipelineVariable> QueueHasAvailableDataEvent;
         public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
@@ -156,19 +156,19 @@ namespace com.ataxlab.alfwm.library.activity.ocr.tesseract
             i = 1;
         }
 
-        public void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+        public void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
             where StartResult : class, new()
             where StartConfiguration : class, new()
         {
             throw new NotImplementedException();
         }
 
-        public void Start<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class
+        public void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class
         {
             throw new NotImplementedException();
         }
 
-        public StopResult Stop<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
+        public StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
         {
             throw new NotImplementedException();
         }

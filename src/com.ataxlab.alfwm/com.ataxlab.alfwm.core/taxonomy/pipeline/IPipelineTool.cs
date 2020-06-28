@@ -19,14 +19,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <summary>
         /// transient machine readable id
         /// </summary>
-        string InstanceId { get; set; }
+        string PipelineToolInstanceId { get; set; }
 
         /// <summary>
         /// static machine readable id
         /// </summary>
         string PipelineToolId { get; set; }
-        string DisplayName { get; set; }
-        string Description { get; set; }
+        string PipelineToolDisplayName { get; set; }
+        string PipelineToolDescription { get; set; }
         event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
         void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args);
 
@@ -47,11 +47,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class;
 
 
-        IPipelineToolStatus Status { get; set; }
-        IPipelineToolContext Context { get; set; }
-        IPipelineToolConfiguration Configuration { get; set; }
+        IPipelineToolStatus PipelineToolStatus { get; set; }
+        IPipelineToolContext PipelineToolContext { get; set; }
+        IPipelineToolConfiguration PipelineToolConfiguration { get; set; }
 
-        IPipelineToolBinding OutputBinding { get; set; }
+        IPipelineToolBinding PipelineToolOutputBinding { get; set; }
 
         /// <summary>
         /// a start method for a delegate that has a user specified output
@@ -62,7 +62,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <typeparam name="StartConfiguration"></typeparam>
         /// <param name="configuration"></param>
         /// <param name="callback"></param>
-        void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback) 
+        void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback) 
             where StartConfiguration : class, new() 
             where StartResult : class, new();
         
@@ -73,10 +73,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <typeparam name="StartConfiguration"></typeparam>
         /// <param name="configuration"></param>
         /// <param name="callback"></param>
-        void Start<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) 
+        void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) 
             where StartConfiguration : class;
 
-        StopResult Stop<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
+        StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
 
     }
 }

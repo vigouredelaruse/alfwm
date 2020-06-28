@@ -28,16 +28,16 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
             RequiredParameters = new HttpActivityConfiguration();
         }
 
-        public override string InstanceId { get; set; }
-        public override IPipelineToolStatus Status { get; set; }
-        public override IPipelineToolContext Context { get; set; }
-        public override IPipelineToolConfiguration Configuration { get; set; }
-        public override IPipelineToolBinding OutputBinding { get; set; }
+        public override string PipelineToolInstanceId { get; set; }
+        public override IPipelineToolStatus PipelineToolStatus { get; set; }
+        public override IPipelineToolContext PipelineToolContext { get; set; }
+        public override IPipelineToolConfiguration PipelineToolConfiguration { get; set; }
+        public override IPipelineToolBinding PipelineToolOutputBinding { get; set; }
         public override string PipelineToolId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string Description { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string PipelineToolDisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string PipelineToolDescription { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public override StopResult Stop<StopResult>(string instanceId)
+        public override StopResult StopPipelineTool<StopResult>(string instanceId)
         {
             throw new NotImplementedException();
         }
@@ -47,12 +47,12 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
         {
 
             StartResult result = default(StartResult); // = new StartResult();
-            var config = Configuration as HttpActivityConfiguration;
+            var config = PipelineToolConfiguration as HttpActivityConfiguration;
 
             try
             {
                 PipelineToolStartEventArgs args = new PipelineToolStartEventArgs();
-                args.InstanceId = this.InstanceId;
+                args.InstanceId = this.PipelineToolInstanceId;
 
                 OnPipelineToolStarted(this, args);
                 
@@ -93,12 +93,12 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
             throw new NotImplementedException();
         }
 
-        public override void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+        public override void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
         {
             throw new NotImplementedException();
         }
 
-        public override void Start<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
+        public override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
         {
             throw new NotImplementedException();
         }

@@ -46,13 +46,13 @@ namespace com.ataxlab.alfwm.scheduler.windowsthreadpool
                 var startEventArgs = new PipelineToolStartEventArgs();
                 
 
-                activity.Configuration = activityConfiguration;
-                activity.InstanceId = Guid.NewGuid().ToString();
+                activity.PipelineToolConfiguration = activityConfiguration;
+                activity.PipelineToolInstanceId = Guid.NewGuid().ToString();
                 activity.PipelineToolCompleted += this.OnActivityCompleted;
                 activity.PipelineToolStarted += this.OnActivityStarted;
 
                 
-                startEventArgs.InstanceId = activity.InstanceId;
+                startEventArgs.InstanceId = activity.PipelineToolInstanceId;
 
                 OnActivityStarted(this, startEventArgs);
 

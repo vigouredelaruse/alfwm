@@ -16,9 +16,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     public interface IPipeline
     {
         string PipelineId { get; set; }
-        string InstanceId { get; set; }
-        string DisplayName { get; set; }
-        string Description { get; set; }
+        string PipelineInstanceId { get; set; }
+        string PipelineDisplayName { get; set; }
+        string PipelineDescription { get; set; }
         event EventHandler<PipelineStartedEventArgs> PipelineStarted;
         void OnPipelineStarted(object sender, PipelineStartedEventArgs args);
 
@@ -31,9 +31,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
         void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args);
  
-        IPipelineBinding InputBinding { get; set; }
+        IPipelineBinding PipelineInputBinding { get; set; }
 
-        IPipelineBinding OutputBinding { get; set; }
+        IPipelineBinding PipelineOutputBinding { get; set; }
 
 
         /// <summary>
@@ -47,11 +47,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <typeparam name="StartConfiguration"></typeparam>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        StartResult Start<StartResult, StartConfiguration>(StartConfiguration configuration) 
+        StartResult StartPipeline<StartResult, StartConfiguration>(StartConfiguration configuration) 
             where StartConfiguration : class 
             where StartResult : class;
 
-        StopResult Stop<StopResult>(string instanceId) where StopResult : class;
+        StopResult StopPipeline<StopResult>(string instanceId) where StopResult : class;
 
 
     }

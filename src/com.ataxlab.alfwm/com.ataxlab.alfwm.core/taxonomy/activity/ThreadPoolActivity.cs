@@ -16,17 +16,17 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
     {
         public ThreadPoolActivity()
         {
-            this.InstanceId = Guid.NewGuid().ToString();
+            this.PipelineToolInstanceId = Guid.NewGuid().ToString();
         }
 
-        public string InstanceId { get; set; }
-        public IPipelineToolStatus Status { get; set; }
-        public IPipelineToolContext Context { get; set; }
-        public IPipelineToolConfiguration Configuration { get; set; }
-        public IPipelineToolBinding OutputBinding { get; set; }
+        public string PipelineToolInstanceId { get; set; }
+        public IPipelineToolStatus PipelineToolStatus { get; set; }
+        public IPipelineToolContext PipelineToolContext { get; set; }
+        public IPipelineToolConfiguration PipelineToolConfiguration { get; set; }
+        public IPipelineToolBinding PipelineToolOutputBinding { get; set; }
         public string PipelineToolId { get; set; }
-        public string DisplayName { get; set; }
-        public string Description { get; set ; }
+        public string PipelineToolDisplayName { get; set; }
+        public string PipelineToolDescription { get; set ; }
 
         public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
         public event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
@@ -78,7 +78,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         /// <typeparam name="StartConfiguration"></typeparam>
         /// <param name="configuration"></param>
         /// <param name="callback"></param>
-        public void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+        public void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
             where StartResult : class, new()
             where StartConfiguration : class, new()
         {
@@ -97,12 +97,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
 
         }
 
-        public void Start<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class
+        public void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class
         {
             throw new NotImplementedException();
         }
 
-        public StopResult Stop<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
+        public StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
         {
             throw new NotImplementedException();
         }

@@ -25,7 +25,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public QueueingPipelineToolObsolete()
         {
 
-            this.InstanceId = Guid.NewGuid().ToString();
+            this.PipelineToolInstanceId = Guid.NewGuid().ToString();
 
             InputBinding = new QueueingChannel<TQueueEntity>();
             QueueingOutputBindingCollection = new List<QueueingChannel<TQueueEntity>>();
@@ -47,14 +47,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public QueueingChannel<TQueueEntity> InputBinding { get; set; }
         public List<QueueingChannel<TQueueEntity>> QueueingOutputBindingCollection { get; set; }
-        public string InstanceId { get; set; }
-        public IPipelineToolStatus Status { get; set; }
-        public IPipelineToolContext Context { get; set; }
-        public IPipelineToolConfiguration Configuration { get; set; }
-        public IPipelineToolBinding OutputBinding { get; set; }
+        public string PipelineToolInstanceId { get; set; }
+        public IPipelineToolStatus PipelineToolStatus { get; set; }
+        public IPipelineToolContext PipelineToolContext { get; set; }
+        public IPipelineToolConfiguration PipelineToolConfiguration { get; set; }
+        public IPipelineToolBinding PipelineToolOutputBinding { get; set; }
         public string PipelineToolId { get; set; }
-        public string DisplayName { get; set ; }
-        public string Description { get ; set ; }
+        public string PipelineToolDisplayName { get; set ; }
+        public string PipelineToolDescription { get ; set ; }
 
         public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
         public event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
@@ -117,7 +117,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             // 
         }
 
-        public virtual StopResult Stop<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
+        public virtual StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
         {
             throw new NotImplementedException();
         }
@@ -139,7 +139,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <typeparam name="StartConfiguration"></typeparam>
         /// <param name="configuration"></param>
         /// <param name="callback"></param>
-        public virtual void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+        public virtual void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
             where StartResult : class, new()
             where StartConfiguration : class, new()
         {
@@ -156,7 +156,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <typeparam name="StartConfiguration"></typeparam>
         /// <param name="configuration"></param>
         /// <param name="callback"></param>
-        public virtual void Start<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class
+        public virtual void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class
         {
             ThreadPool.QueueUserWorkItem((ccc) =>
             {
@@ -175,7 +175,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     {
         public QueueingPipelineTool()
         {
-            this.InstanceId = Guid.NewGuid().ToString();
+            this.PipelineToolInstanceId = Guid.NewGuid().ToString();
 
             InputBinding = new QueueingChannel<TQueueEntity>();
             QueueingOutputBindingCollection = new List<QueueingChannel<TQueueEntity>>();
@@ -191,14 +191,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public override QueueingChannel<TQueueEntity> InputBinding { get; set; }
         public override List<QueueingChannel<TQueueEntity>> QueueingOutputBindingCollection { get; set; }
-        public override string InstanceId { get; set; }
-        public override IPipelineToolStatus Status { get; set; }
-        public override IPipelineToolContext Context { get; set; }
-        public override IPipelineToolConfiguration Configuration { get; set; }
-        public override IPipelineToolBinding OutputBinding { get; set; }
+        public override string PipelineToolInstanceId { get; set; }
+        public override IPipelineToolStatus PipelineToolStatus { get; set; }
+        public override IPipelineToolContext PipelineToolContext { get; set; }
+        public override IPipelineToolConfiguration PipelineToolConfiguration { get; set; }
+        public override IPipelineToolBinding PipelineToolOutputBinding { get; set; }
         public override string PipelineToolId { get ; set; }
-        public override string DisplayName { get; set; }
-        public override string Description { get; set; }
+        public override string PipelineToolDisplayName { get; set; }
+        public override string PipelineToolDescription { get; set; }
 
         public override event Func<TQueueEntity, TQueueEntity> QueueHasAvailableDataEvent;
         public override event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
@@ -258,17 +258,17 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         }
 
-        public override void Start<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+        public override void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
         {
             throw new NotImplementedException();
         }
 
-        public override void Start<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
+        public override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
         {
             throw new NotImplementedException();
         }
 
-        public override StopResult Stop<StopResult>(string instanceId)
+        public override StopResult StopPipelineTool<StopResult>(string instanceId)
         {
             throw new NotImplementedException();
         }
