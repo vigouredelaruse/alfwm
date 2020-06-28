@@ -63,6 +63,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract StartResult StartPipeline<StartResult, StartConfiguration>(StartConfiguration configuration)
             where StartResult : class
             where StartConfiguration : class;
+        public abstract StartResult StartPipeline<StartResult>(TProcessDefinition configuration) where StartResult : class;
         public abstract StopResult StopPipeline<StopResult>(string instanceId) where StopResult : class;
     }
 }
