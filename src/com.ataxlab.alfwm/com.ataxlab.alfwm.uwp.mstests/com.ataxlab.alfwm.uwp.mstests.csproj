@@ -119,6 +119,7 @@
     <SDKReference Include="TestPlatform.Universal, Version=$(UnitTestPlatformVersion)" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bpmn\BPMNSmokeTests.cs" />
     <Compile Include="datasetprovider\litedb\LiteDbProviderSmokeTest.cs" />
     <Compile Include="datasetprovider\litedb\model\Contact.cs" />
     <Compile Include="datasetprovider\litedb\model\TaskItem.cs" />
@@ -154,6 +155,7 @@
     <Content Include="sample.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="samplebpmn.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
@@ -178,6 +180,10 @@
     <ProjectReference Include="..\com.ataxlab.alfwm.library.uwp.activity\com.ataxlab.alfwm.library.uwp.activity.csproj">
       <Project>{BCC195CD-6ADE-4294-B695-9028450CB1B1}</Project>
       <Name>com.ataxlab.alfwm.library.uwp.activity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\com.ataxlab.alfwm.model\com.ataxlab.alfwm.model.csproj">
+      <Project>{5B15EA85-B642-4FAD-86B7-DA3BEC9F616A}</Project>
+      <Name>com.ataxlab.alfwm.model</Name>
     </ProjectReference>
     <ProjectReference Include="..\com.ataxlab.alfwm.persistence.litedb\com.ataxlab.alfwm.persistence.litedb.csproj">
       <Project>{2DDAA1FC-F157-4978-AA1D-8E605B781E27}</Project>

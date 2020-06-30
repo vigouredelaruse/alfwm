@@ -673,6 +673,16 @@
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
         }
       },
+      "com.ataxlab.alfwm.model/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
+        }
+      },
       "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -1630,6 +1640,16 @@
         },
         "runtime": {
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
+        }
+      },
+      "com.ataxlab.alfwm.model/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
         }
       },
       "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
@@ -2634,6 +2654,16 @@
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
         }
       },
+      "com.ataxlab.alfwm.model/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
+        }
+      },
       "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -3636,6 +3666,16 @@
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
         }
       },
+      "com.ataxlab.alfwm.model/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
+        }
+      },
       "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -4593,6 +4633,16 @@
         },
         "runtime": {
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
+        }
+      },
+      "com.ataxlab.alfwm.model/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
         }
       },
       "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
@@ -5597,6 +5647,16 @@
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
         }
       },
+      "com.ataxlab.alfwm.model/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
+        }
+      },
       "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -6554,6 +6614,16 @@
         },
         "runtime": {
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
+        }
+      },
+      "com.ataxlab.alfwm.model/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
         }
       },
       "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
@@ -7556,6 +7626,16 @@
         },
         "runtime": {
           "bin/placeholder/com.ataxlab.alfwm.library.uwp.activity.dll": {}
+        }
+      },
+      "com.ataxlab.alfwm.model/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/com.ataxlab.alfwm.model.dll": {}
         }
       },
       "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
@@ -13779,6 +13859,11 @@
       "path": "../com.ataxlab.alfwm.library.uwp.activity/com.ataxlab.alfwm.library.uwp.activity.csproj",
       "msbuildProject": "../com.ataxlab.alfwm.library.uwp.activity/com.ataxlab.alfwm.library.uwp.activity.csproj"
     },
+    "com.ataxlab.alfwm.model/1.0.0": {
+      "type": "project",
+      "path": "../com.ataxlab.alfwm.model/com.ataxlab.alfwm.model.csproj",
+      "msbuildProject": "../com.ataxlab.alfwm.model/com.ataxlab.alfwm.model.csproj"
+    },
     "com.ataxlab.alfwm.persistence.litedb/1.0.0": {
       "type": "project",
       "path": "../com.ataxlab.alfwm.persistence.litedb/com.ataxlab.alfwm.persistence.litedb.csproj",
@@ -13800,6 +13885,7 @@
       "com.ataxlab.alfwm.core >= 1.0.0",
       "com.ataxlab.alfwm.library.activity >= 1.0.0",
       "com.ataxlab.alfwm.library.uwp.activity >= 1.0.0",
+      "com.ataxlab.alfwm.model >= 1.0.0",
       "com.ataxlab.alfwm.persistence.litedb >= 1.0.0",
       "com.ataxlab.alfwm.scheduler.uwp >= 1.0.0"
     ]
@@ -13846,6 +13932,9 @@
             },
             "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj": {
               "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj"
+            },
+            "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.model\\com.ataxlab.alfwm.model.csproj": {
+              "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.model\\com.ataxlab.alfwm.model.csproj"
             },
             "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.persistence.litedb\\com.ataxlab.alfwm.persistence.litedb.csproj": {
               "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.persistence.litedb\\com.ataxlab.alfwm.persistence.litedb.csproj"
