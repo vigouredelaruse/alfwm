@@ -148,6 +148,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
 
             try
             {
+                var configureResult = testedClass.ConfigureProvider(this.TestedProviderConfiguration);
                 var result = testedClass.Create(TestEntity, CreateExpression, createOperation);
 
                 Assert.IsNotNull(result, "create operation failed. null result");
@@ -158,7 +159,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             }
 
 
-            Assert.IsNull(e, "test failed, exception");
+            Assert.IsNull(e, "test failed, exception : {0}", e?.Message);
         }
 
         private CreateExpression<TaskItemPipelineVariable> InitializeCreateExpression(string collectionName, TaskItemPipelineVariable entity)
@@ -178,7 +179,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb
             {
                 // conveniently our delegate has access to the enclosing class
                 // should that be a viewmodel or a service or a test harness
-                using (var db = new LiteDatabase(this.TestConnectionString.Filename))
+                using (var db = new LiteDatabase(this.TestConnectionString))
                 {
                     var col = db.GetCollection<TaskItemPipelineVariable>(createExpression.CollectionName);
                     col.Insert(entity);

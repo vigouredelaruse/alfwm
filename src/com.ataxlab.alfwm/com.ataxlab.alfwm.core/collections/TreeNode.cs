@@ -14,16 +14,23 @@ namespace com.ataxlab.alfwm.core.collections
         public string Id { get; set; }
         public TPayload Data { get; set; }
         public List<TreeNode<TPayload>> Children { get; set; }
+        
+        public TreeNode<TPayload> ParentNode { get; set; }
 
         public TreeNode(string id, TPayload data)
-            : this(id, data, new TreeNode<TPayload>[0])
+            : this(id, data, null, new TreeNode<TPayload>[0])
         { }
 
-        public TreeNode(string node, TPayload data, params TreeNode<TPayload>[] children)
+        public TreeNode(string id, TPayload data, TreeNode<TPayload> parent) 
+            : this(id, data, parent, new TreeNode<TPayload>[0])
+        { }
+
+        public TreeNode(string node, TPayload data,  TreeNode<TPayload> parentNode, params TreeNode<TPayload>[] children)
         {
             Id = node;
             Data = data;
             Children = new List<TreeNode<TPayload>>(children);
+            ParentNode = parentNode;
         }
     }
 }
