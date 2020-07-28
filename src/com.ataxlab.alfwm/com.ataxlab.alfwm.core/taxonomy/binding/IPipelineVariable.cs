@@ -51,9 +51,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
     /// support generic semantics for the payload
     /// </summary>
     /// <typeparam name="TPayload"></typeparam>
-    public interface IPipelineVariable<TPayload, TPayloadCollection>
+    public interface IPipelineVariable<TPayload>
         where TPayload : class
-        where TPayloadCollection : class
     {
         /// support lookup by composite key ID.Key
         /// </summary>
@@ -84,7 +83,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         DateTime CreateDate { get; set; }
         string DisplayName { get; set; }
         string Description { get; set; }
-        TPayloadCollection Items { get; set; }
     }
 
     /// <summary>

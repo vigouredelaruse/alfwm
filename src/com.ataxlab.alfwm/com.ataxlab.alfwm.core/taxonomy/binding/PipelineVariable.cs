@@ -56,9 +56,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
     /// </summary>
     /// <typeparam name="TPayload"></typeparam>
     /// <typeparam name="TPayloadCollection"></typeparam>
-    public class PipelineVariable<TPayload, TPayloadCollection> : IPipelineVariable<TPayload, TPayloadCollection>
+    public class PipelineVariable<TPayload> : IPipelineVariable<TPayload>
         where TPayload : class
-        where TPayloadCollection : class
     {
         public PipelineVariable()
         {
@@ -71,12 +70,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
             this.Payload = payload;
         }
 
-        public PipelineVariable(TPayloadCollection payloadItems, bool isGenerateJSONValue = false, bool isGenerateJSONSchema = false)
-        {
-            this.ID = Guid.NewGuid().ToString();
-            this.Items = payloadItems;
-        }
-
+ 
         public string ID { get; set; }
         public string Key { get; set; }
         public string JsonValue { get; set; }
@@ -86,7 +80,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         public DateTime CreateDate { get; set; }
         public string DisplayName { get; set; }
         public string Description { get; set; }
-        public TPayloadCollection Items { get; set; }
     }
 
     /// <summary>

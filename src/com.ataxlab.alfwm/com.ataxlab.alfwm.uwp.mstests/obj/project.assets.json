@@ -7785,7 +7785,7 @@
       ]
     },
     "Microsoft.NETCore.Platforms/2.1.0": {
-      "sha512": "ok+RPAtESz/9MUXeIEz6Lv5XAGQsaNmEYXMsgVALj4D7kqC8gveKWXWXbufLySR2fWrwZf8smyN5RmHu0e4BHA==",
+      "sha512": "GmkKfoyerqmsHMn7OZj0AKpcBabD+GaafqphvX2Mw406IwiJRy1pKcKqdCfKJfYmkRyJ6+e+RaUylgdJoDa1jQ==",
       "type": "package",
       "path": "microsoft.netcore.platforms/2.1.0",
       "files": [
@@ -13292,7 +13292,7 @@
       ]
     },
     "System.Resources.ResourceManager/4.0.1": {
-      "sha512": "TxwVeUNoTgUOdQ09gfTjvW411MF+w9MBYL7AtNVc+HtBCFlutPLhUCdZjNkjbhj3bNQWMdHboF0KIWEOjJssbA==",
+      "sha512": "UWWRbiWN04+oMnj7mNzicaleAJHBJ0uM9fF9iLnmKE96e/FFGUr+TyAlDMMa1xQUH54Gh88jX/BUYPtHzqDFJQ==",
       "type": "package",
       "path": "system.resources.resourcemanager/4.0.1",
       "files": [
@@ -13610,7 +13610,7 @@
       ]
     },
     "System.Threading/4.0.11": {
-      "sha512": "N+3xqIcg3VDKyjwwCGaZ9HawG9aC6cSDI+s7ROma310GQo8vilFZa86hqKppwTHleR/G0sfOzhvgnUxWCR/DrQ==",
+      "sha512": "BcDdG7z87bb8bF8xHEGSCkd1+KKKYcoka2xlrYr9mwSIHTNXiArwAKwFb9Eh/Fw+wLVtb9YH4MJ+emORV8hePg==",
       "type": "package",
       "path": "system.threading/4.0.11",
       "files": [
@@ -13891,59 +13891,60 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\foresthacker.FURRAY\\.nuget\\packages\\": {},
+    "C:\\Users\\User\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.uwp.mstests\\com.ataxlab.alfwm.uwp.mstests.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.uwp.mstests\\com.ataxlab.alfwm.uwp.mstests.csproj",
       "projectName": "com.ataxlab.alfwm.uwp.mstests",
-      "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.uwp.mstests\\com.ataxlab.alfwm.uwp.mstests.csproj",
-      "packagesPath": "C:\\Users\\foresthacker.FURRAY\\.nuget\\packages\\",
-      "outputPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.uwp.mstests\\obj\\",
+      "projectPath": "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.uwp.mstests\\com.ataxlab.alfwm.uwp.mstests.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.uwp.mstests\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
       ],
       "configFilePaths": [
-        "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\NuGet.Config",
-        "C:\\Users\\foresthacker.FURRAY\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "uap10.0.17763"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/current/nuget/v3/index.json": {},
-        "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets%40Local/nuget/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "uap10.0.17763": {
           "projectReferences": {
-            "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj": {
-              "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj"
+            "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj": {
+              "projectPath": "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj"
             },
-            "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj": {
-              "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj"
+            "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj": {
+              "projectPath": "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj"
             },
-            "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj": {
-              "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj"
+            "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj": {
+              "projectPath": "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj"
             },
-            "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.model\\com.ataxlab.alfwm.model.csproj": {
-              "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.model\\com.ataxlab.alfwm.model.csproj"
+            "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.model\\com.ataxlab.alfwm.model.csproj": {
+              "projectPath": "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.model\\com.ataxlab.alfwm.model.csproj"
             },
-            "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.persistence.litedb\\com.ataxlab.alfwm.persistence.litedb.csproj": {
-              "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.persistence.litedb\\com.ataxlab.alfwm.persistence.litedb.csproj"
+            "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.persistence.litedb\\com.ataxlab.alfwm.persistence.litedb.csproj": {
+              "projectPath": "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.persistence.litedb\\com.ataxlab.alfwm.persistence.litedb.csproj"
             },
-            "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj": {
-              "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj"
+            "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj": {
+              "projectPath": "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj"
             },
-            "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj": {
-              "projectPath": "C:\\src\\com.ataxlab.alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj"
+            "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj": {
+              "projectPath": "C:\\Users\\User\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj"
             }
           }
         }

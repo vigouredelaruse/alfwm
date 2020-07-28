@@ -14,3 +14,5 @@ C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.mstests\com.ata
 C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.mstests\com.ataxlab.alfwm.mstests\obj\Debug\com.ataxlab.alfwm.mstests.csproj.CopyComplete
 C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.mstests\com.ataxlab.alfwm.mstests\obj\Debug\com.ataxlab.alfwm.mstests.dll
 C:\src\com.ataxlab.alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.mstests\com.ataxlab.alfwm.mstests\obj\Debug\com.ataxlab.alfwm.mstests.pdb
+C:\Users\User\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.mstests\com.ataxlab.alfwm.mstests\obj\Debug\com.ataxlab.alfwm.mstests.dll
+C:\Users\User\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.mstests\com.ataxlab.alfwm.mstests\obj\Debug\com.ataxlab.alfwm.mstests.pdb
