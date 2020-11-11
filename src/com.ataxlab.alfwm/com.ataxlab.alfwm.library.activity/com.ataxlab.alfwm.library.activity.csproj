@@ -2,7 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>A Low Footprint Workflow Manager (For Coders)A Low Footprint Workflow Manager (For Coders)</Description>
+    <Description>A Low Footprint Workflow Manager (For Coders)</Description>
+    <Copyright>Ataxlab Ltd</Copyright>
+    <Authors>vigoure delaruse</Authors>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
   </PropertyGroup>

@@ -5,6 +5,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <Description>A Low Footprint Workflow Manager (For Coders)</Description>
+    <Copyright>Ataxlab Ltd</Copyright>
+    <Authors>vigoure delaruse</Authors>
     <ProjectGuid>{3620C0AB-4B60-42EF-BC08-E658A2893646}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>

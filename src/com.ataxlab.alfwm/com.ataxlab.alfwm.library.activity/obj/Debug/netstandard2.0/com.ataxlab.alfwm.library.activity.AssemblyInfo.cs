@@ -11,10 +11,10 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("com.ataxlab.alfwm.library.activity")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("vigoure delaruse")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyDescriptionAttribute("A Low Footprint Workflow Manager (For Coders)A Low Footprint Workflow Manager (Fo" +
-    "r Coders)")]
+[assembly: System.Reflection.AssemblyCopyrightAttribute("Ataxlab Ltd")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("A Low Footprint Workflow Manager (For Coders)")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("com.ataxlab.alfwm.library.activity")]
