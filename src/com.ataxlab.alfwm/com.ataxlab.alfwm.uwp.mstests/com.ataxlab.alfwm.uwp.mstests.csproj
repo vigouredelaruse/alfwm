@@ -176,10 +176,6 @@
       <Project>{0d7301dd-78fd-481d-9e55-1dee689e1f8c}</Project>
       <Name>com.ataxlab.alfwm.core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\com.ataxlab.alfwm.library.activity\com.ataxlab.alfwm.library.activity.csproj">
-      <Project>{0C2E8A2C-974A-4E07-A829-4284590D6219}</Project>
-      <Name>com.ataxlab.alfwm.library.activity</Name>
-    </ProjectReference>
     <ProjectReference Include="..\com.ataxlab.alfwm.library.uwp.activity\com.ataxlab.alfwm.library.uwp.activity.csproj">
       <Project>{BCC195CD-6ADE-4294-B695-9028450CB1B1}</Project>
       <Name>com.ataxlab.alfwm.library.uwp.activity</Name>

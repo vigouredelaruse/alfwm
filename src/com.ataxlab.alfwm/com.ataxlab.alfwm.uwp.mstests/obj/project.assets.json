@@ -59,7 +59,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.Targets/1.1.0": {
+      "Microsoft.NETCore.Targets/1.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -414,83 +414,47 @@
           "lib/win8/_._": {}
         }
       },
-      "System.IO/4.3.0": {
+      "System.IO/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.IO.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Reflection/4.3.0": {
+      "System.Reflection/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.IO": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.IO": "4.1.0",
+          "System.Reflection.Primitives": "4.0.1",
+          "System.Runtime": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.Reflection.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Reflection.Emit/4.3.0": {
+      "System.Reflection.Primitives/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.IO": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Emit.ILGeneration": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0"
         },
         "compile": {
-          "ref/netstandard1.1/System.Reflection.Emit.dll": {}
-        },
-        "runtime": {
-          "lib/netcore50/System.Reflection.Emit.dll": {}
-        }
-      },
-      "System.Reflection.Emit.ILGeneration/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
-        },
-        "compile": {
-          "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll": {}
-        },
-        "runtime": {
-          "lib/netcore50/System.Reflection.Emit.ILGeneration.dll": {}
-        },
-        "runtimeTargets": {
-          "runtimes/aot/lib/netcore50/_._": {
-            "assetType": "runtime",
-            "rid": "aot"
-          }
-        }
-      },
-      "System.Reflection.Primitives/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0"
-        },
-        "compile": {
-          "ref/netcore50/System.Reflection.Primitives.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -512,14 +476,14 @@
           "lib/win8/_._": {}
         }
       },
-      "System.Runtime/4.3.0": {
+      "System.Runtime/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1"
         },
         "compile": {
-          "ref/netcore50/System.Runtime.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -555,15 +519,15 @@
           }
         }
       },
-      "System.Text.Encoding/4.3.0": {
+      "System.Text.Encoding/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.Text.Encoding.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -588,33 +552,18 @@
           }
         }
       },
-      "System.Threading.Tasks/4.3.0": {
+      "System.Threading.Tasks/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.Threading.Tasks.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
-        }
-      },
-      "Tesseract/4.1.0-beta1": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection.Emit": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "build": {
-          "build/_._": {}
         }
       },
       "com.ataxlab.alfwm/1.0.0": {
@@ -648,7 +597,6 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Tesseract": "4.1.0-beta1",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -663,7 +611,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
         "compile": {
@@ -701,7 +649,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0",
           "com.ataxlab.alfwm.library.activity": "1.0.0"
@@ -772,7 +720,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.Targets/1.1.0": {
+      "Microsoft.NETCore.Targets/1.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -1004,7 +952,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.Schema.dll": {}
         }
       },
-      "runtime.any.System.Globalization/4.3.0": {
+      "runtime.any.System.Globalization/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -1013,7 +961,7 @@
           "lib/netcore50/System.Globalization.dll": {}
         }
       },
-      "runtime.any.System.IO/4.3.0": {
+      "runtime.any.System.IO/4.1.0": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -1022,7 +970,7 @@
           "lib/netcore50/System.IO.dll": {}
         }
       },
-      "runtime.any.System.Reflection/4.3.0": {
+      "runtime.any.System.Reflection/4.1.0": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -1031,7 +979,7 @@
           "lib/netcore50/System.Reflection.dll": {}
         }
       },
-      "runtime.any.System.Reflection.Primitives/4.3.0": {
+      "runtime.any.System.Reflection.Primitives/4.0.1": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -1040,7 +988,7 @@
           "lib/netcore50/System.Reflection.Primitives.dll": {}
         }
       },
-      "runtime.any.System.Resources.ResourceManager/4.3.0": {
+      "runtime.any.System.Resources.ResourceManager/4.0.1": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -1049,10 +997,10 @@
           "lib/netcore50/System.Resources.ResourceManager.dll": {}
         }
       },
-      "runtime.any.System.Runtime/4.3.0": {
+      "runtime.any.System.Runtime/4.1.0": {
         "type": "package",
         "dependencies": {
-          "System.Private.Uri": "4.3.0"
+          "System.Private.Uri": "4.0.1"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -1061,7 +1009,7 @@
           "lib/netcore50/System.Runtime.dll": {}
         }
       },
-      "runtime.any.System.Text.Encoding/4.3.0": {
+      "runtime.any.System.Text.Encoding/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -1070,7 +1018,7 @@
           "lib/netcore50/System.Text.Encoding.dll": {}
         }
       },
-      "runtime.any.System.Threading.Tasks/4.3.0": {
+      "runtime.any.System.Threading.Tasks/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -1346,13 +1294,13 @@
           "build/runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets": {}
         }
       },
-      "runtime.win7.System.Private.Uri/4.3.0": {
+      "runtime.win7.System.Private.Uri/4.0.1": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
         },
         "runtime": {
-          "runtimes/win/lib/netcore50/System.Private.Uri.dll": {}
+          "runtimes/win/lib/netstandard1.0/System.Private.Uri.dll": {}
         }
       },
       "System.ComponentModel.Primitives/4.1.0": {
@@ -1382,7 +1330,7 @@
           "Microsoft.NETCore.Platforms": "1.0.1",
           "Microsoft.NETCore.Targets": "1.0.1",
           "System.Runtime": "4.1.0",
-          "runtime.any.System.Globalization": "4.3.0"
+          "runtime.any.System.Globalization": "4.0.11"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -1391,91 +1339,61 @@
           "lib/win8/_._": {}
         }
       },
-      "System.IO/4.3.0": {
+      "System.IO/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "System.Threading.Tasks": "4.3.0",
-          "runtime.any.System.IO": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "System.Threading.Tasks": "4.0.11",
+          "runtime.any.System.IO": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.IO.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Private.Uri/4.3.0": {
+      "System.Private.Uri/4.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "runtime.win7.System.Private.Uri": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "runtime.win7.System.Private.Uri": "4.0.1"
         },
         "compile": {
           "ref/netstandard/_._": {}
         }
       },
-      "System.Reflection/4.3.0": {
+      "System.Reflection/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.IO": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "runtime.any.System.Reflection": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.IO": "4.1.0",
+          "System.Reflection.Primitives": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.any.System.Reflection": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.Reflection.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Reflection.Emit/4.3.0": {
+      "System.Reflection.Primitives/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.IO": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Emit.ILGeneration": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.any.System.Reflection.Primitives": "4.0.1"
         },
         "compile": {
-          "ref/netstandard1.1/System.Reflection.Emit.dll": {}
-        },
-        "runtime": {
-          "lib/netcore50/System.Reflection.Emit.dll": {}
-        }
-      },
-      "System.Reflection.Emit.ILGeneration/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
-        },
-        "compile": {
-          "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll": {}
-        },
-        "runtime": {
-          "lib/netcore50/System.Reflection.Emit.ILGeneration.dll": {}
-        }
-      },
-      "System.Reflection.Primitives/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.any.System.Reflection.Primitives": "4.3.0"
-        },
-        "compile": {
-          "ref/netcore50/System.Reflection.Primitives.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -1489,7 +1407,7 @@
           "System.Globalization": "4.0.11",
           "System.Reflection": "4.1.0",
           "System.Runtime": "4.1.0",
-          "runtime.any.System.Resources.ResourceManager": "4.3.0"
+          "runtime.any.System.Resources.ResourceManager": "4.0.1"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -1498,15 +1416,15 @@
           "lib/win8/_._": {}
         }
       },
-      "System.Runtime/4.3.0": {
+      "System.Runtime/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "runtime.any.System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "runtime.any.System.Runtime": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.Runtime.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -1528,16 +1446,16 @@
           "runtimes/win/lib/netcore50/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         }
       },
-      "System.Text.Encoding/4.3.0": {
+      "System.Text.Encoding/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.any.System.Text.Encoding": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.any.System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Text.Encoding.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -1556,34 +1474,19 @@
           "lib/netcore50/System.Threading.dll": {}
         }
       },
-      "System.Threading.Tasks/4.3.0": {
+      "System.Threading.Tasks/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.any.System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.any.System.Threading.Tasks": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Threading.Tasks.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
-        }
-      },
-      "Tesseract/4.1.0-beta1": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection.Emit": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "build": {
-          "build/_._": {}
         }
       },
       "com.ataxlab.alfwm/1.0.0": {
@@ -1617,7 +1520,6 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Tesseract": "4.1.0-beta1",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -1632,7 +1534,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
         "compile": {
@@ -1670,7 +1572,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0",
           "com.ataxlab.alfwm.library.activity": "1.0.0"
@@ -1741,7 +1643,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.Targets/1.1.0": {
+      "Microsoft.NETCore.Targets/1.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -1973,7 +1875,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.Schema.dll": {}
         }
       },
-      "runtime.aot.System.Globalization/4.3.0": {
+      "runtime.aot.System.Globalization/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -1982,15 +1884,15 @@
           "runtimes/aot/lib/netcore50/System.Globalization.dll": {}
         }
       },
-      "runtime.aot.System.IO/4.3.0": {
+      "runtime.aot.System.IO/4.1.0": {
         "type": "package",
         "dependencies": {
-          "System.Globalization": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "System.Text.Encoding.Extensions": "4.3.0",
-          "System.Threading": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "System.Globalization": "4.0.11",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "System.Text.Encoding.Extensions": "4.0.11",
+          "System.Threading": "4.0.11",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -1999,7 +1901,7 @@
           "runtimes/aot/lib/netcore50/System.IO.dll": {}
         }
       },
-      "runtime.aot.System.Reflection/4.3.0": {
+      "runtime.aot.System.Reflection/4.0.10": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -2008,11 +1910,11 @@
           "runtimes/aot/lib/netcore50/System.Reflection.dll": {}
         }
       },
-      "runtime.aot.System.Reflection.Primitives/4.3.0": {
+      "runtime.aot.System.Reflection.Primitives/4.0.0": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0",
-          "System.Threading": "4.3.0"
+          "System.Runtime": "4.1.0",
+          "System.Threading": "4.0.11"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -2021,12 +1923,12 @@
           "runtimes/aot/lib/netcore50/System.Reflection.Primitives.dll": {}
         }
       },
-      "runtime.aot.System.Resources.ResourceManager/4.3.0": {
+      "runtime.aot.System.Resources.ResourceManager/4.0.0": {
         "type": "package",
         "dependencies": {
-          "System.Globalization": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Runtime": "4.3.0"
+          "System.Globalization": "4.0.11",
+          "System.Reflection": "4.1.0",
+          "System.Runtime": "4.1.0"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -2035,10 +1937,10 @@
           "runtimes/aot/lib/netcore50/System.Resources.ResourceManager.dll": {}
         }
       },
-      "runtime.aot.System.Runtime/4.3.0": {
+      "runtime.aot.System.Runtime/4.0.20": {
         "type": "package",
         "dependencies": {
-          "System.Private.Uri": "4.3.0"
+          "System.Private.Uri": "4.0.1"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -2047,7 +1949,7 @@
           "runtimes/aot/lib/netcore50/System.Runtime.dll": {}
         }
       },
-      "runtime.aot.System.Text.Encoding/4.3.0": {
+      "runtime.aot.System.Text.Encoding/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -2056,7 +1958,7 @@
           "runtimes/aot/lib/netcore50/System.Text.Encoding.dll": {}
         }
       },
-      "runtime.aot.System.Text.Encoding.Extensions/4.3.0": {
+      "runtime.aot.System.Text.Encoding.Extensions/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -2065,7 +1967,7 @@
           "runtimes/aot/lib/netcore50/System.Text.Encoding.Extensions.dll": {}
         }
       },
-      "runtime.aot.System.Threading.Tasks/4.3.0": {
+      "runtime.aot.System.Threading.Tasks/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -2342,7 +2244,7 @@
           "build/runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets": {}
         }
       },
-      "runtime.win7.System.Private.Uri/4.3.0": {
+      "runtime.win7.System.Private.Uri/4.0.1": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -2372,106 +2274,76 @@
           "lib/netstandard1.5/System.ComponentModel.TypeConverter.dll": {}
         }
       },
-      "System.Globalization/4.3.0": {
+      "System.Globalization/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Globalization": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Globalization": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Globalization.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.IO/4.3.0": {
+      "System.IO/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "System.Threading.Tasks": "4.3.0",
-          "runtime.aot.System.IO": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "System.Threading.Tasks": "4.0.11",
+          "runtime.aot.System.IO": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.IO.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Private.Uri/4.3.0": {
+      "System.Private.Uri/4.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "runtime.win7.System.Private.Uri": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "runtime.win7.System.Private.Uri": "4.0.1"
         },
         "compile": {
           "ref/netstandard/_._": {}
         }
       },
-      "System.Reflection/4.3.0": {
+      "System.Reflection/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.IO": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Reflection": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.IO": "4.1.0",
+          "System.Reflection.Primitives": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Reflection": "4.0.10"
         },
         "compile": {
-          "ref/netcore50/System.Reflection.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Reflection.Emit/4.3.0": {
+      "System.Reflection.Primitives/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.IO": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Emit.ILGeneration": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Reflection.Primitives": "4.0.0"
         },
         "compile": {
-          "ref/netstandard1.1/System.Reflection.Emit.dll": {}
-        },
-        "runtime": {
-          "lib/netcore50/System.Reflection.Emit.dll": {}
-        }
-      },
-      "System.Reflection.Emit.ILGeneration/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
-        },
-        "compile": {
-          "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll": {}
-        },
-        "runtime": {
-          "runtimes/aot/lib/netcore50/_._": {}
-        }
-      },
-      "System.Reflection.Primitives/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Reflection.Primitives": "4.3.0"
-        },
-        "compile": {
-          "ref/netcore50/System.Reflection.Primitives.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -2485,7 +2357,7 @@
           "System.Globalization": "4.0.11",
           "System.Reflection": "4.1.0",
           "System.Runtime": "4.1.0",
-          "runtime.aot.System.Resources.ResourceManager": "4.3.0"
+          "runtime.aot.System.Resources.ResourceManager": "4.0.0"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -2494,15 +2366,15 @@
           "lib/win8/_._": {}
         }
       },
-      "System.Runtime/4.3.0": {
+      "System.Runtime/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "runtime.aot.System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "runtime.aot.System.Runtime": "4.0.20"
         },
         "compile": {
-          "ref/netcore50/System.Runtime.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -2524,78 +2396,63 @@
           "runtimes/aot/lib/netcore50/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         }
       },
-      "System.Text.Encoding/4.3.0": {
+      "System.Text.Encoding/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Text.Encoding": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Text.Encoding.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Text.Encoding.Extensions/4.3.0": {
+      "System.Text.Encoding.Extensions/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "runtime.aot.System.Text.Encoding.Extensions": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "runtime.aot.System.Text.Encoding.Extensions": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Text.Encoding.Extensions.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Threading/4.3.0": {
+      "System.Threading/4.0.11": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "System.Runtime": "4.1.0",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Threading.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Threading.dll": {}
         }
       },
-      "System.Threading.Tasks/4.3.0": {
+      "System.Threading.Tasks/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Threading.Tasks": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Threading.Tasks.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
-        }
-      },
-      "Tesseract/4.1.0-beta1": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection.Emit": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "build": {
-          "build/_._": {}
         }
       },
       "com.ataxlab.alfwm/1.0.0": {
@@ -2629,7 +2486,6 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Tesseract": "4.1.0-beta1",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -2644,7 +2500,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
         "compile": {
@@ -2682,7 +2538,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0",
           "com.ataxlab.alfwm.library.activity": "1.0.0"
@@ -2753,7 +2609,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.Targets/1.1.0": {
+      "Microsoft.NETCore.Targets/1.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -2985,7 +2841,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.Schema.dll": {}
         }
       },
-      "runtime.aot.System.Globalization/4.3.0": {
+      "runtime.aot.System.Globalization/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -2994,15 +2850,15 @@
           "runtimes/aot/lib/netcore50/System.Globalization.dll": {}
         }
       },
-      "runtime.aot.System.IO/4.3.0": {
+      "runtime.aot.System.IO/4.1.0": {
         "type": "package",
         "dependencies": {
-          "System.Globalization": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "System.Text.Encoding.Extensions": "4.3.0",
-          "System.Threading": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "System.Globalization": "4.0.11",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "System.Text.Encoding.Extensions": "4.0.11",
+          "System.Threading": "4.0.11",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -3011,7 +2867,7 @@
           "runtimes/aot/lib/netcore50/System.IO.dll": {}
         }
       },
-      "runtime.aot.System.Reflection/4.3.0": {
+      "runtime.aot.System.Reflection/4.0.10": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -3020,11 +2876,11 @@
           "runtimes/aot/lib/netcore50/System.Reflection.dll": {}
         }
       },
-      "runtime.aot.System.Reflection.Primitives/4.3.0": {
+      "runtime.aot.System.Reflection.Primitives/4.0.0": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0",
-          "System.Threading": "4.3.0"
+          "System.Runtime": "4.1.0",
+          "System.Threading": "4.0.11"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -3033,12 +2889,12 @@
           "runtimes/aot/lib/netcore50/System.Reflection.Primitives.dll": {}
         }
       },
-      "runtime.aot.System.Resources.ResourceManager/4.3.0": {
+      "runtime.aot.System.Resources.ResourceManager/4.0.0": {
         "type": "package",
         "dependencies": {
-          "System.Globalization": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Runtime": "4.3.0"
+          "System.Globalization": "4.0.11",
+          "System.Reflection": "4.1.0",
+          "System.Runtime": "4.1.0"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -3047,10 +2903,10 @@
           "runtimes/aot/lib/netcore50/System.Resources.ResourceManager.dll": {}
         }
       },
-      "runtime.aot.System.Runtime/4.3.0": {
+      "runtime.aot.System.Runtime/4.0.20": {
         "type": "package",
         "dependencies": {
-          "System.Private.Uri": "4.3.0"
+          "System.Private.Uri": "4.0.1"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -3059,7 +2915,7 @@
           "runtimes/aot/lib/netcore50/System.Runtime.dll": {}
         }
       },
-      "runtime.aot.System.Text.Encoding/4.3.0": {
+      "runtime.aot.System.Text.Encoding/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -3068,7 +2924,7 @@
           "runtimes/aot/lib/netcore50/System.Text.Encoding.dll": {}
         }
       },
-      "runtime.aot.System.Text.Encoding.Extensions/4.3.0": {
+      "runtime.aot.System.Text.Encoding.Extensions/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -3077,7 +2933,7 @@
           "runtimes/aot/lib/netcore50/System.Text.Encoding.Extensions.dll": {}
         }
       },
-      "runtime.aot.System.Threading.Tasks/4.3.0": {
+      "runtime.aot.System.Threading.Tasks/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -3354,7 +3210,7 @@
           "build/runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets": {}
         }
       },
-      "runtime.win7.System.Private.Uri/4.3.0": {
+      "runtime.win7.System.Private.Uri/4.0.1": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -3384,106 +3240,76 @@
           "lib/netstandard1.5/System.ComponentModel.TypeConverter.dll": {}
         }
       },
-      "System.Globalization/4.3.0": {
+      "System.Globalization/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Globalization": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Globalization": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Globalization.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.IO/4.3.0": {
+      "System.IO/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "System.Threading.Tasks": "4.3.0",
-          "runtime.aot.System.IO": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "System.Threading.Tasks": "4.0.11",
+          "runtime.aot.System.IO": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.IO.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Private.Uri/4.3.0": {
+      "System.Private.Uri/4.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "runtime.win7.System.Private.Uri": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "runtime.win7.System.Private.Uri": "4.0.1"
         },
         "compile": {
           "ref/netstandard/_._": {}
         }
       },
-      "System.Reflection/4.3.0": {
+      "System.Reflection/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.IO": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Reflection": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.IO": "4.1.0",
+          "System.Reflection.Primitives": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Reflection": "4.0.10"
         },
         "compile": {
-          "ref/netcore50/System.Reflection.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Reflection.Emit/4.3.0": {
+      "System.Reflection.Primitives/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.IO": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Emit.ILGeneration": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Reflection.Primitives": "4.0.0"
         },
         "compile": {
-          "ref/netstandard1.1/System.Reflection.Emit.dll": {}
-        },
-        "runtime": {
-          "lib/netcore50/System.Reflection.Emit.dll": {}
-        }
-      },
-      "System.Reflection.Emit.ILGeneration/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
-        },
-        "compile": {
-          "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll": {}
-        },
-        "runtime": {
-          "runtimes/aot/lib/netcore50/_._": {}
-        }
-      },
-      "System.Reflection.Primitives/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Reflection.Primitives": "4.3.0"
-        },
-        "compile": {
-          "ref/netcore50/System.Reflection.Primitives.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -3497,7 +3323,7 @@
           "System.Globalization": "4.0.11",
           "System.Reflection": "4.1.0",
           "System.Runtime": "4.1.0",
-          "runtime.aot.System.Resources.ResourceManager": "4.3.0"
+          "runtime.aot.System.Resources.ResourceManager": "4.0.0"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -3506,15 +3332,15 @@
           "lib/win8/_._": {}
         }
       },
-      "System.Runtime/4.3.0": {
+      "System.Runtime/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "runtime.aot.System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "runtime.aot.System.Runtime": "4.0.20"
         },
         "compile": {
-          "ref/netcore50/System.Runtime.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -3536,78 +3362,63 @@
           "runtimes/aot/lib/netcore50/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         }
       },
-      "System.Text.Encoding/4.3.0": {
+      "System.Text.Encoding/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Text.Encoding": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Text.Encoding.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Text.Encoding.Extensions/4.3.0": {
+      "System.Text.Encoding.Extensions/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "runtime.aot.System.Text.Encoding.Extensions": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "runtime.aot.System.Text.Encoding.Extensions": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Text.Encoding.Extensions.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Threading/4.3.0": {
+      "System.Threading/4.0.11": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "System.Runtime": "4.1.0",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Threading.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Threading.dll": {}
         }
       },
-      "System.Threading.Tasks/4.3.0": {
+      "System.Threading.Tasks/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Threading.Tasks": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Threading.Tasks.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
-        }
-      },
-      "Tesseract/4.1.0-beta1": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection.Emit": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "build": {
-          "build/_._": {}
         }
       },
       "com.ataxlab.alfwm/1.0.0": {
@@ -3641,7 +3452,6 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Tesseract": "4.1.0-beta1",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -3656,7 +3466,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
         "compile": {
@@ -3694,7 +3504,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0",
           "com.ataxlab.alfwm.library.activity": "1.0.0"
@@ -3765,7 +3575,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.Targets/1.1.0": {
+      "Microsoft.NETCore.Targets/1.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -3997,7 +3807,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.Schema.dll": {}
         }
       },
-      "runtime.any.System.Globalization/4.3.0": {
+      "runtime.any.System.Globalization/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -4006,7 +3816,7 @@
           "lib/netcore50/System.Globalization.dll": {}
         }
       },
-      "runtime.any.System.IO/4.3.0": {
+      "runtime.any.System.IO/4.1.0": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -4015,7 +3825,7 @@
           "lib/netcore50/System.IO.dll": {}
         }
       },
-      "runtime.any.System.Reflection/4.3.0": {
+      "runtime.any.System.Reflection/4.1.0": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -4024,7 +3834,7 @@
           "lib/netcore50/System.Reflection.dll": {}
         }
       },
-      "runtime.any.System.Reflection.Primitives/4.3.0": {
+      "runtime.any.System.Reflection.Primitives/4.0.1": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -4033,7 +3843,7 @@
           "lib/netcore50/System.Reflection.Primitives.dll": {}
         }
       },
-      "runtime.any.System.Resources.ResourceManager/4.3.0": {
+      "runtime.any.System.Resources.ResourceManager/4.0.1": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -4042,10 +3852,10 @@
           "lib/netcore50/System.Resources.ResourceManager.dll": {}
         }
       },
-      "runtime.any.System.Runtime/4.3.0": {
+      "runtime.any.System.Runtime/4.1.0": {
         "type": "package",
         "dependencies": {
-          "System.Private.Uri": "4.3.0"
+          "System.Private.Uri": "4.0.1"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -4054,7 +3864,7 @@
           "lib/netcore50/System.Runtime.dll": {}
         }
       },
-      "runtime.any.System.Text.Encoding/4.3.0": {
+      "runtime.any.System.Text.Encoding/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -4063,7 +3873,7 @@
           "lib/netcore50/System.Text.Encoding.dll": {}
         }
       },
-      "runtime.any.System.Threading.Tasks/4.3.0": {
+      "runtime.any.System.Threading.Tasks/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -4339,13 +4149,13 @@
           "build/runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets": {}
         }
       },
-      "runtime.win7.System.Private.Uri/4.3.0": {
+      "runtime.win7.System.Private.Uri/4.0.1": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
         },
         "runtime": {
-          "runtimes/win/lib/netcore50/System.Private.Uri.dll": {}
+          "runtimes/win/lib/netstandard1.0/System.Private.Uri.dll": {}
         }
       },
       "System.ComponentModel.Primitives/4.1.0": {
@@ -4375,7 +4185,7 @@
           "Microsoft.NETCore.Platforms": "1.0.1",
           "Microsoft.NETCore.Targets": "1.0.1",
           "System.Runtime": "4.1.0",
-          "runtime.any.System.Globalization": "4.3.0"
+          "runtime.any.System.Globalization": "4.0.11"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -4384,91 +4194,61 @@
           "lib/win8/_._": {}
         }
       },
-      "System.IO/4.3.0": {
+      "System.IO/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "System.Threading.Tasks": "4.3.0",
-          "runtime.any.System.IO": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "System.Threading.Tasks": "4.0.11",
+          "runtime.any.System.IO": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.IO.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Private.Uri/4.3.0": {
+      "System.Private.Uri/4.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "runtime.win7.System.Private.Uri": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "runtime.win7.System.Private.Uri": "4.0.1"
         },
         "compile": {
           "ref/netstandard/_._": {}
         }
       },
-      "System.Reflection/4.3.0": {
+      "System.Reflection/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.IO": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "runtime.any.System.Reflection": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.IO": "4.1.0",
+          "System.Reflection.Primitives": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.any.System.Reflection": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.Reflection.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Reflection.Emit/4.3.0": {
+      "System.Reflection.Primitives/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.IO": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Emit.ILGeneration": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.any.System.Reflection.Primitives": "4.0.1"
         },
         "compile": {
-          "ref/netstandard1.1/System.Reflection.Emit.dll": {}
-        },
-        "runtime": {
-          "lib/netcore50/System.Reflection.Emit.dll": {}
-        }
-      },
-      "System.Reflection.Emit.ILGeneration/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
-        },
-        "compile": {
-          "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll": {}
-        },
-        "runtime": {
-          "lib/netcore50/System.Reflection.Emit.ILGeneration.dll": {}
-        }
-      },
-      "System.Reflection.Primitives/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.any.System.Reflection.Primitives": "4.3.0"
-        },
-        "compile": {
-          "ref/netcore50/System.Reflection.Primitives.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -4482,7 +4262,7 @@
           "System.Globalization": "4.0.11",
           "System.Reflection": "4.1.0",
           "System.Runtime": "4.1.0",
-          "runtime.any.System.Resources.ResourceManager": "4.3.0"
+          "runtime.any.System.Resources.ResourceManager": "4.0.1"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -4491,15 +4271,15 @@
           "lib/win8/_._": {}
         }
       },
-      "System.Runtime/4.3.0": {
+      "System.Runtime/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "runtime.any.System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "runtime.any.System.Runtime": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.Runtime.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -4521,16 +4301,16 @@
           "runtimes/win/lib/netcore50/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         }
       },
-      "System.Text.Encoding/4.3.0": {
+      "System.Text.Encoding/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.any.System.Text.Encoding": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.any.System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Text.Encoding.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -4549,34 +4329,19 @@
           "lib/netcore50/System.Threading.dll": {}
         }
       },
-      "System.Threading.Tasks/4.3.0": {
+      "System.Threading.Tasks/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.any.System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.any.System.Threading.Tasks": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Threading.Tasks.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
-        }
-      },
-      "Tesseract/4.1.0-beta1": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection.Emit": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "build": {
-          "build/_._": {}
         }
       },
       "com.ataxlab.alfwm/1.0.0": {
@@ -4610,7 +4375,6 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Tesseract": "4.1.0-beta1",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -4625,7 +4389,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
         "compile": {
@@ -4663,7 +4427,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0",
           "com.ataxlab.alfwm.library.activity": "1.0.0"
@@ -4734,7 +4498,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.Targets/1.1.0": {
+      "Microsoft.NETCore.Targets/1.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -4966,7 +4730,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.Schema.dll": {}
         }
       },
-      "runtime.aot.System.Globalization/4.3.0": {
+      "runtime.aot.System.Globalization/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -4975,15 +4739,15 @@
           "runtimes/aot/lib/netcore50/System.Globalization.dll": {}
         }
       },
-      "runtime.aot.System.IO/4.3.0": {
+      "runtime.aot.System.IO/4.1.0": {
         "type": "package",
         "dependencies": {
-          "System.Globalization": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "System.Text.Encoding.Extensions": "4.3.0",
-          "System.Threading": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "System.Globalization": "4.0.11",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "System.Text.Encoding.Extensions": "4.0.11",
+          "System.Threading": "4.0.11",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -4992,7 +4756,7 @@
           "runtimes/aot/lib/netcore50/System.IO.dll": {}
         }
       },
-      "runtime.aot.System.Reflection/4.3.0": {
+      "runtime.aot.System.Reflection/4.0.10": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -5001,11 +4765,11 @@
           "runtimes/aot/lib/netcore50/System.Reflection.dll": {}
         }
       },
-      "runtime.aot.System.Reflection.Primitives/4.3.0": {
+      "runtime.aot.System.Reflection.Primitives/4.0.0": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0",
-          "System.Threading": "4.3.0"
+          "System.Runtime": "4.1.0",
+          "System.Threading": "4.0.11"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -5014,12 +4778,12 @@
           "runtimes/aot/lib/netcore50/System.Reflection.Primitives.dll": {}
         }
       },
-      "runtime.aot.System.Resources.ResourceManager/4.3.0": {
+      "runtime.aot.System.Resources.ResourceManager/4.0.0": {
         "type": "package",
         "dependencies": {
-          "System.Globalization": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Runtime": "4.3.0"
+          "System.Globalization": "4.0.11",
+          "System.Reflection": "4.1.0",
+          "System.Runtime": "4.1.0"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -5028,10 +4792,10 @@
           "runtimes/aot/lib/netcore50/System.Resources.ResourceManager.dll": {}
         }
       },
-      "runtime.aot.System.Runtime/4.3.0": {
+      "runtime.aot.System.Runtime/4.0.20": {
         "type": "package",
         "dependencies": {
-          "System.Private.Uri": "4.3.0"
+          "System.Private.Uri": "4.0.1"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -5040,7 +4804,7 @@
           "runtimes/aot/lib/netcore50/System.Runtime.dll": {}
         }
       },
-      "runtime.aot.System.Text.Encoding/4.3.0": {
+      "runtime.aot.System.Text.Encoding/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -5049,7 +4813,7 @@
           "runtimes/aot/lib/netcore50/System.Text.Encoding.dll": {}
         }
       },
-      "runtime.aot.System.Text.Encoding.Extensions/4.3.0": {
+      "runtime.aot.System.Text.Encoding.Extensions/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -5058,7 +4822,7 @@
           "runtimes/aot/lib/netcore50/System.Text.Encoding.Extensions.dll": {}
         }
       },
-      "runtime.aot.System.Threading.Tasks/4.3.0": {
+      "runtime.aot.System.Threading.Tasks/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -5335,7 +5099,7 @@
           "build/runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets": {}
         }
       },
-      "runtime.win7.System.Private.Uri/4.3.0": {
+      "runtime.win7.System.Private.Uri/4.0.1": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -5365,106 +5129,76 @@
           "lib/netstandard1.5/System.ComponentModel.TypeConverter.dll": {}
         }
       },
-      "System.Globalization/4.3.0": {
+      "System.Globalization/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Globalization": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Globalization": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Globalization.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.IO/4.3.0": {
+      "System.IO/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "System.Threading.Tasks": "4.3.0",
-          "runtime.aot.System.IO": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "System.Threading.Tasks": "4.0.11",
+          "runtime.aot.System.IO": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.IO.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Private.Uri/4.3.0": {
+      "System.Private.Uri/4.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "runtime.win7.System.Private.Uri": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "runtime.win7.System.Private.Uri": "4.0.1"
         },
         "compile": {
           "ref/netstandard/_._": {}
         }
       },
-      "System.Reflection/4.3.0": {
+      "System.Reflection/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.IO": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Reflection": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.IO": "4.1.0",
+          "System.Reflection.Primitives": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Reflection": "4.0.10"
         },
         "compile": {
-          "ref/netcore50/System.Reflection.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Reflection.Emit/4.3.0": {
+      "System.Reflection.Primitives/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.IO": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Emit.ILGeneration": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Reflection.Primitives": "4.0.0"
         },
         "compile": {
-          "ref/netstandard1.1/System.Reflection.Emit.dll": {}
-        },
-        "runtime": {
-          "lib/netcore50/System.Reflection.Emit.dll": {}
-        }
-      },
-      "System.Reflection.Emit.ILGeneration/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
-        },
-        "compile": {
-          "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll": {}
-        },
-        "runtime": {
-          "runtimes/aot/lib/netcore50/_._": {}
-        }
-      },
-      "System.Reflection.Primitives/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Reflection.Primitives": "4.3.0"
-        },
-        "compile": {
-          "ref/netcore50/System.Reflection.Primitives.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -5478,7 +5212,7 @@
           "System.Globalization": "4.0.11",
           "System.Reflection": "4.1.0",
           "System.Runtime": "4.1.0",
-          "runtime.aot.System.Resources.ResourceManager": "4.3.0"
+          "runtime.aot.System.Resources.ResourceManager": "4.0.0"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -5487,15 +5221,15 @@
           "lib/win8/_._": {}
         }
       },
-      "System.Runtime/4.3.0": {
+      "System.Runtime/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "runtime.aot.System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "runtime.aot.System.Runtime": "4.0.20"
         },
         "compile": {
-          "ref/netcore50/System.Runtime.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -5517,78 +5251,63 @@
           "runtimes/aot/lib/netcore50/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         }
       },
-      "System.Text.Encoding/4.3.0": {
+      "System.Text.Encoding/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Text.Encoding": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Text.Encoding.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Text.Encoding.Extensions/4.3.0": {
+      "System.Text.Encoding.Extensions/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "runtime.aot.System.Text.Encoding.Extensions": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "runtime.aot.System.Text.Encoding.Extensions": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Text.Encoding.Extensions.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Threading/4.3.0": {
+      "System.Threading/4.0.11": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "System.Runtime": "4.1.0",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Threading.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Threading.dll": {}
         }
       },
-      "System.Threading.Tasks/4.3.0": {
+      "System.Threading.Tasks/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Threading.Tasks": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Threading.Tasks.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
-        }
-      },
-      "Tesseract/4.1.0-beta1": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection.Emit": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "build": {
-          "build/_._": {}
         }
       },
       "com.ataxlab.alfwm/1.0.0": {
@@ -5622,7 +5341,6 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Tesseract": "4.1.0-beta1",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -5637,7 +5355,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
         "compile": {
@@ -5675,7 +5393,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0",
           "com.ataxlab.alfwm.library.activity": "1.0.0"
@@ -5746,7 +5464,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.Targets/1.1.0": {
+      "Microsoft.NETCore.Targets/1.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -5978,7 +5696,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.Schema.dll": {}
         }
       },
-      "runtime.any.System.Globalization/4.3.0": {
+      "runtime.any.System.Globalization/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -5987,7 +5705,7 @@
           "lib/netcore50/System.Globalization.dll": {}
         }
       },
-      "runtime.any.System.IO/4.3.0": {
+      "runtime.any.System.IO/4.1.0": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -5996,7 +5714,7 @@
           "lib/netcore50/System.IO.dll": {}
         }
       },
-      "runtime.any.System.Reflection/4.3.0": {
+      "runtime.any.System.Reflection/4.1.0": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -6005,7 +5723,7 @@
           "lib/netcore50/System.Reflection.dll": {}
         }
       },
-      "runtime.any.System.Reflection.Primitives/4.3.0": {
+      "runtime.any.System.Reflection.Primitives/4.0.1": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -6014,7 +5732,7 @@
           "lib/netcore50/System.Reflection.Primitives.dll": {}
         }
       },
-      "runtime.any.System.Resources.ResourceManager/4.3.0": {
+      "runtime.any.System.Resources.ResourceManager/4.0.1": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -6023,10 +5741,10 @@
           "lib/netcore50/System.Resources.ResourceManager.dll": {}
         }
       },
-      "runtime.any.System.Runtime/4.3.0": {
+      "runtime.any.System.Runtime/4.1.0": {
         "type": "package",
         "dependencies": {
-          "System.Private.Uri": "4.3.0"
+          "System.Private.Uri": "4.0.1"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -6035,7 +5753,7 @@
           "lib/netcore50/System.Runtime.dll": {}
         }
       },
-      "runtime.any.System.Text.Encoding/4.3.0": {
+      "runtime.any.System.Text.Encoding/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -6044,7 +5762,7 @@
           "lib/netcore50/System.Text.Encoding.dll": {}
         }
       },
-      "runtime.any.System.Threading.Tasks/4.3.0": {
+      "runtime.any.System.Threading.Tasks/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -6320,13 +6038,13 @@
           "runtimes/win10-x86/nativeassets/uap10.0.15138/clrcompression.dll": {}
         }
       },
-      "runtime.win7.System.Private.Uri/4.3.0": {
+      "runtime.win7.System.Private.Uri/4.0.1": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
         },
         "runtime": {
-          "runtimes/win/lib/netcore50/System.Private.Uri.dll": {}
+          "runtimes/win/lib/netstandard1.0/System.Private.Uri.dll": {}
         }
       },
       "System.ComponentModel.Primitives/4.1.0": {
@@ -6356,7 +6074,7 @@
           "Microsoft.NETCore.Platforms": "1.0.1",
           "Microsoft.NETCore.Targets": "1.0.1",
           "System.Runtime": "4.1.0",
-          "runtime.any.System.Globalization": "4.3.0"
+          "runtime.any.System.Globalization": "4.0.11"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -6365,91 +6083,61 @@
           "lib/win8/_._": {}
         }
       },
-      "System.IO/4.3.0": {
+      "System.IO/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "System.Threading.Tasks": "4.3.0",
-          "runtime.any.System.IO": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "System.Threading.Tasks": "4.0.11",
+          "runtime.any.System.IO": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.IO.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Private.Uri/4.3.0": {
+      "System.Private.Uri/4.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "runtime.win7.System.Private.Uri": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "runtime.win7.System.Private.Uri": "4.0.1"
         },
         "compile": {
           "ref/netstandard/_._": {}
         }
       },
-      "System.Reflection/4.3.0": {
+      "System.Reflection/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.IO": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "runtime.any.System.Reflection": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.IO": "4.1.0",
+          "System.Reflection.Primitives": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.any.System.Reflection": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.Reflection.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Reflection.Emit/4.3.0": {
+      "System.Reflection.Primitives/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.IO": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Emit.ILGeneration": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.any.System.Reflection.Primitives": "4.0.1"
         },
         "compile": {
-          "ref/netstandard1.1/System.Reflection.Emit.dll": {}
-        },
-        "runtime": {
-          "lib/netcore50/System.Reflection.Emit.dll": {}
-        }
-      },
-      "System.Reflection.Emit.ILGeneration/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
-        },
-        "compile": {
-          "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll": {}
-        },
-        "runtime": {
-          "lib/netcore50/System.Reflection.Emit.ILGeneration.dll": {}
-        }
-      },
-      "System.Reflection.Primitives/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.any.System.Reflection.Primitives": "4.3.0"
-        },
-        "compile": {
-          "ref/netcore50/System.Reflection.Primitives.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -6463,7 +6151,7 @@
           "System.Globalization": "4.0.11",
           "System.Reflection": "4.1.0",
           "System.Runtime": "4.1.0",
-          "runtime.any.System.Resources.ResourceManager": "4.3.0"
+          "runtime.any.System.Resources.ResourceManager": "4.0.1"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -6472,15 +6160,15 @@
           "lib/win8/_._": {}
         }
       },
-      "System.Runtime/4.3.0": {
+      "System.Runtime/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "runtime.any.System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "runtime.any.System.Runtime": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.Runtime.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -6502,16 +6190,16 @@
           "runtimes/win/lib/netcore50/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         }
       },
-      "System.Text.Encoding/4.3.0": {
+      "System.Text.Encoding/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.any.System.Text.Encoding": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.any.System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Text.Encoding.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -6530,34 +6218,19 @@
           "lib/netcore50/System.Threading.dll": {}
         }
       },
-      "System.Threading.Tasks/4.3.0": {
+      "System.Threading.Tasks/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.any.System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.any.System.Threading.Tasks": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Threading.Tasks.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
-        }
-      },
-      "Tesseract/4.1.0-beta1": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection.Emit": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "build": {
-          "build/_._": {}
         }
       },
       "com.ataxlab.alfwm/1.0.0": {
@@ -6591,7 +6264,6 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Tesseract": "4.1.0-beta1",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -6606,7 +6278,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
         "compile": {
@@ -6644,7 +6316,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0",
           "com.ataxlab.alfwm.library.activity": "1.0.0"
@@ -6715,7 +6387,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.Targets/1.1.0": {
+      "Microsoft.NETCore.Targets/1.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -6947,7 +6619,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.Schema.dll": {}
         }
       },
-      "runtime.aot.System.Globalization/4.3.0": {
+      "runtime.aot.System.Globalization/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -6956,15 +6628,15 @@
           "runtimes/aot/lib/netcore50/System.Globalization.dll": {}
         }
       },
-      "runtime.aot.System.IO/4.3.0": {
+      "runtime.aot.System.IO/4.1.0": {
         "type": "package",
         "dependencies": {
-          "System.Globalization": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "System.Text.Encoding.Extensions": "4.3.0",
-          "System.Threading": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "System.Globalization": "4.0.11",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "System.Text.Encoding.Extensions": "4.0.11",
+          "System.Threading": "4.0.11",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -6973,7 +6645,7 @@
           "runtimes/aot/lib/netcore50/System.IO.dll": {}
         }
       },
-      "runtime.aot.System.Reflection/4.3.0": {
+      "runtime.aot.System.Reflection/4.0.10": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -6982,11 +6654,11 @@
           "runtimes/aot/lib/netcore50/System.Reflection.dll": {}
         }
       },
-      "runtime.aot.System.Reflection.Primitives/4.3.0": {
+      "runtime.aot.System.Reflection.Primitives/4.0.0": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0",
-          "System.Threading": "4.3.0"
+          "System.Runtime": "4.1.0",
+          "System.Threading": "4.0.11"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -6995,12 +6667,12 @@
           "runtimes/aot/lib/netcore50/System.Reflection.Primitives.dll": {}
         }
       },
-      "runtime.aot.System.Resources.ResourceManager/4.3.0": {
+      "runtime.aot.System.Resources.ResourceManager/4.0.0": {
         "type": "package",
         "dependencies": {
-          "System.Globalization": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Runtime": "4.3.0"
+          "System.Globalization": "4.0.11",
+          "System.Reflection": "4.1.0",
+          "System.Runtime": "4.1.0"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -7009,10 +6681,10 @@
           "runtimes/aot/lib/netcore50/System.Resources.ResourceManager.dll": {}
         }
       },
-      "runtime.aot.System.Runtime/4.3.0": {
+      "runtime.aot.System.Runtime/4.0.20": {
         "type": "package",
         "dependencies": {
-          "System.Private.Uri": "4.3.0"
+          "System.Private.Uri": "4.0.1"
         },
         "compile": {
           "ref/netstandard/_._": {}
@@ -7021,7 +6693,7 @@
           "runtimes/aot/lib/netcore50/System.Runtime.dll": {}
         }
       },
-      "runtime.aot.System.Text.Encoding/4.3.0": {
+      "runtime.aot.System.Text.Encoding/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -7030,7 +6702,7 @@
           "runtimes/aot/lib/netcore50/System.Text.Encoding.dll": {}
         }
       },
-      "runtime.aot.System.Text.Encoding.Extensions/4.3.0": {
+      "runtime.aot.System.Text.Encoding.Extensions/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -7039,7 +6711,7 @@
           "runtimes/aot/lib/netcore50/System.Text.Encoding.Extensions.dll": {}
         }
       },
-      "runtime.aot.System.Threading.Tasks/4.3.0": {
+      "runtime.aot.System.Threading.Tasks/4.0.11": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -7316,7 +6988,7 @@
           "build/runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets": {}
         }
       },
-      "runtime.win7.System.Private.Uri/4.3.0": {
+      "runtime.win7.System.Private.Uri/4.0.1": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -7346,106 +7018,76 @@
           "lib/netstandard1.5/System.ComponentModel.TypeConverter.dll": {}
         }
       },
-      "System.Globalization/4.3.0": {
+      "System.Globalization/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Globalization": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Globalization": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Globalization.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.IO/4.3.0": {
+      "System.IO/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "System.Threading.Tasks": "4.3.0",
-          "runtime.aot.System.IO": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "System.Threading.Tasks": "4.0.11",
+          "runtime.aot.System.IO": "4.1.0"
         },
         "compile": {
-          "ref/netcore50/System.IO.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Private.Uri/4.3.0": {
+      "System.Private.Uri/4.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "runtime.win7.System.Private.Uri": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "runtime.win7.System.Private.Uri": "4.0.1"
         },
         "compile": {
           "ref/netstandard/_._": {}
         }
       },
-      "System.Reflection/4.3.0": {
+      "System.Reflection/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.IO": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Reflection": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.IO": "4.1.0",
+          "System.Reflection.Primitives": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Reflection": "4.0.10"
         },
         "compile": {
-          "ref/netcore50/System.Reflection.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Reflection.Emit/4.3.0": {
+      "System.Reflection.Primitives/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.IO": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Emit.ILGeneration": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Reflection.Primitives": "4.0.0"
         },
         "compile": {
-          "ref/netstandard1.1/System.Reflection.Emit.dll": {}
-        },
-        "runtime": {
-          "lib/netcore50/System.Reflection.Emit.dll": {}
-        }
-      },
-      "System.Reflection.Emit.ILGeneration/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Primitives": "4.3.0",
-          "System.Runtime": "4.3.0"
-        },
-        "compile": {
-          "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll": {}
-        },
-        "runtime": {
-          "runtimes/aot/lib/netcore50/_._": {}
-        }
-      },
-      "System.Reflection.Primitives/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Reflection.Primitives": "4.3.0"
-        },
-        "compile": {
-          "ref/netcore50/System.Reflection.Primitives.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -7459,7 +7101,7 @@
           "System.Globalization": "4.0.11",
           "System.Reflection": "4.1.0",
           "System.Runtime": "4.1.0",
-          "runtime.aot.System.Resources.ResourceManager": "4.3.0"
+          "runtime.aot.System.Resources.ResourceManager": "4.0.0"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -7468,15 +7110,15 @@
           "lib/win8/_._": {}
         }
       },
-      "System.Runtime/4.3.0": {
+      "System.Runtime/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "runtime.aot.System.Runtime": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "runtime.aot.System.Runtime": "4.0.20"
         },
         "compile": {
-          "ref/netcore50/System.Runtime.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
@@ -7498,78 +7140,63 @@
           "runtimes/aot/lib/netcore50/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         }
       },
-      "System.Text.Encoding/4.3.0": {
+      "System.Text.Encoding/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Text.Encoding": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Text.Encoding": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Text.Encoding.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Text.Encoding.Extensions/4.3.0": {
+      "System.Text.Encoding.Extensions/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "runtime.aot.System.Text.Encoding.Extensions": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Text.Encoding": "4.0.11",
+          "runtime.aot.System.Text.Encoding.Extensions": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Text.Encoding.Extensions.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
         }
       },
-      "System.Threading/4.3.0": {
+      "System.Threading/4.0.11": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "System.Runtime": "4.1.0",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Threading.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Threading.dll": {}
         }
       },
-      "System.Threading.Tasks/4.3.0": {
+      "System.Threading.Tasks/4.0.11": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.NETCore.Targets": "1.1.0",
-          "System.Runtime": "4.3.0",
-          "runtime.aot.System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.NETCore.Targets": "1.0.1",
+          "System.Runtime": "4.1.0",
+          "runtime.aot.System.Threading.Tasks": "4.0.11"
         },
         "compile": {
-          "ref/netcore50/System.Threading.Tasks.dll": {}
+          "ref/netcore50/_._": {}
         },
         "runtime": {
           "lib/win8/_._": {}
-        }
-      },
-      "Tesseract/4.1.0-beta1": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection.Emit": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Tesseract.dll": {}
-        },
-        "build": {
-          "build/_._": {}
         }
       },
       "com.ataxlab.alfwm/1.0.0": {
@@ -7603,7 +7230,6 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Tesseract": "4.1.0-beta1",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -7618,7 +7244,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
         "compile": {
@@ -7656,7 +7282,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm": "1.0.0",
           "com.ataxlab.alfwm.core": "1.0.0",
           "com.ataxlab.alfwm.library.activity": "1.0.0"
@@ -7801,17 +7427,16 @@
         "version.txt"
       ]
     },
-    "Microsoft.NETCore.Targets/1.1.0": {
-      "sha512": "aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
+    "Microsoft.NETCore.Targets/1.0.1": {
+      "sha512": "rkn+fKobF/cbWfnnfBOQHKVKIOpxMZBvlSHkqDWgBpwGDcLRduvs3D9OLGeV6GWGvVwNlVi2CBbTjuPmtHvyNw==",
       "type": "package",
-      "path": "microsoft.netcore.targets/1.1.0",
+      "path": "microsoft.netcore.targets/1.0.1",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
-        "microsoft.netcore.targets.1.1.0.nupkg.sha512",
+        "microsoft.netcore.targets.1.0.1.nupkg.sha512",
         "microsoft.netcore.targets.nuspec",
         "runtime.json"
       ]
@@ -8453,10 +8078,10 @@
         "newtonsoft.json.schema.nuspec"
       ]
     },
-    "runtime.any.System.Globalization/4.3.0": {
-      "sha512": "sMDBnad4rp4t7GY442Jux0MCUuKL4otn5BK6Ni0ARTXTSpRNBzZ7hpMfKSvnVSED5kYJm96YOWsqV0JH0d2uuw==",
+    "runtime.any.System.Globalization/4.0.11": {
+      "sha512": "cjJ3+b83Tpf02AIc5FkGj1vzY68RnsVHiGLrOCc5n7gpNVg1JnZrt1mcY99ykQ/wr3nCdvSP2pYvdxbYsxZdlA==",
       "type": "package",
-      "path": "runtime.any.system.globalization/4.3.0",
+      "path": "runtime.any.system.globalization/4.0.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8475,15 +8100,15 @@
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
         "ref/netstandard/_._",
-        "runtime.any.system.globalization.4.3.0.nupkg.sha512",
+        "runtime.any.system.globalization.4.0.11.nupkg.sha512",
         "runtime.any.system.globalization.nuspec",
         "runtimes/aot/lib/netcore50/_._"
       ]
     },
-    "runtime.any.System.IO/4.3.0": {
-      "sha512": "SDZ5AD1DtyRoxYtEcqQ3HDlcrorMYXZeCt7ZhG9US9I5Vva+gpIWDGMkcwa5XiKL0ceQKRZIX2x0XEjLX7PDzQ==",
+    "runtime.any.System.IO/4.1.0": {
+      "sha512": "sC7zKVdhYQEtrREKBJf4zkUwNdi6fsbkzrhJLDIAxIxD+YA5PABAQJps13zxpA1Ke3AgzOA9551JDymAfmRuTg==",
       "type": "package",
-      "path": "runtime.any.system.io/4.3.0",
+      "path": "runtime.any.system.io/4.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8502,15 +8127,15 @@
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
         "ref/netstandard/_._",
-        "runtime.any.system.io.4.3.0.nupkg.sha512",
+        "runtime.any.system.io.4.1.0.nupkg.sha512",
         "runtime.any.system.io.nuspec",
         "runtimes/aot/lib/netcore50/_._"
       ]
     },
-    "runtime.any.System.Reflection/4.3.0": {
-      "sha512": "hLC3A3rI8jipR5d9k7+f0MgRCW6texsAp0MWkN/ci18FMtQ9KH7E2vDn/DH2LkxsszlpJpOn9qy6Z6/69rH6eQ==",
+    "runtime.any.System.Reflection/4.1.0": {
+      "sha512": "eKq6/GprEINYbugjWf2V9cjkyuAH/y+Raed28PJQ35zd30oR/pvKEHNN8JbPAgzYpI09TCd1yuhXN/Rb8PM8GA==",
       "type": "package",
-      "path": "runtime.any.system.reflection/4.3.0",
+      "path": "runtime.any.system.reflection/4.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8529,15 +8154,15 @@
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
         "ref/netstandard/_._",
-        "runtime.any.system.reflection.4.3.0.nupkg.sha512",
+        "runtime.any.system.reflection.4.1.0.nupkg.sha512",
         "runtime.any.system.reflection.nuspec",
         "runtimes/aot/lib/netcore50/_._"
       ]
     },
-    "runtime.any.System.Reflection.Primitives/4.3.0": {
-      "sha512": "Nrm1p3armp6TTf2xuvaa+jGTTmncALWFq22CpmwRvhDf6dE9ZmH40EbOswD4GnFLrMRS0Ki6Kx5aUPmKK/hZBg==",
+    "runtime.any.System.Reflection.Primitives/4.0.1": {
+      "sha512": "oKs78h11WDhCGFNpxT26IqL8Oo8OBzr6YOW0WG+R14FGaB/WDM5UHiK/jr6dipdnO8Wxlg/U48ka6uaPM6l53w==",
       "type": "package",
-      "path": "runtime.any.system.reflection.primitives/4.3.0",
+      "path": "runtime.any.system.reflection.primitives/4.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8556,15 +8181,15 @@
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
         "ref/netstandard/_._",
-        "runtime.any.system.reflection.primitives.4.3.0.nupkg.sha512",
+        "runtime.any.system.reflection.primitives.4.0.1.nupkg.sha512",
         "runtime.any.system.reflection.primitives.nuspec",
         "runtimes/aot/lib/netcore50/_._"
       ]
     },
-    "runtime.any.System.Resources.ResourceManager/4.3.0": {
-      "sha512": "Lxb89SMvf8w9p9+keBLyL6H6x/TEmc6QVsIIA0T36IuyOY3kNvIdyGddA2qt35cRamzxF8K5p0Opq4G4HjNbhQ==",
+    "runtime.any.System.Resources.ResourceManager/4.0.1": {
+      "sha512": "hes7WFTOERydB/hLGmLj66NbK7I2AnjLHEeTpf7EmPZOIrRWeuC1dPoFYC9XRVIVzfCcOZI7oXM7KXe4vakt9Q==",
       "type": "package",
-      "path": "runtime.any.system.resources.resourcemanager/4.3.0",
+      "path": "runtime.any.system.resources.resourcemanager/4.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8583,15 +8208,15 @@
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
         "ref/netstandard/_._",
-        "runtime.any.system.resources.resourcemanager.4.3.0.nupkg.sha512",
+        "runtime.any.system.resources.resourcemanager.4.0.1.nupkg.sha512",
         "runtime.any.system.resources.resourcemanager.nuspec",
         "runtimes/aot/lib/netcore50/_._"
       ]
     },
-    "runtime.any.System.Runtime/4.3.0": {
-      "sha512": "fRS7zJgaG9NkifaAxGGclDDoRn9HC7hXACl52Or06a/fxdzDajWb5wov3c6a+gVSlekRoexfjwQSK9sh5um5LQ==",
+    "runtime.any.System.Runtime/4.1.0": {
+      "sha512": "0QVLwEGXROl0Trt2XosEjly9uqXcjHKStoZyZG9twJYFZJqq2JJXcBMXl/fnyQAgYEEODV8lUsU+t7NCCY0nUQ==",
       "type": "package",
-      "path": "runtime.any.system.runtime/4.3.0",
+      "path": "runtime.any.system.runtime/4.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8610,15 +8235,15 @@
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
         "ref/netstandard/_._",
-        "runtime.any.system.runtime.4.3.0.nupkg.sha512",
+        "runtime.any.system.runtime.4.1.0.nupkg.sha512",
         "runtime.any.system.runtime.nuspec",
         "runtimes/aot/lib/netcore50/_._"
       ]
     },
-    "runtime.any.System.Text.Encoding/4.3.0": {
-      "sha512": "+ihI5VaXFCMVPJNstG4O4eo1CfbrByLxRrQQTqOTp1ttK0kUKDqOdBSTaCB2IBk/QtjDrs6+x4xuezyMXdm0HQ==",
+    "runtime.any.System.Text.Encoding/4.0.11": {
+      "sha512": "uweRMRDD4O8Iy8m4h1cJvoFIHNCzHMpipuxkRNAMML6EMzAhDCQTjgvRwki7PlUg8RGY1ctXnBZjT1rXvMZuRw==",
       "type": "package",
-      "path": "runtime.any.system.text.encoding/4.3.0",
+      "path": "runtime.any.system.text.encoding/4.0.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8636,15 +8261,15 @@
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
         "ref/netstandard/_._",
-        "runtime.any.system.text.encoding.4.3.0.nupkg.sha512",
+        "runtime.any.system.text.encoding.4.0.11.nupkg.sha512",
         "runtime.any.system.text.encoding.nuspec",
         "runtimes/aot/lib/netcore50/_._"
       ]
     },
-    "runtime.any.System.Threading.Tasks/4.3.0": {
-      "sha512": "OhBAVBQG5kFj1S+hCEQ3TUHBAEtZ3fbEMgZMRNdN8A0Pj4x+5nTELEqL59DU0TjKVE6II3dqKw4Dklb3szT65w==",
+    "runtime.any.System.Threading.Tasks/4.0.11": {
+      "sha512": "CEvWO0IwtdCAsmCb9aAl59psy0hzx+whYh4DzbjNb0GsQmxw/G7bZEcrBtE8c9QupNVbu87c2xaMi6p4r1bpjA==",
       "type": "package",
-      "path": "runtime.any.system.threading.tasks/4.3.0",
+      "path": "runtime.any.system.threading.tasks/4.0.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8663,68 +8288,64 @@
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
         "ref/netstandard/_._",
-        "runtime.any.system.threading.tasks.4.3.0.nupkg.sha512",
+        "runtime.any.system.threading.tasks.4.0.11.nupkg.sha512",
         "runtime.any.system.threading.tasks.nuspec",
         "runtimes/aot/lib/netcore50/_._"
       ]
     },
-    "runtime.aot.System.Globalization/4.3.0": {
-      "sha512": "JGVbV0rYZGFq44g2wd1pmm/CfcxiqyjwclO9WTzRcUT+SJvj097u1DoaXt/epyT5lOTkbOkEBqgl9hZlKvMf9g==",
+    "runtime.aot.System.Globalization/4.0.11": {
+      "sha512": "eEPSEA2yUp1HLNlp8Cve/J6UpN2mFnWUJhjqVEw+d+JUkWrzE2+ebl+0kf91Nwls4Mnia0GkjRRDiDKt8XeAAQ==",
       "type": "package",
-      "path": "runtime.aot.system.globalization/4.3.0",
+      "path": "runtime.aot.system.globalization/4.0.11",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "ref/netstandard/_._",
-        "runtime.aot.system.globalization.4.3.0.nupkg.sha512",
+        "runtime.aot.system.globalization.4.0.11.nupkg.sha512",
         "runtime.aot.system.globalization.nuspec",
         "runtimes/aot/lib/netcore50/System.Globalization.dll"
       ]
     },
-    "runtime.aot.System.IO/4.3.0": {
-      "sha512": "Hh4Acaw1LDirS2SRU3H8vjcdQDfWbJzP/6TacuIrmkzBvnmPMV0npB7BvZ3ODa2uyqdynrXx7/M60ufqrrVz/g==",
+    "runtime.aot.System.IO/4.1.0": {
+      "sha512": "zI0PBKDpAvTNbxTgcZutcb50D7jHJaC9vQLxKhUBn4gS7VHQqnZjqyEqXBxc4rnx6rdZzlMADNZAMUWNW42Sxw==",
       "type": "package",
-      "path": "runtime.aot.system.io/4.3.0",
+      "path": "runtime.aot.system.io/4.1.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "ref/netstandard/_._",
-        "runtime.aot.system.io.4.3.0.nupkg.sha512",
+        "runtime.aot.system.io.4.1.0.nupkg.sha512",
         "runtime.aot.system.io.nuspec",
         "runtimes/aot/lib/netcore50/System.IO.dll",
         "runtimes/aot/lib/netstandard1.3/System.IO.dll"
       ]
     },
-    "runtime.aot.System.Reflection/4.3.0": {
-      "sha512": "RtPByBmixEVC003nTtg9rGk+hogh8u3Tjd2Ap9WtYchddErK+EfOWhWEWSNfrlfHSep0fPZyjLXye+bdDqeqyQ==",
+    "runtime.aot.System.Reflection/4.0.10": {
+      "sha512": "vrUbKdxXRNkmIsiMFP03cKLmzGoN7ObqU7rpjr/9ABL2ovHO7vyFhVfkpUXg4uX94ixgVaytbISLe+yxFQtl8w==",
       "type": "package",
-      "path": "runtime.aot.system.reflection/4.3.0",
+      "path": "runtime.aot.system.reflection/4.0.10",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "ref/netstandard/_._",
-        "runtime.aot.system.reflection.4.3.0.nupkg.sha512",
+        "runtime.aot.system.reflection.4.0.10.nupkg.sha512",
         "runtime.aot.system.reflection.nuspec",
         "runtimes/aot/lib/netcore50/System.Reflection.dll"
       ]
     },
-    "runtime.aot.System.Reflection.Primitives/4.3.0": {
-      "sha512": "H8uucvnpgVnZizQqLfkfISLPfJ4SwTiZdhkciAZniRCjRR4iW23npVeAQVhsdaMsy1tVFt4lJgfzrbvQElRGlA==",
+    "runtime.aot.System.Reflection.Primitives/4.0.0": {
+      "sha512": "826QEny5/GvZ270fhG70vnzYlFnTxNAHiHfyRS2zMZ5X1MpAsiW0y0XHAJjq7MrrnRjyG3qHF0zqytpNPJLaFQ==",
       "type": "package",
-      "path": "runtime.aot.system.reflection.primitives/4.3.0",
+      "path": "runtime.aot.system.reflection.primitives/4.0.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "ref/netstandard/_._",
-        "runtime.aot.system.reflection.primitives.4.3.0.nupkg.sha512",
+        "runtime.aot.system.reflection.primitives.4.0.0.nupkg.sha512",
         "runtime.aot.system.reflection.primitives.nuspec",
         "runtimes/aot/lib/MonoAndroid10/_._",
         "runtimes/aot/lib/MonoTouch10/_._",
@@ -8739,77 +8360,72 @@
         "runtimes/aot/lib/xamarinwatchos10/_._"
       ]
     },
-    "runtime.aot.System.Resources.ResourceManager/4.3.0": {
-      "sha512": "UuU/71bzofPYs0edqzGObX8yJ0JzwxWPK8W1OC0EddWbLTOkmlDUAefJTiDqN0/UZYHMOHX5lJCwgXLsV3c/4A==",
+    "runtime.aot.System.Resources.ResourceManager/4.0.0": {
+      "sha512": "j+xK1M/oJ5ll7WT6UD9oQ/YUESFtT0YN3th1TIliJjK5J0Ek4vDPTMDQceu3WFy7aQOThDmIxjkAVSxZV7OWIA==",
       "type": "package",
-      "path": "runtime.aot.system.resources.resourcemanager/4.3.0",
+      "path": "runtime.aot.system.resources.resourcemanager/4.0.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "ref/netstandard/_._",
-        "runtime.aot.system.resources.resourcemanager.4.3.0.nupkg.sha512",
+        "runtime.aot.system.resources.resourcemanager.4.0.0.nupkg.sha512",
         "runtime.aot.system.resources.resourcemanager.nuspec",
         "runtimes/aot/lib/netcore50/System.Resources.ResourceManager.dll"
       ]
     },
-    "runtime.aot.System.Runtime/4.3.0": {
-      "sha512": "+v3ECNS5te29NRB7qhY2Ea3KKK1ACWEoGRcicbXm79HqFi7eL0IuqPpCpv43MMVUWxGcnrP8+PdktB2c2P0L0w==",
+    "runtime.aot.System.Runtime/4.0.20": {
+      "sha512": "ax423Smc+2Bcm8Go70iwj30hpjUIuahVtBAqlGXzhOoRwRR4vlEN3OGp8qTecWki3ZhGrbOXy+A1U89V3DzG/w==",
       "type": "package",
-      "path": "runtime.aot.system.runtime/4.3.0",
+      "path": "runtime.aot.system.runtime/4.0.20",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "ref/netstandard/_._",
-        "runtime.aot.system.runtime.4.3.0.nupkg.sha512",
+        "runtime.aot.system.runtime.4.0.20.nupkg.sha512",
         "runtime.aot.system.runtime.nuspec",
         "runtimes/aot/lib/netcore50/System.Runtime.dll"
       ]
     },
-    "runtime.aot.System.Text.Encoding/4.3.0": {
-      "sha512": "oFUYKrchmj4Y9BVT/VgCdUZkvvo0geGntd6Ojz27jsQcu0NDNcYK62arI0/LVQOYCVrQIdUfFMJqCjS4YQidJg==",
+    "runtime.aot.System.Text.Encoding/4.0.11": {
+      "sha512": "mUltrQRF5trt9DvIDPxV5E3girWcXlJgQBnYHfy1b8RQU2Ipob6xzCqlDnnECa8+FdhD8C/A7s7krxvHWcJ/pw==",
       "type": "package",
-      "path": "runtime.aot.system.text.encoding/4.3.0",
+      "path": "runtime.aot.system.text.encoding/4.0.11",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "ref/netstandard/_._",
-        "runtime.aot.system.text.encoding.4.3.0.nupkg.sha512",
+        "runtime.aot.system.text.encoding.4.0.11.nupkg.sha512",
         "runtime.aot.system.text.encoding.nuspec",
         "runtimes/aot/lib/netcore50/System.Text.Encoding.dll"
       ]
     },
-    "runtime.aot.System.Text.Encoding.Extensions/4.3.0": {
-      "sha512": "pxSiZre1BBpXurLR4HdFk5PKQHvLwB2wYc8xSaZV34y/zojUFTOJtMHprjXW217p72aR4llwVrp4WVlDppXcGw==",
+    "runtime.aot.System.Text.Encoding.Extensions/4.0.11": {
+      "sha512": "N6XCU9y8ZC51LfxnE5tgNFy+3emNQTRY6W3NeLqlHLcina5vbChsSsPDOCpEIGMTOMxbODe5HtWYbzaOOSFtGg==",
       "type": "package",
-      "path": "runtime.aot.system.text.encoding.extensions/4.3.0",
+      "path": "runtime.aot.system.text.encoding.extensions/4.0.11",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "ref/netstandard/_._",
-        "runtime.aot.system.text.encoding.extensions.4.3.0.nupkg.sha512",
+        "runtime.aot.system.text.encoding.extensions.4.0.11.nupkg.sha512",
         "runtime.aot.system.text.encoding.extensions.nuspec",
         "runtimes/aot/lib/netcore50/System.Text.Encoding.Extensions.dll"
       ]
     },
-    "runtime.aot.System.Threading.Tasks/4.3.0": {
-      "sha512": "xkNtSW7Xcy3gauT0tEc5FgA2FviuG+QsPNEo3hf/pdOWCXHIQtLBJCWwXnc0B3VpCLSJB6A2zQ5XIxHS9mBkmQ==",
+    "runtime.aot.System.Threading.Tasks/4.0.11": {
+      "sha512": "55coohhmT0Usdq536a54bqGK4ij2D1ZTaJo8lQ3k/piwVx+Dl2r3xmDGsims+jVimQVayU2tXptKSAn9nhgRfA==",
       "type": "package",
-      "path": "runtime.aot.system.threading.tasks/4.3.0",
+      "path": "runtime.aot.system.threading.tasks/4.0.11",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "ref/netstandard/_._",
-        "runtime.aot.system.threading.tasks.4.3.0.nupkg.sha512",
+        "runtime.aot.system.threading.tasks.4.0.11.nupkg.sha512",
         "runtime.aot.system.threading.tasks.nuspec",
         "runtimes/aot/lib/netcore50/System.Threading.Tasks.dll"
       ]
@@ -12732,20 +12348,19 @@
         "runtimes/win10-x86/nativeassets/uap10.0.15138/clrcompression.dll"
       ]
     },
-    "runtime.win7.System.Private.Uri/4.3.0": {
-      "sha512": "Q+IBgaPYicSQs2tBlmXqbS25c/JLIthWrgrpMwxKSOobW/OqIMVFruUGfuaz4QABVzV8iKdCAbN7APY7Tclbnw==",
+    "runtime.win7.System.Private.Uri/4.0.1": {
+      "sha512": "LPOuwNel9nJ+G751J/yb64zkodFzVUwYYukQ8vysjiHRBrnvsZOhIxvqKhG6od1szrBNkl8pw8VGvvcfQ/2VOA==",
       "type": "package",
-      "path": "runtime.win7.system.private.uri/4.3.0",
+      "path": "runtime.win7.system.private.uri/4.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "ref/netstandard/_._",
-        "runtime.win7.system.private.uri.4.3.0.nupkg.sha512",
+        "runtime.win7.system.private.uri.4.0.1.nupkg.sha512",
         "runtime.win7.system.private.uri.nuspec",
         "runtimes/aot/lib/netcore50/System.Private.Uri.dll",
-        "runtimes/win/lib/netcore50/System.Private.Uri.dll",
         "runtimes/win/lib/netstandard1.0/System.Private.Uri.dll"
       ]
     },
@@ -12909,78 +12524,10 @@
         "system.globalization.nuspec"
       ]
     },
-    "System.Globalization/4.3.0": {
-      "sha512": "kYdVd2f2PAdFGblzFswE4hkNANJBKRmsfa2X5LG2AcWE1c7/4t0pYae1L8vfZ5xvE2nK/R9JprtToA61OSHWIg==",
+    "System.IO/4.1.0": {
+      "sha512": "3KlTJceQc3gnGIaHZ7UBZO26SHL1SHE4ddrmiwumFnId+CEHP+O8r386tZKaE6zlk5/mF8vifMBzHj9SaXN+mQ==",
       "type": "package",
-      "path": "system.globalization/4.3.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "ThirdPartyNotices.txt",
-        "dotnet_library_license.txt",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net45/_._",
-        "lib/portable-net45+win8+wp8+wpa81/_._",
-        "lib/win8/_._",
-        "lib/wp80/_._",
-        "lib/wpa81/_._",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "lib/xamarintvos10/_._",
-        "lib/xamarinwatchos10/_._",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/net45/_._",
-        "ref/netcore50/System.Globalization.dll",
-        "ref/netcore50/System.Globalization.xml",
-        "ref/netcore50/de/System.Globalization.xml",
-        "ref/netcore50/es/System.Globalization.xml",
-        "ref/netcore50/fr/System.Globalization.xml",
-        "ref/netcore50/it/System.Globalization.xml",
-        "ref/netcore50/ja/System.Globalization.xml",
-        "ref/netcore50/ko/System.Globalization.xml",
-        "ref/netcore50/ru/System.Globalization.xml",
-        "ref/netcore50/zh-hans/System.Globalization.xml",
-        "ref/netcore50/zh-hant/System.Globalization.xml",
-        "ref/netstandard1.0/System.Globalization.dll",
-        "ref/netstandard1.0/System.Globalization.xml",
-        "ref/netstandard1.0/de/System.Globalization.xml",
-        "ref/netstandard1.0/es/System.Globalization.xml",
-        "ref/netstandard1.0/fr/System.Globalization.xml",
-        "ref/netstandard1.0/it/System.Globalization.xml",
-        "ref/netstandard1.0/ja/System.Globalization.xml",
-        "ref/netstandard1.0/ko/System.Globalization.xml",
-        "ref/netstandard1.0/ru/System.Globalization.xml",
-        "ref/netstandard1.0/zh-hans/System.Globalization.xml",
-        "ref/netstandard1.0/zh-hant/System.Globalization.xml",
-        "ref/netstandard1.3/System.Globalization.dll",
-        "ref/netstandard1.3/System.Globalization.xml",
-        "ref/netstandard1.3/de/System.Globalization.xml",
-        "ref/netstandard1.3/es/System.Globalization.xml",
-        "ref/netstandard1.3/fr/System.Globalization.xml",
-        "ref/netstandard1.3/it/System.Globalization.xml",
-        "ref/netstandard1.3/ja/System.Globalization.xml",
-        "ref/netstandard1.3/ko/System.Globalization.xml",
-        "ref/netstandard1.3/ru/System.Globalization.xml",
-        "ref/netstandard1.3/zh-hans/System.Globalization.xml",
-        "ref/netstandard1.3/zh-hant/System.Globalization.xml",
-        "ref/portable-net45+win8+wp8+wpa81/_._",
-        "ref/win8/_._",
-        "ref/wp80/_._",
-        "ref/wpa81/_._",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
-        "system.globalization.4.3.0.nupkg.sha512",
-        "system.globalization.nuspec"
-      ]
-    },
-    "System.IO/4.3.0": {
-      "sha512": "3qjaHvxQPDpSOYICjUoTsmoq5u6QJAFRUITgeT/4gqkF1bajbSmb1kwSxEA8AHlofqgcKJcM8udgieRNhaJ5Cg==",
-      "type": "package",
-      "path": "system.io/4.3.0",
+      "path": "system.io/4.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -13054,28 +12601,28 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.io.4.3.0.nupkg.sha512",
+        "system.io.4.1.0.nupkg.sha512",
         "system.io.nuspec"
       ]
     },
-    "System.Private.Uri/4.3.0": {
-      "sha512": "I4SwANiUGho1esj4V4oSlPllXjzCZDE+5XXso2P03LW2vOda2Enzh8DWOxwN6hnrJyp314c7KuVu31QYhRzOGg==",
+    "System.Private.Uri/4.0.1": {
+      "sha512": "OltceAn9yyNf9LZIqvf80DhdRH55iVu1fxowdR79018w1CWIRNojUZBStsiRHvADeKI5pXcM9EftOFikBQh5AA==",
       "type": "package",
-      "path": "system.private.uri/4.3.0",
+      "path": "system.private.uri/4.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "ref/netstandard/_._",
-        "system.private.uri.4.3.0.nupkg.sha512",
+        "system.private.uri.4.0.1.nupkg.sha512",
         "system.private.uri.nuspec"
       ]
     },
-    "System.Reflection/4.3.0": {
-      "sha512": "KMiAFoW7MfJGa9nDFNcfu+FpEdiHpWgTcS2HdMpDvt9saK3y/G4GwprPyzqjFH9NTaGPQeWNHU+iDlDILj96aQ==",
+    "System.Reflection/4.1.0": {
+      "sha512": "JCKANJ0TI7kzoQzuwB/OoJANy1Lg338B6+JVacPl4TpUwi3cReg3nMLplMq2uqYfHFQpKIlHAUVAJlImZz/4ng==",
       "type": "package",
-      "path": "system.reflection/4.3.0",
+      "path": "system.reflection/4.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -13149,95 +12696,14 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.reflection.4.3.0.nupkg.sha512",
+        "system.reflection.4.1.0.nupkg.sha512",
         "system.reflection.nuspec"
       ]
     },
-    "System.Reflection.Emit/4.3.0": {
-      "sha512": "228FG0jLcIwTVJyz8CLFKueVqQK36ANazUManGaJHkO0icjiIypKW7YLWLIWahyIkdh5M7mV2dJepllLyA1SKg==",
+    "System.Reflection.Primitives/4.0.1": {
+      "sha512": "4inTox4wTBaDhB7V3mPvp9XlCbeGYWVEM9/fXALd52vNEAVisc1BoVWQPuUuD0Ga//dNbA/WeMy9u9mzLxGTHQ==",
       "type": "package",
-      "path": "system.reflection.emit/4.3.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "ThirdPartyNotices.txt",
-        "dotnet_library_license.txt",
-        "lib/MonoAndroid10/_._",
-        "lib/monotouch10/_._",
-        "lib/net45/_._",
-        "lib/netcore50/System.Reflection.Emit.dll",
-        "lib/netstandard1.3/System.Reflection.Emit.dll",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "lib/xamarintvos10/_._",
-        "lib/xamarinwatchos10/_._",
-        "ref/MonoAndroid10/_._",
-        "ref/net45/_._",
-        "ref/netstandard1.1/System.Reflection.Emit.dll",
-        "ref/netstandard1.1/System.Reflection.Emit.xml",
-        "ref/netstandard1.1/de/System.Reflection.Emit.xml",
-        "ref/netstandard1.1/es/System.Reflection.Emit.xml",
-        "ref/netstandard1.1/fr/System.Reflection.Emit.xml",
-        "ref/netstandard1.1/it/System.Reflection.Emit.xml",
-        "ref/netstandard1.1/ja/System.Reflection.Emit.xml",
-        "ref/netstandard1.1/ko/System.Reflection.Emit.xml",
-        "ref/netstandard1.1/ru/System.Reflection.Emit.xml",
-        "ref/netstandard1.1/zh-hans/System.Reflection.Emit.xml",
-        "ref/netstandard1.1/zh-hant/System.Reflection.Emit.xml",
-        "ref/xamarinmac20/_._",
-        "system.reflection.emit.4.3.0.nupkg.sha512",
-        "system.reflection.emit.nuspec"
-      ]
-    },
-    "System.Reflection.Emit.ILGeneration/4.3.0": {
-      "sha512": "59tBslAk9733NXLrUJrwNZEzbMAcu8k344OYo+wfSVygcgZ9lgBdGIzH/nrg3LYhXceynyvTc8t5/GD4Ri0/ng==",
-      "type": "package",
-      "path": "system.reflection.emit.ilgeneration/4.3.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "ThirdPartyNotices.txt",
-        "dotnet_library_license.txt",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net45/_._",
-        "lib/netcore50/System.Reflection.Emit.ILGeneration.dll",
-        "lib/netstandard1.3/System.Reflection.Emit.ILGeneration.dll",
-        "lib/portable-net45+wp8/_._",
-        "lib/wp80/_._",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "lib/xamarintvos10/_._",
-        "lib/xamarinwatchos10/_._",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/net45/_._",
-        "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll",
-        "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.xml",
-        "ref/netstandard1.0/de/System.Reflection.Emit.ILGeneration.xml",
-        "ref/netstandard1.0/es/System.Reflection.Emit.ILGeneration.xml",
-        "ref/netstandard1.0/fr/System.Reflection.Emit.ILGeneration.xml",
-        "ref/netstandard1.0/it/System.Reflection.Emit.ILGeneration.xml",
-        "ref/netstandard1.0/ja/System.Reflection.Emit.ILGeneration.xml",
-        "ref/netstandard1.0/ko/System.Reflection.Emit.ILGeneration.xml",
-        "ref/netstandard1.0/ru/System.Reflection.Emit.ILGeneration.xml",
-        "ref/netstandard1.0/zh-hans/System.Reflection.Emit.ILGeneration.xml",
-        "ref/netstandard1.0/zh-hant/System.Reflection.Emit.ILGeneration.xml",
-        "ref/portable-net45+wp8/_._",
-        "ref/wp80/_._",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
-        "runtimes/aot/lib/netcore50/_._",
-        "system.reflection.emit.ilgeneration.4.3.0.nupkg.sha512",
-        "system.reflection.emit.ilgeneration.nuspec"
-      ]
-    },
-    "System.Reflection.Primitives/4.3.0": {
-      "sha512": "5RXItQz5As4xN2/YUDxdpsEkMhvw3e6aNveFXUn4Hl/udNTCNhnKp8lT9fnc3MhvGKh1baak5CovpuQUXHAlIA==",
-      "type": "package",
-      "path": "system.reflection.primitives/4.3.0",
+      "path": "system.reflection.primitives/4.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -13287,7 +12753,7 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.reflection.primitives.4.3.0.nupkg.sha512",
+        "system.reflection.primitives.4.0.1.nupkg.sha512",
         "system.reflection.primitives.nuspec"
       ]
     },
@@ -13348,10 +12814,10 @@
         "system.resources.resourcemanager.nuspec"
       ]
     },
-    "System.Runtime/4.3.0": {
-      "sha512": "JufQi0vPQ0xGnAczR13AUFglDyVYt4Kqnz1AZaiKZ5+GICq0/1MH/mO/eAJHt/mHW1zjKBJd7kV26SrxddAhiw==",
+    "System.Runtime/4.1.0": {
+      "sha512": "v6c/4Yaa9uWsq+JMhnOFewrYkgdNHNG2eMKuNqRn8P733rNXeRCGvV5FkkjBXn2dbVkPXOsO0xjsEeM1q2zC0g==",
       "type": "package",
-      "path": "system.runtime/4.3.0",
+      "path": "system.runtime/4.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -13436,7 +12902,7 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.runtime.4.3.0.nupkg.sha512",
+        "system.runtime.4.1.0.nupkg.sha512",
         "system.runtime.nuspec"
       ]
     },
@@ -13473,10 +12939,10 @@
         "system.runtime.interopservices.runtimeinformation.nuspec"
       ]
     },
-    "System.Text.Encoding/4.3.0": {
-      "sha512": "BiIg+KWaSDOITze6jGQynxg64naAPtqGHBwDrLaCtixsa5bKiR8dpPOHA7ge3C0JJQizJE+sfkz1wV+BAKAYZw==",
+    "System.Text.Encoding/4.0.11": {
+      "sha512": "U3gGeMlDZXxCEiY4DwVLSacg+DFWCvoiX+JThA/rvw37Sqrku7sEFeVBBBMBnfB6FeZHsyDx85HlKL19x0HtZA==",
       "type": "package",
-      "path": "system.text.encoding/4.3.0",
+      "path": "system.text.encoding/4.0.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -13537,14 +13003,14 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.text.encoding.4.3.0.nupkg.sha512",
+        "system.text.encoding.4.0.11.nupkg.sha512",
         "system.text.encoding.nuspec"
       ]
     },
-    "System.Text.Encoding.Extensions/4.3.0": {
-      "sha512": "YVMK0Bt/A43RmwizJoZ22ei2nmrhobgeiYwFzC4YAN+nue8RF6djXDMog0UCn+brerQoYVyaS+ghy9P/MUVcmw==",
+    "System.Text.Encoding.Extensions/4.0.11": {
+      "sha512": "jtbiTDtvfLYgXn8PTfWI+SiBs51rrmO4AAckx4KR6vFK9Wzf6tI8kcRdsYQNwriUeQ1+CtQbM1W4cMbLXnj/OQ==",
       "type": "package",
-      "path": "system.text.encoding.extensions/4.3.0",
+      "path": "system.text.encoding.extensions/4.0.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -13605,7 +13071,7 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.text.encoding.extensions.4.3.0.nupkg.sha512",
+        "system.text.encoding.extensions.4.0.11.nupkg.sha512",
         "system.text.encoding.extensions.nuspec"
       ]
     },
@@ -13680,81 +13146,10 @@
         "system.threading.nuspec"
       ]
     },
-    "System.Threading/4.3.0": {
-      "sha512": "VkUS0kOBcUf3Wwm0TSbrevDDZ6BlM+b/HRiapRFWjM5O0NS0LviG0glKmFK+hhPDd1XFeSdU1GmlLhb2CoVpIw==",
+    "System.Threading.Tasks/4.0.11": {
+      "sha512": "k1S4Gc6IGwtHGT8188RSeGaX86Qw/wnrgNLshJvsdNUOPP9etMmo8S07c+UlOAx4K/xLuN9ivA1bD0LVurtIxQ==",
       "type": "package",
-      "path": "system.threading/4.3.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "ThirdPartyNotices.txt",
-        "dotnet_library_license.txt",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net45/_._",
-        "lib/netcore50/System.Threading.dll",
-        "lib/netstandard1.3/System.Threading.dll",
-        "lib/portable-net45+win8+wp8+wpa81/_._",
-        "lib/win8/_._",
-        "lib/wp80/_._",
-        "lib/wpa81/_._",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "lib/xamarintvos10/_._",
-        "lib/xamarinwatchos10/_._",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/net45/_._",
-        "ref/netcore50/System.Threading.dll",
-        "ref/netcore50/System.Threading.xml",
-        "ref/netcore50/de/System.Threading.xml",
-        "ref/netcore50/es/System.Threading.xml",
-        "ref/netcore50/fr/System.Threading.xml",
-        "ref/netcore50/it/System.Threading.xml",
-        "ref/netcore50/ja/System.Threading.xml",
-        "ref/netcore50/ko/System.Threading.xml",
-        "ref/netcore50/ru/System.Threading.xml",
-        "ref/netcore50/zh-hans/System.Threading.xml",
-        "ref/netcore50/zh-hant/System.Threading.xml",
-        "ref/netstandard1.0/System.Threading.dll",
-        "ref/netstandard1.0/System.Threading.xml",
-        "ref/netstandard1.0/de/System.Threading.xml",
-        "ref/netstandard1.0/es/System.Threading.xml",
-        "ref/netstandard1.0/fr/System.Threading.xml",
-        "ref/netstandard1.0/it/System.Threading.xml",
-        "ref/netstandard1.0/ja/System.Threading.xml",
-        "ref/netstandard1.0/ko/System.Threading.xml",
-        "ref/netstandard1.0/ru/System.Threading.xml",
-        "ref/netstandard1.0/zh-hans/System.Threading.xml",
-        "ref/netstandard1.0/zh-hant/System.Threading.xml",
-        "ref/netstandard1.3/System.Threading.dll",
-        "ref/netstandard1.3/System.Threading.xml",
-        "ref/netstandard1.3/de/System.Threading.xml",
-        "ref/netstandard1.3/es/System.Threading.xml",
-        "ref/netstandard1.3/fr/System.Threading.xml",
-        "ref/netstandard1.3/it/System.Threading.xml",
-        "ref/netstandard1.3/ja/System.Threading.xml",
-        "ref/netstandard1.3/ko/System.Threading.xml",
-        "ref/netstandard1.3/ru/System.Threading.xml",
-        "ref/netstandard1.3/zh-hans/System.Threading.xml",
-        "ref/netstandard1.3/zh-hant/System.Threading.xml",
-        "ref/portable-net45+win8+wp8+wpa81/_._",
-        "ref/win8/_._",
-        "ref/wp80/_._",
-        "ref/wpa81/_._",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
-        "runtimes/aot/lib/netcore50/System.Threading.dll",
-        "system.threading.4.3.0.nupkg.sha512",
-        "system.threading.nuspec"
-      ]
-    },
-    "System.Threading.Tasks/4.3.0": {
-      "sha512": "LbSxKEdOUhVe8BezB/9uOGGppt+nZf6e1VFyw6v3DN6lqitm0OSn2uXMOdtP0M3W4iMcqcivm2J6UgqiwwnXiA==",
-      "type": "package",
-      "path": "system.threading.tasks/4.3.0",
+      "path": "system.threading.tasks/4.0.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -13815,28 +13210,8 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.threading.tasks.4.3.0.nupkg.sha512",
+        "system.threading.tasks.4.0.11.nupkg.sha512",
         "system.threading.tasks.nuspec"
-      ]
-    },
-    "Tesseract/4.1.0-beta1": {
-      "sha512": "zGxcvbWfAzpEnbL7vXrGzp+ACQ7uXcSaZBFuE7l0EKi1nXarDBq1S5Gg4KLregsflq8mwgvaskGpnUPWguewRg==",
-      "type": "package",
-      "path": "tesseract/4.1.0-beta1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "build/Tesseract.targets",
-        "lib/net40/Tesseract.dll",
-        "lib/net45/Tesseract.dll",
-        "lib/netstandard2.0/Tesseract.dll",
-        "lib/netstandard2.0/Tesseract.xml",
-        "tesseract.4.1.0-beta1.nupkg.sha512",
-        "tesseract.nuspec",
-        "x64/leptonica-1.78.0.dll",
-        "x64/tesseract41.dll",
-        "x86/leptonica-1.78.0.dll",
-        "x86/tesseract41.dll"
       ]
     },
     "com.ataxlab.alfwm/1.0.0": {
@@ -13883,7 +13258,6 @@
       "Microsoft.NETCore.UniversalWindowsPlatform >= 6.2.9",
       "com.ataxlab.alfwm >= 1.0.0",
       "com.ataxlab.alfwm.core >= 1.0.0",
-      "com.ataxlab.alfwm.library.activity >= 1.0.0",
       "com.ataxlab.alfwm.library.uwp.activity >= 1.0.0",
       "com.ataxlab.alfwm.model >= 1.0.0",
       "com.ataxlab.alfwm.persistence.litedb >= 1.0.0",
@@ -13925,9 +13299,6 @@
           "projectReferences": {
             "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj": {
               "projectPath": "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj"
-            },
-            "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj": {
-              "projectPath": "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj"
             },
             "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj": {
               "projectPath": "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.uwp.activity\\com.ataxlab.alfwm.library.uwp.activity.csproj"
@@ -13998,5 +13369,41 @@
         "#import": []
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package downgrade: Microsoft.NETCore.UniversalWindowsPlatform from 6.2.10 to 6.2.9. Reference the package directly from the project to select a different version. \r\n com.ataxlab.alfwm.uwp.mstests -> com.ataxlab.alfwm.library.uwp.activity -> Microsoft.NETCore.UniversalWindowsPlatform (>= 6.2.10) \r\n com.ataxlab.alfwm.uwp.mstests -> Microsoft.NETCore.UniversalWindowsPlatform (>= 6.2.9)",
+      "libraryId": "Microsoft.NETCore.UniversalWindowsPlatform",
+      "targetGraphs": [
+        "UAP,Version=v10.0.17763",
+        "UAP,Version=v10.0.17763/win10-arm",
+        "UAP,Version=v10.0.17763/win10-arm-aot",
+        "UAP,Version=v10.0.17763/win10-arm64-aot",
+        "UAP,Version=v10.0.17763/win10-x64",
+        "UAP,Version=v10.0.17763/win10-x64-aot",
+        "UAP,Version=v10.0.17763/win10-x86",
+        "UAP,Version=v10.0.17763/win10-x86-aot"
+      ]
+    },
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package downgrade: Microsoft.NETCore.UniversalWindowsPlatform from 6.2.10 to 6.2.9. Reference the package directly from the project to select a different version. \r\n com.ataxlab.alfwm.uwp.mstests -> com.ataxlab.alfwm.scheduler.uwp -> Microsoft.NETCore.UniversalWindowsPlatform (>= 6.2.10) \r\n com.ataxlab.alfwm.uwp.mstests -> Microsoft.NETCore.UniversalWindowsPlatform (>= 6.2.9)",
+      "libraryId": "Microsoft.NETCore.UniversalWindowsPlatform",
+      "targetGraphs": [
+        "UAP,Version=v10.0.17763",
+        "UAP,Version=v10.0.17763/win10-arm",
+        "UAP,Version=v10.0.17763/win10-arm-aot",
+        "UAP,Version=v10.0.17763/win10-arm64-aot",
+        "UAP,Version=v10.0.17763/win10-x64",
+        "UAP,Version=v10.0.17763/win10-x64-aot",
+        "UAP,Version=v10.0.17763/win10-x86",
+        "UAP,Version=v10.0.17763/win10-x86-aot"
+      ]
+    }
+  ]
 }
