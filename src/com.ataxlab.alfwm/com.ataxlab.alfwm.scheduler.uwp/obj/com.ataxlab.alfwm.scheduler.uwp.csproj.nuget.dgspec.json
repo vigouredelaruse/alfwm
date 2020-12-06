@@ -29,7 +29,7 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets/nuget/v3/index.json": {}
+          "https://pkgs.dev.azure.com/electricrucible/_packaging/appstorenugets/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
@@ -101,7 +101,7 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets/nuget/v3/index.json": {}
+          "https://pkgs.dev.azure.com/electricrucible/_packaging/appstorenugets/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
@@ -174,7 +174,7 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets/nuget/v3/index.json": {}
+          "https://pkgs.dev.azure.com/electricrucible/_packaging/appstorenugets/nuget/v3/index.json": {}
         },
         "frameworks": {
           "uap10.0.17763": {
@@ -256,7 +256,7 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/electricrucible/app.electricrucible.my/_packaging/electricruciblenugets/nuget/v3/index.json": {}
+          "https://pkgs.dev.azure.com/electricrucible/_packaging/appstorenugets/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {

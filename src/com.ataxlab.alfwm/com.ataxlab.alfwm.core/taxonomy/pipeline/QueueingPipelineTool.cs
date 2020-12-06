@@ -1,4 +1,5 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,91 +8,71 @@ using System.Threading;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
-    /// <summary>
-    /// canonical implementation of a Queueing Pipeline Tool 
-    /// - supply your own queue entity
-    /// - supply your own queue processing event handler 
-    /// - expect automatic notification of queue data arrival
-    /// or
-    /// - supply your own derived class overriding the virtuals as you see fit
-    /// </summary>
-    /// <typeparam name="TQueueEntity"></typeparam>
-    public class QueueingPipelineToolObsolete<TQueueEntity> : IQueueingPipelineTool<QueueingChannel<TQueueEntity>, QueueingChannel<TQueueEntity>, TQueueEntity>
-    where TQueueEntity : class, new()
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        public QueueingPipelineToolObsolete()
-        {
 
+    public class QueueingPipelineTool<TInputQueueEntity, TOutputQueueEntity> :
+        QueueingPipelineToolBase<TInputQueueEntity, TOutputQueueEntity>
+        where TInputQueueEntity : class, new()
+        where TOutputQueueEntity : class, new()
+    {
+        public override event Func<TInputQueueEntity, TInputQueueEntity> QueueHasAvailableDataEvent;
+        public override event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
+        public override event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
+        public override event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
+        public override event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
+
+        public QueueingPipelineTool()
+        {
             this.PipelineToolInstanceId = Guid.NewGuid().ToString();
 
-            InputBinding = new QueueingChannel<TQueueEntity>();
-            QueueingOutputBindingCollection = new List<QueueingChannel<TQueueEntity>>();
+            InputBinding = new QueueingChannel<TInputQueueEntity>();
+            OutputBinding = new QueueingChannel<TOutputQueueEntity>();
+            PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
 
             InputBinding.QueueHasData += InputBinding_QueueHasData;
         }
 
-        /// <summary>
-        /// event listener delegate for input channel
-        /// new arrivals on the queue are pushed here
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public virtual void InputBinding_QueueHasData(object sender, binding.queue.QueueDataAvailableEventArgs<TQueueEntity> e)
+        public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
         {
-            // delegate the logic of the queue event handler 
-            this.OnQueueHasData(sender, e.EventPayload);
+
+            PipelineToolStarted?.Invoke(this, new PipelineToolStartEventArgs()
+            {
+                InstanceId = this.PipelineToolInstanceId,
+                Status = { }
+            });
         }
 
-        public QueueingChannel<TQueueEntity> InputBinding { get; set; }
-        public List<QueueingChannel<TQueueEntity>> QueueingOutputBindingCollection { get; set; }
-        public string PipelineToolInstanceId { get; set; }
-        public IPipelineToolStatus PipelineToolStatus { get; set; }
-        public IPipelineToolContext PipelineToolContext { get; set; }
-        public IPipelineToolConfiguration PipelineToolConfiguration { get; set; }
-        public IPipelineToolBinding PipelineToolOutputBinding { get; set; }
-        public string PipelineToolId { get; set; }
-        public string PipelineToolDisplayName { get; set ; }
-        public string PipelineToolDescription { get ; set ; }
-
-        public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
-        public event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
-        public event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
-        public event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
-        public event Func<TQueueEntity, TQueueEntity> QueueHasAvailableDataEvent;
-
-        public virtual void OnPipelineToolCompleted(object sender, PipelineToolCompletedEventArgs args)
+        public override void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
         {
-            PipelineToolCompleted?.Invoke(this, args);
+            PipelineToolFailed?.Invoke(this, new PipelineToolFailedEventArgs()
+            {
+                InstanceId = this.PipelineToolInstanceId,
+                Status = { }
+            });
         }
 
-        public virtual void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
+        public override void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
         {
-            PipelineToolFailed?.Invoke(this, args);
+            PipelineToolProgressUpdated?.Invoke(this, new PipelineToolProgressUpdatedEventArgs()
+            {
+                InstanceId = this.PipelineToolInstanceId,
+                Status = { },
+                OutputVariables = this.PipelineToolVariables
+            });
         }
 
-        public virtual void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
+        public override void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
         {
-            PipelineToolProgressUpdated?.Invoke(this, args);
+            PipelineToolStarted?.Invoke(this, new PipelineToolStartEventArgs()
+            {
+                Status = { },
+                InstanceId = this.PipelineToolInstanceId
+            });
         }
 
-        public virtual void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
+        public override void OnQueueHasData(object sender, TInputQueueEntity availableData)
         {
-            PipelineToolStarted?.Invoke(this, args);
-        }
-
-        /// <summary>
-        /// dispatch the event processing logic delegates on the threadpool
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="availableData"></param>
-        public virtual void OnQueueHasData(object sender, TQueueEntity availableData)
-        {
-            // signal listeners to the event
-            Func<TQueueEntity, TQueueEntity> handler = this.QueueHasAvailableDataEvent;
-            if(handler != null)
+            Func<TInputQueueEntity, TInputQueueEntity> handler = this.QueueHasAvailableDataEvent;
+            if (handler != null)
             {
                 try
                 {
@@ -100,68 +81,39 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
                         // invoke the client's delegate logic
                         var result = handler(availableData);
 
-                        // reflect the result on the output binding
-                        foreach (var channel in this.QueueingOutputBindingCollection)
-                        {
-                            channel.InputQueue.Enqueue(result);
-                        }
+                        // perhaps include auditing strategy uwing the result here
+
                     });
 
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    // job failed, signal listeners
+                    // job client delegate failed, perhaps signal listeners
+                    // perhaps audit
                 }
             }
 
-            // 
         }
 
-        public virtual StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
+        private void InputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<TInputQueueEntity> e)
+        {
+            // delegate the logic of the queue event handler 
+            this.OnQueueHasData(sender, e.EventPayload);
+        }
+
+        public override void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+        {
+            
+        }
+
+        public override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
         {
             throw new NotImplementedException();
         }
 
-        public virtual void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class
+        public override StopResult StopPipelineTool<StopResult>(string instanceId)
         {
-            PipelineToolCompletedEventArgs completedArgs = new PipelineToolCompletedEventArgs();
-            completedArgs.Payload = args.Payload;
-            PipelineToolCompleted?.Invoke(this, completedArgs);
-        }
-
-        /// <summary>
-        /// dispatch a work item on the threadpool
-        /// note this is independent of the queue processing
-        /// 
-        /// clients of the queue may for instance, dispatch work items on the threadpool here
-        /// </summary>
-        /// <typeparam name="StartResult"></typeparam>
-        /// <typeparam name="StartConfiguration"></typeparam>
-        /// <param name="configuration"></param>
-        /// <param name="callback"></param>
-        public virtual void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
-            where StartResult : class, new()
-            where StartConfiguration : class, new()
-        {
-            ThreadPool.QueueUserWorkItem((ccc) =>
-            {
-                var result = callback(configuration);
-            });
-        }
-
-        /// <summary>
-        /// dispatch a workitem on the threadpool
-        /// note this is independent of queue processing
-        /// </summary>
-        /// <typeparam name="StartConfiguration"></typeparam>
-        /// <param name="configuration"></param>
-        /// <param name="callback"></param>
-        public virtual void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class
-        {
-            ThreadPool.QueueUserWorkItem((ccc) =>
-            {
-                callback(configuration);
-            });
+            throw new NotImplementedException();
         }
     }
 

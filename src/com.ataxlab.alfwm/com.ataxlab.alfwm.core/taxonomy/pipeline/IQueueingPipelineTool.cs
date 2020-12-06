@@ -5,6 +5,60 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
+    public interface IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputQueueEntity, TOutputQueueEntity> : IPipelineTool
+        where TLatchingInputBinding : class, new()
+        where TLatchingOutputBinding : class, new()
+        where TInputQueueEntity : class, new()
+        where TOutputQueueEntity: class, new()
+    {
+        /// <summary>
+        /// latching input binding that latches signalling
+        /// after signalling new data. 
+        /// 
+        /// callers can add data to the queue
+        /// but the binding does not signal new arrival
+        /// until the latch is reset
+        /// 
+        /// consumer is free to dequeue as many
+        /// events as it likes before renabling the 
+        /// polling timer
+        /// </summary>
+        TLatchingInputBinding InputBinding { get; set; }
+
+        /// <summary>
+        /// latching input binding that latches signalling
+        /// after signalling new data. 
+        /// 
+        /// callers can add data to the queue
+        /// but the binding does not signal new arrival
+        /// until the latch is reset
+        /// 
+        /// consumer is free to dequeue as many
+        /// events as it likes before renabling the 
+        /// polling timer
+        /// </summary>
+        TLatchingOutputBinding OutputBinding { get; set; }
+
+        /// <summary>
+        /// signalled when the queue input binding
+        /// detects data arrived at the queue
+        /// 
+        /// equivalent to ICommand.Execute()
+        /// </summary>
+        /// <param name="timestamp"></param>
+        void OnQueueHasData(object sender, TInputQueueEntity availableData);
+
+
+        /// <summary>
+        /// clients of the queue pipeline tool can listen to this event
+        /// for notificaton of new arrivals on the quueue
+        /// 
+        /// the result is could be reflected on the queuing output binding collection of the tool, for instance
+        /// </summary>
+        event Func<TInputQueueEntity, TInputQueueEntity> QueueHasAvailableDataEvent;
+
+    }
+
     /// <summary>
     /// specify a pipeline tool that supports
     /// pub/sub pipeline queue consumption semantics

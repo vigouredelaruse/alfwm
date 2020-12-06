@@ -1,6 +1,7 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.binding;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// transient machine readable id
         /// </summary>
         string PipelineToolInstanceId { get; set; }
+
+        ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set; }
 
         /// <summary>
         /// static machine readable id
@@ -44,7 +47,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <typeparam name="TPayload"></typeparam>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class;
+        void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class, new();
 
 
         IPipelineToolStatus PipelineToolStatus { get; set; }
@@ -74,7 +77,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <param name="configuration"></param>
         /// <param name="callback"></param>
         void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) 
-            where StartConfiguration : class;
+            where StartConfiguration : class, new();
 
         StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
 
