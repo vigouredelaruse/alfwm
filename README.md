@@ -1,4 +1,4 @@
-mrgnc => triage => release
+mrgnc [![Build Status](https://dev.azure.com/ataxlab/ALFWM/_apis/build/status/vigouredelaruse.alfwm?branchName=mrgnc)](https://dev.azure.com/ataxlab/ALFWM/_build/latest?definitionId=3&branchName=mrgnc) => triage => release
 
 # Introduction 
 current modernity in system design is best left with the concise description, complexity
