@@ -11,7 +11,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
     public abstract class Activity<TConfiguration> : IPipelineTool<TConfiguration>
         where TConfiguration : class, new()
     {
-        public abstract TConfiguration PipelineToolConfiguration { get; set; }
+        public abstract IPipelineToolConfiguration<TConfiguration> PipelineToolConfiguration { get; set; }
         public abstract string PipelineToolInstanceId { get; set; }
         public abstract ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set; }
         public abstract string PipelineToolId { get; set; }
@@ -31,16 +31,15 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         public abstract void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args);
         public abstract void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args);
         public abstract void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
-            where StartResult : class, new()
-            where StartConfiguration : class, new();
-        public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class, new();
+             where StartResult : IStartResult
+             where StartConfiguration : IPipelineToolConfiguration;
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }
 
     [Obsolete]
     public abstract class Activity : IPipelineTool<ActivityConfiguration>
     {
-        public abstract ActivityConfiguration PipelineToolConfiguration { get; set; }
+        public abstract IPipelineToolConfiguration<ActivityConfiguration> PipelineToolConfiguration { get; set; }
         public abstract string PipelineToolInstanceId { get; set; }
         public abstract ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set; }
         public abstract string PipelineToolId { get; set; }
@@ -59,9 +58,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         public abstract void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args);
         public abstract void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args);
         public abstract void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
-            where StartResult : class, new()
-            where StartConfiguration : class, new();
-        public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class, new();
+             where StartResult : IStartResult
+             where StartConfiguration : IPipelineToolConfiguration;
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }
 }

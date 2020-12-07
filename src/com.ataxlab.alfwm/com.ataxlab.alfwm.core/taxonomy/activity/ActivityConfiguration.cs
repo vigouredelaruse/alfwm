@@ -5,7 +5,7 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.activity
 {
-    public abstract class ActivityConfiguration : IPipelineToolConfiguration
+    public class ActivityConfiguration
     {
         /// <summary>
         /// designed with ease of implementation replacement
@@ -14,9 +14,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         public ActivityConfiguration()
         { }
 
-        public virtual string DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public virtual DateTime DeploymentTime { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public virtual string ConfigurationJson { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public virtual string ConfigurationJsonSchema { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public virtual string DisplayName { get; set; }
+        public virtual DateTime DeploymentTime { get; set; }
+        public virtual string ConfigurationJson { get; set; }
+        public virtual string ConfigurationJsonSchema { get; set; }
     }
 }

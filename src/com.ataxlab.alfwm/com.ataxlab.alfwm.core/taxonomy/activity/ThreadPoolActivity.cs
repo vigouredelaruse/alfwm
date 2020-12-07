@@ -1,5 +1,6 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,13 +25,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         public string PipelineToolInstanceId { get; set; }
         public IPipelineToolStatus PipelineToolStatus { get; set; }
         public IPipelineToolContext PipelineToolContext { get; set; }
-  
+
         public IPipelineToolBinding PipelineToolOutputBinding { get; set; }
         public string PipelineToolId { get; set; }
         public string PipelineToolDisplayName { get; set; }
-        public string PipelineToolDescription { get; set ; }
+        public string PipelineToolDescription { get; set; }
         public ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set; }
-        public ThreadPoolActivityConfiguration PipelineToolConfiguration { get; set; }
+        public IPipelineToolConfiguration<ThreadPoolActivityConfiguration> PipelineToolConfiguration { get; set; }
 
         public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
         public event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
@@ -62,8 +63,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         {
             PipelineToolFailed?.Invoke(this, new PipelineToolFailedEventArgs()
             {
-                 InstanceId = this.PipelineToolInstanceId,
-                 Status = args.Status
+                InstanceId = this.PipelineToolInstanceId,
+                Status = args.Status
             });
         }
 
@@ -74,7 +75,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
                 InstanceId = this.PipelineToolInstanceId,
                 Status = args.Status,
                 OutputVariables = args.OutputVariables
- 
+
             });
         }
 
@@ -82,51 +83,76 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         {
             PipelineToolStarted?.Invoke(this, new PipelineToolStartEventArgs()
             {
-                 InstanceId = this.PipelineToolInstanceId, 
-                 Status = args.Status
+                InstanceId = this.PipelineToolInstanceId,
+                Status = args.Status
             });
         }
 
-        /// <summary>
-        /// schedule the callback on the threadpool
-        /// and signal the PipelineToolCompleted listeners
-        /// with the payload
-        /// </summary>
-        /// <typeparam name="StartResult"></typeparam>
-        /// <typeparam name="StartConfiguration"></typeparam>
-        /// <param name="configuration"></param>
-        /// <param name="callback"></param>
-        public virtual void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
-            where StartResult : class, new()
-            where StartConfiguration : class, new()
+
+        public virtual StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
         {
-            StartResult result = new StartResult();
-
-            // queue the callback method and cache the result
-            ThreadPool.QueueUserWorkItem((cofig) =>
-            {
-               
-                result = callback(configuration);
-            });
-
-            // signal the completed event
-            PipelineToolCompletedEventArgs<StartResult> jobResult = new PipelineToolCompletedEventArgs<StartResult>(result);
-            this.OnPipelineToolCompleted<StartResult>(this, jobResult);
-
+            return new StopResult();
         }
 
-        public virtual void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class, new()
+
+
+        public void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+            where StartResult : IStartResult
+            where StartConfiguration : IPipelineToolConfiguration
         {
             this.OnPipelineToolStarted(this, new PipelineToolStartEventArgs()
             {
                 InstanceId = this.PipelineToolInstanceId,
                 Status = { }
             });
+
+            ThreadPoolActivityStartResult result = new ThreadPoolActivityStartResult();
+
+            try
+            {
+                // queue the callback method and cache the result
+                ThreadPool.QueueUserWorkItem((cofig) =>
+                {
+
+                    IStartResult res = callback(configuration);
+                    result = res as ThreadPoolActivityStartResult;
+                });
+
+
+                // signal the completed event
+                PipelineToolCompletedEventArgs<ThreadPoolActivityStartResult> jobResult = new PipelineToolCompletedEventArgs<ThreadPoolActivityStartResult>(result);
+                this.OnPipelineToolCompleted<ThreadPoolActivityStartResult>(this, jobResult);
+            }
+            catch(Exception ex)
+            {
+                this.OnPipelineToolFailed(this, new PipelineToolFailedEventArgs()
+                {
+                    InstanceId = this.PipelineToolInstanceId,
+                    Status = { StatusJson = JsonConvert.SerializeObject(ex) } 
+                });
+            }
+
+
         }
 
-        public virtual StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
+    }
+
+    public class ThreadPoolActivityScaffold
+    { 
+        public void test()
         {
-            return new StopResult();   
+            var v = new ThreadPoolActivity();
+            var config = new PipelineToolConfiguration<ThreadPoolActivityConfiguration>();
+            v.StartPipelineTool<ThreadPoolActivityStartResult, PipelineToolConfiguration<ThreadPoolActivityConfiguration>>(config, c => 
+            {
+                v.PipelineToolConfiguration = config;
+                
+                return new ThreadPoolActivityStartResult();
+
+            });
+
         }
     }
+
+ 
 }

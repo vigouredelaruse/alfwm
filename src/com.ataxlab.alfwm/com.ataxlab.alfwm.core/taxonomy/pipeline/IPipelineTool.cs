@@ -1,4 +1,5 @@
-﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+﻿using com.ataxlab.alfwm.core.taxonomy.activity;
+using com.ataxlab.alfwm.core.taxonomy.binding;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,9 +17,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// the need to base other interfaces on this
     /// </summary>
     public interface IPipelineTool<TConfiguration>
+        where TConfiguration : class, new()
     {
 
-        TConfiguration PipelineToolConfiguration { get; set; }
+        IPipelineToolConfiguration<TConfiguration> PipelineToolConfiguration { get; set; }
         /// <summary>
         /// transient machine readable id
         /// </summary>
@@ -57,6 +59,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         IPipelineToolBinding PipelineToolOutputBinding { get; set; }
 
+
+
         /// <summary>
         /// a start method for a delegate that has a user specified output
         /// an implementation may choose to for instance, pass the output
@@ -66,19 +70,19 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <typeparam name="StartConfiguration"></typeparam>
         /// <param name="configuration"></param>
         /// <param name="callback"></param>
-        void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback) 
-            where StartConfiguration : class, new() 
-            where StartResult : class, new();
+        void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+           where StartConfiguration : IPipelineToolConfiguration
+            where StartResult : IStartResult;
         
 
-        /// <summary>
-        /// a start method for a delegate that has no output
-        /// </summary>
-        /// <typeparam name="StartConfiguration"></typeparam>
-        /// <param name="configuration"></param>
-        /// <param name="callback"></param>
-        void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) 
-            where StartConfiguration : class, new();
+        ///// <summary>
+        ///// a start method for a delegate that has no output
+        ///// </summary>
+        ///// <typeparam name="StartConfiguration"></typeparam>
+        ///// <param name="configuration"></param>
+        ///// <param name="callback"></param>
+        //void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) 
+        //    where StartConfiguration : class, IPipelineToolConfiguration<TConfiguration>, new();
 
         StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
 

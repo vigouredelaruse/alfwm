@@ -32,7 +32,7 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
         public override string PipelineToolInstanceId { get; set; }
         public override IPipelineToolStatus PipelineToolStatus { get; set; }
         public override IPipelineToolContext PipelineToolContext { get; set; }
-        public override HttpActivityConfiguration PipelineToolConfiguration { get; set; }
+        public override IPipelineToolConfiguration<HttpActivityConfiguration> PipelineToolConfiguration { get; set; }
         public override IPipelineToolBinding PipelineToolOutputBinding { get; set; }
         public override string PipelineToolId { get; set; }
         public override string PipelineToolDisplayName { get; set; }
@@ -100,11 +100,7 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
             throw new NotImplementedException();
         }
 
-        public override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
-        {
-            throw new NotImplementedException();
-        }
-
+  
         public override void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
         {
             throw new NotImplementedException();

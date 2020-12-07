@@ -148,7 +148,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public override string PipelineToolInstanceId { get; set; }
         public override IPipelineToolStatus PipelineToolStatus { get; set; }
         public override IPipelineToolContext PipelineToolContext { get; set; }
-        public override TConfiguration PipelineToolConfiguration { get; set; }
+        public override IPipelineToolConfiguration<TConfiguration> PipelineToolConfiguration { get; set; }
         public override IPipelineToolBinding PipelineToolOutputBinding { get; set; }
         public override string PipelineToolId { get ; set; }
         public override string PipelineToolDisplayName { get; set; }
@@ -214,17 +214,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public override void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
         {
-            throw new NotImplementedException();
-        }
-
-        public override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
-        {
-            throw new NotImplementedException();
+            this.PipelineToolConfiguration = new PipelineToolConfiguration<TConfiguration>() { Configuration = configuration as TConfiguration};
+            IStartResult result = callback(configuration);
         }
 
         public override StopResult StopPipelineTool<StopResult>(string instanceId)
         {
-            throw new NotImplementedException();
+            return default(StopResult);
         }
     }
 }

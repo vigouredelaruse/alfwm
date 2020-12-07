@@ -1,6 +1,16 @@
-﻿namespace com.ataxlab.alfwm.core.taxonomy.activity
+﻿using com.ataxlab.alfwm.core.taxonomy.pipeline;
+using System;
+
+namespace com.ataxlab.alfwm.core.taxonomy.activity 
 {
-    public class ThreadPoolActivityConfiguration
+    public class ThreadPoolActivityConfiguration : PipelineToolConfiguration<ThreadPoolActivity>
     {
+        public ThreadPoolActivityConfiguration()
+        {
+
+
+        }
+
+  
     }
 }

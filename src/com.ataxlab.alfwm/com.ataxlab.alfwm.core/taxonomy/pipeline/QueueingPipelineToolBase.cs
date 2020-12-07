@@ -22,7 +22,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public virtual string PipelineToolDescription {get; set;}
         public virtual IPipelineToolStatus PipelineToolStatus {get; set;}
         public virtual IPipelineToolContext PipelineToolContext {get; set;}
-        public virtual TQueueConfiguration PipelineToolConfiguration {get; set;}
+        public virtual IPipelineToolConfiguration<TQueueConfiguration> PipelineToolConfiguration {get; set;}
         public virtual IPipelineToolBinding PipelineToolOutputBinding {get; set;}
 
         public virtual event  Func<TInputQueueEntity, TInputQueueEntity> QueueHasAvailableDataEvent;
@@ -64,8 +64,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract void OnQueueHasData(object sender, TInputQueueEntity availableData);
 
         public abstract void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
-            where StartResult : class, new()
-            where StartConfiguration : class, new();
+            where StartResult : IStartResult
+            where StartConfiguration : IPipelineToolConfiguration;
 
         public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class, new();
 
@@ -85,7 +85,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract string PipelineToolDescription { get; set; }
         public abstract IPipelineToolStatus PipelineToolStatus { get; set; }
         public abstract IPipelineToolContext PipelineToolContext { get; set; }
-        public abstract TConfiguration PipelineToolConfiguration { get; set; }
+        public abstract IPipelineToolConfiguration<TConfiguration> PipelineToolConfiguration { get; set; }
         public abstract IPipelineToolBinding PipelineToolOutputBinding { get; set; }
         public ObservableCollection<IPipelineVariable> PipelineToolVariables {get; set;}
 
@@ -101,9 +101,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args);
         public abstract void OnQueueHasData(object sender, TQueueEntity availableData);
         public abstract void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
-            where StartResult : class, new()
-            where StartConfiguration : class, new();
-        public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class, new();
+            where StartResult : IStartResult
+            where StartConfiguration : IPipelineToolConfiguration;
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }
 }
