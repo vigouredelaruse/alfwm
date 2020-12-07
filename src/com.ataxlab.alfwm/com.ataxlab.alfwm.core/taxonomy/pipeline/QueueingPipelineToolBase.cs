@@ -7,10 +7,11 @@ using System.Text;
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
 
-    public abstract class QueueingPipelineToolBase<TInputQueueEntity, TOutputQueueEntity>
-        : IQueueingPipelineTool<QueueingChannel<TInputQueueEntity>, QueueingChannel<TOutputQueueEntity>, TInputQueueEntity, TOutputQueueEntity>
+    public abstract class QueueingPipelineToolBase<TInputQueueEntity, TOutputQueueEntity, TQueueConfiguration>
+        : IQueueingPipelineTool<QueueingChannel<TInputQueueEntity>, QueueingChannel<TOutputQueueEntity>, TInputQueueEntity, TOutputQueueEntity, TQueueConfiguration>
         where TInputQueueEntity : class, new()
         where TOutputQueueEntity : class, new()
+        where TQueueConfiguration : class, new()
     {
         public virtual QueueingChannel<TInputQueueEntity> InputBinding {get; set;}
         public virtual QueueingChannel<TOutputQueueEntity> OutputBinding {get; set;}
@@ -21,7 +22,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public virtual string PipelineToolDescription {get; set;}
         public virtual IPipelineToolStatus PipelineToolStatus {get; set;}
         public virtual IPipelineToolContext PipelineToolContext {get; set;}
-        public virtual IPipelineToolConfiguration PipelineToolConfiguration {get; set;}
+        public virtual TQueueConfiguration PipelineToolConfiguration {get; set;}
         public virtual IPipelineToolBinding PipelineToolOutputBinding {get; set;}
 
         public virtual event  Func<TInputQueueEntity, TInputQueueEntity> QueueHasAvailableDataEvent;
@@ -72,7 +73,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     }
 
 
-    public abstract class QueueingPipelineToolBase<TQueueEntity> : IQueueingPipelineTool<QueueingChannel<TQueueEntity>, QueueingChannel<TQueueEntity>, TQueueEntity>
+    public abstract class QueueingPipelineToolBase<TQueueEntity, TConfiguration> : IQueueingPipelineTool<QueueingChannel<TQueueEntity>, QueueingChannel<TQueueEntity>, TQueueEntity, TConfiguration>
+        where TConfiguration : class, new()
         where TQueueEntity : class, new()
     {
         public abstract QueueingChannel<TQueueEntity> InputBinding { get; set; }
@@ -83,7 +85,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract string PipelineToolDescription { get; set; }
         public abstract IPipelineToolStatus PipelineToolStatus { get; set; }
         public abstract IPipelineToolContext PipelineToolContext { get; set; }
-        public abstract IPipelineToolConfiguration PipelineToolConfiguration { get; set; }
+        public abstract TConfiguration PipelineToolConfiguration { get; set; }
         public abstract IPipelineToolBinding PipelineToolOutputBinding { get; set; }
         public ObservableCollection<IPipelineVariable> PipelineToolVariables {get; set;}
 

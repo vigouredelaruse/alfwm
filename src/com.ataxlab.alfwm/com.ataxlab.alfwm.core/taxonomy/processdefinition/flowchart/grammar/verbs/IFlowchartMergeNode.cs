@@ -5,13 +5,15 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.verbs
 {
-    public interface IFlowchartMergeNode : IFlowchartSequenceNode<IPipelineTool>
+    public interface IFlowchartMergeNode<TFlowchartNode, TConfiguration> : IFlowchartSequenceNode<TFlowchartNode, TConfiguration>
+        where TConfiguration : class, new()
+        where TFlowchartNode : class, IPipelineTool<TConfiguration>, new()
     {
 
-        ICollection<IFlowchartSequenceNode<IPipelineTool>> InputNodes { get; set; }
+        ICollection<TFlowchartNode> InputNodes { get; set; }
 
 
-        ICollection<IFlowchartSequenceNode<IPipelineTool>> OutputNodes { get; set; }
+        ICollection<TFlowchartNode> OutputNodes { get; set; }
 
     }
 }

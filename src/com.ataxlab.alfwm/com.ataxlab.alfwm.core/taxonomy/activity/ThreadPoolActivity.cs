@@ -13,7 +13,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
     /// you supply a delegate that is called by this activity on the threadpool - act accordingly
     /// 
     /// </summary>
-    public class ThreadPoolActivity : IPipelineTool
+    public class ThreadPoolActivity : IPipelineTool<ThreadPoolActivityConfiguration>
     {
         public ThreadPoolActivity()
         {
@@ -24,12 +24,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         public string PipelineToolInstanceId { get; set; }
         public IPipelineToolStatus PipelineToolStatus { get; set; }
         public IPipelineToolContext PipelineToolContext { get; set; }
-        public IPipelineToolConfiguration PipelineToolConfiguration { get; set; }
+  
         public IPipelineToolBinding PipelineToolOutputBinding { get; set; }
         public string PipelineToolId { get; set; }
         public string PipelineToolDisplayName { get; set; }
         public string PipelineToolDescription { get; set ; }
-        public ObservableCollection<IPipelineVariable> PipelineToolVariables { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set; }
+        public ThreadPoolActivityConfiguration PipelineToolConfiguration { get; set; }
 
         public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
         public event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
@@ -59,17 +60,31 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
 
         public void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineToolFailed?.Invoke(this, new PipelineToolFailedEventArgs()
+            {
+                 InstanceId = this.PipelineToolInstanceId,
+                 Status = args.Status
+            });
         }
 
         public void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineToolProgressUpdated?.Invoke(this, new PipelineToolProgressUpdatedEventArgs()
+            {
+                InstanceId = this.PipelineToolInstanceId,
+                Status = args.Status,
+                OutputVariables = args.OutputVariables
+ 
+            });
         }
 
         public void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineToolStarted?.Invoke(this, new PipelineToolStartEventArgs()
+            {
+                 InstanceId = this.PipelineToolInstanceId, 
+                 Status = args.Status
+            });
         }
 
         /// <summary>
@@ -102,7 +117,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
 
         public virtual void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class, new()
         {
-            
+            this.OnPipelineToolStarted(this, new PipelineToolStartEventArgs()
+            {
+                InstanceId = this.PipelineToolInstanceId,
+                Status = { }
+            });
         }
 
         public virtual StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()

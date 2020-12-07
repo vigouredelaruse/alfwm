@@ -19,7 +19,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.ve
     /// </summary>
     /// <typeparam name="TInput"></typeparam>
     /// <typeparam name="TSelectedItem"></typeparam>
-    public interface IFlowchartChooseOnePredicateSequenceNode<TInput, TSelectedItem, TInputNodes, TOutputNode> : IFlowchartSequenceNode<IPipelineTool> where TSelectedItem : IPipelineTool
+    public interface IFlowchartChooseOnePredicateSequenceNode<TInput, TSelectedItem, TInputNodes, TOutputNode, TFlowchartNode, TConfiguration> : 
+        IFlowchartSequenceNode<TFlowchartNode, TConfiguration> 
+        where TSelectedItem : TFlowchartNode
+        where TConfiguration : class, new()
+        where TFlowchartNode : IPipelineTool<TConfiguration>
     {
         Func<TInput, TSelectedItem> ChoicePredicate { get; set; }
 

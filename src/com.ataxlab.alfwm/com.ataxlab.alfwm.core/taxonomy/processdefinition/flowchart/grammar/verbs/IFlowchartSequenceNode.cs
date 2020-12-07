@@ -16,7 +16,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.ve
     /// the eulerian graphiness of a flowchart
     /// node we are using to specify a pipeline step
     /// </summary>
-    public interface IFlowchartSequenceNode<TFlowchartNode> where TFlowchartNode : IPipelineTool
+    public interface IFlowchartSequenceNode<TFlowchartNode, TNodeConfiguration> where TFlowchartNode : IPipelineTool<TNodeConfiguration>
     {
         /// <summary>
         /// the associated pipeline tooling

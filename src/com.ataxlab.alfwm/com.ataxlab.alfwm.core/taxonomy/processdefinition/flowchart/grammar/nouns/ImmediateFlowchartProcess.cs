@@ -9,7 +9,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.no
     /// <summary>
     /// as opposed to a background or timer triggered scheduled process
     /// </summary>
-    public abstract class ImmediateFlowchartProcess : IFlowchartSequenceNode<IPipelineTool>
+    public abstract class ImmediateFlowchartProcess<TSequenceNode, TConfiguration> : IFlowchartSequenceNode<TSequenceNode, TConfiguration>
+        where TConfiguration : class, new()
+        where TSequenceNode : class, IPipelineTool<TConfiguration>, new()
     {
         public abstract string FlowChartSequenceNodeId { get; set; }
         public abstract EvaluateFlowchartNode InjectedNodeEvaluator { get; set; }
@@ -21,7 +23,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.no
         /// this tool can be nominated for scheduling
         /// folling execution of EvaulateNode()
         /// </summary>
-        public abstract IPipelineTool PipelineTool { get; set; }
+        public abstract TSequenceNode PipelineTool { get; set; }
 
         /// <summary>
         /// the evaulator that nominates the associated pipeline tool

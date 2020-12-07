@@ -4,6 +4,7 @@ using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Design;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using Windows.Web.Http;
 
 namespace com.ataxlab.alfwm.library.activity.httpactivity
 {
-    public class HttpActivity : Activity
+    public class HttpActivity : Activity<HttpActivityConfiguration>
     {
         private HttpClient httpClient = new HttpClient();
 
@@ -31,11 +32,12 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
         public override string PipelineToolInstanceId { get; set; }
         public override IPipelineToolStatus PipelineToolStatus { get; set; }
         public override IPipelineToolContext PipelineToolContext { get; set; }
-        public override IPipelineToolConfiguration PipelineToolConfiguration { get; set; }
+        public override HttpActivityConfiguration PipelineToolConfiguration { get; set; }
         public override IPipelineToolBinding PipelineToolOutputBinding { get; set; }
-        public override string PipelineToolId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string PipelineToolDisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string PipelineToolDescription { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string PipelineToolId { get; set; }
+        public override string PipelineToolDisplayName { get; set; }
+        public override string PipelineToolDescription { get; set; }
+        public override ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set; }
 
         public override StopResult StopPipelineTool<StopResult>(string instanceId)
         {

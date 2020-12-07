@@ -15,8 +15,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// resist the temptation to not prove
     /// the need to base other interfaces on this
     /// </summary>
-    public interface IPipelineTool
+    public interface IPipelineTool<TConfiguration>
     {
+
+        TConfiguration PipelineToolConfiguration { get; set; }
         /// <summary>
         /// transient machine readable id
         /// </summary>
@@ -52,7 +54,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         IPipelineToolStatus PipelineToolStatus { get; set; }
         IPipelineToolContext PipelineToolContext { get; set; }
-        IPipelineToolConfiguration PipelineToolConfiguration { get; set; }
 
         IPipelineToolBinding PipelineToolOutputBinding { get; set; }
 

@@ -12,7 +12,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.ve
     /// <typeparam name="TLeftInput"></typeparam>
     /// <typeparam name="TRightInput"></typeparam>
     /// <typeparam name="TPredicate"></typeparam>
-    public interface IFlowchartBinaryPredicateSequenceNode<TLeftInput, TRightInput> : IFlowchartSequenceNode<IPipelineTool>
+    public interface IFlowchartBinaryPredicateSequenceNode<TLeftInput, TRightInput, TConfiguration> : IFlowchartSequenceNode<IPipelineTool<TConfiguration>, TConfiguration>
+        where TConfiguration : class, new()
+        where TLeftInput : class, new()
+        where TRightInput : class, new()
     {
         Func<TLeftInput, TRightInput, bool> BinaryPredicate { get; set; }
     }

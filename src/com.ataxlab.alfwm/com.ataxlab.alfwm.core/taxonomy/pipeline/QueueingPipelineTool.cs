@@ -9,10 +9,11 @@ using System.Threading;
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
 
-    public class QueueingPipelineTool<TInputQueueEntity, TOutputQueueEntity> :
-        QueueingPipelineToolBase<TInputQueueEntity, TOutputQueueEntity>
+    public class QueueingPipelineTool<TInputQueueEntity, TOutputQueueEntity, TConfiguration> :
+        QueueingPipelineToolBase<TInputQueueEntity, TOutputQueueEntity, TConfiguration>
         where TInputQueueEntity : class, new()
         where TOutputQueueEntity : class, new()
+        where TConfiguration : class, new()
     {
         public override event Func<TInputQueueEntity, TInputQueueEntity> QueueHasAvailableDataEvent;
         public override event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
@@ -122,8 +123,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// supply your own Queue Entity and Queue event arrival handler logic
     /// </summary>
     /// <typeparam name="TQueueEntity"></typeparam>
-    public class QueueingPipelineTool<TQueueEntity> : QueueingPipelineToolBase<TQueueEntity>
+    public class QueueingPipelineTool<TQueueEntity, TConfiguration> : QueueingPipelineToolBase<TQueueEntity, TConfiguration>
         where TQueueEntity : class, new()
+        where TConfiguration : class, new()
     {
         public QueueingPipelineTool()
         {
@@ -146,7 +148,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public override string PipelineToolInstanceId { get; set; }
         public override IPipelineToolStatus PipelineToolStatus { get; set; }
         public override IPipelineToolContext PipelineToolContext { get; set; }
-        public override IPipelineToolConfiguration PipelineToolConfiguration { get; set; }
+        public override TConfiguration PipelineToolConfiguration { get; set; }
         public override IPipelineToolBinding PipelineToolOutputBinding { get; set; }
         public override string PipelineToolId { get ; set; }
         public override string PipelineToolDisplayName { get; set; }

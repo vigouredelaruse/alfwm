@@ -5,11 +5,12 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
-    public interface IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputQueueEntity, TOutputQueueEntity> : IPipelineTool
+    public interface IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputQueueEntity, TOutputQueueEntity, TConfiguration> : IPipelineTool<TConfiguration>
         where TLatchingInputBinding : class, new()
         where TLatchingOutputBinding : class, new()
         where TInputQueueEntity : class, new()
         where TOutputQueueEntity: class, new()
+        where TConfiguration : class, new()
     {
         /// <summary>
         /// latching input binding that latches signalling
@@ -76,10 +77,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     /// <typeparam name="TLatchingInputBinding"></typeparam>
     /// <typeparam name="TOutputBinding"></typeparam>
-    public interface IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TQueueEntity> : IPipelineTool 
+    public interface IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TQueueEntity, TConfiguration> : IPipelineTool<TConfiguration> 
         where TLatchingInputBinding : class
         where TOutputBinding : class
         where TQueueEntity : class, new()
+        where TConfiguration : class, new()
     {
         /// <summary>
         /// latching input binding that latches signalling

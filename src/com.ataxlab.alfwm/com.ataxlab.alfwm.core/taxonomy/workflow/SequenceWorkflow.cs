@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace com.ataxlab.alfwm.core.taxonomy.workflow
 {
-    public abstract class SequenceWorkflow : IPipelineTool
+    public abstract class SequenceWorkflow<TSequenceWorkflowConfiguration> : IPipelineTool<TSequenceWorkflowConfiguration>
+        where TSequenceWorkflowConfiguration : class, new()
     {
 
         
         public virtual string PipelineToolInstanceId { get; set; }
         public virtual IPipelineToolStatus PipelineToolStatus { get; set; }
         public virtual IPipelineToolContext PipelineToolContext { get; set; }
-        public virtual IPipelineToolConfiguration PipelineToolConfiguration { get; set; }
+        public virtual TSequenceWorkflowConfiguration PipelineToolConfiguration { get; set; }
         public virtual IPipelineToolBinding PipelineToolOutputBinding { get; set; }
         public abstract string PipelineToolId { get; set; }
         public abstract string PipelineToolDisplayName { get; set; }
