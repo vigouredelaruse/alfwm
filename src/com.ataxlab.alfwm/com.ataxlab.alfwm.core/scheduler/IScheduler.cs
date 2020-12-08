@@ -51,10 +51,10 @@ namespace com.ataxlab.alfwm.core.scheduler
             where TPipeline : class, IPipeline, new() 
             where TStatus : class,  IPipelineStatus, new();
 
-        void StartActivity<TActivity, TStatus, TConfiguration>(TActivity activity, TConfiguration activityConfiguration, Action<TStatus> callback)
-            where TActivity : class, IPipelineTool<TConfiguration>,  new() 
-            where TConfiguration : class, new()
-            where TStatus : ActivityStatus, new();
+        void StartActivity<TActivity, TConfiguration>(TActivity activity, TConfiguration activityConfiguration, Action<TConfiguration> callback)
+            where TActivity : class, IPipelineTool<TConfiguration>, new()
+            // where TConfiguration : class, new();
+            where TConfiguration : class, IPipelineToolConfiguration, new();
 
         Task<T> StopPipeline<T>(string instanceId) 
             where T : IPipelineToolStatus, new();

@@ -70,9 +70,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <typeparam name="StartConfiguration"></typeparam>
         /// <param name="configuration"></param>
         /// <param name="callback"></param>
-        void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
-           where StartConfiguration : IPipelineToolConfiguration
-            where StartResult : IStartResult;
+        void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
+           where StartConfiguration : class, IPipelineToolConfiguration, new();
         
 
         ///// <summary>

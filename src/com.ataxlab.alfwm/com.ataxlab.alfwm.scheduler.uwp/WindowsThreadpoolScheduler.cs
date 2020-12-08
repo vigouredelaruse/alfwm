@@ -4,6 +4,7 @@ using com.ataxlab.alfwm.core.taxonomy.activity;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using com.ataxlab.alfwm.scheduler.uwp;
 using System;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.Foundation;
 
@@ -39,7 +40,8 @@ namespace com.ataxlab.alfwm.scheduler.windowsthreadpool
             throw new NotImplementedException();
         }
 
-        public override void StartActivity<TActivity, TStatus, TConfiguration>(TActivity activity, TConfiguration activityConfiguration, Action<TStatus> callback)
+
+        public override void StartActivity<TActivity, TConfiguration>(TActivity activity, TConfiguration activityConfiguration, Action<TConfiguration> callback)
         {
             try
             {
@@ -60,10 +62,17 @@ namespace com.ataxlab.alfwm.scheduler.windowsthreadpool
 
                        (workItem) =>
                        {
-                           try
-                           {
-                               TStatus s = new TStatus();
-    
+                       try
+                       {
+                           activity.StartPipelineTool<TConfiguration>(activityConfiguration, (config) => 
+                               {
+                                   callback(config);
+                                   //return new ThreadPoolActivityStartResult();
+
+                                   
+                                   var result = new  WindowsThreadPoolSchedulerStartResult();
+                                   // return result;
+                               });
                                //activity.Start<TConfiguration>(activityConfiguration, c =>
                                //{
 
@@ -99,5 +108,7 @@ namespace com.ataxlab.alfwm.scheduler.windowsthreadpool
         {
             throw new NotImplementedException();
         }
+
+    
     }
 }

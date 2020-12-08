@@ -95,10 +95,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         }
 
 
-
-        public void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
-            where StartResult : IStartResult
-            where StartConfiguration : IPipelineToolConfiguration
+        public void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
+            where StartConfiguration : class, IPipelineToolConfiguration, new()
         {
             this.OnPipelineToolStarted(this, new PipelineToolStartEventArgs()
             {
@@ -111,12 +109,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
             try
             {
                 // queue the callback method and cache the result
-                ThreadPool.QueueUserWorkItem((cofig) =>
+                ThreadPool.QueueUserWorkItem( (config) =>
                 {
 
-                    IStartResult res = callback(configuration);
-                    result = res as ThreadPoolActivityStartResult;
-                });
+                    callback(config as StartConfiguration);
+                    //result = res as ThreadPoolActivityStartResult;
+                }, configuration);
 
 
                 // signal the completed event
@@ -143,11 +141,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         {
             var v = new ThreadPoolActivity();
             var config = new PipelineToolConfiguration<ThreadPoolActivityConfiguration>();
-            v.StartPipelineTool<ThreadPoolActivityStartResult, PipelineToolConfiguration<ThreadPoolActivityConfiguration>>(config, c => 
+            v.StartPipelineTool<PipelineToolConfiguration<ThreadPoolActivityConfiguration>>(config, (co) => 
             {
                 v.PipelineToolConfiguration = config;
-                
-                return new ThreadPoolActivityStartResult();
+
+                // return config;
 
             });
 

@@ -66,9 +66,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.workflow
             }
         }
 
-        public abstract void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
-            where StartResult : IStartResult
-            where StartConfiguration : IPipelineToolConfiguration;
+        public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
+            where StartConfiguration : class, IPipelineToolConfiguration, new();
 
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }

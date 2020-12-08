@@ -95,9 +95,12 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
             throw new NotImplementedException();
         }
 
-        public override void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+        public override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
         {
-            throw new NotImplementedException();
+            this.PipelineToolConfiguration = configuration as IPipelineToolConfiguration<HttpActivityConfiguration>;
+
+            int i = 0;
+
         }
 
   

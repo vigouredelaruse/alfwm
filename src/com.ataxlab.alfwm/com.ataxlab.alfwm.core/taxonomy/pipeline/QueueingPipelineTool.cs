@@ -102,15 +102,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             this.OnQueueHasData(sender, e.EventPayload);
         }
 
-        public override void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+        public override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
         {
             
         }
 
-        public override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
-        {
-            throw new NotImplementedException();
-        }
 
         public override StopResult StopPipelineTool<StopResult>(string instanceId)
         {
@@ -212,10 +208,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         }
 
-        public override void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
+        public override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
         {
             this.PipelineToolConfiguration = new PipelineToolConfiguration<TConfiguration>() { Configuration = configuration as TConfiguration};
-            IStartResult result = callback(configuration);
+            callback(configuration);
         }
 
         public override StopResult StopPipelineTool<StopResult>(string instanceId)

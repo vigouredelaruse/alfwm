@@ -30,9 +30,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         public abstract void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args);
         public abstract void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args);
         public abstract void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args);
-        public abstract void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
-             where StartResult : IStartResult
-             where StartConfiguration : IPipelineToolConfiguration;
+        public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
+             where StartConfiguration : class, IPipelineToolConfiguration, new();
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }
 
@@ -57,9 +56,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         public abstract void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args);
         public abstract void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args);
         public abstract void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args);
-        public abstract void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
-             where StartResult : IStartResult
-             where StartConfiguration : IPipelineToolConfiguration;
+        public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
+             where StartConfiguration : class, IPipelineToolConfiguration, new();
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }
 }

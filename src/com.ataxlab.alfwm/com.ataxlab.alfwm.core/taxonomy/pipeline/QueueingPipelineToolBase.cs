@@ -63,11 +63,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public abstract void OnQueueHasData(object sender, TInputQueueEntity availableData);
 
-        public abstract void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
-            where StartResult : IStartResult
-            where StartConfiguration : IPipelineToolConfiguration;
+        public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
+            where StartConfiguration : class, IPipelineToolConfiguration, new();
 
-        public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class, new();
 
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }
@@ -100,9 +98,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args);
         public abstract void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args);
         public abstract void OnQueueHasData(object sender, TQueueEntity availableData);
-        public abstract void StartPipelineTool<StartResult, StartConfiguration>(StartConfiguration configuration, Func<StartConfiguration, StartResult> callback)
-            where StartResult : IStartResult
-            where StartConfiguration : IPipelineToolConfiguration;
+        public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
+            where StartConfiguration : class, IPipelineToolConfiguration, new();
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }
 }

@@ -38,9 +38,9 @@ namespace com.ataxlab.alfwm.uwp.mstests
 
             try
             {
-                scheduler.StartActivity<HttpActivity, HttpActivityStatus, HttpActivityConfiguration>(activity, config, something =>
+                scheduler.StartActivity<HttpActivity, HttpActivityConfiguration>(activity, config, something =>
                 {
-                    Debug.WriteLine(String.Format("scheduler started with start callback data {0}", something.StatusJson));
+                    Debug.WriteLine(String.Format("scheduler started with start callback data {0}", something.ConfigurationJson));
                 });
             }
             catch(Exception e)
