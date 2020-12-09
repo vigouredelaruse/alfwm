@@ -33,6 +33,11 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Never /p:UapAppxPackageBuildMode=StoreUpload'
 
+- task: PublishSymbols@2
+  inputs:
+    SearchPattern: '**/bin/**/com.ataxlab*.pdb'
+    SymbolServerType: 'TeamServices'
+    
 - task: NuGetCommand@2
   inputs:
     command: 'pack'
