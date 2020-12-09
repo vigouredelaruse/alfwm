@@ -2,6 +2,7 @@
 using com.ataxlab.alfwm.core.taxonomy.activity;
 using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -48,8 +49,24 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
         public async void Start<StartResult>(Action<StartResult> callback)
         {
 
-            StartResult result = default(StartResult); // = new StartResult();
-            var config = PipelineToolConfiguration as HttpActivityConfiguration;
+
+        }
+
+
+
+        public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
+        {
+           PipelineToolCompleted?.Invoke(this, new PipelineToolCompletedEventArgs() { Payload = args.Payload });
+        }
+
+        public async override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
+        {
+            this.PipelineToolConfiguration =
+                new PipelineToolConfiguration<HttpActivityConfiguration>()
+                { Configuration = configuration as HttpActivityConfiguration }; // { configuration as HttpActivityConfiguration; ;
+
+            // StartResult result = default(StartResult); // = new StartResult();
+            var config = configuration;
 
             try
             {
@@ -57,13 +74,13 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
                 args.InstanceId = this.PipelineToolInstanceId;
 
                 OnPipelineToolStarted(this, args);
-                
+
                 try
                 {
                     //                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", RequiredParameters.AuthorizationToken);
-                    var uri = new Uri(config.HttpUrl);
-                    var request = new HttpRequestMessage(config.HttpMethod, uri);
-                    var response = await httpClient.SendRequestAsync(request); 
+                    var uri = new Uri((config as HttpActivityConfiguration).HttpUrl); //  new Uri(this.PipelineToolConfiguration.Configuration.HttpUrl);
+                    var request = new HttpRequestMessage(this.PipelineToolConfiguration.Configuration.HttpMethod, uri);
+                    var response = await httpClient.SendRequestAsync(request);
                     var data = response.ToString();
 
                     //if (RequiredParameters.AuthorizationToken != null)
@@ -73,50 +90,50 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
 
                     // trying out a couple of strategies
                     // for returning results
-                    PipelineToolCompletedEventArgs completionArgs = new PipelineToolCompletedEventArgs();
-                    completionArgs.Payload = data;
+                    PipelineToolCompletedEventArgs<PipelineVariable<String>> completionArgs = new PipelineToolCompletedEventArgs<PipelineVariable<String>>();
+                    completionArgs.Payload = new PipelineVariable<String>() { Payload = data };
                     // result.StatusJson = data;
-                    callback(result);
-                    // OnPipelineToolCompleted<>(this, completionArgs);
+                    callback(configuration);
+                    OnPipelineToolCompleted<PipelineVariable<String>>(this, completionArgs);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    throw new HttpActivityException(ex.Message);
+                    OnPipelineToolFailed(this,
+                        new PipelineToolFailedEventArgs()
+                        {
+                            InstanceId = this.PipelineToolInstanceId,
+                            Status = new HttpActivityStatus() { StatusJson = JsonConvert.SerializeObject(ex) }
+                        });
                 }
             }
-            catch(Exception e)
-            { 
-                throw new HttpActivityException(e.Message); 
-            } 
-        }
+            catch (Exception e)
+            {
 
-        public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
-        {
-            this.PipelineToolConfiguration = configuration as IPipelineToolConfiguration<HttpActivityConfiguration>;
-
-            int i = 0;
+                OnPipelineToolFailed(this,
+                    new PipelineToolFailedEventArgs()
+                    {
+                        InstanceId = this.PipelineToolInstanceId,
+                        Status = new HttpActivityStatus() { StatusJson = JsonConvert.SerializeObject(e) }
+                    });
+            }
 
         }
 
   
         public override void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
         {
-            throw new NotImplementedException();
+           PipelineToolFailed?.Invoke(this, args);
         }
 
         public override void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineToolProgressUpdated?.Invoke(this, args);
+
         }
 
         public override void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineToolStarted?.Invoke(this, args);
         }
     }
 }

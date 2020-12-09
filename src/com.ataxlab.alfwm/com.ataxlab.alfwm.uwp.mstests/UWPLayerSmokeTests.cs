@@ -16,9 +16,20 @@ namespace com.ataxlab.alfwm.uwp.mstests
     {
         private bool activityCompleted = false;
 
+        [TestInitialize]
+        public void Setup()
+        {
+            int i = 0;
+        }
+
         [TestMethod]
         public void TestMethod1()
         {
+            IScheduler scheduler = new WindowsThreadpoolScheduler();
+            scheduler.ActivityStarted += OnActivityStarted;
+            scheduler.ActivityCompleted += OnActivityCompleted;
+            scheduler.ActivityProgressUpdated += OnActivityProgressUpdated;
+            scheduler.ActivityFailed += OnActivityFailed;
         }
 
         [TestMethod]
