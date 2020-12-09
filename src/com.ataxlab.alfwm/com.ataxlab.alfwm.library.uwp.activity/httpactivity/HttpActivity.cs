@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.Design;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.UI.WebUI;
 using Windows.Web.Http;
 
@@ -59,14 +60,27 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
            PipelineToolCompleted?.Invoke(this, new PipelineToolCompletedEventArgs() { Payload = args.Payload });
         }
 
+        private IAsyncAction HttpRequestAsyncAction;
+
         public async override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
+        {
+            HttpRequestAsyncAction = Windows.System.Threading.ThreadPool.RunAsync(
+                async (state) =>
+                {
+                    await EnsureHttpRequest(configuration, callback);
+
+                });
+      
+        }
+
+        private async Task EnsureHttpRequest<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback) where StartConfiguration : class, IPipelineToolConfiguration, new()
         {
             this.PipelineToolConfiguration =
                 new PipelineToolConfiguration<HttpActivityConfiguration>()
                 { Configuration = configuration as HttpActivityConfiguration }; // { configuration as HttpActivityConfiguration; ;
 
             // StartResult result = default(StartResult); // = new StartResult();
-            var config = configuration;
+            // var config = configuration;
 
             try
             {
@@ -78,10 +92,10 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
                 try
                 {
                     //                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", RequiredParameters.AuthorizationToken);
-                    var uri = new Uri((config as HttpActivityConfiguration).HttpUrl); //  new Uri(this.PipelineToolConfiguration.Configuration.HttpUrl);
+                    var uri = new Uri((configuration as HttpActivityConfiguration).HttpUrl); //  new Uri(this.PipelineToolConfiguration.Configuration.HttpUrl);
                     var request = new HttpRequestMessage(this.PipelineToolConfiguration.Configuration.HttpMethod, uri);
                     var response = await httpClient.SendRequestAsync(request);
-                    var data = response.ToString();
+                    var data = await response.Content.ReadAsStringAsync();
 
                     //if (RequiredParameters.AuthorizationToken != null)
                     //{
@@ -116,10 +130,8 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
                         Status = new HttpActivityStatus() { StatusJson = JsonConvert.SerializeObject(e) }
                     });
             }
-
         }
 
-  
         public override void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
         {
            PipelineToolFailed?.Invoke(this, args);

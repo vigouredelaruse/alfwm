@@ -4,12 +4,28 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
-    /// <summary>
-    /// optimistically assuming IPipelineToolConfiguration is a suitable
-    /// archetype for IPipelineConfiguration
-    /// </summary>
-    [Obsolete]
-    public interface IPipelineConfiguration : IPipelineToolConfiguration
+    public interface IPipelineConfiguration
     {
+
+        string DisplayName { get; set; }
+
+        DateTime DeploymentTime { get; set; }
+
+        string ConfigurationJson { get; set; }
+
+        /// <summary>
+        /// the expectation is that the implemenation layer of the workflow service
+        /// is decoupled from the clients of public interface of the workflow service
+        /// 
+        /// the implementation layer can identify the specifics that can be easily 
+        /// changed with a schema update
+        /// </summary>
+        string ConfigurationJsonSchema { get; set; }
+    }
+
+    public interface IPipelineConfiguration<TConfiguration> : IPipelineConfiguration
+    where TConfiguration : class, new()
+    {
+        TConfiguration Configuration { get; set; }
     }
 }
