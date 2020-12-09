@@ -33,6 +33,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             where StartResult : class
             where StartConfiguration : class;
         public abstract StopResult StopPipeline<StopResult>(string instanceId) where StopResult : class;
+
+        bool IPipeline.AddTool<TPipelineTool, TConfiguration>(TPipelineTool tool, TConfiguration configuration)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>
@@ -65,5 +70,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             where StartConfiguration : class;
         public abstract StartResult StartPipeline<StartResult>(TProcessDefinition configuration) where StartResult : class;
         public abstract StopResult StopPipeline<StopResult>(string instanceId) where StopResult : class;
+
+        public abstract bool AddTool<TPipelineTool, TConfiguration>(TPipelineTool tool, TConfiguration configuration)
+            where TPipelineTool : class, IPipelineTool<TConfiguration>, new()
+            where TConfiguration : class, new();
+
     }
 }

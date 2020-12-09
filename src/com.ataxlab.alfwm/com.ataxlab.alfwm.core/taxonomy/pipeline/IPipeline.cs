@@ -35,6 +35,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         IPipelineBinding PipelineOutputBinding { get; set; }
 
+        bool AddTool<TPipelineTool, TConfiguration>(TPipelineTool tool, TConfiguration configuration)
+            where TPipelineTool : class, IPipelineTool<TConfiguration>, new()
+            where TConfiguration : class, new();
 
         /// <summary>
         /// obsolete because implements should probably

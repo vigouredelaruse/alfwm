@@ -1,4 +1,5 @@
-﻿//using com.ataxlab.alfwm.core.taxonomy.pipeline;
+﻿//using com.ataxlab.alfwm.core.taxonomy.binding;
+//using com.ataxlab.alfwm.core.taxonomy.pipeline;
 //using com.ataxlab.alfwm.library.activity.ocr.tesseract;
 //using com.ataxlab.alfwm.library.activity.ocr.tesseract.model;
 //using com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb.model;
@@ -21,7 +22,7 @@
 //    public class QueueingPipelineToolSmokeTest
 //    {
 
-//        private ConcurrentQueue<TesseractPipelineVariable> TesseractToolWorkItemQueue { get; set; }
+//        private ConcurrentQueue<PipelineVariable> TesseractToolWorkItemQueue { get; set; }
 //        private ConcurrentQueue<TaskItemPipelineVariable> ToolAWorkItemQueue { get; set; }
 //        private ConcurrentQueue<TaskItemPipelineVariable> ToolBWorkItemQueue { get; set; }
 
@@ -30,9 +31,9 @@
 //        {
 //            ToolAWorkItemQueue = new ConcurrentQueue<TaskItemPipelineVariable>();
 //            ToolBWorkItemQueue = new ConcurrentQueue<TaskItemPipelineVariable>();
-//            TesseractWorkQueue = new ConcurrentQueue<TesseractPipelineVariable>();
+//            TesseractWorkQueue = new ConcurrentQueue<TaskItemPipelineVariable>();
 
-//            TesseractToolWorkItemQueue = new ConcurrentQueue<TesseractPipelineVariable>();
+//            TesseractToolWorkItemQueue = new ConcurrentQueue<PipelineVariable>();
 //        }
 
 //        #region default queueing tool tests
@@ -60,7 +61,7 @@
 //            // wire Tool B downstream from Tool A
 //            toolA.QueueingOutputBindingCollection.Add(toolB.InputBinding);
 
-//            for(int itemNo = 0; itemNo < itemsToInsert; itemNo++)
+//            for (int itemNo = 0; itemNo < itemsToInsert; itemNo++)
 //            {
 //                // initialize a new pipeline tuple
 //                var newItem = this.GetNewQueueEntity(itemNo);
@@ -118,10 +119,11 @@
 //            byte[] imageAsBytes;
 //            imageAsBytes = await GetSampleImageAsBytes();
 
+           
 //            int i = imageAsBytes.Length;
 
 //            // initialize the tesseract tool
-//            TesseractPipelineVariable testTuple = new TesseractPipelineVariable();
+//            PipelineVariable testTuple = new PipelineVariable();
 //            testTuple.Payload = imageAsBytes;
 
 //            TesseractActivity activity = new TesseractActivity();
@@ -135,11 +137,11 @@
 //            Assert.IsTrue(activity.InputBinding.InputQueue.Count > 0, "test failed, input queue count incorrect");
 //        }
 
-//        ConcurrentQueue<TesseractPipelineVariable> TesseractWorkQueue { get; set; }
+//        ConcurrentQueue<TaskItemPipelineVariable> TesseractWorkQueue { get; set; }
 
-//        private TesseractPipelineVariable Activity_QueueHasAvailableDataEvent(TesseractPipelineVariable arg)
+//        private PipelineVariable Activity_QueueHasAvailableDataEvent(PipelineVariable arg)
 //        {
-//            TesseractPipelineVariable v = new TesseractPipelineVariable();
+//            PipelineVariable v = new PipelineVariable();
 //            return v;
 //        }
 
@@ -152,7 +154,7 @@
 //            Windows.Storage.ApplicationData.Current.LocalFolder;
 
 //            StorageFile sampleFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///sample.png"));
-            
+
 //            //Windows.Storage.StorageFile sampleFile =
 //            //    await storageFolder.GetFileAsync("sample.png");
 
