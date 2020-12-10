@@ -49,16 +49,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// since this is the initial entry point here one should
         /// construct a suitable context 
         /// </summary>
-        /// <typeparam name="StartResult"></typeparam>
         /// <typeparam name="StartConfiguration"></typeparam>
         /// <param name="configuration"></param>
         /// <returns></returns>
         [Obsolete]
-        StartResult StartPipeline<StartResult, StartConfiguration>(StartConfiguration configuration) 
-            where StartConfiguration : class 
-            where StartResult : class;
+        void StartPipeline<StartConfiguration>(StartConfiguration configuration) 
+            where StartConfiguration : class;
 
-        StopResult StopPipeline<StopResult>(string instanceId) where StopResult : class;
+        void StopPipeline(string instanceId);
 
 
     }
@@ -69,16 +67,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     /// <typeparam name="TProcessDefinition"></typeparam>
     public interface IPipeline<TProcessDefinition> : IPipeline
-        where TProcessDefinition : class, new()
     {
         /// <summary>
         /// this collection will be determined by 
         /// the nature of your process definition 
         /// </summary>
-        TProcessDefinition PipelineTools { get; set; }
+        TProcessDefinition ProcessDefinition { get; set; }
 
-        StartResult StartPipeline<StartResult>(TProcessDefinition configuration)
-            where StartResult : class;
+        void StartPipeline(TProcessDefinition configuration);
     }
     public interface IPipelineObsolete
     {
@@ -110,13 +106,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// since this is the initial entry point here one should
         /// construct a suitable context 
         /// </summary>
-        /// <typeparam name="StartResult"></typeparam>
         /// <typeparam name="StartConfiguration"></typeparam>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        StartResult Start<StartResult, StartConfiguration>(StartConfiguration configuration) where StartConfiguration : IPipelineConfiguration where StartResult : IPipelineStatus;
-
-        StopResult Stop<StopResult>(string instanceId) where StopResult : IPipelineStatus;
+        void Start<StartConfiguration>(StartConfiguration configuration) where StartConfiguration : IPipelineConfiguration;
+        void Stop(string instanceId);
 
 
     }

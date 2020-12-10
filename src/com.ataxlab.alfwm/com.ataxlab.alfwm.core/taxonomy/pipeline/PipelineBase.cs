@@ -29,10 +29,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract void OnPipelineFailed(object sender, PipelineFailedEventArgs args);
         public abstract void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args);
         public abstract void OnPipelineStarted(object sender, PipelineStartedEventArgs args);
-        public abstract StartResult StartPipeline<StartResult, StartConfiguration>(StartConfiguration configuration)
-            where StartResult : class
+        public abstract void StartPipeline<StartConfiguration>(StartConfiguration configuration)
             where StartConfiguration : class;
-        public abstract StopResult StopPipeline<StopResult>(string instanceId) where StopResult : class;
+        public abstract void StopPipeline(string instanceId);
 
         bool IPipeline.AddTool<TPipelineTool, TConfiguration>(TPipelineTool tool, TConfiguration configuration)
         {
@@ -46,9 +45,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     /// <typeparam name="TProcessDefinition"></typeparam>
     public abstract class PipelineBase<TProcessDefinition> : IPipeline<TProcessDefinition>
-        where TProcessDefinition : class, new()
+        
     {
-        public abstract TProcessDefinition PipelineTools { get; set; }
+        public abstract TProcessDefinition ProcessDefinition { get; set; }
         public abstract string PipelineId { get; set; }
         public abstract string PipelineInstanceId { get; set; }
         public abstract string PipelineDisplayName { get; set; }
@@ -65,11 +64,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract void OnPipelineFailed(object sender, PipelineFailedEventArgs args);
         public abstract void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args);
         public abstract void OnPipelineStarted(object sender, PipelineStartedEventArgs args);
-        public abstract StartResult StartPipeline<StartResult, StartConfiguration>(StartConfiguration configuration)
-            where StartResult : class
+        public abstract void StartPipeline<StartConfiguration>(StartConfiguration configuration)
             where StartConfiguration : class;
-        public abstract StartResult StartPipeline<StartResult>(TProcessDefinition configuration) where StartResult : class;
-        public abstract StopResult StopPipeline<StopResult>(string instanceId) where StopResult : class;
+        public abstract void StartPipeline(TProcessDefinition configuration);
+        public abstract void StopPipeline(string instanceId);
 
         public abstract bool AddTool<TPipelineTool, TConfiguration>(TPipelineTool tool, TConfiguration configuration)
             where TPipelineTool : class, IPipelineTool<TConfiguration>, new()
