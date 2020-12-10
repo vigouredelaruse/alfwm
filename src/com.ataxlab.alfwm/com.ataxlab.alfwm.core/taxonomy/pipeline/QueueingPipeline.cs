@@ -20,7 +20,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public event EventHandler<PipelineFailedEventArgs> PipelineFailed;
         public event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
 
-        public bool Bind<TInputQEntity, TOutputQEntity>(string SourceInstanceId, string DestinationInstanceId)
+        public bool Bind(string SourceInstanceId, string DestinationInstanceId)
         {
             throw new NotImplementedException();
         }
@@ -47,25 +47,21 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public void StartPipeline(IQueueingPipelineProcessDefinition configuration)
         {
-            // QueueingPipelineStartResult result = new QueueingPipelineStartResult();
-
-            // return result;
+            this.ProcessDefinition = configuration;
         }
 
-        public void StartPipeline<StartConfiguration>(StartConfiguration configuration)
-            where StartConfiguration : class
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void StopPipeline(string instanceId)
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
-        bool IPipeline.AddTool<TPipelineTool, TConfiguration>(TPipelineTool tool, TConfiguration configuration)
+        public bool AddTool<TPipelineTool, TConfiguration>(TPipelineTool tool, TConfiguration configuration)
+            where TPipelineTool : class, IPipelineTool<TConfiguration>, new()
+            where TConfiguration : class, new()
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

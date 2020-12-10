@@ -39,22 +39,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             where TPipelineTool : class, IPipelineTool<TConfiguration>, new()
             where TConfiguration : class, new();
 
-        /// <summary>
-        /// obsolete because implements should probably
-        /// provide this method according to their own needs
-        /// 
-        /// designed to permit implementers to supply their own
-        /// Configuration and Pipeline types
-        /// 
-        /// since this is the initial entry point here one should
-        /// construct a suitable context 
-        /// </summary>
-        /// <typeparam name="StartConfiguration"></typeparam>
-        /// <param name="configuration"></param>
-        /// <returns></returns>
-        [Obsolete]
-        void StartPipeline<StartConfiguration>(StartConfiguration configuration) 
-            where StartConfiguration : class;
 
         void StopPipeline(string instanceId);
 

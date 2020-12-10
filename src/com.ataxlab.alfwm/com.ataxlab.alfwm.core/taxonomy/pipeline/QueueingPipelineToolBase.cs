@@ -65,7 +65,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
             where StartConfiguration : class, IPipelineToolConfiguration, new();
-
+        public abstract void StartPipelineTool(TQueueConfiguration configuration, Action<TQueueConfiguration> callback);
 
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }
@@ -100,6 +100,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract void OnQueueHasData(object sender, TQueueEntity availableData);
         public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
             where StartConfiguration : class, IPipelineToolConfiguration, new();
+        public abstract void StartPipelineTool(TConfiguration configuration, Action<TConfiguration> callback);
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }
 }

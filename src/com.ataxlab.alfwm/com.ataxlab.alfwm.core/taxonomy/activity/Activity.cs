@@ -32,6 +32,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         public abstract void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args);
         public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
              where StartConfiguration : class, IPipelineToolConfiguration, new();
+
+        public abstract void StartPipelineTool(TConfiguration configuration, Action<TConfiguration> callback);
+  
+
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }
 
@@ -58,6 +62,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         public abstract void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args);
         public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
              where StartConfiguration : class, IPipelineToolConfiguration, new();
+
+        public abstract void StartPipelineTool(ActivityConfiguration configuration, Action<ActivityConfiguration> callback);
+
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }
 }

@@ -66,7 +66,7 @@ namespace com.ataxlab.alfwm.uwp.mstests
             while (i++ < 60 && activityCompleted == false)
                 {
                     // now wait for background threads to complete 
-                    Task.Delay(5).Wait();
+                    Task.Delay(500).Wait();
                 }
 
             Assert.IsTrue(activityCompleted, "test failed - scheduler did not report activity completed");

@@ -98,13 +98,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
         public void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
             where StartConfiguration : class, IPipelineToolConfiguration, new()
         {
+
+            this.PipelineToolConfiguration = new PipelineToolConfiguration<ThreadPoolActivityConfiguration>() { Configuration = configuration as ThreadPoolActivityConfiguration};
             this.OnPipelineToolStarted(this, new PipelineToolStartEventArgs()
             {
                 InstanceId = this.PipelineToolInstanceId,
                 Status = { }
             });
 
-            ThreadPoolActivityStartResult result = new ThreadPoolActivityStartResult();
 
             try
             {
@@ -117,6 +118,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
                 }, configuration);
 
 
+                ThreadPoolActivityStartResult result = new ThreadPoolActivityStartResult();
                 // signal the completed event
                 PipelineToolCompletedEventArgs<ThreadPoolActivityStartResult> jobResult = new PipelineToolCompletedEventArgs<ThreadPoolActivityStartResult>(result);
                 this.OnPipelineToolCompleted<ThreadPoolActivityStartResult>(this, jobResult);
@@ -133,6 +135,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
 
         }
 
+        public void StartPipelineTool(ThreadPoolActivityConfiguration configuration, Action<ThreadPoolActivityConfiguration> callback)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class ThreadPoolActivityScaffold

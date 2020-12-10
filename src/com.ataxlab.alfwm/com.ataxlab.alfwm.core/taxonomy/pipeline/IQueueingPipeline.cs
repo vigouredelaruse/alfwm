@@ -5,6 +5,10 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
+    /// <summary>
+    /// furnish a queueing specialization of 
+    /// the pipeline interface
+    /// </summary>
     public interface IQueueingPipeline : IPipeline<IQueueingPipelineProcessDefinition>
     {
         /// <summary>
@@ -16,6 +20,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <param name="SourceInstanceId"></param>
         /// <param name="DestinationInstanceId"></param>
         /// <returns></returns>
-        bool Bind<TInputQEntity, TOutputQEntity>(string SourceInstanceId, string DestinationInstanceId);
+        bool Bind(string SourceInstanceId, string DestinationInstanceId);
     }
 }

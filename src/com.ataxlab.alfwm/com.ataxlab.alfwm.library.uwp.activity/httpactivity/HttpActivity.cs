@@ -43,16 +43,9 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
 
         public override StopResult StopPipelineTool<StopResult>(string instanceId)
         {
-            throw new NotImplementedException();
+            /// todo something useful here
+            return default(StopResult);
         }
-
-        [Obsolete]
-        public async void Start<StartResult>(Action<StartResult> callback)
-        {
-
-
-        }
-
 
 
         public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
@@ -146,6 +139,11 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
         public override void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
         {
             PipelineToolStarted?.Invoke(this, args);
+        }
+
+        public override void StartPipelineTool(HttpActivityConfiguration configuration, Action<HttpActivityConfiguration> callback)
+        {
+            throw new NotImplementedException();
         }
     }
 }

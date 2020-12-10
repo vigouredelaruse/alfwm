@@ -3,6 +3,7 @@ using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO.Pipes;
 using System.Text;
 using System.Threading;
 
@@ -104,13 +105,19 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
         {
-            
+            /// TODO something useful here
         }
 
 
         public override StopResult StopPipelineTool<StopResult>(string instanceId)
         {
-            throw new NotImplementedException();
+            // TODO something useful here
+            return default(StopResult);
+        }
+
+        public override void StartPipelineTool(TConfiguration configuration, Action<TConfiguration> callback)
+        {
+           // TODO something useful here
         }
     }
 
@@ -217,6 +224,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public override StopResult StopPipelineTool<StopResult>(string instanceId)
         {
             return default(StopResult);
+        }
+
+        public override void StartPipelineTool(TConfiguration configuration, Action<TConfiguration> callback)
+        {
+            this.PipelineToolConfiguration = new PipelineToolConfiguration<TConfiguration>() { Configuration = configuration };
         }
     }
 }
