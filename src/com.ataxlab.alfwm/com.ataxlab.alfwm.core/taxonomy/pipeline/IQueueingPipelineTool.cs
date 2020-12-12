@@ -78,8 +78,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// <typeparam name="TLatchingInputBinding"></typeparam>
     /// <typeparam name="TOutputBinding"></typeparam>
     public interface IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TQueueEntity, TConfiguration> : IPipelineTool<TConfiguration> 
-        where TLatchingInputBinding : class
-        where TOutputBinding : class
+        where TLatchingInputBinding : class, new()
+        where TOutputBinding : class, new()
         where TQueueEntity : class, new()
         where TConfiguration : class, new()
     {

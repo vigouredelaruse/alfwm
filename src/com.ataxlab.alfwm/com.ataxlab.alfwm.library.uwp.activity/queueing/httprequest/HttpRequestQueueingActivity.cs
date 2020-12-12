@@ -44,7 +44,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 
             this.InputBinding = new core.taxonomy.binding.QueueingChannel<HttpRequestQueueingActivityConfiguration>();
             this.OutputBinding = new core.taxonomy.binding.QueueingChannel<List<Tuple<string, string>>>();
-
+            
             // enable the queue
             this.InputBinding.IsQueuePollingEnabled = true;
             this.InputBinding.QueueHasData += InputBinding_QueueHasData;
@@ -97,6 +97,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 
                 OnPipelineToolCompleted<List<String>>(this,outTuple);
                 this.OutputBinding.InputQueue.Enqueue(outMsg);
+                this.OutputBinding.OnQueueHasData(DateTime.UtcNow, outMsg);
                 return true;
             }
             catch(Exception ex)

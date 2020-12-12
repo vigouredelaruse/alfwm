@@ -36,6 +36,25 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             TesseractToolWorkItemQueue = new ConcurrentQueue<PipelineVariable>();
         }
 
+        #region queueing pipeline tests
+        [TestMethod]
+        public void CanAddAndBindPipelineToolsToPipeline()
+        {
+            var testPipeline = new QueueingPipeline();
+
+   
+            var httpActivity = new HttpRequestQueueingActivity();
+            httpActivity.QueueHasAvailableDataEvent += Activity_QueueHasAvailableDataEvent1;
+            httpActivity.InputBinding.IsQueuePollingEnabled = true;
+
+            var httpActivityConfig = new HttpRequestQueueingActivityConfiguration();
+            httpActivityConfig.RequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
+            httpActivity.PipelineToolCompleted += Activity_PipelineToolCompleted;
+
+            testPipeline.AddTool<HttpRequestQueueingActivity, HttpRequestQueueingActivityConfiguration>(httpActivity, httpActivityConfig);
+        }
+
+        #endregion queueing pipeline tests
         #region default queueing tool tests
         /// <summary>
         /// initialize a queueing pipeline tool
@@ -133,13 +152,29 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             var activityConfig = new HttpRequestQueueingActivityConfiguration();
             activityConfig.RequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
             activity.PipelineToolCompleted += Activity_PipelineToolCompleted;
+
+            var outputQueue = activity.OutputBinding;
+            outputQueue.QueueHasData += OutputQueue_QueueHasData;
             activity.InputBinding.InputQueue.Enqueue(activityConfig);
 
             Thread.Sleep(10000);
+            var outQMsg = new List<Tuple<String, String>>();
 
-
+            Assert.IsTrue(didSignalDownstreamActivity, "Failed to dequeue output q message");
 
             Assert.IsTrue(didfirePipelineToolCompleted, "test failed, did not fire activity completed event");
+        }
+
+        bool didSignalDownstreamActivity = false;
+        /// <summary>
+        /// signal from outputut channel that outputut queue has data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OutputQueue_QueueHasData(object sender, core.taxonomy.binding.queue.QueueDataAvailableEventArgs<List<Tuple<string, string>>> e)
+        {
+            int i = 0;
+            didSignalDownstreamActivity = true;
         }
 
         private void Activity_PipelineToolCompleted(object sender, core.taxonomy.PipelineToolCompletedEventArgs e)

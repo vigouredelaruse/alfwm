@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.ataxlab.alfwm.core.taxonomy.binding.queue;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,6 +12,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     public interface IQueueingPipelineNode
     {
         string QueueingPipelineNodeId { get; set; }
+
+       
     }
 
     public interface IQueueingPipelineNode<TPipelineTool> : IQueueingPipelineNode
@@ -30,5 +33,18 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     {
         TPipelineTool PipelineTool { get; set; }
 
+    }
+
+    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity> : IQueueingPipelineNode
+       where TPipelineTool : class, IPipelineTool<TPipelineToolConfiguration>, new()
+       where TPipelineToolConfiguration : class, new()
+       where TOutputEntity : class, new()
+        where TInputEntity : class, new()
+    {
+        TPipelineTool PipelineTool { get; set; }
+
+        IQueueConsumerPipelineToolBinding<TInputEntity> PipelineToolInputBinding { get; set; }
+
+        IQueueProducerPipelineToolBinding<TOutputEntity> PipelineToolOutputBinding { get; set; }
     }
 }
