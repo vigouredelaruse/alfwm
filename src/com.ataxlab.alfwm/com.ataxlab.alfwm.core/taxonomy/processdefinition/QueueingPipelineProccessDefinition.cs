@@ -38,7 +38,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
     public class QueueingPipelineProcessDefinition<TPipelineToolConfiguration, TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity>
         : IQueueingPipelineProcessDefinition<LinkedList<IQueueingPipelineNode<IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>,
             TPipelineToolConfiguration, TInputEntity, TOutputEntity>>>
-        where TPipelineToolConfiguration : class, new()
+        where TPipelineToolConfiguration : class, IPipelineToolConfiguration, new()
         where TInputEntity : class, new()
         where TOutputEntity : class, new()
         where TLatchingOutputBinding : class, new()

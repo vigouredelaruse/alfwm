@@ -28,7 +28,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
     public interface IQueueingPipelineProcessDefinition<TPipelineTool, TLatchingInputBinding, TOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity>
          where TPipelineTool : class, IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>, new()
-         where TPipelineToolConfiguration : class, new()
+         where TPipelineToolConfiguration : class, IPipelineToolConfiguration, new()
          where TLatchingInputBinding : class, new()
          where TOutputBinding : class, new()
          where TOutputEntity : class, new()

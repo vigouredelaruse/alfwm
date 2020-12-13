@@ -1,5 +1,6 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
+using com.ataxlab.alfwm.core.taxonomy.processdefinition;
 using com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest;
 using com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb.model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -59,6 +60,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             newNode.PipelineToolInputBinding = httpActivity.InputBinding;
             newNode.PipelineToolOutputBinding = httpActivity.OutputBinding;
 
+            var processDefinition = new QueueingPipelineProcessDefinition<HttpRequestQueueingActivityConfiguration, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>
+                ();
             //var processDefinition = new QueueingPipelineProcessDefinition<(); // TODO  make a TConfiguration that uses PipelineToolVariables
             // otherwise he linked list of the process definition becomes hardcoded to 1 configuration
             // and the linked list must specify arbitrary pipelinetool<tconfiguration> nodes
