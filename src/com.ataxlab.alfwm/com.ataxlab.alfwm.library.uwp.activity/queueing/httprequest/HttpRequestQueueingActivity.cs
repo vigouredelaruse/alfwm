@@ -42,8 +42,8 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             WorkQueueProcessTimer.Elapsed += WorkQueueProcessTimer_Elapsed;
             WorkQueueProcessTimer.Enabled = true;
 
-            this.InputBinding = new core.taxonomy.binding.QueueingChannel<HttpRequestQueueingActivityConfiguration>();
-            this.OutputBinding = new core.taxonomy.binding.QueueingChannel<List<Tuple<string, string>>>();
+            this.InputBinding = new core.taxonomy.binding.QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>();
+            this.OutputBinding = new core.taxonomy.binding.QueueingProducerChannel<List<Tuple<string, string>>>();
             
             // enable the queue
             this.InputBinding.IsQueuePollingEnabled = true;
@@ -96,7 +96,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
                 var outTuple = new PipelineToolCompletedEventArgs<List<String>>() { Payload = evtMsg };
 
                 OnPipelineToolCompleted<List<String>>(this,outTuple);
-                this.OutputBinding.InputQueue.Enqueue(outMsg);
+                this.OutputBinding.OutputQueue.Enqueue(outMsg);
                 this.OutputBinding.OnQueueHasData(DateTime.UtcNow, outMsg);
                 return true;
             }

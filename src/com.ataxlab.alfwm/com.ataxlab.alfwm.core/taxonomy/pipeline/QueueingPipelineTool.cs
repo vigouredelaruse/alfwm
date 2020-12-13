@@ -26,8 +26,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         {
             this.PipelineToolInstanceId = Guid.NewGuid().ToString();
 
-            InputBinding = new QueueingChannel<TInputQueueEntity>();
-            OutputBinding = new QueueingChannel<TOutputQueueEntity>();
+            InputBinding = new QueueingConsumerChannel<TInputQueueEntity>();
+            OutputBinding = new QueueingConsumerChannel<TOutputQueueEntity>();
             PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
 
             InputBinding.QueueHasData += InputBinding_QueueHasData;
@@ -134,8 +134,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         {
             this.PipelineToolInstanceId = Guid.NewGuid().ToString();
 
-            InputBinding = new QueueingChannel<TQueueEntity>();
-            QueueingOutputBindingCollection = new List<QueueingChannel<TQueueEntity>>();
+            InputBinding = new QueueingConsumerChannel<TQueueEntity>();
+            QueueingOutputBindingCollection = new List<QueueingConsumerChannel<TQueueEntity>>();
 
             InputBinding.QueueHasData += InputBinding_QueueHasData;
         }
@@ -146,8 +146,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             this.OnQueueHasData(sender, e.EventPayload);
         }
 
-        public override QueueingChannel<TQueueEntity> InputBinding { get; set; }
-        public override List<QueueingChannel<TQueueEntity>> QueueingOutputBindingCollection { get; set; }
+        public override QueueingConsumerChannel<TQueueEntity> InputBinding { get; set; }
+        public override List<QueueingConsumerChannel<TQueueEntity>> QueueingOutputBindingCollection { get; set; }
         public override string PipelineToolInstanceId { get; set; }
         public override IPipelineToolStatus PipelineToolStatus { get; set; }
         public override IPipelineToolContext PipelineToolContext { get; set; }

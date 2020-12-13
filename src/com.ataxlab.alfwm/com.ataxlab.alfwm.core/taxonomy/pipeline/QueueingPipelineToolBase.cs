@@ -8,13 +8,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
 
     public abstract class QueueingPipelineToolBase<TInputQueueEntity, TOutputQueueEntity, TQueueConfiguration>
-        : IQueueingPipelineTool<QueueingChannel<TInputQueueEntity>, QueueingChannel<TOutputQueueEntity>, TInputQueueEntity, TOutputQueueEntity, TQueueConfiguration>
+        : IQueueingPipelineTool<QueueingConsumerChannel<TInputQueueEntity>, QueueingProducerChannel<TOutputQueueEntity>, TInputQueueEntity, TOutputQueueEntity, TQueueConfiguration>
         where TInputQueueEntity : class, new()
         where TOutputQueueEntity : class, new()
         where TQueueConfiguration : class, new()
     {
-        public virtual QueueingChannel<TInputQueueEntity> InputBinding {get; set;}
-        public virtual QueueingChannel<TOutputQueueEntity> OutputBinding {get; set;}
+        public virtual QueueingConsumerChannel<TInputQueueEntity> InputBinding {get; set;}
+        public virtual QueueingProducerChannel<TOutputQueueEntity> OutputBinding {get; set;}
         public virtual string PipelineToolInstanceId {get; set;}
         public ObservableCollection<IPipelineVariable> PipelineToolVariables {get; set;}
         public virtual string PipelineToolId {get; set;}
@@ -71,12 +71,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     }
 
 
-    public abstract class QueueingPipelineToolBase<TQueueEntity, TConfiguration> : IQueueingPipelineTool<QueueingChannel<TQueueEntity>, QueueingChannel<TQueueEntity>, TQueueEntity, TConfiguration>
+    public abstract class QueueingPipelineToolBase<TQueueEntity, TConfiguration> : IQueueingPipelineTool<QueueingConsumerChannel<TQueueEntity>, QueueingConsumerChannel<TQueueEntity>, TQueueEntity, TConfiguration>
         where TConfiguration : class, new()
         where TQueueEntity : class, new()
     {
-        public abstract QueueingChannel<TQueueEntity> InputBinding { get; set; }
-        public abstract List<QueueingChannel<TQueueEntity>> QueueingOutputBindingCollection { get; set; }
+        public abstract QueueingConsumerChannel<TQueueEntity> InputBinding { get; set; }
+        public abstract List<QueueingConsumerChannel<TQueueEntity>> QueueingOutputBindingCollection { get; set; }
         public abstract string PipelineToolInstanceId { get; set; }
         public abstract string PipelineToolId { get; set; }
         public abstract string PipelineToolDisplayName { get; set; }

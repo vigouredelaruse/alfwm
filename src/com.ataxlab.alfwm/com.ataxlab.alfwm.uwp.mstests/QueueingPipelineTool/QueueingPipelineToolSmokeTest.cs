@@ -51,6 +51,26 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             httpActivityConfig.RequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
             httpActivity.PipelineToolCompleted += Activity_PipelineToolCompleted;
 
+            var inputBinding = new QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>();
+            var outputBinding = new QueueingProducerChannel<List<Tuple<String, String>>>();
+
+            var newNode = new QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration,HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>();
+            newNode.PipelineTool = httpActivity;
+            newNode.PipelineToolInputBinding = httpActivity.InputBinding;
+            newNode.PipelineToolOutputBinding = httpActivity.OutputBinding;
+
+
+            //var result = testPipeline.AddTool < QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration>,
+            //    QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>,
+            //    QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>,
+            //    QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>,
+            //    HttpRequestQueueingActivityConfiguration,
+            //    HttpRequestQueueingActivityConfiguration,
+            //     HttpRequestQueueingActivityConfiguration
+            //    > (httpActivity, httpActivityConfig);
+                
+ 
+
             testPipeline.AddTool<HttpRequestQueueingActivity, HttpRequestQueueingActivityConfiguration>(httpActivity, httpActivityConfig);
         }
 
@@ -157,8 +177,15 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             outputQueue.QueueHasData += OutputQueue_QueueHasData;
             activity.InputBinding.InputQueue.Enqueue(activityConfig);
 
-            Thread.Sleep(10000);
+            Thread.Sleep(30000);
+            var loopMax = 60;
+            var loopCounter = 0;
             var outQMsg = new List<Tuple<String, String>>();
+
+            while(loopCounter++ < loopMax && didSignalDownstreamActivity == false)
+            {
+                 Thread.Sleep(1000);
+            }
 
             Assert.IsTrue(didSignalDownstreamActivity, "Failed to dequeue output q message");
 
