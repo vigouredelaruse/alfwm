@@ -17,6 +17,9 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
         public DateTime DeploymentTime { get; set; }
         public string ConfigurationJson { get; set; }
         public string ConfigurationJsonSchema { get; set; }
+        public string Id { get; set; }
+        public string Key { get; set; }
+        public object Configuration { get; set; }
     }
 
 }

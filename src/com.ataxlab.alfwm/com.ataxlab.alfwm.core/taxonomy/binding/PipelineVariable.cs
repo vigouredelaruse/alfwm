@@ -36,7 +36,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         public string ID { get;  set; }
         public string Key { get;  set; }
         public string JsonValue { get; set; }
-        public virtual object Payload { get; set; }
+ 
         public JSchema JsonValueSchema { get; set; }
 
         public DateTime CreateDate { get; set; }
@@ -49,6 +49,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         public virtual object ParentItem { get; set; }
 
         public virtual ICollection<object> Items { get; set; }
+        public virtual object Payload { get; set; }
     }
 
     /// <summary>
@@ -74,7 +75,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         public string ID { get; set; }
         public string Key { get; set; }
         public string JsonValue { get; set; }
-        public TPayload Payload { get; set; }
+        public virtual TPayload Payload { get; set; }
         public JSchema JsonValueSchema { get; set; }
         public DateTime TimeStamp { get; set; }
         public DateTime CreateDate { get; set; }

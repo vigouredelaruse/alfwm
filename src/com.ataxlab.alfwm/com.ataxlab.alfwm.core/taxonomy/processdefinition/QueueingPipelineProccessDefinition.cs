@@ -44,7 +44,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
         where TLatchingOutputBinding : class, new()
         where TLatchingInputBinding : class, new()
     {
-        public string Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Id { get ; set; }
         public LinkedList<IQueueingPipelineNode<IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>, TPipelineToolConfiguration, TInputEntity, TOutputEntity>> PipelineToolChain { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

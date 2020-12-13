@@ -7,10 +7,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// <summary>
     /// support a serialiazable config
     /// </summary>
-    public interface IPipelineToolConfiguration
+    public interface IPipelineToolConfiguration 
     {
+        string Id { get; set; }
 
+        string Key { get; set; }
         string DisplayName { get; set; }
+
+        object Configuration { get; set; }
 
         DateTime DeploymentTime { get; set; }
 
@@ -33,6 +37,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     public interface IPipelineToolConfiguration<TConfiguration> : IPipelineToolConfiguration
         where TConfiguration : class, new()
     {
-        TConfiguration Configuration { get; set; }
+        new TConfiguration Configuration { get; set; }
     }
 }

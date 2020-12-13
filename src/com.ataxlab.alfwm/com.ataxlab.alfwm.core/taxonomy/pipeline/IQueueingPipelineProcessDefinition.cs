@@ -37,6 +37,25 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         string Id { get; set; }
 
         LinkedList<IQueueingPipelineNode<TPipelineTool,TPipelineToolConfiguration, TInputEntity, TOutputEntity>> PipelineToolChain { get; set; }
+
+        /// <summary>
+        /// mirror linkedlist api
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        String AddFirstNode(TPipelineTool node);
+
+        /// <summary>
+        /// mirror linked list api
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        String AddLastNode(TPipelineTool node);
+
+
+        String AddAfter(String nodeId);
+
+        bool Bind(String node1Id, String node2Id);
     }
 
 }

@@ -59,6 +59,10 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             newNode.PipelineToolInputBinding = httpActivity.InputBinding;
             newNode.PipelineToolOutputBinding = httpActivity.OutputBinding;
 
+            //var processDefinition = new QueueingPipelineProcessDefinition<(); // TODO  make a TConfiguration that uses PipelineToolVariables
+            // otherwise he linked list of the process definition becomes hardcoded to 1 configuration
+            // and the linked list must specify arbitrary pipelinetool<tconfiguration> nodes
+
 
             //var result = testPipeline.AddTool < QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration>,
             //    QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>,
