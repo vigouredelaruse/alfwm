@@ -36,8 +36,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     }
 
     public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity> : IQueueingPipelineNode
-       where TPipelineTool : class, IPipelineTool<TPipelineToolConfiguration>, new()
-       where TPipelineToolConfiguration : class, new()
+       // where TPipelineTool : class, IPipelineTool<TPipelineToolConfiguration>, new()
+       // where TPipelineToolConfiguration : class, new()
        where TOutputEntity : class, new()
         where TInputEntity : class, new()
     {

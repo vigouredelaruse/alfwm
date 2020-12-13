@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Schema.Generation;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
@@ -44,5 +45,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             where TInputQueueENtity : class, new()
             where TOutputQueueEntity : class, new()
             where TConfiguration : class, new();
+
+    
+    }
+
+    public interface IQueueingPipeline<TProcessDefinition, TPipelineNode> : IPipeline<TProcessDefinition>
+    {
+
+        void AddTool(TPipelineNode node);
     }
 }

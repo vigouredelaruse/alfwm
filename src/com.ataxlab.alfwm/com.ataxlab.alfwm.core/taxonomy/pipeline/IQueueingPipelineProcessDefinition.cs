@@ -17,4 +17,26 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// to expose a ConcurrentQueue<Entity>         /// </summary>
         ConcurrentDictionary<string, IQueueingPipelineNode> PipelineToolChain { get; set; }
     }
+
+    public interface IQueueingPipelineProcessDefinition<TProcessDefinition>
+        where TProcessDefinition : class, new()
+    { 
+        string Id { get; set; }
+
+        TProcessDefinition PipelineToolChain { get; set; }
+    }
+
+    public interface IQueueingPipelineProcessDefinition<TPipelineTool, TLatchingInputBinding, TOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity>
+         where TPipelineTool : class, IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>, new()
+         where TPipelineToolConfiguration : class, new()
+         where TLatchingInputBinding : class, new()
+         where TOutputBinding : class, new()
+         where TOutputEntity : class, new()
+         where TInputEntity : class, new()
+    { 
+        string Id { get; set; }
+
+        LinkedList<IQueueingPipelineNode<TPipelineTool,TPipelineToolConfiguration, TInputEntity, TOutputEntity>> PipelineToolChain { get; set; }
+    }
+
 }

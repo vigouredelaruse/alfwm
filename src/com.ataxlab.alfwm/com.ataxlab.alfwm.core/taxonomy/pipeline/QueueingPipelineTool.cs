@@ -27,7 +27,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             this.PipelineToolInstanceId = Guid.NewGuid().ToString();
 
             InputBinding = new QueueingConsumerChannel<TInputQueueEntity>();
-            OutputBinding = new QueueingConsumerChannel<TOutputQueueEntity>();
+            OutputBinding = new QueueingProducerChannel<TOutputQueueEntity>();
             PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
 
             InputBinding.QueueHasData += InputBinding_QueueHasData;

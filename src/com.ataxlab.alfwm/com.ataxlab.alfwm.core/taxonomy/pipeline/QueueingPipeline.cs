@@ -1,4 +1,5 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+using com.ataxlab.alfwm.core.taxonomy.processdefinition;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,6 +8,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
     public class QueueingPipeline : IQueueingPipeline
     {
+        public QueueingPipeline()
+        {
+            ProcessDefinition = new QueueingPipelineProccessDefinition();
+        }
+
         public IQueueingPipelineProcessDefinition ProcessDefinition { get; set; }
         public string PipelineId { get; set; }
         public string PipelineInstanceId { get; set; }
@@ -77,7 +83,59 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         {
             var newNode = new QueueingPipelineNode<TPipelineToolNode, TLatchingInputBinding, TOutputBinding, TConfiguration, TInputQueueENtity, TOutputQueueEntity>() { PipelineTool = node };
 
+            // this.ProcessDefinition.PipelineToolChain
             return true;
+        }
+    }
+
+    public class QueueingPipeline<TProcessDefinition, TPipelineNode> : IQueueingPipeline<TProcessDefinition, TPipelineNode>
+    {
+        public TProcessDefinition ProcessDefinition { get; set;}
+        public string PipelineId { get; set;}
+        public string PipelineInstanceId { get; set;}
+        public string PipelineDisplayName { get; set;}
+        public string PipelineDescription { get; set;}
+        public IPipelineBinding PipelineInputBinding { get; set;}
+        public IPipelineBinding PipelineOutputBinding { get; set;}
+
+        public event EventHandler<PipelineStartedEventArgs> PipelineStarted;
+        public event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
+        public event EventHandler<PipelineFailedEventArgs> PipelineFailed;
+        public event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
+
+        public void AddTool(TPipelineNode node)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineFailed(object sender, PipelineFailedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineStarted(object sender, PipelineStartedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StartPipeline(TProcessDefinition configuration)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StopPipeline(string instanceId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
