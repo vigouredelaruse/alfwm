@@ -26,7 +26,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     }
 
     public class PipelineToolConfiguration<TPayload> : IPipelineToolConfiguration<TPayload>
-        where TPayload : class, new()
+        //where TPayload : class, new()
     {
         public TPayload Configuration { get; set;}
         public string DisplayName { get; set;}

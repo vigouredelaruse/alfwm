@@ -12,7 +12,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     /// </summary>
     /// <typeparam name="TQueueEntity"></typeparam>
     public interface IQueueProducerPipelineToolBinding<TQueueEntity> : IPipelineToolBinding 
-        where TQueueEntity : class
+        //where TQueueEntity : class
     {
         ConcurrentQueue<TQueueEntity> OutputQueue { get; set; }
     }

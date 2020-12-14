@@ -17,7 +17,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// the need to base other interfaces on this
     /// </summary>
     public interface IPipelineTool<TConfiguration>
-        where TConfiguration : class, new()
+        //where TConfiguration : class, new()
     {
 
         IPipelineToolConfiguration<TConfiguration> PipelineToolConfiguration { get; set; }
@@ -58,27 +58,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         IPipelineToolContext PipelineToolContext { get; set; }
 
         IPipelineToolBinding PipelineToolOutputBinding { get; set; }
-
-
-
-        /// <summary>
-        /// a start method for a delegate that has a user specified output
-        /// an implementation may choose to for instance, pass the output
-        /// to new activities
-        /// 
-        /// nominated to be obsoleted due to impedence mismatch
-        /// between generic type parameter and class generic type paremeter
-        /// configuration
-        /// 
-        ///
-        /// </summary>
-        /// <typeparam name="StartResult"></typeparam>
-        /// <typeparam name="StartConfiguration"></typeparam>
-        /// <param name="configuration"></param>
-        /// <param name="callback"></param>
-        [Obsolete]
-        void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
-           where StartConfiguration : class, IPipelineToolConfiguration, new();
 
         /// <summary>
         /// start with the Class Generic parameter 

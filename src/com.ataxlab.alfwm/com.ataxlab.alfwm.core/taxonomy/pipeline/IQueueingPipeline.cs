@@ -40,11 +40,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <returns></returns>
         bool AddQueueingPipelineNode<TPipelineToolNode, TLatchingInputBinding, TOutputBinding, TInputQueueENtity, TOutputQueueEntity, TConfiguration>(TPipelineToolNode node)
             where TPipelineToolNode : class, IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TInputQueueENtity, TOutputQueueEntity, TConfiguration>, new()
-            where TLatchingInputBinding : class, new()
-            where TOutputBinding : class, new()
-            where TInputQueueENtity : class, new()
-            where TOutputQueueEntity : class, new()
-            where TConfiguration : class, new();
+            //where TLatchingInputBinding : class, new()
+            //where TOutputBinding : class, new()
+            //where TInputQueueENtity : class, new()
+            //where TOutputQueueEntity : class, new()
+            where TConfiguration : IPipelineToolConfiguration; // class, new();
 
     
     }

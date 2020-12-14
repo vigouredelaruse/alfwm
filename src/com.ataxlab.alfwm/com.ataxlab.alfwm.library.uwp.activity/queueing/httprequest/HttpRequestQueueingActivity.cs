@@ -133,10 +133,6 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             WorkItemCache.Enqueue(availableData);
         }
 
-        public override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
-        {
-            this.PipelineToolConfiguration = new PipelineToolConfiguration<HttpRequestQueueingActivityConfiguration>() { Configuration = configuration as HttpRequestQueueingActivityConfiguration };
-        }
 
         public override void StartPipelineTool(HttpRequestQueueingActivityConfiguration configuration, Action<HttpRequestQueueingActivityConfiguration> callback)
         {

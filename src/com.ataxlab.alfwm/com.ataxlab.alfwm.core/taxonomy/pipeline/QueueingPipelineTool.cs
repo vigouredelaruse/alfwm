@@ -103,11 +103,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             this.OnQueueHasData(sender, e.EventPayload);
         }
 
-        public override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
-        {
-            /// TODO something useful here
-        }
-
 
         public override StopResult StopPipelineTool<StopResult>(string instanceId)
         {
@@ -127,8 +122,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     /// <typeparam name="TQueueEntity"></typeparam>
     public class QueueingPipelineTool<TQueueEntity, TConfiguration> : QueueingPipelineToolBase<TQueueEntity, TConfiguration>
-        where TQueueEntity : class, new()
-        where TConfiguration : class, new()
+        //where TQueueEntity : class, new()
+        where TConfiguration :  IPipelineToolConfiguration // class, new()
     {
         public QueueingPipelineTool()
         {
@@ -215,11 +210,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         }
 
-        public override void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
-        {
-            this.PipelineToolConfiguration = new PipelineToolConfiguration<TConfiguration>() { Configuration = configuration as TConfiguration};
-            callback(configuration);
-        }
 
         public override StopResult StopPipelineTool<StopResult>(string instanceId)
         {

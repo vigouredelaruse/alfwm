@@ -64,7 +64,7 @@ namespace com.ataxlab.alfwm.scheduler.windowsthreadpool
                        {
                        try
                        {
-                           activity.StartPipelineTool<TConfiguration>(activityConfiguration, (config) => 
+                           activity.StartPipelineTool(activityConfiguration, (config) => 
                                {
                                    callback(config);
                                    //return new ThreadPoolActivityStartResult();

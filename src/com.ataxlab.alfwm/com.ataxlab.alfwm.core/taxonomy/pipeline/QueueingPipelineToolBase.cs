@@ -63,8 +63,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public abstract void OnQueueHasData(object sender, TInputQueueEntity availableData);
 
-        public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
-            where StartConfiguration : class, IPipelineToolConfiguration, new();
         public abstract void StartPipelineTool(TQueueConfiguration configuration, Action<TQueueConfiguration> callback);
 
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
@@ -72,8 +70,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
 
     public abstract class QueueingPipelineToolBase<TQueueEntity, TConfiguration> : IQueueingPipelineTool<QueueingConsumerChannel<TQueueEntity>, QueueingConsumerChannel<TQueueEntity>, TQueueEntity, TConfiguration>
-        where TConfiguration : class, new()
-        where TQueueEntity : class, new()
+        where TConfiguration : IPipelineToolConfiguration // class, new()
+        //where TQueueEntity : class, new()
     {
         public abstract QueueingConsumerChannel<TQueueEntity> InputBinding { get; set; }
         public abstract List<QueueingConsumerChannel<TQueueEntity>> QueueingOutputBindingCollection { get; set; }
@@ -98,8 +96,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args);
         public abstract void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args);
         public abstract void OnQueueHasData(object sender, TQueueEntity availableData);
-        public abstract void StartPipelineTool<StartConfiguration>(StartConfiguration configuration, Action<StartConfiguration> callback)
-            where StartConfiguration : class, IPipelineToolConfiguration, new();
         public abstract void StartPipelineTool(TConfiguration configuration, Action<TConfiguration> callback);
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }

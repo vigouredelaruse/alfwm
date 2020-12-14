@@ -16,7 +16,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
     /// <typeparam name="TQueueEntity"></typeparam>
     /// <typeparam name="TPollingTimer"></typeparam>
     public class QueueingConsumerChannel<TQueueEntity> : IQueueConsumerPipelineToolBinding<TQueueEntity>
-        where TQueueEntity : class, new()
+        //where TQueueEntity : class, new()
     {
         /// <summary>
         /// 
@@ -170,7 +170,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         {
 
             // examine the queue
-            TQueueEntity newEntity = null;
+            TQueueEntity newEntity = default(TQueueEntity);
             InputQueue.TryPeek(out newEntity);
 
             if (newEntity != null)
