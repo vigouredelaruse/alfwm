@@ -52,6 +52,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     public interface IQueueingPipeline<TProcessDefinition, TPipelineNode> : IPipeline<TProcessDefinition>
     {
 
-        void AddTool(TPipelineNode node);
+        
+        string AddTool(TPipelineNode node);
     }
 }

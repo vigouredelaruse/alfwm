@@ -44,7 +44,27 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
         where TLatchingOutputBinding : class, new()
         where TLatchingInputBinding : class, new()
     {
+
+        public QueueingPipelineProcessDefinition()
+        {
+            this.PipelineToolChain = new LinkedList<IQueueingPipelineNode<IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>, TPipelineToolConfiguration, TInputEntity, TOutputEntity>>();
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         public string Id { get ; set; }
         public LinkedList<IQueueingPipelineNode<IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>, TPipelineToolConfiguration, TInputEntity, TOutputEntity>> PipelineToolChain { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+   
+        public String AddFirstNode<TNode, TTLatchingInputBinding, TTOutputBinding, TTInputEntity, TTOutputEntity, TTPipelineToolConfiguration>(TNode node)
+            where TNode : IQueueingPipelineNode<IQueueingPipelineTool<TTLatchingInputBinding, TTOutputBinding, TTInputEntity, TTOutputEntity, TTPipelineToolConfiguration>,
+                    TTPipelineToolConfiguration, TTInputEntity, TTOutputEntity>
+            where TTPipelineToolConfiguration : class, IPipelineToolConfiguration, new()
+            where TTLatchingInputBinding : class, new()
+            where TTOutputBinding : class, new()
+            where TTOutputEntity : class, new()
+            where TTInputEntity : class, new()
+        {
+            return "";
+        }
+
     }
 }

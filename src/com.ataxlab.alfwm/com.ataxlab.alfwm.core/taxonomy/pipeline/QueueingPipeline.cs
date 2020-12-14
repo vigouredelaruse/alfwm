@@ -88,54 +88,27 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         }
     }
 
-    public class QueueingPipeline<TProcessDefinition, TPipelineNode> : IQueueingPipeline<TProcessDefinition, TPipelineNode>
+    public abstract class QueueingPipeline<TProcessDefinition, TPipelineNode> : IQueueingPipeline<TProcessDefinition, TPipelineNode>
     {
-        public TProcessDefinition ProcessDefinition { get; set;}
-        public string PipelineId { get; set;}
-        public string PipelineInstanceId { get; set;}
-        public string PipelineDisplayName { get; set;}
-        public string PipelineDescription { get; set;}
-        public IPipelineBinding PipelineInputBinding { get; set;}
-        public IPipelineBinding PipelineOutputBinding { get; set;}
+        public abstract TProcessDefinition ProcessDefinition { get; set; }
+        public abstract string PipelineId { get; set; }
+        public abstract string PipelineInstanceId { get; set; }
+        public abstract string PipelineDisplayName { get; set; }
+        public abstract string PipelineDescription { get; set; }
+        public abstract IPipelineBinding PipelineInputBinding { get; set; }
+        public abstract IPipelineBinding PipelineOutputBinding { get; set; }
 
-        public event EventHandler<PipelineStartedEventArgs> PipelineStarted;
-        public event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
-        public event EventHandler<PipelineFailedEventArgs> PipelineFailed;
-        public event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
+        public abstract event EventHandler<PipelineStartedEventArgs> PipelineStarted;
+        public abstract event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
+        public abstract event EventHandler<PipelineFailedEventArgs> PipelineFailed;
+        public abstract event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
 
-        public void AddTool(TPipelineNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnPipelineFailed(object sender, PipelineFailedEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnPipelineStarted(object sender, PipelineStartedEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void StartPipeline(TProcessDefinition configuration)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void StopPipeline(string instanceId)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract string AddTool(TPipelineNode node);
+        public abstract void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args);
+        public abstract void OnPipelineFailed(object sender, PipelineFailedEventArgs args);
+        public abstract void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args);
+        public abstract void OnPipelineStarted(object sender, PipelineStartedEventArgs args);
+        public abstract void StartPipeline(TProcessDefinition configuration);
+        public abstract void StopPipeline(string instanceId);
     }
 }

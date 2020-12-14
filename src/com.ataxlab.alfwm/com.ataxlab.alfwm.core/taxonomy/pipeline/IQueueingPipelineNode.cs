@@ -28,7 +28,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// <typeparam name="TPipelineTool"></typeparam>
     /// <typeparam name="TPipelineToolConfiguration"></typeparam>
     public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration> : IQueueingPipelineNode
-        where TPipelineTool : class, IPipelineTool<TPipelineToolConfiguration>, new()
+        where TPipelineTool : IPipelineTool<TPipelineToolConfiguration>
         where TPipelineToolConfiguration : class, new()
     {
         TPipelineTool PipelineTool { get; set; }

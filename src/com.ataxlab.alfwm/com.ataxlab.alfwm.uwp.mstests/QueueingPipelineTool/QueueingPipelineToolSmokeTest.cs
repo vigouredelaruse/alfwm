@@ -1,4 +1,5 @@
-﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+﻿using com.ataxlab.alfwm.core.collections;
+using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using com.ataxlab.alfwm.core.taxonomy.processdefinition;
 using com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest;
@@ -41,8 +42,10 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
         [TestMethod]
         public void CanAddAndBindPipelineToolsToPipeline()
         {
-            var testPipeline = new QueueingPipeline();
+            //var testPipeline = new QueueingPipeline<QueueingPipelineProcessDefinition<HttpRequestQueueingActivityConfiguration, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>
+            //  , QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>>();
 
+            var testPipeline = new PipelineNodeQueueingPipeline();
    
             var httpActivity = new HttpRequestQueueingActivity();
             httpActivity.QueueHasAvailableDataEvent += Activity_QueueHasAvailableDataEvent1;
@@ -62,9 +65,22 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
             var processDefinition = new QueueingPipelineProcessDefinition<HttpRequestQueueingActivityConfiguration, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>
                 ();
-            //var processDefinition = new QueueingPipelineProcessDefinition<(); // TODO  make a TConfiguration that uses PipelineToolVariables
-            // otherwise he linked list of the process definition becomes hardcoded to 1 configuration
-            // and the linked list must specify arbitrary pipelinetool<tconfiguration> nodes
+
+            // testPipeline.ProcessDefinition = processDefinition;
+            // testPipeline.AddTool(newNode);
+
+            //var id = testPipeline.AddQueueingPipelineNode < QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>,
+
+            //var id = testPipeline.AddQueueingPipelineNode<IQueueingPipelineNode<QueueingPipelineToolBase<HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>, HttpRequestQueueingActivityConfiguration>>,
+            //     QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>,
+            //    QueueingProducerChannel<List<Tuple<String, String>>>,
+            //    HttpRequestQueueingActivityConfiguration,
+            //    List<Tuple<String, String>>,
+            //    HttpRequestQueueingActivityConfiguration>(newNode);
+
+                 //var processDefinition = new QueueingPipelineProcessDefinition<(); // TODO  make a TConfiguration that uses PipelineToolVariables
+                 // otherwise he linked list of the process definition becomes hardcoded to 1 configuration
+                 // and the linked list must specify arbitrary pipelinetool<tconfiguration> nodes
 
 
             //var result = testPipeline.AddTool < QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration>,
@@ -75,10 +91,10 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             //    HttpRequestQueueingActivityConfiguration,
             //     HttpRequestQueueingActivityConfiguration
             //    > (httpActivity, httpActivityConfig);
-                
- 
 
-            testPipeline.AddTool<HttpRequestQueueingActivity, HttpRequestQueueingActivityConfiguration>(httpActivity, httpActivityConfig);
+
+
+            // testPipeline.AddTool<HttpRequestQueueingActivity, HttpRequestQueueingActivityConfiguration>(httpActivity, httpActivityConfig);
         }
 
         #endregion queueing pipeline tests
