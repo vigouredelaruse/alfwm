@@ -5,6 +5,18 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
+
+    public class QueueingPipelineNode2<TPipelineTool, TLatchingInputBinding, TOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity> :
+      IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity>
+       where TPipelineTool : IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>
+       where TPipelineToolConfiguration : PipelineToolConfiguration<IPipelineToolConfiguration> // class, new()
+    {
+        public TPipelineTool PipelineTool { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IQueueConsumerPipelineToolBinding<TInputEntity> PipelineToolInputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IQueueProducerPipelineToolBinding<TOutputEntity> PipelineToolOutputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string QueueingPipelineNodeId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    }
+
     public class QueueingPipelineNode<TPipelineTool, TLatchingInputBinding, TOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity> : 
         IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity>
          where TPipelineTool :  IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>

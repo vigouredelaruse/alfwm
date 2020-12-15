@@ -99,7 +99,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.activity
             where StartConfiguration : class, IPipelineToolConfiguration, new()
         {
 
-            this.PipelineToolConfiguration = new PipelineToolConfiguration<ThreadPoolActivityConfiguration>() { Configuration = configuration as ThreadPoolActivityConfiguration};
+            this.PipelineToolConfiguration = new PipelineToolConfiguration<ThreadPoolActivityConfiguration>() { Payload = configuration as ThreadPoolActivityConfiguration};
             this.OnPipelineToolStarted(this, new PipelineToolStartEventArgs()
             {
                 InstanceId = this.PipelineToolInstanceId,

@@ -6,6 +6,7 @@ using System.Text;
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
     public interface IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputQueueEntity, TOutputQueueEntity, TConfiguration> : IPipelineTool<TConfiguration>
+        where TConfiguration : IPipelineToolConfiguration
         //where TLatchingInputBinding : class, new()
         //where TLatchingOutputBinding : class, new()
         //where TInputQueueEntity : class, new()

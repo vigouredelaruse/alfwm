@@ -1,9 +1,11 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy;
+using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -13,6 +15,65 @@ using Windows.Foundation;
 
 namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 {
+    public class HttpRequestQueueingActivity2 : IQueueingPipelineTool<QueueingConsumerChannel<PipelineToolConfiguration<HttpRequestQueueingActivityConfiguration>>,
+                                                                      QueueingProducerChannel<PipelineToolConfiguration<HttpRequestQueueingActivityResult>>,
+                                                                                              PipelineToolConfiguration<HttpRequestQueueingActivityConfiguration>,
+                                                                                              PipelineToolConfiguration<HttpRequestQueueingActivityResult>,
+                                                                                              PipelineToolConfiguration<HttpRequestQueueingActivityConfiguration>>
+    {
+        public QueueingConsumerChannel<PipelineToolConfiguration<HttpRequestQueueingActivityConfiguration>> InputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public QueueingProducerChannel<PipelineToolConfiguration<HttpRequestQueueingActivityResult>> OutputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IPipelineToolConfiguration<PipelineToolConfiguration<HttpRequestQueueingActivityConfiguration>> PipelineToolConfiguration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string PipelineToolInstanceId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ObservableCollection<IPipelineVariable> PipelineToolVariables { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string PipelineToolId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string PipelineToolDisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string PipelineToolDescription { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IPipelineToolStatus PipelineToolStatus { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IPipelineToolContext PipelineToolContext { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IPipelineToolBinding PipelineToolOutputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public event Func<PipelineToolConfiguration<HttpRequestQueueingActivityConfiguration>, PipelineToolConfiguration<HttpRequestQueueingActivityConfiguration>> QueueHasAvailableDataEvent;
+        public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
+        public event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
+        public event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
+        public event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
+
+        public void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class, new()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnQueueHasData(object sender, PipelineToolConfiguration<HttpRequestQueueingActivityConfiguration> availableData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StartPipelineTool(PipelineToolConfiguration<HttpRequestQueueingActivityConfiguration> configuration, Action<PipelineToolConfiguration<HttpRequestQueueingActivityConfiguration>> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
+        {
+            throw new NotImplementedException();
+        }
+    }
     /// <summary>
     /// canonical implementation of a Queueing Pipeline Tool
     /// that performs an HTTP Request
@@ -134,9 +195,10 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         }
 
 
+
         public override void StartPipelineTool(HttpRequestQueueingActivityConfiguration configuration, Action<HttpRequestQueueingActivityConfiguration> callback)
         {
-            this.PipelineToolConfiguration = new PipelineToolConfiguration<HttpRequestQueueingActivityConfiguration>() { Configuration = configuration };
+            this.PipelineToolConfiguration = new PipelineToolConfiguration<HttpRequestQueueingActivityConfiguration>() { Payload = configuration };
         }
 
         public override StopResult StopPipelineTool<StopResult>(string instanceId)

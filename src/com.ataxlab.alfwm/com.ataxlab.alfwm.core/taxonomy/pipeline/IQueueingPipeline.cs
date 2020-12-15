@@ -23,9 +23,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <returns></returns>
         bool Bind(string SourceInstanceId, string DestinationInstanceId);
 
-        bool AddTool<TPipelineTool, TConfiguration>(TPipelineTool tool, TConfiguration configuration)
-             where TPipelineTool : class, IPipelineTool<TConfiguration>, new()
-             where TConfiguration : class, new();
+        //bool AddTool<TPipelineTool, TConfiguration>(TPipelineTool tool, TConfiguration configuration)
+        //     where TPipelineTool : class, IPipelineTool<TConfiguration>, new()
+        //     where TConfiguration : class, new();
 
         /// <summary>
         /// add a tool with sufficient specification to support dynamic binding

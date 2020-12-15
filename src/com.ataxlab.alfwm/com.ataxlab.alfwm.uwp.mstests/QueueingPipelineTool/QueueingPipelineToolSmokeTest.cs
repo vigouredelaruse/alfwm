@@ -39,16 +39,16 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
         }
 
         #region queueing pipeline tests
-        [TestMethod]
+        // [TestMethod]
         public void CanAddAndBindPipelineToolsToPipeline()
         {
             //var testPipeline = new QueueingPipeline<QueueingPipelineProcessDefinition<HttpRequestQueueingActivityConfiguration, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>
             //  , QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>>();
 
-            var testPipeline = new PipelineNodeQueueingPipeline();
+            var testPipeline = new PipelineNodeQueueingPipeline3();
    
-            var httpActivity = new HttpRequestQueueingActivity();
-            httpActivity.QueueHasAvailableDataEvent += Activity_QueueHasAvailableDataEvent1;
+            var httpActivity = new HttpRequestQueueingActivity2();
+            // httpActivity.QueueHasAvailableDataEvent += Activity_QueueHasAvailableDataEvent1;
             httpActivity.InputBinding.IsQueuePollingEnabled = true;
 
             var httpActivityConfig = new HttpRequestQueueingActivityConfiguration();
@@ -56,15 +56,21 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             httpActivity.PipelineToolCompleted += Activity_PipelineToolCompleted;
 
             var inputBinding = new QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>();
-            var outputBinding = new QueueingProducerChannel<List<Tuple<String, String>>>();
+            var outputBinding = new QueueingProducerChannel<HttpRequestQueueingActivityResult>();
 
-            var newNode = new QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration,HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>();
-            newNode.PipelineTool = httpActivity;
-            newNode.PipelineToolInputBinding = httpActivity.InputBinding;
-            newNode.PipelineToolOutputBinding = httpActivity.OutputBinding;
+            // var newNode = new QueueingPipelineNode<HttpRequestQueueingActivity2, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<HttpRequestQueueingActivityResult>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityResult>();
 
-            var processDefinition = new QueueingPipelineProcessDefinition<HttpRequestQueueingActivityConfiguration, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>
+            //var newNode = new QueueingPipelineNode<HttpRequestQueueingActivity2, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<HttpRequestQueueingActivityConfiguration>, HttpRequestQueueingActivityConfiguration,HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration>();
+            //newNode.PipelineTool = httpActivity;
+            //newNode.PipelineToolInputBinding = httpActivity.InputBinding;
+            //newNode.PipelineToolOutputBinding = httpActivity.OutputBinding;
+
+            var processDefinition = new QueueingPipelineProcessDefinition<HttpRequestQueueingActivityConfiguration, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<HttpRequestQueueingActivityResult>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityResult>
                 ();
+
+            var processDefinition2 = new QueueingPipelineProcessDefinition<HttpRequestQueueingActivityConfiguration, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<HttpRequestQueueingActivityConfiguration>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration>
+    ();
+            // testPipeline.AddTool(httpActivity);
 
             // testPipeline.ProcessDefinition = processDefinition;
             // testPipeline.AddTool(newNode);

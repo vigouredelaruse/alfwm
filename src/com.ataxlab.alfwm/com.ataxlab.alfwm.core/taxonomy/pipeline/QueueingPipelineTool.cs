@@ -12,9 +12,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
     public class QueueingPipelineTool<TInputQueueEntity, TOutputQueueEntity, TConfiguration> :
         QueueingPipelineToolBase<TInputQueueEntity, TOutputQueueEntity, TConfiguration>
-        where TInputQueueEntity : class, new()
-        where TOutputQueueEntity : class, new()
-        where TConfiguration : class, new()
+        //where TInputQueueEntity : class, new()
+        //where TOutputQueueEntity : class, new()
+        where TConfiguration : IPipelineToolConfiguration //class, new()
     {
         public override event Func<TInputQueueEntity, TInputQueueEntity> QueueHasAvailableDataEvent;
         public override event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
@@ -218,7 +218,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public override void StartPipelineTool(TConfiguration configuration, Action<TConfiguration> callback)
         {
-            this.PipelineToolConfiguration = new PipelineToolConfiguration<TConfiguration>() { Configuration = configuration };
+            this.PipelineToolConfiguration = new PipelineToolConfiguration<TConfiguration>() { Payload = configuration };
         }
     }
 }

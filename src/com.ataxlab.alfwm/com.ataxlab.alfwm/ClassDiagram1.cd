@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="com.ataxlab.alfwm.WorkflowManager" BaseTypeListCollapsed="true">
+    <Position X="10" Y="9.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAACSAAAAABAAAAAEAAAAAAAAAAASAEAAA=</HashCode>
+      <FileName>WorkflowManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.WorkflowManagerContext">
+    <Position X="7" Y="7" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WorkflowManagerContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.deployment.model.Deployment&lt;TProcessDefinition, TDeploymentStatus&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="9.25" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAQAAAAAIAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>deployment\model\Deployment.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.deployment.model.DeploymentConfiguration">
+    <Position X="10" Y="7" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>deployment\model\DeploymentConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.deployment.model.DeploymentStatus" Collapsed="true">
+    <Position X="3.5" Y="8.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>deployment\model\DeploymentStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.deployment.DeploymentContainer&lt;TProcessDefinitionItems, TProcessDefinition&gt;" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAgAAACAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>deployment\DeploymentContainer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.utility.extension.CloneExtensions" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>utility\extension\CloneExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.utility.extension.LinqTreeExtension">
+    <Position X="10" Y="8" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>utility\extension\LinqTreeExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.utility.QueueingPipelineBuilder&lt;TPipeline, TProcessDefinition&gt;">
+    <Position X="5.75" Y="5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>utility\QueueingPipelineBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="com.ataxlab.alfwm.IWorkflowManager">
+    <Position X="7.5" Y="0.5" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAASAAAAAAAAAAAEAAAAAAAAAAASAEAAA=</HashCode>
+      <FileName>IWorkflowManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.deployment.model.IDeployment&lt;TProcessDefinition, TDeploymentStatus&gt;">
+    <Position X="10" Y="5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAQAAAAAIAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>deployment\model\IDeployment.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.deployment.IDeploymentContainer">
+    <Position X="2" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>deployment\IDeploymentContainer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.deployment.IDeploymentContainer&lt;TProcessDefinitionItems, TProcessDefinition&gt;">
+    <Position X="0.5" Y="2" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAgAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>deployment\IDeploymentContainer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

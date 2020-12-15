@@ -70,7 +70,7 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
         {
             this.PipelineToolConfiguration =
                 new PipelineToolConfiguration<HttpActivityConfiguration>()
-                { Configuration = configuration as HttpActivityConfiguration }; // { configuration as HttpActivityConfiguration; ;
+                { Payload = configuration as HttpActivityConfiguration }; // { configuration as HttpActivityConfiguration; ;
 
             // StartResult result = default(StartResult); // = new StartResult();
             // var config = configuration;
@@ -86,7 +86,7 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
                 {
                     //                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", RequiredParameters.AuthorizationToken);
                     var uri = new Uri((configuration as HttpActivityConfiguration).HttpUrl); //  new Uri(this.PipelineToolConfiguration.Configuration.HttpUrl);
-                    var request = new HttpRequestMessage(this.PipelineToolConfiguration.Configuration.HttpMethod, uri);
+                    var request = new HttpRequestMessage(this.PipelineToolConfiguration.Payload.HttpMethod, uri);
                     var response = await httpClient.SendRequestAsync(request);
                     var data = await response.Content.ReadAsStringAsync();
 
@@ -143,7 +143,13 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
 
         public override void StartPipelineTool(HttpActivityConfiguration configuration, Action<HttpActivityConfiguration> callback)
         {
-            throw new NotImplementedException();
+            this.PipelineToolConfiguration =  new PipelineToolConfiguration<HttpActivityConfiguration>() { Payload = configuration };
+            HttpRequestAsyncAction = Windows.System.Threading.ThreadPool.RunAsync(
+              async (state) =>
+              {
+                  await EnsureHttpRequest(configuration, callback);
+
+              });
         }
     }
 }

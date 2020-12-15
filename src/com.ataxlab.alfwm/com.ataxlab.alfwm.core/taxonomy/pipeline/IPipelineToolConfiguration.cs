@@ -37,6 +37,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     public interface IPipelineToolConfiguration<TConfiguration> : IPipelineToolConfiguration
         //where TConfiguration : class, new()
     {
-        new TConfiguration Configuration { get; set; }
+        TConfiguration Payload { get; set; }
     }
 }

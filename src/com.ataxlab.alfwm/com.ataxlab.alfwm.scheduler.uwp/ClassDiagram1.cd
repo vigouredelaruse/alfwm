@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="com.ataxlab.alfwm.scheduler.uwp.WindowsThreadpoolSchedulerBase" Collapsed="true">
+    <Position X="2.5" Y="0.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAQgAAAAAAQAAAQAAAAAAAAAAAAAAAACAIAA=</HashCode>
+      <FileName>WindowsThreadpoolSchedulerBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.scheduler.uwp.WindowsThreadPoolSchedulerStartResult" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="3" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WindowsThreadPoolSchedulerStartResult.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.scheduler.uwp.threadpool.ActivityStartedException">
+    <Position X="0.5" Y="0.75" Width="6.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ActivityStartedException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.scheduler.windowsthreadpool.WindowsThreadpoolScheduler">
+    <Position X="2.5" Y="2.25" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAACgAAAAQgAAAAAAQAAAQAAAAAAAAAAAAAAAACAIAA=</HashCode>
+      <FileName>WindowsThreadpoolScheduler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.scheduler.windowsthreadpool.WindowsThreadpoolSchedulerException">
+    <Position X="9.5" Y="0.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WindowsThreadpoolSchedulerException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

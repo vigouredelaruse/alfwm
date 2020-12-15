@@ -9,9 +9,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
     public abstract class QueueingPipelineToolBase<TInputQueueEntity, TOutputQueueEntity, TQueueConfiguration>
         : IQueueingPipelineTool<QueueingConsumerChannel<TInputQueueEntity>, QueueingProducerChannel<TOutputQueueEntity>, TInputQueueEntity, TOutputQueueEntity, TQueueConfiguration>
-        where TInputQueueEntity : class, new()
-        where TOutputQueueEntity : class, new()
-        where TQueueConfiguration : class, new()
+        //where TInputQueueEntity : class, new()
+        //where TOutputQueueEntity : class, new()
+        where TQueueConfiguration : IPipelineToolConfiguration // class, new()
     {
         public virtual QueueingConsumerChannel<TInputQueueEntity> InputBinding {get; set;}
         public virtual QueueingProducerChannel<TOutputQueueEntity> OutputBinding {get; set;}
