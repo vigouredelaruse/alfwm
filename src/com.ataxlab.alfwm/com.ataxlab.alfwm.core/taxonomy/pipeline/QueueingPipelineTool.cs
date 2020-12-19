@@ -12,9 +12,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
     public class QueueingPipelineTool<TInputQueueEntity, TOutputQueueEntity, TConfiguration> :
         QueueingPipelineToolBase<TInputQueueEntity, TOutputQueueEntity, TConfiguration>
-        //where TInputQueueEntity : class, new()
-        //where TOutputQueueEntity : class, new()
-        where TConfiguration : IPipelineToolConfiguration //class, new()
+            where TInputQueueEntity : class, IPipelineToolConfiguration, new()
+            where TOutputQueueEntity : class, IPipelineToolConfiguration, new()
+        // where TConfiguration : IPipelineToolConfiguration //class, new()
     {
         public override event Func<TInputQueueEntity, TInputQueueEntity> QueueHasAvailableDataEvent;
         public override event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
@@ -26,11 +26,17 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         {
             this.PipelineToolInstanceId = Guid.NewGuid().ToString();
 
-            InputBinding = new QueueingConsumerChannel<TInputQueueEntity>();
-            OutputBinding = new QueueingProducerChannel<TOutputQueueEntity>();
+            QueueingInputBinding = new QueueingConsumerChannel<QueueingPipelineQueueEntity<TInputQueueEntity>>();
+            QueueingOutputBinding = new QueueingProducerChannel<QueueingPipelineQueueEntity<TOutputQueueEntity>>();
             PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
 
-            InputBinding.QueueHasData += InputBinding_QueueHasData;
+            QueueingInputBinding.QueueHasData += QueueingInputBinding_QueueHasData; //  InputBinding_QueueHasData;
+        }
+
+        private void QueueingInputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<TInputQueueEntity>> e)
+        {
+            // delegate the logic of the queue event handler 
+            this.OnQueueHasData(sender, e.EventPayload.Payload);
         }
 
         public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
@@ -97,6 +103,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         }
 
+        [Obsolete]
         private void InputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<TInputQueueEntity> e)
         {
             // delegate the logic of the queue event handler 
@@ -122,27 +129,31 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     /// <typeparam name="TQueueEntity"></typeparam>
     public class QueueingPipelineTool<TQueueEntity, TConfiguration> : QueueingPipelineToolBase<TQueueEntity, TConfiguration>
-        //where TQueueEntity : class, new()
-        where TConfiguration :  IPipelineToolConfiguration // class, new()
+        where TQueueEntity : class, new()
+        // where TConfiguration :  IPipelineToolConfiguration // class, new()
     {
         public QueueingPipelineTool()
         {
             this.PipelineToolInstanceId = Guid.NewGuid().ToString();
 
-            InputBinding = new QueueingConsumerChannel<TQueueEntity>();
-            QueueingOutputBindingCollection = new List<QueueingConsumerChannel<TQueueEntity>>();
+            QueueingInputBinding = new QueueingConsumerChannel<QueueingPipelineQueueEntity<TQueueEntity>>();
+            QueueingOutputBinding = new QueueingProducerChannel<QueueingPipelineQueueEntity<TQueueEntity>>();
 
-            InputBinding.QueueHasData += InputBinding_QueueHasData;
+            QueueingInputBinding.QueueHasData += QueueingInputBinding_QueueHasData; // InputBinding_QueueHasData;
+        }
+
+        private void QueueingInputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<TQueueEntity>> e)
+        {
+            // delegate the logic of the queue event handler 
+            this.OnQueueHasData(sender, e.EventPayload.Payload);
         }
 
         private void InputBinding_QueueHasData(object sender, binding.queue.QueueDataAvailableEventArgs<TQueueEntity> e)
         {
-            // delegate the logic of the queue event handler 
-            this.OnQueueHasData(sender, e.EventPayload);
+
         }
 
-        public override QueueingConsumerChannel<TQueueEntity> InputBinding { get; set; }
-        public override List<QueueingConsumerChannel<TQueueEntity>> QueueingOutputBindingCollection { get; set; }
+
         public override string PipelineToolInstanceId { get; set; }
         public override IPipelineToolStatus PipelineToolStatus { get; set; }
         public override IPipelineToolContext PipelineToolContext { get; set; }
@@ -151,6 +162,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public override string PipelineToolId { get ; set; }
         public override string PipelineToolDisplayName { get; set; }
         public override string PipelineToolDescription { get; set; }
+        public override QueueingConsumerChannel<QueueingPipelineQueueEntity<TQueueEntity>> QueueingInputBinding {get; set; }
+        public override QueueingProducerChannel<QueueingPipelineQueueEntity<TQueueEntity>> QueueingOutputBinding {get; set; }
+        public override ObservableCollection<IPipelineVariable> PipelineToolVariables {get; set; }
 
         public override event Func<TQueueEntity, TQueueEntity> QueueHasAvailableDataEvent;
         public override event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
@@ -195,10 +209,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
                         var result = handler(availableData);
 
                         // reflect the result on the output binding
-                        foreach (var channel in this.QueueingOutputBindingCollection)
-                        {
-                            channel.InputQueue.Enqueue(result);
-                        }
+                        this.QueueingOutputBinding.OutputQueue.Enqueue(new QueueingPipelineQueueEntity<TQueueEntity>() {  Payload = result });
+                        
                     });
 
                 }

@@ -1,4 +1,5 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,15 +9,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
 
     public abstract class QueueingPipelineToolBase<TInputQueueEntity, TOutputQueueEntity, TQueueConfiguration>
-        : IQueueingPipelineTool<QueueingConsumerChannel<TInputQueueEntity>, QueueingProducerChannel<TOutputQueueEntity>, TInputQueueEntity, TOutputQueueEntity, TQueueConfiguration>
-        //where TInputQueueEntity : class, new()
-        //where TOutputQueueEntity : class, new()
-        where TQueueConfiguration : IPipelineToolConfiguration // class, new()
+        : IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<TInputQueueEntity>>, 
+            QueueingProducerChannel<QueueingPipelineQueueEntity<TOutputQueueEntity>>, TInputQueueEntity, TOutputQueueEntity, TQueueConfiguration>
+            where TInputQueueEntity : class, IPipelineToolConfiguration, new()
+            where TOutputQueueEntity : class, IPipelineToolConfiguration, new()
+        //where TQueueConfiguration : class, new()
     {
-        public virtual QueueingConsumerChannel<TInputQueueEntity> InputBinding {get; set;}
-        public virtual QueueingProducerChannel<TOutputQueueEntity> OutputBinding {get; set;}
         public virtual string PipelineToolInstanceId {get; set;}
-        public ObservableCollection<IPipelineVariable> PipelineToolVariables {get; set;}
+        public virtual ObservableCollection<IPipelineVariable> PipelineToolVariables {get; set;}
         public virtual string PipelineToolId {get; set;}
         public virtual string PipelineToolDisplayName {get; set;}
         public virtual string PipelineToolDescription {get; set;}
@@ -24,6 +24,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public virtual IPipelineToolContext PipelineToolContext {get; set;}
         public virtual IPipelineToolConfiguration<TQueueConfiguration> PipelineToolConfiguration {get; set;}
         public virtual IPipelineToolBinding PipelineToolOutputBinding {get; set;}
+        public virtual QueueingConsumerChannel<QueueingPipelineQueueEntity<TInputQueueEntity>> QueueingInputBinding { get; set; }
+        public virtual QueueingProducerChannel<QueueingPipelineQueueEntity<TOutputQueueEntity>> QueueingOutputBinding { get; set; }
 
         public virtual event  Func<TInputQueueEntity, TInputQueueEntity> QueueHasAvailableDataEvent;
         public virtual event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
@@ -69,21 +71,22 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     }
 
 
-    public abstract class QueueingPipelineToolBase<TQueueEntity, TConfiguration> : IQueueingPipelineTool<QueueingConsumerChannel<TQueueEntity>, QueueingConsumerChannel<TQueueEntity>, TQueueEntity, TConfiguration>
-        where TConfiguration : IPipelineToolConfiguration // class, new()
-        //where TQueueEntity : class, new()
+    public abstract class QueueingPipelineToolBase<TQueueEntity, TConfiguration> :
+        IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<TQueueEntity>>, QueueingProducerChannel<QueueingPipelineQueueEntity<TQueueEntity>>, TQueueEntity, TConfiguration>
+    //where TConfiguration : class, new()
+          where TQueueEntity : class, new()
     {
-        public abstract QueueingConsumerChannel<TQueueEntity> InputBinding { get; set; }
-        public abstract List<QueueingConsumerChannel<TQueueEntity>> QueueingOutputBindingCollection { get; set; }
+        public abstract QueueingConsumerChannel<QueueingPipelineQueueEntity<TQueueEntity>> QueueingInputBinding { get; set; }
+        public abstract QueueingProducerChannel<QueueingPipelineQueueEntity<TQueueEntity>> QueueingOutputBinding { get; set; }
+        public abstract IPipelineToolConfiguration<TConfiguration> PipelineToolConfiguration { get; set; }
         public abstract string PipelineToolInstanceId { get; set; }
+        public abstract ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set; }
         public abstract string PipelineToolId { get; set; }
         public abstract string PipelineToolDisplayName { get; set; }
         public abstract string PipelineToolDescription { get; set; }
         public abstract IPipelineToolStatus PipelineToolStatus { get; set; }
         public abstract IPipelineToolContext PipelineToolContext { get; set; }
-        public abstract IPipelineToolConfiguration<TConfiguration> PipelineToolConfiguration { get; set; }
         public abstract IPipelineToolBinding PipelineToolOutputBinding { get; set; }
-        public ObservableCollection<IPipelineVariable> PipelineToolVariables {get; set;}
 
         public abstract event Func<TQueueEntity, TQueueEntity> QueueHasAvailableDataEvent;
         public abstract event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;

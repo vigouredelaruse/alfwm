@@ -17,8 +17,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// the need to base other interfaces on this
     /// </summary>
     public interface IPipelineTool<TConfiguration>
-        // where TConfiguration : IPipelineToolConfiguration
-        //where TConfiguration : class, new()
+         // where TConfiguration : class, new()
     {
 
         IPipelineToolConfiguration<TConfiguration> PipelineToolConfiguration { get; set; }

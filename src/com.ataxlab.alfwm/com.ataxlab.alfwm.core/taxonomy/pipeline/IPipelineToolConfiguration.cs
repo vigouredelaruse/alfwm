@@ -28,14 +28,16 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// changed with a schema update
         /// </summary>
         string ConfigurationJsonSchema { get; set; }
+
+
     }
 
     /// <summary>
     /// support generic semantics
     /// </summary>
     /// <typeparam name="TConfiguration"></typeparam>
-    public interface IPipelineToolConfiguration<TConfiguration> : IPipelineToolConfiguration
-        //where TConfiguration : class, new()
+    public interface IPipelineToolConfiguration<TConfiguration> 
+        // where TConfiguration : class, IPipelineToolConfiguration,  new()
     {
         TConfiguration Payload { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.ataxlab.alfwm.core.taxonomy.binding.queue;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -6,12 +7,11 @@ using System.Text;
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
     public interface IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputQueueEntity, TOutputQueueEntity, TConfiguration> : IPipelineTool<TConfiguration>
-        where TConfiguration : IPipelineToolConfiguration
-        //where TLatchingInputBinding : class, new()
-        //where TLatchingOutputBinding : class, new()
-        //where TInputQueueEntity : class, new()
-        //where TOutputQueueEntity: class, new()
-        //where TConfiguration : class, new()
+     // where TLatchingInputBinding : class, IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<TInputQueueEntity>>, new()
+      // where TLatchingOutputBinding : class, IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<TOutputQueueEntity>>, new()
+        // where TInputQueueEntity : class, IPipelineToolConfiguration, new()
+        // where TOutputQueueEntity : class, IPipelineToolConfiguration, new()
+        // where TConfiguration : class, new()
     {
         /// <summary>
         /// latching input binding that latches signalling
@@ -25,7 +25,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// events as it likes before renabling the 
         /// polling timer
         /// </summary>
-        TLatchingInputBinding InputBinding { get; set; }
+        TLatchingInputBinding QueueingInputBinding { get; set; }
 
         /// <summary>
         /// latching input binding that latches signalling
@@ -39,7 +39,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// events as it likes before renabling the 
         /// polling timer
         /// </summary>
-        TLatchingOutputBinding OutputBinding { get; set; }
+        TLatchingOutputBinding QueueingOutputBinding { get; set; }
 
         /// <summary>
         /// signalled when the queue input binding
@@ -79,10 +79,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// <typeparam name="TLatchingInputBinding"></typeparam>
     /// <typeparam name="TOutputBinding"></typeparam>
     public interface IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TQueueEntity, TConfiguration> : IPipelineTool<TConfiguration> 
-        //where TLatchingInputBinding : class, new()
-        //where TOutputBinding : class, new()
-        //where TQueueEntity : class, new()
-        where TConfiguration : IPipelineToolConfiguration // class, new()
+        // where TLatchingInputBinding : class, new()
+        // where TOutputBinding : class, new()
+        // where TQueueEntity : class, new()
+        //where TConfiguration :  class, new()
     {
         /// <summary>
         /// latching input binding that latches signalling
@@ -96,7 +96,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// events as it likes before renabling the 
         /// polling timer
         /// </summary>
-        TLatchingInputBinding InputBinding { get; set; }
+        TLatchingInputBinding QueueingInputBinding { get; set; }
 
         /// <summary>
         /// signalled when the queue input binding
@@ -120,6 +120,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// support fanout scenarious
         /// where a tool produces data on multiple outputs
         /// </summary>
-        List<TOutputBinding> QueueingOutputBindingCollection { get; set; }
+        TOutputBinding QueueingOutputBinding { get; set; }
     }
 }

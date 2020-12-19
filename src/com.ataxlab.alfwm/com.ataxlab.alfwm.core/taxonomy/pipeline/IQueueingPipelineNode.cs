@@ -17,7 +17,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
        
     }
 
-    public interface IQueueingPipelineNode<TPipelineTool> : IQueueingPipelineNode
+    public interface IQueueingPipelineNode<TPipelineTool> 
     {
         TPipelineTool PipelineTool { get; set; }
     }
@@ -28,21 +28,18 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     /// <typeparam name="TPipelineTool"></typeparam>
     /// <typeparam name="TPipelineToolConfiguration"></typeparam>
-    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration> : IQueueingPipelineNode
-        where TPipelineTool : IQueueingPipelineTool<QueueingConsumerChannel<TPipelineToolConfiguration>, QueueingProducerChannel<IPipelineToolConfiguration>,
-                                                    IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>
-        where TPipelineToolConfiguration : IPipelineConfiguration // class, new()
+    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration> 
+         where TPipelineToolConfiguration :  class, new()
     {
         TPipelineTool PipelineTool { get; set; }
 
     }
 
-    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity> : IQueueingPipelineNode
-        where TPipelineToolConfiguration : IPipelineToolConfiguration
-       // where TPipelineTool : class, IPipelineTool<TPipelineToolConfiguration>, new()
-       // where TPipelineToolConfiguration : class, new()
+    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity> 
+
+       //where TPipelineToolConfiguration : class, new()
        //where TOutputEntity : class, new()
-       // where TInputEntity : class, new()
+       //where TInputEntity : class, new()
     {
         TPipelineTool PipelineTool { get; set; }
 

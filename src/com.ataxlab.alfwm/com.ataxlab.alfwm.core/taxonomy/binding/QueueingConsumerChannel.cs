@@ -16,7 +16,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
     /// <typeparam name="TQueueEntity"></typeparam>
     /// <typeparam name="TPollingTimer"></typeparam>
     public class QueueingConsumerChannel<TQueueEntity> : IQueueConsumerPipelineToolBinding<TQueueEntity>
-        //where TQueueEntity : class, new()
+              // where TQueueEntity : class,  new()
     {
         /// <summary>
         /// 

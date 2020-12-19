@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 {
-    public class HttpRequestQueueingActivityResult : IPipelineToolConfiguration<List<Tuple<String, String>>>
+    public class HttpRequestQueueingActivityResult : IPipelineToolConfiguration<List<Tuple<String, String>>>, IPipelineToolConfiguration
     {
-        public List<Tuple<string, string>> Payload { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Key { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime DeploymentTime { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string ConfigurationJson { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string ConfigurationJsonSchema { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        object IPipelineToolConfiguration.Configuration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public List<Tuple<string, string>> Payload {get; set; }
+        public string Id {get; set; }
+        public string Key {get; set; }
+        public string DisplayName {get; set; }
+        public DateTime DeploymentTime {get; set; }
+        public string ConfigurationJson {get; set; }
+        public string ConfigurationJsonSchema {get; set; }
+        object IPipelineToolConfiguration.Configuration {get; set; }
     }
 }

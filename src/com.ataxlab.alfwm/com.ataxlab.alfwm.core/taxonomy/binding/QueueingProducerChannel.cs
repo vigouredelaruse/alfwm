@@ -9,7 +9,7 @@ using System.Timers;
 namespace com.ataxlab.alfwm.core.taxonomy.binding
 {
     public class QueueingProducerChannel<TQueueEntity> : IQueueProducerPipelineToolBinding<TQueueEntity>
-        //where TQueueEntity : class, new()
+              // where TQueueEntity : class,  new()
     {
 
         private double DefaultPollingInterval = 50;

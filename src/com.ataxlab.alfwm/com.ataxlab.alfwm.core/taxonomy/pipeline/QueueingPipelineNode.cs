@@ -8,19 +8,21 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
     public class QueueingPipelineNode2<TPipelineTool, TLatchingInputBinding, TOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity> :
       IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity>
-       where TPipelineTool : IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>
-       where TPipelineToolConfiguration : PipelineToolConfiguration<IPipelineToolConfiguration> // class, new()
+       //where TPipelineTool : class, new()
+       //where TPipelineToolConfiguration : class, new()
+       // where TInputEntity : class, new()
+       // where TOutputEntity : class, new()
     {
-        public TPipelineTool PipelineTool { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IQueueConsumerPipelineToolBinding<TInputEntity> PipelineToolInputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IQueueProducerPipelineToolBinding<TOutputEntity> PipelineToolOutputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string QueueingPipelineNodeId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public TPipelineTool PipelineTool { get; set;}
+        public IQueueConsumerPipelineToolBinding<TInputEntity> PipelineToolInputBinding { get; set;}
+        public IQueueProducerPipelineToolBinding<TOutputEntity> PipelineToolOutputBinding { get; set;}
+        public string QueueingPipelineNodeId { get; set;}
     }
 
     public class QueueingPipelineNode<TPipelineTool, TLatchingInputBinding, TOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity> : 
-        IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity>
-         where TPipelineTool :  IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>
-         where TPipelineToolConfiguration : IPipelineToolConfiguration // class, new()
+        IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity>, IQueueingPipelineNode
+         //where TPipelineTool :  class, new()
+         //where TPipelineToolConfiguration :  class, new()
          //where TLatchingInputBinding : class, new()
          //where TOutputBinding : class, new()
          //where TOutputEntity : class, new()

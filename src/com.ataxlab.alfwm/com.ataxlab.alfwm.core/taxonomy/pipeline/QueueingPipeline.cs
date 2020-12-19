@@ -1,4 +1,5 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.processdefinition;
 using System;
 using System.Collections.Generic;
@@ -75,17 +76,18 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public bool AddQueueingPipelineNode<TPipelineToolNode, TLatchingInputBinding, TOutputBinding, TInputQueueENtity, TOutputQueueEntity, TConfiguration>(TPipelineToolNode node)
             where TPipelineToolNode : class, IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TInputQueueENtity, TOutputQueueEntity, TConfiguration>, new()
-            //where TLatchingInputBinding : class, new()
-            //where TOutputBinding : class, new()
-            //where TInputQueueENtity : class, new()
-            //where TOutputQueueEntity : class, new()
-            where TConfiguration : IPipelineToolConfiguration // class, new()
+             where TLatchingInputBinding : class, IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<TInputQueueENtity>>, new()
+              where TOutputBinding : class, IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<TOutputQueueEntity>>, new()
+            where TInputQueueENtity : class, IPipelineToolConfiguration, new()
+            where TOutputQueueEntity : class, IPipelineToolConfiguration, new()
+            where TConfiguration : class, IPipelineToolConfiguration, new() // class, new()
         {
             var newNode = new QueueingPipelineNode<TPipelineToolNode, TLatchingInputBinding, TOutputBinding, TConfiguration, TInputQueueENtity, TOutputQueueEntity>() { PipelineTool = node };
 
             // this.ProcessDefinition.PipelineToolChain
             return true;
         }
+
     }
 
     public abstract class QueueingPipeline<TProcessDefinition, TPipelineNode> : IQueueingPipeline<TProcessDefinition, TPipelineNode>
