@@ -1,4 +1,5 @@
-﻿using com.ataxlab.alfwm.core.taxonomy.binding.queue;
+﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using System;
 using System.Collections.Concurrent;
@@ -54,12 +55,24 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
         public QueueingPipelineProccessDefinition()
         {
             this.PipelineToolChain = new ConcurrentDictionary<string, IQueueingPipelineNode>();
+            this.PipelineTools = new LinkedList<QueueingPipelineToolBase>();
             this.Id = Guid.NewGuid().ToString();
         }
 
         public string Id { get; set; }
         public ConcurrentDictionary<string, IQueueingPipelineNode> PipelineToolChain { get ; set ; }
- 
+        public LinkedList<QueueingPipelineToolBase> PipelineTools { get; set; }
+
+        public string AddTool(QueueingPipelineToolBase node)
+        {
+            this.PipelineTools.AddLast(node);
+            return node.PipelineToolId;
+        }
+
+        public bool Bind(string node1Id, string node2Id)
+        {
+            return false;
+        }
     }
 
     /// <summary>
@@ -73,29 +86,30 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
     /// <typeparam name="TPipelineToolConfiguration"></typeparam>
     /// <typeparam name="TInputEntity"></typeparam>
     /// <typeparam name="TOutputEntity"></typeparam>
-    public class QueueingPipelineProcessDefinition<TPipelineToolConfiguration, TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity>
-        : IQueueingPipelineProcessDefinition<LinkedList<IQueueingPipelineNode<
-                                                                                IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>,
-                                                        TPipelineToolConfiguration, TInputEntity, TOutputEntity>>>
-        //where TPipelineToolConfiguration : class, new()
-        //where TPipelineToolConfiguration : class, IPipelineToolConfiguration, new()
-            where TInputEntity : class, IPipelineToolConfiguration, new()
-            where TOutputEntity : class, IPipelineToolConfiguration, new()
-            where TLatchingInputBinding : class, IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<TInputEntity>>, new()
-            where TLatchingOutputBinding : class, IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<TOutputEntity>>, new()
+    public class QueueingPipelineProcessDefinition<TPipelineNode>
+        : IQueueingPipelineProcessDefinition<TPipelineNode>
+        where TPipelineNode : QueueingPipelineNode<
+                            IQueueingPipelineTool<
+                                                    QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
+                                                    QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
+                                                    IPipelineToolConfiguration,
+                                                    IPipelineToolConfiguration,
+                                                    IPipelineToolConfiguration
+                                                  >
+                                        >
     {
-
         public QueueingPipelineProcessDefinition()
         {
-            this.PipelineToolChain = new LinkedList<IQueueingPipelineNode<IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>, TPipelineToolConfiguration, TInputEntity, TOutputEntity>>();
+            this.PipelineTools = new LinkedList<TPipelineNode>();
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public string Id { get ; set; }
-        public LinkedList<IQueueingPipelineNode<IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>, TPipelineToolConfiguration, TInputEntity, TOutputEntity>> PipelineToolChain {get; set; }
-   
+        public string Id { get; set;}
+        public LinkedList<TPipelineNode> PipelineTools { get; set;}
 
-
-
+        public bool Bind(string node1Id, string node2Id)
+        {
+            return false;
+        }
     }
 }

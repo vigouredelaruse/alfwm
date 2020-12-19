@@ -46,6 +46,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     /// <typeparam name="TProcessDefinition"></typeparam>
     public interface IPipeline<TProcessDefinition> : IPipeline
+        //where TProcessDefinition : class, new()
     {
         /// <summary>
         /// this collection will be determined by 

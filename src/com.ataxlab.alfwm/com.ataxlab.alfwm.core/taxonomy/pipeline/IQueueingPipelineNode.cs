@@ -14,12 +14,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     {
         string QueueingPipelineNodeId { get; set; }
 
-       
+        QueueingPipelineToolBase PipelineTool { get; set; }
     }
 
     public interface IQueueingPipelineNode<TPipelineTool> 
     {
         TPipelineTool PipelineTool { get; set; }
+
     }
 
 

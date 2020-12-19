@@ -1,4 +1,5 @@
-﻿using com.ataxlab.alfwm.core.taxonomy.binding.queue;
+﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -17,14 +18,41 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// the payload is expected (by the Bind mechanism)
         /// to expose a ConcurrentQueue<Entity>         /// </summary>
         ConcurrentDictionary<string, IQueueingPipelineNode> PipelineToolChain { get; set; }
+
+        LinkedList<QueueingPipelineToolBase> PipelineTools { get; set; }
+
+        bool Bind(string node1Id, string node2Id);
+
+        string AddTool(QueueingPipelineToolBase node);
     }
 
-    public interface IQueueingPipelineProcessDefinition<TProcessDefinition>
-        // where TProcessDefinition : class, new()
-    { 
+    //public interface IQueueingPipelineProcessDefinition<TProcessDefinition>
+    //    // where TProcessDefinition : class, new()
+    //{ 
+    //    string Id { get; set; }
+
+    //    TProcessDefinition PipelineToolChain { get; set; }
+    //}
+
+    public interface IQueueingPipelineProcessDefinition<TPipelineNode> where TPipelineNode :
+                    QueueingPipelineNode<
+                            IQueueingPipelineTool<
+                                                    QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
+                                                    QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
+                                                    IPipelineToolConfiguration,
+                                                    IPipelineToolConfiguration,
+                                                    IPipelineToolConfiguration
+                                                  >
+                                        >
+
+    {
         string Id { get; set; }
 
-        TProcessDefinition PipelineToolChain { get; set; }
+        LinkedList<TPipelineNode> PipelineTools { get; set; }
+
+
+        bool Bind(string node1Id, string node2Id);
+
     }
 
     public interface IQueueingPipelineProcessDefinition<TPipelineTool, TLatchingInputBinding, TOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity>

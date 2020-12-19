@@ -16,6 +16,65 @@ using Windows.Foundation;
 
 namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 {
+
+ 
+
+    public class HttpRequestQueueingActivityEx : QueueingPipelineToolBase
+    {
+        public override IQueueConsumerPipelineToolBinding<object> QueueingInputBinding {get; set;}
+        public override IQueueProducerPipelineToolBinding<object> QueueingOutputBinding {get; set;}
+        public override IPipelineToolConfiguration<IPipelineToolConfiguration> PipelineToolConfiguration {get; set;}
+        public override string PipelineToolInstanceId {get; set;}
+        public override ObservableCollection<IPipelineVariable> PipelineToolVariables {get; set;}
+        public override string PipelineToolId {get; set;}
+        public override string PipelineToolDisplayName {get; set;}
+        public override string PipelineToolDescription {get; set;}
+        public override IPipelineToolStatus PipelineToolStatus {get; set;}
+        public override IPipelineToolContext PipelineToolContext {get; set;}
+        public override IPipelineToolBinding PipelineToolOutputBinding {get; set;}
+
+        public override event Func<object, object> QueueHasAvailableDataEvent;
+        public override event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
+        public override event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
+        public override event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
+        public override event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
+
+        public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnQueueHasData(object sender, object availableData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void StartPipelineTool(IPipelineToolConfiguration configuration, Action<IPipelineToolConfiguration> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override StopResult StopPipelineTool<StopResult>(string instanceId)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class HttpRequestQueueingActivity2 : IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>,
                                                                       QueueingProducerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult>>,
                                                                                               HttpRequestQueueingActivityConfiguration,
@@ -40,7 +99,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         public IPipelineToolStatus PipelineToolStatus { get; set; }
         public IPipelineToolContext PipelineToolContext { get; set; }
         public IPipelineToolBinding PipelineToolOutputBinding { get; set; }
-        IPipelineToolConfiguration<HttpRequestQueueingActivityConfiguration> IPipelineTool<HttpRequestQueueingActivityConfiguration>.PipelineToolConfiguration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        IPipelineToolConfiguration<HttpRequestQueueingActivityConfiguration> IPipelineTool<HttpRequestQueueingActivityConfiguration>.PipelineToolConfiguration { get; set; }
 
         public event Func<HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration> QueueHasAvailableDataEvent;
         public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;

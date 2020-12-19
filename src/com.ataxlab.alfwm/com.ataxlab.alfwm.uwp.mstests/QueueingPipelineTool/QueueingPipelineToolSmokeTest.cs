@@ -46,7 +46,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             //var testPipeline = new QueueingPipeline<QueueingPipelineProcessDefinition<HttpRequestQueueingActivityConfiguration, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>
             //  , QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>>();
 
-            var testPipeline = new PipelineNodeQueueingPipelineEx();
+            var testPipeline = new PipelineNodeQueueingPipeline2();
 
             //IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, 
             //                        QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, 
@@ -54,7 +54,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             //                        QueueingPipelineQueueEntity<IPipelineToolConfiguration>, 
             //                        QueueingPipelineQueueEntity<IPipelineToolConfiguration>> httpActivity = new HttpRequestQueueingActivity2();
 
-            var httpActivity = new HttpRequestQueueingActivity2();
+            var httpActivity = new HttpRequestQueueingActivityEx();
   
 
             // httpActivity.QueueHasAvailableDataEvent += Activity_QueueHasAvailableDataEvent1;
@@ -95,10 +95,9 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             // testPipeline.ProcessDefinition.;
             int iii = 0;
 
-            var tHttpActivity = httpActivity  as IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
-                QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>; // = httpActivity;
+
             // testPipeline.ProcessDefinition = processDefinition;
-            // testPipeline.ProcessDefinition.AddFirstNode(httpActivity);
+            testPipeline.ProcessDefinition.PipelineTools.AddLast(httpActivity);
 
             //var id = testPipeline.AddQueueingPipelineNode < QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>,
 

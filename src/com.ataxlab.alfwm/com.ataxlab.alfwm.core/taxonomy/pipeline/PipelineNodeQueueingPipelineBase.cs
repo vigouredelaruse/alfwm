@@ -5,12 +5,14 @@ using System;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
+
+  
     public abstract class PipelineNodeQueueingPipelineBaseEx<TNode, TPipelineTool, TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration> :
             IQueueingPipeline<QueueingPipelineProcessDefinitionEx<TPipelineTool, TPipelineToolConfiguration, TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity>, TNode>
-            where TLatchingInputBinding : class, new() // QueueingConsumerChannel<TInputEntity>, new()
-            where TLatchingOutputBinding : class, new() // QueueingProducerChannel<TOutputEntity>, new()
-            // where TInputEntity : QueueingPipelineQueueEntity<IPipelineToolConfiguration>, new()
-            // where TOutputEntity : QueueingPipelineQueueEntity<IPipelineToolConfiguration>, new()
+            where TLatchingInputBinding :  QueueingConsumerChannel<QueueingPipelineQueueEntity<TInputEntity>>, new()
+            where TLatchingOutputBinding : QueueingProducerChannel<QueueingPipelineQueueEntity<TOutputEntity>>, new()
+            where TInputEntity : IPipelineToolConfiguration
+            where TOutputEntity : IPipelineToolConfiguration
                 where TNode : IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>
                 where TPipelineTool : IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration>
 
@@ -68,21 +70,31 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
 
 
+    public abstract class PipelineNodeQueueingPipelineBase :
+        IQueueingPipeline<
+            QueueingPipelineProcessDefinition
+            <
+                    QueueingPipelineNode<
+                            IQueueingPipelineTool<
+                                                    QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
+                                                    QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
+                                                    IPipelineToolConfiguration,
+                                                    IPipelineToolConfiguration,
+                                                    IPipelineToolConfiguration
+                                                  >
+                                        >
+            >,
 
-
-
-    public abstract class PipelineNodeQueueingPipelineBase : IQueueingPipeline<QueueingPipelineProcessDefinition<QueueingPipelineToolConfiguration,
-                                                            QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>,
-                                                            QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>,
-                                                            QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration>
-        , QueueingPipelineNode<IQueueingPipelineTool<
-                                                        QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>,
-            QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration, 
-            QueueingPipelineToolConfiguration>, 
-            QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>,
-            QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration>
-
-        >
+                                QueueingPipelineNode<
+                            IQueueingPipelineTool<
+                                    QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
+                                    QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
+                                    IPipelineToolConfiguration,
+                                    IPipelineToolConfiguration,
+                                    IPipelineToolConfiguration
+                                                  >
+                                        >
+            >
     {
         public abstract string PipelineId { get; set; }
         public abstract string PipelineInstanceId { get; set; }
@@ -90,20 +102,56 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract string PipelineDescription { get; set; }
         public abstract IPipelineBinding PipelineInputBinding { get; set; }
         public abstract IPipelineBinding PipelineOutputBinding { get; set; }
-        public abstract QueueingPipelineProcessDefinition<QueueingPipelineToolConfiguration, QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration> ProcessDefinition { get; set; }
+        QueueingPipelineProcessDefinition<QueueingPipelineNode<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>>> IPipeline<QueueingPipelineProcessDefinition<QueueingPipelineNode<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>>>>.ProcessDefinition { get; set; }
 
         public abstract event EventHandler<PipelineStartedEventArgs> PipelineStarted;
         public abstract event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
         public abstract event EventHandler<PipelineFailedEventArgs> PipelineFailed;
         public abstract event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
 
-
-          public abstract string AddTool(QueueingPipelineNode<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration>, QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration> node);
+        public abstract string AddTool(QueueingPipelineNode<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>> node);
         public abstract void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args);
         public abstract void OnPipelineFailed(object sender, PipelineFailedEventArgs args);
         public abstract void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args);
         public abstract void OnPipelineStarted(object sender, PipelineStartedEventArgs args);
-        public abstract void StartPipeline(QueueingPipelineProcessDefinition<QueueingPipelineToolConfiguration, QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration> configuration);
+        public abstract void StartPipeline(QueueingPipelineProcessDefinition<QueueingPipelineNode<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>>> configuration);
         public abstract void StopPipeline(string instanceId);
     }
+
+
+    //public abstract class PipelineNodeQueueingPipelineBase : IQueueingPipeline<QueueingPipelineProcessDefinition<QueueingPipelineToolConfiguration,
+    //                                                        QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>,
+    //                                                        QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>,
+    //                                                        QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration>
+    //    , QueueingPipelineNode<IQueueingPipelineTool<
+    //                                                    QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>,
+    //        QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration, 
+    //        QueueingPipelineToolConfiguration>, 
+    //        QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>,
+    //        QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration>
+
+    //    >
+    //{
+    //    public abstract string PipelineId { get; set; }
+    //    public abstract string PipelineInstanceId { get; set; }
+    //    public abstract string PipelineDisplayName { get; set; }
+    //    public abstract string PipelineDescription { get; set; }
+    //    public abstract IPipelineBinding PipelineInputBinding { get; set; }
+    //    public abstract IPipelineBinding PipelineOutputBinding { get; set; }
+    //    public abstract QueueingPipelineProcessDefinition<QueueingPipelineToolConfiguration, QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration> ProcessDefinition { get; set; }
+
+    //    public abstract event EventHandler<PipelineStartedEventArgs> PipelineStarted;
+    //    public abstract event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
+    //    public abstract event EventHandler<PipelineFailedEventArgs> PipelineFailed;
+    //    public abstract event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
+
+
+    //      public abstract string AddTool(QueueingPipelineNode<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration>, QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration> node);
+    //    public abstract void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args);
+    //    public abstract void OnPipelineFailed(object sender, PipelineFailedEventArgs args);
+    //    public abstract void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args);
+    //    public abstract void OnPipelineStarted(object sender, PipelineStartedEventArgs args);
+    //    public abstract void StartPipeline(QueueingPipelineProcessDefinition<QueueingPipelineToolConfiguration, QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration> configuration);
+    //    public abstract void StopPipeline(string instanceId);
+    //}
 }

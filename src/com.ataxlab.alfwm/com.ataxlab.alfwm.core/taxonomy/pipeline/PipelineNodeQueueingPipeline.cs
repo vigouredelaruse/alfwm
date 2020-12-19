@@ -8,6 +8,59 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
+
+    public class PipelineNodeQueueingPipeline2 : IQueueingPipeline
+    {
+        public IQueueingPipelineProcessDefinition ProcessDefinition { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string PipelineId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string PipelineInstanceId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string PipelineDisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string PipelineDescription { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IPipelineBinding PipelineInputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IPipelineBinding PipelineOutputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public event EventHandler<PipelineStartedEventArgs> PipelineStarted;
+        public event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
+        public event EventHandler<PipelineFailedEventArgs> PipelineFailed;
+        public event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
+
+        public bool Bind(string SourceInstanceId, string DestinationInstanceId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineFailed(object sender, PipelineFailedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineStarted(object sender, PipelineStartedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StartPipeline(IQueueingPipelineProcessDefinition configuration)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StopPipeline(string instanceId)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
     public class PipelineNodeQueueingPipelineEx : PipelineNodeQueueingPipelineBaseEx
         <
                     IQueueingPipelineTool<
@@ -92,8 +145,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
     public class PipelineNodeQueueingPipeline : PipelineNodeQueueingPipelineBase
     {
-        public override QueueingPipelineProcessDefinition<QueueingPipelineToolConfiguration, QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration> ProcessDefinition { get; set; }
-
         public override string PipelineId { get; set; }
         public override string PipelineInstanceId { get; set; }
         public override string PipelineDisplayName { get; set; }
@@ -106,75 +157,37 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public override event EventHandler<PipelineFailedEventArgs> PipelineFailed;
         public override event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
 
-        //public override string AddTool(QueueingPipelineNode<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineToolConfiguration>, QueueingProducerChannel<QueueingPipelineToolConfiguration>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration>, QueueingConsumerChannel<QueueingPipelineToolConfiguration>, QueueingProducerChannel<QueueingPipelineToolConfiguration>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration> node)
-        //{
-        //    ProcessDefinition.PipelineToolChain.AddLast(node);
-        //    node.PipelineTool.PipelineToolCompleted += PipelineTool_PipelineToolCompleted;
-        //    node.PipelineTool.PipelineToolFailed += PipelineTool_PipelineToolFailed;
-        //    node.PipelineTool.PipelineToolProgressUpdated += PipelineTool_PipelineToolProgressUpdated;
-        //    node.PipelineTool.PipelineToolStarted += PipelineTool_PipelineToolStarted;
-
-            
-        //    return node.QueueingPipelineNodeId;
-        //}
-
-        private void PipelineTool_PipelineToolStarted(object sender, PipelineToolStartEventArgs e)
-        {
-            OnPipelineStarted(sender, new PipelineStartedEventArgs() 
-            {  
-                SourceEvent = e,
-                PipelineDisplayName = this.PipelineDisplayName
-
-            });
-        }
-
-        private void PipelineTool_PipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs e)
-        {
-            PipelineProgressUpdated?.Invoke(sender, new PipelineProgressUpdatedEventArgs());
-        }
-
-        private void PipelineTool_PipelineToolFailed(object sender, PipelineToolFailedEventArgs e)
-        {
-            PipelineFailed?.Invoke(sender, new PipelineFailedEventArgs());
-        }
-
-        private void PipelineTool_PipelineToolCompleted(object sender, PipelineToolCompletedEventArgs e)
-        {
-            PipelineCompleted?.Invoke(sender, new PipelineCompletedEventArgs());
-        }
-
-        public override void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args)
-        {
-            PipelineCompleted?.Invoke(sender, args);   
-        }
-
-        public override void OnPipelineFailed(object sender, PipelineFailedEventArgs args)
-        {
-            PipelineFailed?.Invoke(sender, args);
-        }
-
-        public override void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args)
-        {
-            PipelineProgressUpdated?.Invoke(sender, args);
-        }
-
-        public override void OnPipelineStarted(object sender, PipelineStartedEventArgs args)
-        {
-            PipelineStarted?.Invoke(sender, args);
-        }
-
-
-        public override void StopPipeline(string instanceId)
-        {
-            // todo do something useful here
-        }
-
-        public override string AddTool(QueueingPipelineNode<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration>, QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration> node)
+        public override string AddTool(QueueingPipelineNode<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>> node)
         {
             throw new NotImplementedException();
         }
 
-        public override void StartPipeline(QueueingPipelineProcessDefinition<QueueingPipelineToolConfiguration, QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<QueueingPipelineToolConfiguration>>, QueueingPipelineToolConfiguration, QueueingPipelineToolConfiguration> configuration)
+        public override void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnPipelineFailed(object sender, PipelineFailedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void OnPipelineStarted(object sender, PipelineStartedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void StartPipeline(QueueingPipelineProcessDefinition<QueueingPipelineNode<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>>> configuration)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void StopPipeline(string instanceId)
         {
             throw new NotImplementedException();
         }

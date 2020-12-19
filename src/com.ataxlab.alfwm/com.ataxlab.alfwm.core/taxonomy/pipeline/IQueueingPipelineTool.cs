@@ -6,11 +6,36 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
+    public interface IQueueingPipelineTool<TInputEntity, TOutputEntity> : IQueueingPipelineTool
+    {
+        new IQueueConsumerPipelineToolBinding<TInputEntity> QueueingInputBinding { get; set; }
+
+        new IQueueProducerPipelineToolBinding<TOutputEntity> QueueingOutputBinding { get; set; }
+    }
+
+    public interface IQueueingPipelineTool
+    {
+        IQueueConsumerPipelineToolBinding<object> QueueingInputBinding { get; set; }
+
+        IQueueProducerPipelineToolBinding<object> QueueingOutputBinding { get; set; }
+
+        void OnQueueHasData(object sender, object availableData);
+
+
+        /// <summary>
+        /// clients of the queue pipeline tool can listen to this event
+        /// for notificaton of new arrivals on the quueue
+        /// 
+        /// the result is could be reflected on the queuing output binding collection of the tool, for instance
+        /// </summary>
+        event Func<object, object> QueueHasAvailableDataEvent;
+    }
+
     public interface IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputQueueEntity, TOutputQueueEntity, TConfiguration> : IPipelineTool<TConfiguration>
-     // where TLatchingInputBinding : class, IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<TInputQueueEntity>>, new()
-      // where TLatchingOutputBinding : class, IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<TOutputQueueEntity>>, new()
-        // where TInputQueueEntity : class, IPipelineToolConfiguration, new()
-        // where TOutputQueueEntity : class, IPipelineToolConfiguration, new()
+      where TLatchingInputBinding : class, IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<TInputQueueEntity>>, new()
+       where TLatchingOutputBinding : class, IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<TOutputQueueEntity>>, new()
+        where TInputQueueEntity : IPipelineToolConfiguration
+        where TOutputQueueEntity :  IPipelineToolConfiguration
         // where TConfiguration : class, new()
     {
         /// <summary>

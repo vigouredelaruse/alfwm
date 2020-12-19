@@ -10,6 +10,67 @@ using System.Threading;
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
 
+    /// <summary>
+    /// furnish the most generic specification of a Queueing Pipeline tool
+    /// it requires input and output queues
+    /// with no restriction on the queue data
+    /// </summary>
+    public class QueueingPipelineTool : IQueueingPipelineTool, IPipelineTool<IPipelineToolConfiguration>
+    {
+        public IQueueConsumerPipelineToolBinding<object> QueueingInputBinding { get; set; }
+        public IQueueProducerPipelineToolBinding<object> QueueingOutputBinding { get; set; }
+        public IPipelineToolConfiguration<IPipelineToolConfiguration> PipelineToolConfiguration { get; set;}
+        public string PipelineToolInstanceId { get; set;}
+        public ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set;}
+        public string PipelineToolId { get; set;}
+        public string PipelineToolDisplayName { get; set;}
+        public string PipelineToolDescription { get; set;}
+        public IPipelineToolStatus PipelineToolStatus { get; set;}
+        public IPipelineToolContext PipelineToolContext { get; set;}
+        public IPipelineToolBinding PipelineToolOutputBinding { get; set;}
+
+        public event Func<object, object> QueueHasAvailableDataEvent;
+        public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
+        public event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
+        public event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
+        public event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
+
+        public void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class, new()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnQueueHasData(object sender, object availableData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StartPipelineTool(IPipelineToolConfiguration configuration, Action<IPipelineToolConfiguration> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class QueueingPipelineTool<TInputQueueEntity, TOutputQueueEntity, TConfiguration> :
         QueueingPipelineToolBase<TInputQueueEntity, TOutputQueueEntity, TConfiguration>
             where TInputQueueEntity : class, IPipelineToolConfiguration, new()
@@ -36,7 +97,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         private void QueueingInputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<TInputQueueEntity>> e)
         {
             // delegate the logic of the queue event handler 
-            this.OnQueueHasData(sender, e.EventPayload.Payload);
+            // this.OnQueueHasData(sender, e.EventPayload);
         }
 
         public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
@@ -129,7 +190,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     /// <typeparam name="TQueueEntity"></typeparam>
     public class QueueingPipelineTool<TQueueEntity, TConfiguration> : QueueingPipelineToolBase<TQueueEntity, TConfiguration>
-        where TQueueEntity : class, new()
+        where TQueueEntity : class, IPipelineToolConfiguration, new()
         // where TConfiguration :  IPipelineToolConfiguration // class, new()
     {
         public QueueingPipelineTool()
@@ -145,7 +206,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         private void QueueingInputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<TQueueEntity>> e)
         {
             // delegate the logic of the queue event handler 
-            this.OnQueueHasData(sender, e.EventPayload.Payload);
+            // this.OnQueueHasData(sender, e.EventPayload.Payload);
         }
 
         private void InputBinding_QueueHasData(object sender, binding.queue.QueueDataAvailableEventArgs<TQueueEntity> e)
@@ -209,7 +270,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
                         var result = handler(availableData);
 
                         // reflect the result on the output binding
-                        this.QueueingOutputBinding.OutputQueue.Enqueue(new QueueingPipelineQueueEntity<TQueueEntity>() {  Payload = result });
+                        // this.QueueingOutputBinding.OutputQueue.Enqueue(new QueueingPipelineQueueEntity<TQueueEntity>() {  Payload = result });
                         
                     });
 

@@ -1,10 +1,22 @@
-﻿using com.ataxlab.alfwm.core.taxonomy.binding.queue;
+﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
+    public class QueueingPipelineNode<TPipelineTool> : IQueueingPipelineNode<TPipelineTool>
+        //where TPipelineTool : 
+        //                        IQueueingPipelineTool<
+        //                            QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
+        //                            QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
+        //                            IPipelineToolConfiguration,
+        //                            IPipelineToolConfiguration,
+        //                            IPipelineToolConfiguration>
+    {
+        public TPipelineTool PipelineTool { get; set; }
+    }
 
     public class QueueingPipelineNode2<TPipelineTool, TLatchingInputBinding, TOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity> :
       IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity>
