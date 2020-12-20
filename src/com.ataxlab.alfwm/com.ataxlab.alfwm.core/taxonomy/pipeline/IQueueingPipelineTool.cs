@@ -1,4 +1,5 @@
-﻿using com.ataxlab.alfwm.core.taxonomy.binding.queue;
+﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,10 +8,12 @@ using System.Text;
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
     public interface IQueueingPipelineTool<TInputEntity, TOutputEntity> : IQueueingPipelineTool
+        where TInputEntity : class, IQueueingPipelineQueueEntity<IPipelineToolConfiguration>, new()
+        where TOutputEntity : class, IQueueingPipelineQueueEntity<IPipelineToolConfiguration>, new()
     {
-        new IQueueConsumerPipelineToolBinding<TInputEntity> QueueingInputBinding { get; set; }
+        new QueueingConsumerChannel<TInputEntity> QueueingInputBinding { get; set; }
 
-        new IQueueProducerPipelineToolBinding<TOutputEntity> QueueingOutputBinding { get; set; }
+        new QueueingProducerChannel<TOutputEntity> QueueingOutputBinding { get; set; }
     }
 
     public interface IQueueingPipelineTool

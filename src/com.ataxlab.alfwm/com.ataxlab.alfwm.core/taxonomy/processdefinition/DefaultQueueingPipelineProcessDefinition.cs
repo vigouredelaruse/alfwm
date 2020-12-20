@@ -24,6 +24,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
         public LinkedList<TPipelineTool> PipelineTools {get; set; }
         public LinkedList<IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity>> PipelineToolChain {get; set; }
 
+        public LinkedList<QueueingPipelineNode> QueueingPipelineNodes { get; set; }
+
         public string AddAfter(string nodeId)
         {
             throw new NotImplementedException();
@@ -49,24 +51,24 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
     /// a dictionary of specialized IPipelineTools
     /// </summary>
     /// <typeparam name="TConfiguration"></typeparam>
-    public class QueueingPipelineProccessDefinition : IQueueingPipelineProcessDefinition
-        
+    public class DefaultQueueingPipelineProcessDefinition : IDefaultQueueingPipelineProcessDefinition
+
     {
-        public QueueingPipelineProccessDefinition()
+
+        public DefaultQueueingPipelineProcessDefinition()
         {
-            this.PipelineToolChain = new ConcurrentDictionary<string, IQueueingPipelineNode>();
-            this.PipelineTools = new LinkedList<QueueingPipelineToolBase>();
-            this.Id = Guid.NewGuid().ToString();
+            PipelineToolChain = new ConcurrentDictionary<string, IQueueingPipelineNode>();
+            QueueingPipelineNodes = new LinkedList<IQueueingPipelineNode>();
+            PipelineTools = new LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration>>();
         }
-
         public string Id { get; set; }
-        public ConcurrentDictionary<string, IQueueingPipelineNode> PipelineToolChain { get ; set ; }
-        public LinkedList<QueueingPipelineToolBase> PipelineTools { get; set; }
+        public ConcurrentDictionary<string, IQueueingPipelineNode> PipelineToolChain { get; set; }
+        public LinkedList<IQueueingPipelineNode> QueueingPipelineNodes { get; set; }
+        public LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration>> PipelineTools { get; set; }
 
-        public string AddTool(QueueingPipelineToolBase node)
+        public string AddTool(QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> node)
         {
-            this.PipelineTools.AddLast(node);
-            return node.PipelineToolId;
+            return string.Empty;
         }
 
         public bool Bind(string node1Id, string node2Id)

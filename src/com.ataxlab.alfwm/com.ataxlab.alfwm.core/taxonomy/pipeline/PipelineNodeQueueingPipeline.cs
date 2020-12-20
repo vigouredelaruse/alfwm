@@ -11,13 +11,18 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
     public class PipelineNodeQueueingPipeline2 : IQueueingPipeline
     {
-        public IQueueingPipelineProcessDefinition ProcessDefinition { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PipelineId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PipelineInstanceId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PipelineDisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PipelineDescription { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IPipelineBinding PipelineInputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IPipelineBinding PipelineOutputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public PipelineNodeQueueingPipeline2()
+        {
+            this.ProcessDefinition = new DefaultQueueingPipelineProcessDefinition();
+        }
+
+        public string PipelineId { get; set; }
+        public string PipelineInstanceId { get; set; }
+        public string PipelineDisplayName { get; set; }
+        public string PipelineDescription { get; set; }
+        public IPipelineBinding PipelineInputBinding { get; set; }
+        public IPipelineBinding PipelineOutputBinding { get; set; }
+        public IDefaultQueueingPipelineProcessDefinition ProcessDefinition { get; set; }
 
         public event EventHandler<PipelineStartedEventArgs> PipelineStarted;
         public event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
@@ -49,7 +54,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             throw new NotImplementedException();
         }
 
-        public void StartPipeline(IQueueingPipelineProcessDefinition configuration)
+        public void StartPipeline(IDefaultQueueingPipelineProcessDefinition configuration)
         {
             throw new NotImplementedException();
         }

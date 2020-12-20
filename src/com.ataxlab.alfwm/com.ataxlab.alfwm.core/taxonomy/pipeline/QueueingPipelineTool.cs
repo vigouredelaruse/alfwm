@@ -10,62 +10,76 @@ using System.Threading;
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
 
+    public interface IDefaultQueueingPipelineTool : IQueueingPipelineTool, IPipelineTool<IPipelineToolConfiguration>
+    {
+
+    }
+
     /// <summary>
     /// furnish the most generic specification of a Queueing Pipeline tool
     /// it requires input and output queues
     /// with no restriction on the queue data
     /// </summary>
-    public class QueueingPipelineTool : IQueueingPipelineTool, IPipelineTool<IPipelineToolConfiguration>
+    public class DefaultQueueingPipelineTool : IDefaultQueueingPipelineTool
+
     {
-        public IQueueConsumerPipelineToolBinding<object> QueueingInputBinding { get; set; }
-        public IQueueProducerPipelineToolBinding<object> QueueingOutputBinding { get; set; }
-        public IPipelineToolConfiguration<IPipelineToolConfiguration> PipelineToolConfiguration { get; set;}
-        public string PipelineToolInstanceId { get; set;}
-        public ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set;}
-        public string PipelineToolId { get; set;}
-        public string PipelineToolDisplayName { get; set;}
-        public string PipelineToolDescription { get; set;}
-        public IPipelineToolStatus PipelineToolStatus { get; set;}
-        public IPipelineToolContext PipelineToolContext { get; set;}
-        public IPipelineToolBinding PipelineToolOutputBinding { get; set;}
+        public DefaultQueueingPipelineTool()
+        {
+ 
 
-        public event Func<object, object> QueueHasAvailableDataEvent;
-        public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
-        public event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
-        public event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
-        public event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
+        }
 
-        public void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class, new()
+        public virtual IQueueConsumerPipelineToolBinding<object> QueueingInputBinding { get; set; }
+
+        public virtual IQueueProducerPipelineToolBinding<object> QueueingOutputBinding { get; set; }
+
+        public virtual IPipelineToolConfiguration<IPipelineToolConfiguration> PipelineToolConfiguration { get; set;}
+        public virtual string PipelineToolInstanceId { get; set;}
+        public virtual ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set;}
+        public virtual string PipelineToolId { get; set;}
+        public virtual string PipelineToolDisplayName { get; set;}
+        public virtual string PipelineToolDescription { get; set;}
+        public virtual IPipelineToolStatus PipelineToolStatus { get; set;}
+        public virtual IPipelineToolContext PipelineToolContext { get; set;}
+        public virtual IPipelineToolBinding PipelineToolOutputBinding { get; set;}
+
+        public virtual event Func<object, object> QueueHasAvailableDataEvent;
+        public virtual event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
+        public virtual event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
+        public virtual event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
+        public virtual event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
+
+        public virtual void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class, new()
         {
             throw new NotImplementedException();
         }
 
-        public void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
+        public virtual void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
         {
             throw new NotImplementedException();
         }
 
-        public void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
+        public virtual void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
         {
             throw new NotImplementedException();
         }
 
-        public void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
+        public virtual void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
         {
             throw new NotImplementedException();
         }
 
-        public void OnQueueHasData(object sender, object availableData)
+        public virtual void OnQueueHasData(object sender, object availableData)
         {
             throw new NotImplementedException();
         }
 
-        public void StartPipelineTool(IPipelineToolConfiguration configuration, Action<IPipelineToolConfiguration> callback)
+        public virtual void StartPipelineTool(IPipelineToolConfiguration configuration, Action<IPipelineToolConfiguration> callback)
         {
             throw new NotImplementedException();
         }
 
-        public StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
+        public virtual StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
         {
             throw new NotImplementedException();
         }

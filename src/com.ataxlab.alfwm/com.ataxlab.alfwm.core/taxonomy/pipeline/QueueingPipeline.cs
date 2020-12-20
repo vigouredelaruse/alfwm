@@ -11,10 +11,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     {
         public QueueingPipeline()
         {
-            ProcessDefinition = new QueueingPipelineProccessDefinition();
+            ProcessDefinition = new DefaultQueueingPipelineProcessDefinition();
         }
 
-        public IQueueingPipelineProcessDefinition ProcessDefinition { get; set; }
+        public IDefaultQueueingPipelineProcessDefinition ProcessDefinition { get; set; }
         public string PipelineId { get; set; }
         public string PipelineInstanceId { get; set; }
         public string PipelineDisplayName { get; set; }
@@ -52,7 +52,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             PipelineStarted?.Invoke(this, args);
         }
 
-        public void StartPipeline(IQueueingPipelineProcessDefinition configuration)
+        public void StartPipeline(IDefaultQueueingPipelineProcessDefinition configuration)
         {
             this.ProcessDefinition = configuration;
         }

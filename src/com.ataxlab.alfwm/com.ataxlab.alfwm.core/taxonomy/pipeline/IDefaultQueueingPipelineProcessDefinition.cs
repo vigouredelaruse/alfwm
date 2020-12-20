@@ -7,7 +7,7 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
-    public interface IQueueingPipelineProcessDefinition
+    public interface IDefaultQueueingPipelineProcessDefinition
     {
         string Id { get; set; }
 
@@ -19,11 +19,17 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// to expose a ConcurrentQueue<Entity>         /// </summary>
         ConcurrentDictionary<string, IQueueingPipelineNode> PipelineToolChain { get; set; }
 
-        LinkedList<QueueingPipelineToolBase> PipelineTools { get; set; }
+        LinkedList<IQueueingPipelineNode> QueueingPipelineNodes { get; set; }
+
+        LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>,
+                                            QueueingPipelineQueueEntity<IPipelineToolConfiguration>,
+                                            IPipelineToolConfiguration>> PipelineTools { get; set; }
 
         bool Bind(string node1Id, string node2Id);
 
-        string AddTool(QueueingPipelineToolBase node);
+        string AddTool(QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>,
+                                            QueueingPipelineQueueEntity<IPipelineToolConfiguration>,
+                                            IPipelineToolConfiguration> node);
     }
 
     //public interface IQueueingPipelineProcessDefinition<TProcessDefinition>

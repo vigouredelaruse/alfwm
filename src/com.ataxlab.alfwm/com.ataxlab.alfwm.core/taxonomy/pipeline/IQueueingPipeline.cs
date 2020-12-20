@@ -10,7 +10,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// furnish a queueing specialization of 
     /// the pipeline interface
     /// </summary>
-    public interface IQueueingPipeline : IPipeline<IQueueingPipelineProcessDefinition>
+    public interface IQueueingPipeline : IPipeline<IDefaultQueueingPipelineProcessDefinition>
     {
         /// <summary>
         /// wire the output of the source queue

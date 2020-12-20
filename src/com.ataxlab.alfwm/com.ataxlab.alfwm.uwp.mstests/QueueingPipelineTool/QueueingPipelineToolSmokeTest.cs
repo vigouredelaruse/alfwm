@@ -54,7 +54,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             //                        QueueingPipelineQueueEntity<IPipelineToolConfiguration>, 
             //                        QueueingPipelineQueueEntity<IPipelineToolConfiguration>> httpActivity = new HttpRequestQueueingActivity2();
 
-            var httpActivity = new HttpRequestQueueingActivityEx();
+            var httpActivity = new HttpRequestQueueingActivity();
   
 
             // httpActivity.QueueHasAvailableDataEvent += Activity_QueueHasAvailableDataEvent1;
@@ -94,10 +94,11 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             // testPipeline.ProcessDefinition.AddFirstNode(httpActivity);
             // testPipeline.ProcessDefinition.;
             int iii = 0;
-
+            QueueingPipelineNode aNode = new QueueingPipelineNode();
+            aNode.QueueingPipelineTool = httpActivity as IQueueingPipelineTool;
 
             // testPipeline.ProcessDefinition = processDefinition;
-            testPipeline.ProcessDefinition.PipelineTools.AddLast(httpActivity);
+            testPipeline.ProcessDefinition.QueueingPipelineNodes.AddLast(aNode);
 
             //var id = testPipeline.AddQueueingPipelineNode < QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>,
 

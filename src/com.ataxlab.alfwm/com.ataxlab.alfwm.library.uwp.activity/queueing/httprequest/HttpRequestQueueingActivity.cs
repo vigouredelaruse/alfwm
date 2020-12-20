@@ -2,6 +2,7 @@
 using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
+using com.ataxlab.alfwm.library.activity.httpactivity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -17,54 +19,88 @@ using Windows.Foundation;
 namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 {
 
- 
-
-    public class HttpRequestQueueingActivityEx : QueueingPipelineToolBase
+    public class HttpRequestQueueingActivity : DefaultQueueingPipelineTool
     {
-        public override IQueueConsumerPipelineToolBinding<object> QueueingInputBinding {get; set;}
-        public override IQueueProducerPipelineToolBinding<object> QueueingOutputBinding {get; set;}
-        public override IPipelineToolConfiguration<IPipelineToolConfiguration> PipelineToolConfiguration {get; set;}
-        public override string PipelineToolInstanceId {get; set;}
-        public override ObservableCollection<IPipelineVariable> PipelineToolVariables {get; set;}
-        public override string PipelineToolId {get; set;}
-        public override string PipelineToolDisplayName {get; set;}
-        public override string PipelineToolDescription {get; set;}
-        public override IPipelineToolStatus PipelineToolStatus {get; set;}
-        public override IPipelineToolContext PipelineToolContext {get; set;}
-        public override IPipelineToolBinding PipelineToolOutputBinding {get; set;}
+        public HttpRequestQueueingActivity()
+        {
+            this.QueueingInputBinding = new QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>();
+            this.QueueingOutputBinding = new QueueingConsumerChannel<HttpRequestQueueingActivityResult>();
 
-        public override event Func<object, object> QueueHasAvailableDataEvent;
-        public override event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
-        public override event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
-        public override event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
-        public override event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
+        }
 
+        public new QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration> QueueingInputBinding { get; set; }
+        public new QueueingConsumerChannel<HttpRequestQueueingActivityResult> QueueingOutputBinding { get; set; }
+        public IPipelineToolConfiguration<IPipelineToolConfiguration> PipelineToolConfiguration { get; set; }
+        public string PipelineToolInstanceId { get; set; }
+        public ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set; }
+        public string PipelineToolId { get; set; }
+        public string PipelineToolDisplayName { get; set; }
+        public string PipelineToolDescription { get; set; }
+        public IPipelineToolStatus PipelineToolStatus { get; set; }
+        public IPipelineToolContext PipelineToolContext { get; set; }
+        public IPipelineToolBinding PipelineToolOutputBinding { get; set; }
+
+        public event Func<object, object> QueueHasAvailableDataEvent;
+        public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
+        public event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
+        public event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
+        public event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
+
+        public void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class, new()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnQueueHasData(object sender, object availableData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StartPipelineTool(IPipelineToolConfiguration configuration, Action<IPipelineToolConfiguration> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    public class HttpRequestQueueingActivityEx : QueueingPipelineToolBase<
+                                                                            QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>,
+                                                                            QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult>,
+                                                                            HttpRequestQueueingActivityConfiguration>
+    {
+
+  
         public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
         {
             throw new NotImplementedException();
         }
 
-        public override void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
+        public override void OnQueueHasData(object sender, QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration> availableData)
         {
             throw new NotImplementedException();
         }
 
-        public override void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void OnQueueHasData(object sender, object availableData)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void StartPipelineTool(IPipelineToolConfiguration configuration, Action<IPipelineToolConfiguration> callback)
+        public override void StartPipelineTool(HttpRequestQueueingActivityConfiguration configuration, Action<HttpRequestQueueingActivityConfiguration> callback)
         {
             throw new NotImplementedException();
         }
