@@ -46,7 +46,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             //var testPipeline = new QueueingPipeline<QueueingPipelineProcessDefinition<HttpRequestQueueingActivityConfiguration, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>
             //  , QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>>();
 
-            var testPipeline = new PipelineNodeQueueingPipeline2();
+            var testPipeline = new DefaultPipelineNodeQueueingPipeline();
 
             //IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, 
             //                        QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, 

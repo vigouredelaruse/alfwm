@@ -9,9 +9,9 @@ using System.Text;
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
 
-    public class PipelineNodeQueueingPipeline2 : IQueueingPipeline
+    public class DefaultPipelineNodeQueueingPipeline : IQueueingPipeline
     {
-        public PipelineNodeQueueingPipeline2()
+        public DefaultPipelineNodeQueueingPipeline()
         {
             this.ProcessDefinition = new DefaultQueueingPipelineProcessDefinition();
         }

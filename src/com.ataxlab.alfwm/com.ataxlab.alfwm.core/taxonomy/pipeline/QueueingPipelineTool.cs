@@ -1,9 +1,11 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Pipes;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 
@@ -28,6 +30,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
  
 
         }
+
+
 
         public virtual IQueueConsumerPipelineToolBinding<object> QueueingInputBinding { get; set; }
 
