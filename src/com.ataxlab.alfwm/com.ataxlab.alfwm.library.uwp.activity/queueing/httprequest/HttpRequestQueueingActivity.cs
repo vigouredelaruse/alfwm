@@ -25,6 +25,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         {
             this.QueueingInputBinding = new QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>();
             this.QueueingOutputBinding = new QueueingConsumerChannel<HttpRequestQueueingActivityResult>();
+            this.QueueingOutputBindingCollection = new List<QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>>();
             this.PipelineToolId = Guid.NewGuid().ToString();
             this.PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
 
@@ -42,7 +43,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 
         private void QueueingOutputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<HttpRequestQueueingActivityResult> e)
         {
-            throw new NotImplementedException();
+            
         }
 
 
@@ -104,7 +105,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         ConcurrentQueue<HttpRequestQueueingActivityConfiguration> WorkItemCache { get; set; }
         public Timer WorkQueueProcessTimer { get; private set; }
 
-
+        public new List<QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>> QueueingOutputBindingCollection { get; set; }
         public new QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration> QueueingInputBinding { get; set; }
         public new QueueingConsumerChannel<HttpRequestQueueingActivityResult> QueueingOutputBinding { get; set; }
         public override IPipelineToolConfiguration<IPipelineToolConfiguration> PipelineToolConfiguration { get; set; }
@@ -168,8 +169,9 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
                                                                             QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult>,
                                                                             HttpRequestQueueingActivityConfiguration>
     {
+        public override List<QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>>> QueueingOutputBindingPorts { get; set; }
+        public override List<QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>>> QueueingOutputBindingCollection {get; set; }
 
-  
         public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
         {
             throw new NotImplementedException();
@@ -205,17 +207,17 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         }
 
         public QueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>> QueueingInputBinding { get; set; }
+        public List<QueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>> QueueingOutputBindingCollection {get; set; }
         public QueueingProducerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult>> QueueingOutputBinding { get; set; }
-        public IPipelineToolConfiguration<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>> PipelineToolConfiguration { get; set; }
+        public IPipelineToolConfiguration<HttpRequestQueueingActivityConfiguration> PipelineToolConfiguration {get; set; }
         public string PipelineToolInstanceId { get; set; }
-        public ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set; }
+        public ObservableCollection<IPipelineVariable> PipelineToolVariables {get; set; }
         public string PipelineToolId { get; set; }
-        public string PipelineToolDisplayName { get; set; }
+        public string PipelineToolDisplayName {get; set; }
         public string PipelineToolDescription { get; set; }
-        public IPipelineToolStatus PipelineToolStatus { get; set; }
+        public IPipelineToolStatus PipelineToolStatus {get; set; }
         public IPipelineToolContext PipelineToolContext { get; set; }
-        public IPipelineToolBinding PipelineToolOutputBinding { get; set; }
-        IPipelineToolConfiguration<HttpRequestQueueingActivityConfiguration> IPipelineTool<HttpRequestQueueingActivityConfiguration>.PipelineToolConfiguration { get; set; }
+        public IPipelineToolBinding PipelineToolOutputBinding {get; set; }
 
         public event Func<HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration> QueueHasAvailableDataEvent;
         public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
@@ -244,11 +246,6 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         }
 
         public void OnQueueHasData(object sender, HttpRequestQueueingActivityConfiguration availableData)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void StartPipelineTool(QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration> configuration, Action<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>> callback)
         {
             throw new NotImplementedException();
         }

@@ -61,7 +61,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public void StopPipeline(string instanceId)
         {
-            throw new NotImplementedException();
+            
         }
     }
 
@@ -118,32 +118,32 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public override void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void OnPipelineFailed(object sender, PipelineFailedEventArgs args)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void OnPipelineStarted(object sender, PipelineStartedEventArgs args)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void StartPipeline(QueueingPipelineProcessDefinitionEx<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>, IPipelineToolConfiguration, QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration> configuration)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void StopPipeline(string instanceId)
         {
-            throw new NotImplementedException();
+            
         }
     }
 
@@ -164,37 +164,37 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public override string AddTool(QueueingPipelineNode<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>> node)
         {
-            throw new NotImplementedException();
+            return string.Empty;
         }
 
         public override void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void OnPipelineFailed(object sender, PipelineFailedEventArgs args)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void OnPipelineStarted(object sender, PipelineStartedEventArgs args)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void StartPipeline(QueueingPipelineProcessDefinition<QueueingPipelineNode<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>>> configuration)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void StopPipeline(string instanceId)
         {
-            throw new NotImplementedException();
+            
         }
     }
 

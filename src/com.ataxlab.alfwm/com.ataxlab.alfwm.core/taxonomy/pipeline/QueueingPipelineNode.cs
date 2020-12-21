@@ -34,10 +34,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         }
 
-        public TPipelineTool PipelineTool { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string QueueingPipelineNodeId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IDefaultQueueingPipelineTool PipelineToolEx { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> IQueueingPipelineNode.PipelineTool { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public TPipelineTool PipelineTool { get; set; }
+        public string QueueingPipelineNodeId { get; set; }
+        public IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
+        QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> IQueueingPipelineNode.PipelineTool { get; set; }
     }
 
     public class QueueingPipelineNode2<TPipelineTool, TLatchingInputBinding, TOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity> :
@@ -47,12 +47,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     // where TInputEntity : class, new()
     // where TOutputEntity : class, new()
     {
-        public TPipelineTool PipelineTool { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IQueueConsumerPipelineToolBinding<TInputEntity> PipelineToolInputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IQueueProducerPipelineToolBinding<TOutputEntity> PipelineToolOutputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string QueueingPipelineNodeId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IDefaultQueueingPipelineTool PipelineToolEx { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> IQueueingPipelineNode.PipelineTool { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public TPipelineTool PipelineTool { get; set; }
+        public IQueueConsumerPipelineToolBinding<TInputEntity> PipelineToolInputBinding { get; set; }
+        public IQueueProducerPipelineToolBinding<TOutputEntity> PipelineToolOutputBinding { get; set; }
+        public string QueueingPipelineNodeId { get; set; }
+        public IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
+        QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> IQueueingPipelineNode.PipelineTool { get; set; }
     }
 
     public class QueueingPipelineNode<TPipelineTool, TLatchingInputBinding, TOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity> :
@@ -64,11 +64,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     //where TOutputEntity : class, new()
     //where TInputEntity : class, new()
     {
-        public TPipelineTool PipelineTool { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IQueueConsumerPipelineToolBinding<TInputEntity> PipelineToolInputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IQueueProducerPipelineToolBinding<TOutputEntity> PipelineToolOutputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string QueueingPipelineNodeId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IDefaultQueueingPipelineTool PipelineToolEx { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> IQueueingPipelineNode.PipelineTool { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public TPipelineTool PipelineTool { get; set; }
+        public IQueueConsumerPipelineToolBinding<TInputEntity> PipelineToolInputBinding { get; set; }
+        public IQueueProducerPipelineToolBinding<TOutputEntity> PipelineToolOutputBinding { get; set; }
+        public string QueueingPipelineNodeId { get; set; }
+        public IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
+        QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> IQueueingPipelineNode.PipelineTool { get; set; }
     }
 }

@@ -139,47 +139,48 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
         public void CanPassThroughToOutputChannels()
         {
 
-            //var itemsToInsert = 10;
+            var itemsToInsert = 10;
 
-            //// initialize a tool
-            //var toolA = new QueueingPipelineTool<TaskItemPipelineVariable, QueueingPipelineToolConfiguration>();
-            //// wire a listener to the tool's queue arrival event
-            //toolA.QueueingInputBinding.QueueHasData += QueueingInputBinding_QueueHasData; // += ToolA_InputBinding_QueueHasData;
-            //toolA.QueueingInputBinding.IsQueuePollingEnabled = true;
+            // initialize a tool
+            var toolA = new QueueingPipelineTool<TaskItemPipelineVariable, QueueingPipelineToolConfiguration>();
+            // wire a listener to the tool's queue arrival event
+            toolA.QueueingInputBinding.QueueHasData += QueueingInputBinding_QueueHasData; // += ToolA_InputBinding_QueueHasData;
+            toolA.QueueingInputBinding.IsQueuePollingEnabled = true;
 
-            //var toolB = new QueueingPipelineTool<TaskItemPipelineVariable, QueueingPipelineToolConfiguration>();
-            //// wire a listener to the tool's queue arrival event
-            //toolB.QueueingInputBinding.QueueHasData += QueueingInputBinding_QueueHasData1; //  += ToolB_InputBinding_QueueHasData1;
+            var toolB = new QueueingPipelineTool<TaskItemPipelineVariable, QueueingPipelineToolConfiguration>();
+            // wire a listener to the tool's queue arrival event
+            toolB.QueueingInputBinding.QueueHasData += QueueingInputBinding_QueueHasData1; //  += ToolB_InputBinding_QueueHasData1;
 
-            //// wire Tool B downstream from Tool A
-            //toolA.QueueingOutputBinding.Add(toolB.QueueingInputBinding);
+            // wire Tool B downstream from Tool A
+            toolA.QueueingOutputBindingCollection.Add(toolB.QueueingInputBinding);
 
-            //for (int itemNo = 0; itemNo < itemsToInsert; itemNo++)
-            //{
-            //    // initialize a new pipeline tuple
-            //    var newItem = this.GetNewQueueEntity(itemNo);
+            for (int itemNo = 0; itemNo < itemsToInsert; itemNo++)
+            {
+                // initialize a new pipeline tuple
+                var newItem = this.GetNewQueueEntity(itemNo);
 
-            //    // post new item to Tool A input Q
-            //    toolA.InputBinding.InputQueue.Enqueue(newItem);
-            //}
+                // post new item to Tool A input Q
+                toolA.QueueingInputBinding.InputQueue.Enqueue(new QueueingPipelineQueueEntity<TaskItemPipelineVariable>(newItem));
+            }
 
-            //// pause the test while the queue processes the inputs
-            //Thread.Sleep(15000);
+            // pause the test while the queue processes the inputs
+            Thread.Sleep(30000);
 
-            //// validate the received work item queues have the right counts
-            //Assert.IsTrue(ToolAWorkItemQueue.Count == itemsToInsert, "test failed, incorrect number of items on receive queue");
+            // validate the received work item queues have the right counts
+            Assert.IsTrue(ToolAWorkItemQueue.Count == itemsToInsert, "test failed, reported " + ToolAWorkItemQueue.Count + " queued items, an incorrect number of items on receive queue");
 
-            //int i = 0;
+            int i = 0;
         }
 
         private void QueueingInputBinding_QueueHasData1(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<TaskItemPipelineVariable>> e)
         {
-            throw new NotImplementedException();
+            // new dta on Tool A queue - build a private work item queue
+            ToolBWorkItemQueue.Enqueue(e.EventPayload.Payload);
         }
 
         private void QueueingInputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<TaskItemPipelineVariable>> e)
         {
-            throw new NotImplementedException();
+            ToolAWorkItemQueue.Enqueue(e.EventPayload.Payload);
         }
 
         private void ToolB_InputBinding_QueueHasData1(object sender, core.taxonomy.binding.queue.QueueDataAvailableEventArgs<TaskItemPipelineVariable> e)

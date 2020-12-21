@@ -15,9 +15,15 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     /// furnish a consistent type for queue entities
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public class QueueingPipelineQueueEntity<TEntity> : IPipelineToolConfiguration
+    public class QueueingPipelineQueueEntity<TEntity> : IPipelineToolConfiguration, IQueueingPipelineQueueEntity<TEntity>
         where TEntity : IPipelineToolConfiguration
     {
+
+        public QueueingPipelineQueueEntity(TEntity payload)
+        {
+            this.Payload = payload;
+        }
+
         public QueueingPipelineQueueEntity()
         {
 
@@ -30,5 +36,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         public DateTime DeploymentTime { get; set; }
         public string ConfigurationJson { get; set; }
         public string ConfigurationJsonSchema { get; set; }
+        public TEntity Payload { get; set; }
     }
 }

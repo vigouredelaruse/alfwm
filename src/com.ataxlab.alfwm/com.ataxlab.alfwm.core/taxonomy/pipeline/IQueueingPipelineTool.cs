@@ -7,13 +7,25 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
-    public interface IQueueingPipelineTool<TInputEntity, TOutputEntity> : IQueueingPipelineTool
+    public interface IQueueingPipelineTool<TInputEntity, TOutputEntity> 
         where TInputEntity : class, IQueueingPipelineQueueEntity<IPipelineToolConfiguration>, new()
         where TOutputEntity : class, IQueueingPipelineQueueEntity<IPipelineToolConfiguration>, new()
     {
-        new QueueingConsumerChannel<TInputEntity> QueueingInputBinding { get; set; }
+        QueueingConsumerChannel<TInputEntity> QueueingInputBinding { get; set; }
 
-        new QueueingProducerChannel<TOutputEntity> QueueingOutputBinding { get; set; }
+        QueueingProducerChannel<TOutputEntity> QueueingOutputBinding { get; set; }
+
+        List<QueueingConsumerChannel<TOutputEntity>> QueueingOutputBindingCollection { get; set; }
+
+        void OnQueueHasData(object sender, TInputEntity availableData);
+
+        /// <summary>
+        /// clients of the queue pipeline tool can listen to this event
+        /// for notificaton of new arrivals on the quueue
+        /// 
+        /// the result is could be reflected on the queuing output binding collection of the tool, for instance
+        /// </summary>
+        event Func<TInputEntity, TInputEntity> QueueHasAvailableDataEvent;
     }
 
     public interface IQueueingPipelineTool
@@ -25,6 +37,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         void OnQueueHasData(object sender, object availableData);
 
 
+
+        List<QueueingConsumerChannel<object>> QueueingOutputBindingCollection { get; set; }
+
         /// <summary>
         /// clients of the queue pipeline tool can listen to this event
         /// for notificaton of new arrivals on the quueue
@@ -34,7 +49,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         event Func<object, object> QueueHasAvailableDataEvent;
     }
 
-    public interface IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputQueueEntity, TOutputQueueEntity, TConfiguration> : IPipelineTool<TConfiguration>
+    public interface IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputQueueEntity, TOutputQueueEntity, TConfiguration> :  IPipelineTool<TConfiguration>
       where TLatchingInputBinding : class, IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<TInputQueueEntity>>, new()
        where TLatchingOutputBinding : class, IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<TOutputQueueEntity>>, new()
         where TInputQueueEntity : IPipelineToolConfiguration
@@ -54,6 +69,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// polling timer
         /// </summary>
         TLatchingInputBinding QueueingInputBinding { get; set; }
+
+        /// <summary>
+        /// support fanout scenarious
+        /// where a tool produces data on multiple outputs
+        /// </summary>
+        List<TLatchingInputBinding> QueueingOutputBindingCollection { get; set; }
 
         /// <summary>
         /// latching input binding that latches signalling
@@ -106,7 +127,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     /// <typeparam name="TLatchingInputBinding"></typeparam>
     /// <typeparam name="TOutputBinding"></typeparam>
-    public interface IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TQueueEntity, TConfiguration> : IPipelineTool<TConfiguration> 
+    public interface IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TQueueEntity, TConfiguration> :  IPipelineTool<TConfiguration> 
         // where TLatchingInputBinding : class, new()
         // where TOutputBinding : class, new()
         // where TQueueEntity : class, new()
@@ -125,6 +146,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// polling timer
         /// </summary>
         TLatchingInputBinding QueueingInputBinding { get; set; }
+
+        /// <summary>
+        /// support fanout scenarious
+        /// where a tool produces data on multiple outputs
+        /// </summary>
+
+
+        List<TLatchingInputBinding> QueueingOutputBindingCollection { get; set; }
 
         /// <summary>
         /// signalled when the queue input binding
@@ -149,5 +178,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// where a tool produces data on multiple outputs
         /// </summary>
         TOutputBinding QueueingOutputBinding { get; set; }
+
+
+
     }
 }
