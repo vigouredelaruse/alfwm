@@ -144,12 +144,12 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             // initialize a tool
             var toolA = new QueueingPipelineTool<TaskItemPipelineVariable, QueueingPipelineToolConfiguration>();
             // wire a listener to the tool's queue arrival event
-            toolA.QueueingInputBinding.QueueHasData += QueueingInputBinding_QueueHasData; // += ToolA_InputBinding_QueueHasData;
+            toolA.QueueingInputBinding.QueueHasData += ToolAQueueingInputBinding_QueueHasData; // += ToolA_InputBinding_QueueHasData;
             toolA.QueueingInputBinding.IsQueuePollingEnabled = true;
 
             var toolB = new QueueingPipelineTool<TaskItemPipelineVariable, QueueingPipelineToolConfiguration>();
             // wire a listener to the tool's queue arrival event
-            toolB.QueueingInputBinding.QueueHasData += QueueingInputBinding_QueueHasData1; //  += ToolB_InputBinding_QueueHasData1;
+            toolB.QueueingInputBinding.QueueHasData += ToolBQueueingInputBinding_QueueHasData1; //  += ToolB_InputBinding_QueueHasData1;
 
             // wire Tool B downstream from Tool A
             toolA.QueueingOutputBindingCollection.Add(toolB.QueueingInputBinding);
@@ -172,13 +172,13 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             int i = 0;
         }
 
-        private void QueueingInputBinding_QueueHasData1(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<TaskItemPipelineVariable>> e)
+        private void ToolBQueueingInputBinding_QueueHasData1(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<TaskItemPipelineVariable>> e)
         {
             // new dta on Tool A queue - build a private work item queue
             ToolBWorkItemQueue.Enqueue(e.EventPayload.Payload);
         }
 
-        private void QueueingInputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<TaskItemPipelineVariable>> e)
+        private void ToolAQueueingInputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<TaskItemPipelineVariable>> e)
         {
             ToolAWorkItemQueue.Enqueue(e.EventPayload.Payload);
         }
@@ -216,58 +216,76 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
         #region http tool tests
 
-        //[TestMethod]
-        //public async Task HttpToolSmokeTest()
-        //{
-        //    // get an image as a byte array
-        //    byte[] imageAsBytes;
-        //    imageAsBytes = await GetSampleImageAsBytes();
-
-
-        //    int i = imageAsBytes.Length;
-
-        //    // initialize the tesseract tool
-        //    PipelineVariable testTuple = new PipelineVariable();
-        //    testTuple.Payload = imageAsBytes;
-
-        //    var activity = new HttpRequestQueueingActivity();
-        //    activity.QueueHasAvailableDataEvent += Activity_QueueHasAvailableDataEvent1;
-        //    activity.InputBinding.IsQueuePollingEnabled = true;
-
-        //    var activityConfig = new HttpRequestQueueingActivityConfiguration();
-        //    activityConfig.RequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
-        //    activity.PipelineToolCompleted += Activity_PipelineToolCompleted;
-
-        //    var outputQueue = activity.OutputBinding;
-        //    outputQueue.QueueHasData += OutputQueue_QueueHasData;
-        //    activity.InputBinding.InputQueue.Enqueue(activityConfig);
-
-        //    Thread.Sleep(30000);
-        //    var loopMax = 60;
-        //    var loopCounter = 0;
-        //    var outQMsg = new List<Tuple<String, String>>();
-
-        //    while(loopCounter++ < loopMax && didSignalDownstreamActivity == false)
-        //    {
-        //         Thread.Sleep(1000);
-        //    }
-
-        //    Assert.IsTrue(didSignalDownstreamActivity, "Failed to dequeue output q message");
-
-        //    Assert.IsTrue(didfirePipelineToolCompleted, "test failed, did not fire activity completed event");
-        //}
-
-        bool didSignalDownstreamActivity = false;
-        /// <summary>
-        /// signal from outputut channel that outputut queue has data
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OutputQueue_QueueHasData(object sender, core.taxonomy.binding.queue.QueueDataAvailableEventArgs<List<Tuple<string, string>>> e)
+        [TestMethod]
+        public async Task HttpToolSmokeTest()
         {
-            int i = 0;
+            // get an image as a byte array
+            byte[] imageAsBytes;
+            imageAsBytes = await GetSampleImageAsBytes();
+
+
+            int i = imageAsBytes.Length;
+
+            // initialize the tesseract tool
+            PipelineVariable testTuple = new PipelineVariable();
+            testTuple.Payload = imageAsBytes;
+
+            var activity = new HttpRequestQueueingActivity();
+            activity.QueueHasAvailableDataEvent += Activity_QueueHasAvailableDataEvent3; //  Activity_QueueHasAvailableDataEvent2;  //  += Activity_QueueHasAvailableDataEvent1;
+            activity.QueueingInputBinding.IsQueuePollingEnabled = true;
+
+            var activityConfig = new HttpRequestQueueingActivityConfiguration();
+            activityConfig.RequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
+            activity.PipelineToolCompleted += Activity_PipelineToolCompleted;
+
+            // add an output channel
+            var outputChannel = new QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+            activity.QueueingOutputBindingCollection.Add(outputChannel);
+            var outputQueue = outputChannel; // activity.QueueingOutputBindingCollection.First();
+            QueueingPipelineQueueEntity<IPipelineToolConfiguration> entity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
+            {
+                Payload = activityConfig
+            };
+
+
+            outputQueue.QueueHasData += OutputQueue_QueueHasData1; // += httpActivityTestOutputQueue_QueueHasData1; //  += OutputQueue_QueueHasData;
+            activity.QueueingInputBinding.InputQueue.Enqueue(entity);
+
+            Thread.Sleep(30000);
+            var loopMax = 60;
+            var loopCounter = 0;
+            var outQMsg = new List<Tuple<String, String>>();
+
+            while (loopCounter++ < loopMax && didSignalDownstreamActivity == false)
+            {
+                Thread.Sleep(1000);
+            }
+
+            Assert.IsTrue(didSignalDownstreamActivity, "Failed to dequeue output q message");
+
+            Assert.IsTrue(didfirePipelineToolCompleted, "test failed, did not fire activity completed event");
+        }
+
+        private void OutputQueue_QueueHasData1(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        {
             didSignalDownstreamActivity = true;
         }
+
+        private IQueueingPipelineQueueEntity<IPipelineToolConfiguration> Activity_QueueHasAvailableDataEvent3(IQueueingPipelineQueueEntity<IPipelineToolConfiguration> arg)
+        {
+            return arg;
+        }
+
+
+
+        private object Activity_QueueHasAvailableDataEvent2(object arg)
+        {
+            PipelineVariable v = new PipelineVariable();
+            return v;
+        }
+
+        bool didSignalDownstreamActivity = false;
+
 
         private void Activity_PipelineToolCompleted(object sender, core.taxonomy.PipelineToolCompletedEventArgs e)
         {
@@ -285,6 +303,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
         ConcurrentQueue<TaskItemPipelineVariable> TesseractWorkQueue { get; set; }
 
+        [Obsolete]
         private PipelineVariable Activity_QueueHasAvailableDataEvent(PipelineVariable arg)
         {
             PipelineVariable v = new PipelineVariable();

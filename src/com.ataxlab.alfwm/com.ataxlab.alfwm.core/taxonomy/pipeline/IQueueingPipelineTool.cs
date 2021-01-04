@@ -30,15 +30,15 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
     public interface IQueueingPipelineTool
     {
-        IQueueConsumerPipelineToolBinding<object> QueueingInputBinding { get; set; }
+        IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
 
-        IQueueProducerPipelineToolBinding<object> QueueingOutputBinding { get; set; }
+        IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
 
-        void OnQueueHasData(object sender, object availableData);
+        void OnQueueHasData(object sender, QueueingPipelineQueueEntity<IPipelineToolConfiguration> availableData);
 
 
 
-        List<QueueingConsumerChannel<object>> QueueingOutputBindingCollection { get; set; }
+        List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
 
         /// <summary>
         /// clients of the queue pipeline tool can listen to this event
@@ -46,7 +46,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// 
         /// the result is could be reflected on the queuing output binding collection of the tool, for instance
         /// </summary>
-        event Func<object, object> QueueHasAvailableDataEvent;
+        event Func<IQueueingPipelineQueueEntity<IPipelineToolConfiguration>, IQueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueHasAvailableDataEvent;
     }
 
     public interface IQueueingPipelineTool<TLatchingInputBinding, TLatchingOutputBinding, TInputQueueEntity, TOutputQueueEntity, TConfiguration> :  IPipelineTool<TConfiguration>

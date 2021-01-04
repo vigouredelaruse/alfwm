@@ -42,8 +42,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
     public abstract class QueueingPipelineToolBase : IQueueingPipelineTool, IPipelineTool<IPipelineToolConfiguration>
     {
-        public abstract IQueueConsumerPipelineToolBinding<object> QueueingInputBinding { get; set; }
-        public abstract IQueueProducerPipelineToolBinding<object> QueueingOutputBinding { get; set; }
+        public abstract IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
+        public abstract IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
+        public abstract List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
         public abstract IPipelineToolConfiguration<IPipelineToolConfiguration> PipelineToolConfiguration { get; set; }
         public abstract string PipelineToolInstanceId { get; set; }
         public abstract ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set; }
@@ -53,9 +54,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract IPipelineToolStatus PipelineToolStatus { get; set; }
         public abstract IPipelineToolContext PipelineToolContext { get; set; }
         public abstract IPipelineToolBinding PipelineToolOutputBinding { get; set; }
-        public abstract List<QueueingConsumerChannel<object>> QueueingOutputBindingCollection { get; set; }
 
-        public abstract event Func<object, object> QueueHasAvailableDataEvent;
+        public abstract event Func<IQueueingPipelineQueueEntity<IPipelineToolConfiguration>, IQueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueHasAvailableDataEvent;
         public abstract event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
         public abstract event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
         public abstract event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
@@ -65,7 +65,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args);
         public abstract void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args);
         public abstract void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args);
-        public abstract void OnQueueHasData(object sender, object availableData);
+        public abstract void OnQueueHasData(object sender, QueueingPipelineQueueEntity<IPipelineToolConfiguration> availableData);
         public abstract void StartPipelineTool(IPipelineToolConfiguration configuration, Action<IPipelineToolConfiguration> callback);
         public abstract StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new();
     }

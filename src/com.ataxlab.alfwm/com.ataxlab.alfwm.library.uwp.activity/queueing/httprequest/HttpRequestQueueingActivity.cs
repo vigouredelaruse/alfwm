@@ -21,11 +21,11 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 
     public class HttpRequestQueueingActivity : DefaultQueueingPipelineTool
     {
-        public HttpRequestQueueingActivity()
+        public HttpRequestQueueingActivity() : base()
         {
-            this.QueueingInputBinding = new QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>();
-            this.QueueingOutputBinding = new QueueingConsumerChannel<HttpRequestQueueingActivityResult>();
-            this.QueueingOutputBindingCollection = new List<QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>>();
+            this.QueueingInputBinding =   new QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration >>();
+            this.QueueingOutputBinding =  new QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+            this.QueueingOutputBindingCollection = new List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>(); // new List<QueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>>();
             this.PipelineToolId = Guid.NewGuid().ToString();
             this.PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
 
@@ -35,17 +35,16 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             WorkQueueProcessTimer.Elapsed += WorkQueueProcessTimer_Elapsed;
             WorkQueueProcessTimer.Enabled = true;
 
-            this.WorkItemCache = new ConcurrentQueue<HttpRequestQueueingActivityConfiguration>();
+            this.WorkItemCache = new ConcurrentQueue<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>(); // new ConcurrentQueue<QueueingPipelineQueueEntityHttpRequestQueueingActivityConfiguration>>();
             // enable the queue
             this.QueueingInputBinding.IsQueuePollingEnabled = true;
-            this.QueueingOutputBinding.QueueHasData += QueueingOutputBinding_QueueHasData; // InputBinding_QueueHasData;
+            this.QueueingInputBinding.QueueHasData += QueueingInputBinding_QueueHasData;
         }
 
-        private void QueueingOutputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<HttpRequestQueueingActivityResult> e)
+        private void QueueingInputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
         {
-            
+            this.OnQueueHasData(sender, e.EventPayload);
         }
-
 
         private IAsyncAction HttpRequestAsyncAction;
 
@@ -86,28 +85,39 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         {
             if (WorkItemCache.Count > 0)
             {
-                HttpRequestQueueingActivityConfiguration config;
+                QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration> config;
                 var workItem = WorkItemCache.TryDequeue(out config);
                 HttpRequestAsyncAction = Windows.System.Threading.ThreadPool.RunAsync(
                         async (state) =>
                         {
                             OnPipelineToolStarted(this, new PipelineToolStartEventArgs());
-                            var success = await EnsureHttpRequest(config);
+                            var success = await EnsureHttpRequest(config.Payload);
+                            int i = 0;
                         }
                     );
 
                 await HttpRequestAsyncAction;
+
+                // signal downstream
+                foreach (var binding in this.QueueingOutputBindingCollection)
+                {
+                    binding.InputQueue.Enqueue(new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
+                    {
+                        Payload = config
+                    });
+                }
             }
+
+            WorkQueueProcessTimer.Enabled = true;
         }
 
         private HttpClient httpClient = new HttpClient();
 
-        ConcurrentQueue<HttpRequestQueueingActivityConfiguration> WorkItemCache { get; set; }
+        ConcurrentQueue<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>> WorkItemCache { get; set; }
         public Timer WorkQueueProcessTimer { get; private set; }
 
-        public new List<QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>> QueueingOutputBindingCollection { get; set; }
-        public new QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration> QueueingInputBinding { get; set; }
-        public new QueueingConsumerChannel<HttpRequestQueueingActivityResult> QueueingOutputBinding { get; set; }
+        // public new QueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>> QueueingInputBinding { get; set; }
+
         public override IPipelineToolConfiguration<IPipelineToolConfiguration> PipelineToolConfiguration { get; set; }
         public override string PipelineToolInstanceId { get; set; }
         public override ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set; }
@@ -117,10 +127,8 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         public override IPipelineToolStatus PipelineToolStatus { get; set; }
         public override IPipelineToolContext PipelineToolContext { get; set; }
         public override IPipelineToolBinding PipelineToolOutputBinding { get; set; }
-
-        public override event Func<object, object> QueueHasAvailableDataEvent;
         public override event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
-        public event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
+        public override event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
         public override event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
         public override event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
 
@@ -144,16 +152,34 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             PipelineToolStarted?.Invoke(sender, new PipelineToolStartEventArgs() { InstanceId = this.PipelineToolInstanceId });
         }
 
-        public override void OnQueueHasData(object sender, object availableData)
+        public override void OnQueueHasData(object sender, QueueingPipelineQueueEntity<IPipelineToolConfiguration> availableData)
         {
-            // guard against data arrival we don't handle
-           
-            if (availableData is HttpRequestQueueingActivityConfiguration || availableData is QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>)
+            try
             {
-                // cache the data 
-                WorkItemCache.Enqueue(availableData as HttpRequestQueueingActivityConfiguration);
+                var jsonData = JsonConvert.SerializeObject(availableData.Payload);
+                HttpRequestQueueingActivityConfiguration typedData = JsonConvert.DeserializeObject<HttpRequestQueueingActivityConfiguration>(jsonData);
+                WorkItemCache.Enqueue(new QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>()
+                {
+                    Payload = typedData
+                });
+            }
+            catch(Exception e)
+            {
+                OnPipelineToolFailed(this, new PipelineToolFailedEventArgs()
+                { Status = { StatusJson = JsonConvert.SerializeObject(e) } });
             }
         }
+
+        //public override void OnQueueHasData(object sender, object availableData)
+        //{
+        //    // guard against data arrival we don't handle
+
+        //    if (availableData is HttpRequestQueueingActivityConfiguration || availableData is QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>)
+        //    {
+        //        // cache the data 
+        //        WorkItemCache.Enqueue(availableData as HttpRequestQueueingActivityConfiguration);
+        //    }
+        //}
 
         public override void StartPipelineTool(IPipelineToolConfiguration configuration, Action<IPipelineToolConfiguration> callback)
         {

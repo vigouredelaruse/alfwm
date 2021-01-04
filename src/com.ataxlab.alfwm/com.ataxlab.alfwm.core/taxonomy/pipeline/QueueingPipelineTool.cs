@@ -28,32 +28,28 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     {
         public DefaultQueueingPipelineTool()
         {
-            this.QueueingOutputBindingCollection = new List<QueueingConsumerChannel<object>>();
-            this.QueueingOutputBindingPorts = new List<IQueueProducerPipelineToolBinding<object>>();
-            this.QueueingInputBinding = new QueueingConsumerChannel<object>();
-            this.QueueingOutputBinding = new QueueingProducerChannel<object>();
+            this.QueueingOutputBindingCollection = new List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>(); // new List<QueueingConsumerChannel<IQueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
+            this.QueueingInputBinding = new   QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+            this.QueueingOutputBinding = new QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
             this.PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
+            
         }
 
+ 
+        public virtual IPipelineToolConfiguration<IPipelineToolConfiguration> PipelineToolConfiguration {get; set;}
+        public virtual string PipelineToolInstanceId {get; set;}
+        public virtual ObservableCollection<IPipelineVariable> PipelineToolVariables {get; set;}
+        public virtual string PipelineToolId {get; set;}
+        public virtual string PipelineToolDisplayName {get; set;}
+        public virtual string PipelineToolDescription {get; set;}
+        public virtual IPipelineToolStatus PipelineToolStatus {get; set;}
+        public virtual IPipelineToolContext PipelineToolContext {get; set;}
+        public virtual IPipelineToolBinding PipelineToolOutputBinding {get; set;}
+        public IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
+        public IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
+        public List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
 
-
-        public virtual IQueueConsumerPipelineToolBinding<object> QueueingInputBinding { get; set; }
-
-        public virtual IQueueProducerPipelineToolBinding<object> QueueingOutputBinding { get; set; }
-
-        public virtual IPipelineToolConfiguration<IPipelineToolConfiguration> PipelineToolConfiguration { get; set;}
-        public virtual string PipelineToolInstanceId { get; set;}
-        public virtual ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set;}
-        public virtual string PipelineToolId { get; set;}
-        public virtual string PipelineToolDisplayName { get; set;}
-        public virtual string PipelineToolDescription { get; set;}
-        public virtual IPipelineToolStatus PipelineToolStatus { get; set;}
-        public virtual IPipelineToolContext PipelineToolContext { get; set;}
-        public virtual IPipelineToolBinding PipelineToolOutputBinding { get; set;}
-        public virtual List<IQueueProducerPipelineToolBinding<object>> QueueingOutputBindingPorts { get; set; }
-        public List<QueueingConsumerChannel<object>> QueueingOutputBindingCollection { get; set; }
-
-        public virtual event Func<object, object> QueueHasAvailableDataEvent;
+        public virtual event Func<IQueueingPipelineQueueEntity<IPipelineToolConfiguration>, IQueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueHasAvailableDataEvent;
         public virtual event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
         public virtual event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
         public virtual event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
@@ -61,37 +57,37 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public virtual void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class, new()
         {
-            // throw new NotImplementedException();
+           //
         }
 
         public virtual void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
         {
-            // throw new NotImplementedException();
+           //
         }
 
         public virtual void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
         {
-            // throw new NotImplementedException();
+           //
         }
 
         public virtual void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
         {
-            // throw new NotImplementedException();
+           //
         }
 
-        public virtual void OnQueueHasData(object sender, object availableData)
+        public virtual void OnQueueHasData(object sender, QueueingPipelineQueueEntity<IPipelineToolConfiguration> availableData)
         {
-            //  throw new NotImplementedException();
+            //
         }
 
         public virtual void StartPipelineTool(IPipelineToolConfiguration configuration, Action<IPipelineToolConfiguration> callback)
         {
-            // throw new NotImplementedException();
+           //
         }
 
         public virtual StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
         {
-            // throw new NotImplementedException();
+            //
             return default(StopResult);
         }
     }
