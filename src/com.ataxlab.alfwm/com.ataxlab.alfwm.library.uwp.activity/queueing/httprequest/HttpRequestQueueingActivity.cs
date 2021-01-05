@@ -9,9 +9,11 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using Windows.Foundation;
@@ -21,8 +23,13 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 
     public class HttpRequestQueueingActivity : DefaultQueueingPipelineTool
     {
+
+
+        private HttpClient httpClient;
+
         public HttpRequestQueueingActivity() : base()
         {
+
             this.QueueingInputBinding =   new QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration >>();
             this.QueueingOutputBinding =  new QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
             this.QueueingOutputBindingCollection = new List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>(); // new List<QueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>>();
@@ -48,73 +55,132 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 
         private IAsyncAction HttpRequestAsyncAction;
 
-        private async Task<bool> EnsureHttpRequest(HttpRequestQueueingActivityConfiguration config)
+
+        private async Task<HttpRequestQueueingActivityResult> EnsureHttpRequest(HttpRequestQueueingActivityConfiguration config)
         {
+
+
+            if(httpClient == null)
+            {
+                httpClient = new HttpClient();
+            }
+
+            HttpRequestQueueingActivityResult activityResult = new HttpRequestQueueingActivityResult();
             try
             {
                 var request = config.RequestMessage;
+                httpClient.Timeout = TimeSpan.FromSeconds(30);
+                var _cancelTokenSource = new CancellationTokenSource();
+                var _cancelToken = _cancelTokenSource.Token;
 
-
-                HttpResponseMessage response = await httpClient.SendAsync(request);
+                var response =  await httpClient.SendAsync(request, _cancelToken).ConfigureAwait(false);
 
                 var content = await response.Content.ReadAsStringAsync();
+
                 var outMsg = new List<Tuple<String, String>>();
+                outMsg.Add(new Tuple<string, string>("content", content));
+
+                activityResult.ResponseHeaders = response.Headers;
+                activityResult.ResponseStatusCode = response.StatusCode;
+                activityResult.ReasonPhrase = response.ReasonPhrase;
+                activityResult.Payload.Add(new Tuple<string, string>("content", content));
+                
+
                 var evtMsg = new List<String>();
                 evtMsg.Add(content);
-                var outMsgPayload = new Tuple<String, String>("content", content);
+                //var outMsgPayload = new Tuple<String, String>("content", content);
 
-                outMsg.Add(outMsgPayload);
+                //outMsg.Add(outMsgPayload);
 
-                var outTuple = new PipelineToolCompletedEventArgs<List<String>>() { Payload = evtMsg };
 
-                OnPipelineToolCompleted<List<String>>(this, outTuple);
-                //this.QueueingOutputBinding.OutputQueue.Enqueue(outMsg);
-                //this.QueueingOutputBinding.OnQueueHasData(DateTime.UtcNow, outMsg);
-                return true;
+                //var pipelineToolCompletedArgs = new PipelineToolCompletedEventArgs<List<String>>() { Payload = evtMsg };
+
+                //OnPipelineToolCompleted<List<String>>(this, pipelineToolCompletedArgs);
+
+                var completionArgs = new PipelineToolCompletedEventArgs<HttpRequestQueueingActivityResult>(activityResult);
+                OnPipelineToolCompleted<HttpRequestQueueingActivityResult>(this, new PipelineToolCompletedEventArgs<HttpRequestQueueingActivityResult>(activityResult));
+
+                return activityResult;
             }
             catch (Exception ex)
             {
                 OnPipelineToolFailed(this, new PipelineToolFailedEventArgs() { Status = { StatusJson = JsonConvert.SerializeObject(ex) } });
             }
 
-            return false;
+            return activityResult;
         }
 
 
         private async void WorkQueueProcessTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            if (WorkItemCache.Count > 0)
+            // the result message of this pipeline tool
+            HttpRequestQueueingActivityResult activityResult = new HttpRequestQueueingActivityResult();
+
+            try 
             {
-                QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration> config;
-                var workItem = WorkItemCache.TryDequeue(out config);
-                HttpRequestAsyncAction = Windows.System.Threading.ThreadPool.RunAsync(
-                        async (state) =>
-                        {
-                            OnPipelineToolStarted(this, new PipelineToolStartEventArgs());
-                            var success = await EnsureHttpRequest(config.Payload);
-                            int i = 0;
-                        }
-                    );
-
-                await HttpRequestAsyncAction;
-
-                // signal downstream
-                foreach (var binding in this.QueueingOutputBindingCollection)
+                if (WorkItemCache.Count > 0)
                 {
-                    binding.InputQueue.Enqueue(new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
+                    // we expect these messages on the work item queue
+                    QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration> config;
+                    var workItem = WorkItemCache.TryDequeue(out config);
+
+                    // operate on the queue data via the threadpool
+                    HttpRequestAsyncAction = Windows.System.Threading.ThreadPool.RunAsync(
+                            async (state) =>
+                            {
+                                try
+                                {
+                                    OnPipelineToolStarted(this, new PipelineToolStartEventArgs()
+                                    {
+                                        InstanceId = this.PipelineToolInstanceId
+                                    });
+
+                                    // perform the business logic using 
+                                    // dequeued configuration 
+                                    var result = await EnsureHttpRequest(config.Payload);
+                                    activityResult = result;
+                                }
+                                catch(Exception ex)
+                                {
+                                    OnPipelineToolFailed(this, new PipelineToolFailedEventArgs()
+                                    {
+                                        InstanceId = this.PipelineToolInstanceId,
+                                        Status = { StatusJson = JsonConvert.SerializeObject(ex) }
+                                    });
+                                }
+
+                            }
+                        );
+
+                    // execute the threadpool quque operation
+                    await HttpRequestAsyncAction;
+
+                    // signal downstream
+                    foreach (var binding in this.QueueingOutputBindingCollection)
                     {
-                        Payload = config
-                    });
+                        binding.InputQueue.Enqueue(new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
+                        {
+                            Payload = activityResult
+                        });
+                    }
                 }
+               
+            }
+            catch(Exception eex)
+            {
+                OnPipelineToolFailed(this, new PipelineToolFailedEventArgs()
+                {
+                    InstanceId = this.PipelineToolInstanceId,
+                    Status = { StatusJson = JsonConvert.SerializeObject(eex) }
+                });
             }
 
             WorkQueueProcessTimer.Enabled = true;
         }
 
-        private HttpClient httpClient = new HttpClient();
 
         ConcurrentQueue<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>> WorkItemCache { get; set; }
-        public Timer WorkQueueProcessTimer { get; private set; }
+        public System.Timers.Timer WorkQueueProcessTimer { get; private set; }
 
         // public new QueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>> QueueingInputBinding { get; set; }
 

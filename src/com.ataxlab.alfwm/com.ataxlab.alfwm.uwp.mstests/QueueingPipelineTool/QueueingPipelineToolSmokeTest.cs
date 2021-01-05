@@ -251,6 +251,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             outputQueue.QueueHasData += OutputQueue_QueueHasData1; // += httpActivityTestOutputQueue_QueueHasData1; //  += OutputQueue_QueueHasData;
             activity.QueueingInputBinding.InputQueue.Enqueue(entity);
 
+            // remove this when not debugging
             Thread.Sleep(30000);
             var loopMax = 60;
             var loopCounter = 0;
@@ -261,6 +262,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                 Thread.Sleep(1000);
             }
 
+            
+
             Assert.IsTrue(didSignalDownstreamActivity, "Failed to dequeue output q message");
 
             Assert.IsTrue(didfirePipelineToolCompleted, "test failed, did not fire activity completed event");
@@ -269,6 +272,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
         private void OutputQueue_QueueHasData1(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
         {
             didSignalDownstreamActivity = true;
+
+       
         }
 
         private IQueueingPipelineQueueEntity<IPipelineToolConfiguration> Activity_QueueHasAvailableDataEvent3(IQueueingPipelineQueueEntity<IPipelineToolConfiguration> arg)
