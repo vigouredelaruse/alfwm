@@ -28,6 +28,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     {
         public DefaultQueueingPipelineTool()
         {
+            this.PipelineToolId = Guid.NewGuid().ToString();
             this.QueueingOutputBindingCollection = new List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>(); // new List<QueueingConsumerChannel<IQueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
             this.QueueingInputBinding = new   QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
             this.QueueingOutputBinding = new QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();

@@ -30,11 +30,6 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         public HttpRequestQueueingActivity() : base()
         {
 
-            this.QueueingInputBinding =   new QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration >>();
-            this.QueueingOutputBinding =  new QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
-            this.QueueingOutputBindingCollection = new List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>(); // new List<QueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>>();
-            this.PipelineToolId = Guid.NewGuid().ToString();
-            this.PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
 
             WorkQueueProcessTimer = new System.Timers.Timer();
             WorkQueueProcessTimer.AutoReset = false;
@@ -43,9 +38,10 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             WorkQueueProcessTimer.Enabled = true;
 
             this.WorkItemCache = new ConcurrentQueue<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>(); // new ConcurrentQueue<QueueingPipelineQueueEntityHttpRequestQueueingActivityConfiguration>>();
-            // enable the queue
-            this.QueueingInputBinding.IsQueuePollingEnabled = true;
+                                                                                                                               // enable the queue
             this.QueueingInputBinding.QueueHasData += QueueingInputBinding_QueueHasData;
+
+            this.QueueingInputBinding.IsQueuePollingEnabled = true;
         }
 
         private void QueueingInputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
@@ -249,7 +245,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 
         public override void StartPipelineTool(IPipelineToolConfiguration configuration, Action<IPipelineToolConfiguration> callback)
         {
-            throw new NotImplementedException();
+            // TODO - enqueue the supplied data
         }
 
 

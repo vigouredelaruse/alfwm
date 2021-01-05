@@ -67,39 +67,15 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             var inputBinding = new QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>();
             var outputBinding = new QueueingProducerChannel<HttpRequestQueueingActivityResult>();
 
-            // var newNode = new QueueingPipelineNode<HttpRequestQueueingActivity2, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<HttpRequestQueueingActivityResult>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityResult>();
-
-            var newerNode = new QueueingPipelineNode2<HttpRequestQueueingActivity2,
-                                                    QueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>,
-                                                    QueueingProducerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult>>,
-                                                    HttpRequestQueueingActivityConfiguration,
-                                                    HttpRequestQueueingActivityResult,
-                                                    HttpRequestQueueingActivityConfiguration
-                                                    >();
-
-            var newNode = new QueueingPipelineNode<HttpRequestQueueingActivity2, 
-                            QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, 
-                            QueueingProducerChannel<HttpRequestQueueingActivityConfiguration>, 
-                            HttpRequestQueueingActivityConfiguration,
-                            HttpRequestQueueingActivityConfiguration, 
-                            HttpRequestQueueingActivityConfiguration>();
-            //newNode.PipelineTool = httpActivity;
-            //newNode.PipelineToolInputBinding = httpActivity.InputBinding;
-            //newNode.PipelineToolOutputBinding = httpActivity.OutputBinding;
 
 
-    //        var processDefinition2 = new QueueingPipelineProcessDefinition<HttpRequestQueueingActivityConfiguration, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<HttpRequestQueueingActivityConfiguration>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration>
-    //();
-            // testPipeline.ProcessDefinition.PipelineTools.AddLast(newerNode);
-            // testPipeline.ProcessDefinition.AddFirstNode(httpActivity);
-            // testPipeline.ProcessDefinition.;
-            int iii = 0;
             QueueingPipelineNode aNode = new QueueingPipelineNode();
             aNode.QueueingPipelineTool = httpActivity as IQueueingPipelineTool;
 
             // testPipeline.ProcessDefinition = processDefinition;
             testPipeline.ProcessDefinition.QueueingPipelineNodes.AddLast(aNode);
 
+            #region dead code
             //var id = testPipeline.AddQueueingPipelineNode < QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>,
 
             //var id = testPipeline.AddQueueingPipelineNode<IQueueingPipelineNode<QueueingPipelineToolBase<HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>, HttpRequestQueueingActivityConfiguration>>,
@@ -109,9 +85,9 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             //    List<Tuple<String, String>>,
             //    HttpRequestQueueingActivityConfiguration>(newNode);
 
-                 //var processDefinition = new QueueingPipelineProcessDefinition<(); // TODO  make a TConfiguration that uses PipelineToolVariables
-                 // otherwise he linked list of the process definition becomes hardcoded to 1 configuration
-                 // and the linked list must specify arbitrary pipelinetool<tconfiguration> nodes
+            //var processDefinition = new QueueingPipelineProcessDefinition<(); // TODO  make a TConfiguration that uses PipelineToolVariables
+            // otherwise he linked list of the process definition becomes hardcoded to 1 configuration
+            // and the linked list must specify arbitrary pipelinetool<tconfiguration> nodes
 
 
             //var result = testPipeline.AddTool < QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration>,
@@ -126,6 +102,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
 
             // testPipeline.AddTool<HttpRequestQueueingActivity, HttpRequestQueueingActivityConfiguration>(httpActivity, httpActivityConfig);
+            #endregion dead code
         }
 
         #endregion queueing pipeline tests
@@ -308,12 +285,6 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
         ConcurrentQueue<TaskItemPipelineVariable> TesseractWorkQueue { get; set; }
 
-        [Obsolete]
-        private PipelineVariable Activity_QueueHasAvailableDataEvent(PipelineVariable arg)
-        {
-            PipelineVariable v = new PipelineVariable();
-            return v;
-        }
 
         private static async Task<byte[]> GetSampleImageAsBytes()
         {
