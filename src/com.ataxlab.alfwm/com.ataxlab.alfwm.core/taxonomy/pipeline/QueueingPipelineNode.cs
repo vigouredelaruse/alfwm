@@ -11,8 +11,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public QueueingPipelineNode()
         {
-            
+            this.QueueingPipelineNodeId = Guid.NewGuid().ToString();
         }
+
         public string QueueingPipelineNodeId { get; set; }
         public QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> PipelineTool { get; set; }
         public IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
@@ -37,6 +38,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public TPipelineTool PipelineTool { get; set; }
         public string QueueingPipelineNodeId { get; set; }
         public IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
+        public IQueueingPipelineTool QueueingPipelineTool { get; set; }
         QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> IQueueingPipelineNode.PipelineTool { get; set; }
     }
 
@@ -52,6 +54,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public IQueueProducerPipelineToolBinding<TOutputEntity> PipelineToolOutputBinding { get; set; }
         public string QueueingPipelineNodeId { get; set; }
         public IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
+        public IQueueingPipelineTool QueueingPipelineTool { get; set; }
         QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> IQueueingPipelineNode.PipelineTool { get; set; }
     }
 
@@ -69,6 +72,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public IQueueProducerPipelineToolBinding<TOutputEntity> PipelineToolOutputBinding { get; set; }
         public string QueueingPipelineNodeId { get; set; }
         public IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
+        public IQueueingPipelineTool QueueingPipelineTool { get; set; }
         QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> IQueueingPipelineNode.PipelineTool { get; set; }
     }
 }

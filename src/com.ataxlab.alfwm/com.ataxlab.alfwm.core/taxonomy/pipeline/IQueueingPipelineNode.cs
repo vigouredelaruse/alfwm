@@ -16,7 +16,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
 
-       
+
+        IQueueingPipelineTool QueueingPipelineTool { get; set; }
 
         QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> PipelineTool { get; set; }
     }

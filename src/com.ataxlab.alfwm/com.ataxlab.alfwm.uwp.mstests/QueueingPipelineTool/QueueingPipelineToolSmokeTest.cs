@@ -3,6 +3,7 @@ using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using com.ataxlab.alfwm.core.taxonomy.processdefinition;
+using com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser;
 using com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest;
 using com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb.model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -55,26 +56,46 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             //                        QueueingPipelineQueueEntity<IPipelineToolConfiguration>> httpActivity = new HttpRequestQueueingActivity2();
 
             var httpActivity = new HttpRequestQueueingActivity();
-  
+            var htmlParserActivity = new HtmlParserQueueingActivity();
 
             // httpActivity.QueueHasAvailableDataEvent += Activity_QueueHasAvailableDataEvent1;
             httpActivity.QueueingInputBinding.IsQueuePollingEnabled = true;
 
             var httpActivityConfig = new HttpRequestQueueingActivityConfiguration();
             httpActivityConfig.RequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
-            httpActivity.PipelineToolCompleted += Activity_PipelineToolCompleted;
+            httpActivity.PipelineToolCompleted += httpActivity_PipelineToolCompleted;
 
             var inputBinding = new QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>();
             var outputBinding = new QueueingProducerChannel<HttpRequestQueueingActivityResult>();
 
 
 
-            QueueingPipelineNode aNode = new QueueingPipelineNode();
-            aNode.QueueingPipelineTool = httpActivity as IQueueingPipelineTool;
+            QueueingPipelineNode httpActivityNode = new QueueingPipelineNode()
+            {
+                QueueingPipelineTool = httpActivity
+            };
+            
 
+            QueueingPipelineNode htmlParserNode = new QueueingPipelineNode() 
+            {
+                QueueingPipelineTool = htmlParserActivity
+            };
             // testPipeline.ProcessDefinition = processDefinition;
-            testPipeline.ProcessDefinition.QueueingPipelineNodes.AddLast(aNode);
+            // testPipeline.ProcessDefinition.QueueingPipelineNodes.AddLast(new LinkedListNode<IQueueingPipelineNode>(httpActivityNode));
+            // testPipeline.ProcessDefinition.QueueingPipelineNodes.AddLast(new LinkedListNode<IQueueingPipelineNode>(htmlParserNode));
 
+            Exception bindEx = null;
+            try
+            {
+                testPipeline.AddFirstPipelineNode(httpActivityNode);
+                testPipeline.AddAfterPipelineNode(0, htmlParserNode);
+            }
+            catch(Exception bEx)
+            {
+                bindEx = bEx;
+            }
+
+            Assert.IsNull(bindEx, "failed to add pipeline tools. exception " + bindEx.Message);
             #region dead code
             //var id = testPipeline.AddQueueingPipelineNode < QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>,
 
@@ -213,7 +234,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
             var activityConfig = new HttpRequestQueueingActivityConfiguration();
             activityConfig.RequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
-            activity.PipelineToolCompleted += Activity_PipelineToolCompleted;
+            activity.PipelineToolCompleted += httpActivity_PipelineToolCompleted;
 
             // add an output channel
             var outputChannel = new QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
@@ -269,7 +290,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
         bool didSignalDownstreamActivity = false;
 
 
-        private void Activity_PipelineToolCompleted(object sender, core.taxonomy.PipelineToolCompletedEventArgs e)
+        private void httpActivity_PipelineToolCompleted(object sender, core.taxonomy.PipelineToolCompletedEventArgs e)
         {
             didfirePipelineToolCompleted = true;
         }

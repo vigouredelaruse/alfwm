@@ -29,7 +29,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public DefaultQueueingPipelineTool()
         {
             this.PipelineToolId = Guid.NewGuid().ToString();
-            this.QueueingOutputBindingCollection = new List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>(); // new List<QueueingConsumerChannel<IQueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
+            this.QueueingOutputBindingCollection = new List<IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>(); //  new List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>(); // new List<QueueingConsumerChannel<IQueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
             this.QueueingInputBinding = new   QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
             this.QueueingOutputBinding = new QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
             this.PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
@@ -48,7 +48,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public virtual IPipelineToolBinding PipelineToolOutputBinding {get; set;}
         public IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
         public IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
-        public List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
+        // public List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
+        public List<IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
 
         public virtual event Func<IQueueingPipelineQueueEntity<IPipelineToolConfiguration>, IQueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueHasAvailableDataEvent;
         public virtual event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;

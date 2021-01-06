@@ -38,7 +38,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
 
 
-        List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
+        List<IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
 
         /// <summary>
         /// clients of the queue pipeline tool can listen to this event

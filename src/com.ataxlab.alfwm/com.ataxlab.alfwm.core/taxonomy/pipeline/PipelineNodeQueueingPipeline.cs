@@ -3,6 +3,7 @@ using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.processdefinition;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -31,32 +32,99 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public bool Bind(string SourceInstanceId, string DestinationInstanceId)
         {
-            throw new NotImplementedException();
+            // try to wire the input channel of the destination
+            // to the output binding collection of the source
+            return false;
+        }
+
+        /// <summary>
+        /// linked list semantics for adding pipeline node
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        public bool AddLastPipelineNode(QueueingPipelineNode newNode)
+        {
+
+            this.ProcessDefinition.QueueingPipelineNodes.AddLast(newNode);
+
+            return true;
+        }
+
+        public bool AddFirstPipelineNode(QueueingPipelineNode newNode)
+        {
+            
+            this.ProcessDefinition.QueueingPipelineNodes.AddFirst(newNode);
+
+            return true;
+        }
+
+
+
+        public bool AddAfterPipelineNode(int pipelineNodeIndex, QueueingPipelineNode newNode)
+        {
+            // find the node by its id
+            IQueueingPipelineNode targetNode = this.ProcessDefinition.QueueingPipelineNodes.Skip<IQueueingPipelineNode>(pipelineNodeIndex).Take(1).FirstOrDefault();
+         
+            if (targetNode != null)
+            {
+                //newNode.QueueingPipelineTool.QueueingInputBinding
+                targetNode.QueueingPipelineTool.QueueingOutputBindingCollection.Add(
+                    newNode.QueueingPipelineTool.QueueingInputBinding
+                    );
+                // associate the target with its LinkedListNode container
+                var targetContainer = this.ProcessDefinition.QueueingPipelineNodes.Find(targetNode);
+
+                // bind new downstream node if necessary
+                // TODO discover if this node is already wired somewhere else
+                // foreach(var node in ProcessDefinitionLinkedList)
+                // {
+                //      // as per https://stackoverflow.com/questions/1582285/how-to-remove-elements-from-a-generic-list-while-iterating-over-it
+                //      node.QueueingOutputBidingCollection.RemoveAll(item => item.Id == newNode.QueueingInputBinding.Id);
+                //
+                //  }
+                if (targetContainer.Next != null)
+                {
+                    // enforce nose-to-tail linked list binding
+                    var downstreamNode = targetContainer.Next;
+
+                    newNode.PipelineTool.QueueingOutputBindingCollection.Add(
+                        new QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>()
+                        );
+                }
+
+                this.ProcessDefinition.QueueingPipelineNodes.AddAfter(targetContainer, newNode);
+
+            }
+            else
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineCompleted?.Invoke(sender, args);
         }
 
         public void OnPipelineFailed(object sender, PipelineFailedEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineFailed?.Invoke(sender, args);
         }
 
         public void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineProgressUpdated?.Invoke(sender, args);
         }
 
         public void OnPipelineStarted(object sender, PipelineStartedEventArgs args)
         {
-            throw new NotImplementedException();
+            PipelineStarted?.Invoke(sender, args);
         }
 
         public void StartPipeline(IDefaultQueueingPipelineProcessDefinition configuration)
         {
-            throw new NotImplementedException();
         }
 
         public void StopPipeline(string instanceId)
