@@ -28,6 +28,9 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
         public HtmlParserQueueingActivity() : base()
         {
 
+            PipelineToolDisplayName = this.GetType().Name;
+            PipelineToolInstanceId = Guid.NewGuid().ToString();
+
             WorkQueueProcessTimer = new System.Timers.Timer();
             WorkQueueProcessTimer.AutoReset = false;
             WorkQueueProcessTimer.Interval = 50;
@@ -49,22 +52,22 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
 
         public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
         {
-            PipelineToolCompleted?.Invoke(sender, new PipelineToolCompletedEventArgs() { Payload = args.Payload });
+            PipelineToolCompleted?.Invoke(sender, new PipelineToolCompletedEventArgs() { InstanceId = this.PipelineToolInstanceId, Payload = args.Payload });
         }
 
         public override void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
         {
-            PipelineToolFailed?.Invoke(sender, new PipelineToolFailedEventArgs() { InstanceId = this.PipelineToolInstanceId, Status = { StatusJson = JsonConvert.SerializeObject(args) } });
+            PipelineToolFailed?.Invoke(sender,args);
         }
 
         public override void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
         {
-            PipelineToolProgressUpdated?.Invoke(sender, new PipelineToolProgressUpdatedEventArgs() { InstanceId = this.PipelineToolInstanceId });
+            PipelineToolProgressUpdated?.Invoke(sender,args);
         }
 
         public override void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
         {
-            PipelineToolStarted?.Invoke(sender, new PipelineToolStartEventArgs() { InstanceId = this.PipelineToolInstanceId });
+            PipelineToolStarted?.Invoke(sender, args);
         }
         /// <summary>
         /// handle the data that arrived on the queue
@@ -115,6 +118,12 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
             {
                 try
                 {
+
+                    OnPipelineToolStarted(this, new PipelineToolStartEventArgs()
+                    {
+                        InstanceId = this.PipelineToolInstanceId
+                    });
+
                     // we expect these messages on the work item queue
                     QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult> workitem;
                     var dQResult = WorkItemCache.TryDequeue(out workitem);
@@ -126,7 +135,11 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                         HtmlDocument doc = new HtmlDocument();
                         doc.LoadHtml(content.Item2);
 
+                        PipelineToolCompleted?.Invoke(this, new PipelineToolCompletedEventArgs()
+                        {
+                            InstanceId = this.PipelineToolInstanceId,
 
+                        });
                         //var xpath = "//text()"; // "//text()";
                         //var textNodes = doc.DocumentNode.SelectNodes(xpath);
 
@@ -135,7 +148,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                         //            .Select(w => w.InnerText)  
                         //            .ToList();
 
-                        
+
                     }
                 }
                 catch (Exception ex)

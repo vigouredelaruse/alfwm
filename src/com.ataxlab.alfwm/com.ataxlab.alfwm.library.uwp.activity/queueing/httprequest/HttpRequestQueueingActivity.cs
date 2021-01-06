@@ -37,7 +37,9 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         public HttpRequestQueueingActivity() : base()
         {
 
-
+            PipelineToolDisplayName = this.GetType().Name;
+            PipelineToolInstanceId = Guid.NewGuid().ToString();
+           
             WorkQueueProcessTimer = new System.Timers.Timer();
             WorkQueueProcessTimer.AutoReset = false;
             WorkQueueProcessTimer.Interval = 50;
@@ -140,6 +142,12 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
                                     activityResult = EnsureDecoratedEgressMessage(config, result);
 
                                     EnsureMessageEgressed(activityResult);
+
+                                    PipelineToolCompleted?.Invoke(this, new PipelineToolCompletedEventArgs()
+                                    {
+                                      InstanceId = this.PipelineToolInstanceId,
+                                      
+                                    });
                                 }
                                 catch (Exception ex)
                                 {
@@ -257,17 +265,17 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 
         public override void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
         {
-            PipelineToolFailed?.Invoke(sender, new PipelineToolFailedEventArgs() { InstanceId = this.PipelineToolInstanceId, Status = { StatusJson = JsonConvert.SerializeObject(args) } });
+            PipelineToolFailed?.Invoke(sender, args);
         }
 
         public override void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
         {
-            PipelineToolProgressUpdated?.Invoke(sender, new PipelineToolProgressUpdatedEventArgs() { InstanceId = this.PipelineToolInstanceId });
+            PipelineToolProgressUpdated?.Invoke(sender, args);
         }
 
         public override void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
         {
-            PipelineToolStarted?.Invoke(sender, new PipelineToolStartEventArgs() { InstanceId = this.PipelineToolInstanceId });
+            PipelineToolStarted?.Invoke(sender, args);
         }
 
         public override void OnQueueHasData(object sender, QueueingPipelineQueueEntity<IPipelineToolConfiguration> availableData)

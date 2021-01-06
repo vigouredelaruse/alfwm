@@ -14,13 +14,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     {
         string QueueingPipelineNodeId { get; set; }
 
-        IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
+        IDefaultQueueingPipelineTool QueueingPipelineTool { get; set; }
 
-
-        IQueueingPipelineTool QueueingPipelineTool { get; set; }
-
-        QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> PipelineTool { get; set; }
-    }
+     }
 
     public interface IQueueingPipelineNode<TPipelineTool> : IQueueingPipelineNode
     {

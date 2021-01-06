@@ -18,7 +18,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> PipelineTool { get; set; }
         public IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
 
-        public IQueueingPipelineTool QueueingPipelineTool { get; set; }
+        public IDefaultQueueingPipelineTool QueueingPipelineTool { get; set; }
     }
 
     public class QueueingPipelineNode<TPipelineTool> : IQueueingPipelineNode<TPipelineTool>
@@ -38,8 +38,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public TPipelineTool PipelineTool { get; set; }
         public string QueueingPipelineNodeId { get; set; }
         public IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
-        public IQueueingPipelineTool QueueingPipelineTool { get; set; }
-        QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> IQueueingPipelineNode.PipelineTool { get; set; }
+        public IDefaultQueueingPipelineTool QueueingPipelineTool { get; set; }
+      
     }
 
     public class QueueingPipelineNode2<TPipelineTool, TLatchingInputBinding, TOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity> :
@@ -53,9 +53,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public IQueueConsumerPipelineToolBinding<TInputEntity> PipelineToolInputBinding { get; set; }
         public IQueueProducerPipelineToolBinding<TOutputEntity> PipelineToolOutputBinding { get; set; }
         public string QueueingPipelineNodeId { get; set; }
-        public IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
-        public IQueueingPipelineTool QueueingPipelineTool { get; set; }
-        QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> IQueueingPipelineNode.PipelineTool { get; set; }
+        public IDefaultQueueingPipelineTool QueueingPipelineTool { get; set; }
     }
 
     public class QueueingPipelineNode<TPipelineTool, TLatchingInputBinding, TOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity> :
@@ -72,10 +70,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public IQueueConsumerPipelineToolBinding<TInputEntity> PipelineToolInputBinding { get; set; }
         public IQueueProducerPipelineToolBinding<TOutputEntity> PipelineToolOutputBinding { get; set; }
         public string QueueingPipelineNodeId { get; set; }
+        public IDefaultQueueingPipelineTool QueueingPipelineTool { get; set;}
 
-        [Obsolete]
-        public IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
-        public IQueueingPipelineTool QueueingPipelineTool { get; set; }
-        QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> IQueueingPipelineNode.PipelineTool { get; set; }
+ 
     }
 }

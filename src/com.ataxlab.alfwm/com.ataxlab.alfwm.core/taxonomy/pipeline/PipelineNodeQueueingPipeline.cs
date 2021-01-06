@@ -15,7 +15,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public DefaultPipelineNodeQueueingPipeline()
         {
             this.ProcessDefinition = new DefaultQueueingPipelineProcessDefinition();
+            this.PipelineId = Guid.NewGuid().ToString();
+            this.PipelineDisplayName = this.GetType().Name;
+            this.PipelineInstanceId = Guid.NewGuid().ToString();
+
+            
         }
+
 
         public string PipelineId { get; set; }
         public string PipelineInstanceId { get; set; }
@@ -67,15 +73,50 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// <returns></returns>
         public bool AddLastPipelineNode(QueueingPipelineNode newNode)
         {
+            EnsurePipelineToolListeners(newNode);
 
             this.ProcessDefinition.QueueingPipelineNodes.AddLast(newNode);
             EnsureIngressInputBinding();
             return true;
         }
 
+        /// <summary>
+        /// wire the pipeline to the added tool's events
+        /// </summary>
+        /// <param name="newNode"></param>
+        private void EnsurePipelineToolListeners(QueueingPipelineNode newNode)
+        {
+            newNode.QueueingPipelineTool.PipelineToolStarted += QueueingPipelineTool_PipelineToolStarted;
+            newNode.QueueingPipelineTool.PipelineToolCompleted += QueueingPipelineTool_PipelineToolCompleted;
+            newNode.QueueingPipelineTool.PipelineToolProgressUpdated += QueueingPipelineTool_PipelineToolProgressUpdated;
+            newNode.QueueingPipelineTool.PipelineToolFailed += QueueingPipelineTool_PipelineToolFailed;
+        }
+
+        private void QueueingPipelineTool_PipelineToolFailed(object sender, PipelineToolFailedEventArgs e)
+        {
+            PipelineFailed?.Invoke(sender, new PipelineFailedEventArgs() { ToolFailedEvent = e });
+        }
+
+        private void QueueingPipelineTool_PipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs e)
+        {
+            PipelineProgressUpdated?.Invoke(sender, new PipelineProgressUpdatedEventArgs() { ToolProgressUpdatedEvent = e });
+
+        }
+
+        private void QueueingPipelineTool_PipelineToolCompleted(object sender, PipelineToolCompletedEventArgs e)
+        {
+            PipelineProgressUpdated?.Invoke(sender, new PipelineProgressUpdatedEventArgs() { ToolCompletedEvent = e });
+
+        }
+
+        private void QueueingPipelineTool_PipelineToolStarted(object sender, PipelineToolStartEventArgs e)
+        {
+            PipelineProgressUpdated?.Invoke(sender, new PipelineProgressUpdatedEventArgs() { ToolStartedEvent = e });
+        }
+
         public bool AddFirstPipelineNode(QueueingPipelineNode newNode)
         {
-            
+            EnsurePipelineToolListeners(newNode);
             this.ProcessDefinition.QueueingPipelineNodes.AddFirst(newNode);
             EnsureIngressInputBinding();
             return true;
@@ -85,6 +126,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public bool AddAfterPipelineNode(int pipelineNodeIndex, QueueingPipelineNode newNode)
         {
+
+            EnsurePipelineToolListeners(newNode);
             // find the node by its id
             IQueueingPipelineNode targetNode = this.ProcessDefinition.QueueingPipelineNodes.Skip<IQueueingPipelineNode>(pipelineNodeIndex).Take(1).FirstOrDefault();
          

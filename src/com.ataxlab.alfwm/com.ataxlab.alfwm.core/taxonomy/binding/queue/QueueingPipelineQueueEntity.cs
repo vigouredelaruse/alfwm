@@ -19,7 +19,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         where TEntity : IPipelineToolConfiguration
     {
 
-        public QueueingPipelineQueueEntity(TEntity payload)
+        public QueueingPipelineQueueEntity(TEntity payload) : base()
         {
             this.Id = Guid.NewGuid().ToString();
             this.Payload = payload;
@@ -28,7 +28,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         public QueueingPipelineQueueEntity()
         {
             this.Id = Guid.NewGuid().ToString();
-
+            TimeStamp = DateTime.UtcNow;
         }
 
         public string Id { get; set; }

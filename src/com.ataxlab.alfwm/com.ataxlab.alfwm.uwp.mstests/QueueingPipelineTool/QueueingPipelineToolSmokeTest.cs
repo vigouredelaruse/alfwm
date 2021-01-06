@@ -48,7 +48,9 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             //  , QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>>();
 
             var testPipeline = new DefaultPipelineNodeQueueingPipeline();
-
+            testPipeline.PipelineCompleted += TestPipeline_PipelineCompleted;
+            testPipeline.PipelineStarted += TestPipeline_PipelineStarted;
+            testPipeline.PipelineProgressUpdated += TestPipeline_PipelineProgressUpdated;
             //IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, 
             //                        QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, 
             //                        QueueingPipelineQueueEntity<IPipelineToolConfiguration>, 
@@ -110,6 +112,21 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
             Assert.IsNull(bindEx, "failed to add pipeline tools. exception " + bindEx?.Message);
 
+        }
+
+        private void TestPipeline_PipelineProgressUpdated(object sender, core.taxonomy.PipelineProgressUpdatedEventArgs e)
+        {
+            int i = 0;
+        }
+
+        private void TestPipeline_PipelineStarted(object sender, core.taxonomy.PipelineStartedEventArgs e)
+        {
+            int i = 0;
+        }
+
+        private void TestPipeline_PipelineCompleted(object sender, core.taxonomy.PipelineCompletedEventArgs e)
+        {
+            int i = 0;
         }
 
         #endregion queueing pipeline tests

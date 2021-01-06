@@ -7,9 +7,17 @@ namespace com.ataxlab.alfwm.core.taxonomy
 {
     public class PipelineToolCompletedEventArgs : EventArgs
     {
+
+        public PipelineToolCompletedEventArgs()
+        {
+            TimeStamp = DateTime.UtcNow;
+        }
+
         public object Payload { get; set; }
 
         public string InstanceId { get; set; }
+
+        public DateTime TimeStamp { get; set; }
 
         public IPipelineToolStatus Status { get; set; }
     }
@@ -23,6 +31,8 @@ namespace com.ataxlab.alfwm.core.taxonomy
         {
             this.Payload = payload;
         }
+
+        public DateTime TimeStamp { get; set; }
 
         public TPayload Payload { get; set; }
     }
