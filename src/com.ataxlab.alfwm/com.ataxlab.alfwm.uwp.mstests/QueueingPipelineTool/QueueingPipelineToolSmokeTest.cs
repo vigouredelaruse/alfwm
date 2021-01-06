@@ -104,6 +104,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                 // post the test message
                 testPipeline.QueueingInputBinding.InputQueue.Enqueue(entity);
                 Thread.Sleep(30000);
+
+                Assert.IsTrue(testPipelineDidFirePipelineProgressUpdated == true, "pipeline progress events not firing properly");
             }
             catch (Exception bEx)
             {
@@ -116,7 +118,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
         private void TestPipeline_PipelineProgressUpdated(object sender, core.taxonomy.PipelineProgressUpdatedEventArgs e)
         {
-            int i = 0;
+            testPipelineDidFirePipelineProgressUpdated = true;
         }
 
         private void TestPipeline_PipelineStarted(object sender, core.taxonomy.PipelineStartedEventArgs e)
@@ -301,6 +303,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
         bool didFireQueueHasAvailableDataEvent = false;
         bool didfirePipelineToolCompleted = false;
+        private bool testPipelineDidFirePipelineProgressUpdated;
+
         private HttpRequestQueueingActivityConfiguration Activity_QueueHasAvailableDataEvent1(HttpRequestQueueingActivityConfiguration arg)
         {
             Assert.IsNotNull(arg, "test failed: queue arrival data");
