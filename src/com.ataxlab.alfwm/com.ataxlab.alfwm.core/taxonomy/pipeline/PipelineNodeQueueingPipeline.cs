@@ -82,7 +82,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
                 //      node.QueueingOutputBidingCollection.RemoveAll(item => item.Id == newNode.QueueingInputBinding.Id);
                 //
                 //  }
-                if (targetContainer.Next != null)
+                if (targetContainer?.Next != null)
                 {
                     // enforce nose-to-tail linked list binding
                     var downstreamNode = targetContainer.Next;

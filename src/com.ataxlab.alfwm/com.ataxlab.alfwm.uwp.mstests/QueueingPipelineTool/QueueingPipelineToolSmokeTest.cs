@@ -95,7 +95,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                 bindEx = bEx;
             }
 
-            Assert.IsNull(bindEx, "failed to add pipeline tools. exception " + bindEx.Message);
+            Assert.IsNull(bindEx, "failed to add pipeline tools. exception " + bindEx?.Message);
             #region dead code
             //var id = testPipeline.AddQueueingPipelineNode < QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>,
 
