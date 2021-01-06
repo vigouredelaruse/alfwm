@@ -130,9 +130,11 @@
     <Compile Include="httpactivity\HttpActvtyStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="queueing\htmlparser\HtmlParserQueueingActivity.cs" />
+    <Compile Include="queueing\htmlparser\HtmlParserQueueingActivityStatus.cs" />
     <Compile Include="queueing\httprequest\HttpRequestQueueingActivity.cs" />
     <Compile Include="queueing\httprequest\HttpRequestQueueingActivityConfiguration.cs" />
     <Compile Include="queueing\httprequest\HttpRequestQueueingActivityResult.cs" />
+    <Compile Include="queueing\httprequest\HttpRequestQueueingActivityStatus.cs" />
     <EmbeddedResource Include="Properties\com.ataxlab.alfwm.library.uwp.activity.rd.xml" />
   </ItemGroup>
   <ItemGroup>

@@ -89,8 +89,21 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             {
                 testPipeline.AddFirstPipelineNode(httpActivityNode);
                 testPipeline.AddAfterPipelineNode(0, htmlParserNode);
+
+                // TODO test AddLast
+
+                var activityConfig = new HttpRequestQueueingActivityConfiguration();
+                activityConfig.RequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
+                QueueingPipelineQueueEntity<IPipelineToolConfiguration> entity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
+                {
+                    Payload = activityConfig
+                };
+
+                // post the test message
+                testPipeline.QueueingInputBinding.InputQueue.Enqueue(entity);
+                Thread.Sleep(30000);
             }
-            catch(Exception bEx)
+            catch (Exception bEx)
             {
                 bindEx = bEx;
             }
@@ -234,17 +247,18 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
             var activityConfig = new HttpRequestQueueingActivityConfiguration();
             activityConfig.RequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
+
+             QueueingPipelineQueueEntity<IPipelineToolConfiguration> entity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
+            {
+                Payload = activityConfig
+            };
+
             activity.PipelineToolCompleted += httpActivity_PipelineToolCompleted;
 
             // add an output channel
             var outputChannel = new QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
             activity.QueueingOutputBindingCollection.Add(outputChannel);
             var outputQueue = outputChannel; // activity.QueueingOutputBindingCollection.First();
-            QueueingPipelineQueueEntity<IPipelineToolConfiguration> entity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
-            {
-                Payload = activityConfig
-            };
-
 
             outputQueue.QueueHasData += OutputQueue_QueueHasData1; // += httpActivityTestOutputQueue_QueueHasData1; //  += OutputQueue_QueueHasData;
             activity.QueueingInputBinding.InputQueue.Enqueue(entity);

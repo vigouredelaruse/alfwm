@@ -75,10 +75,15 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                     Payload = typedData
                 });
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 OnPipelineToolFailed(this, new PipelineToolFailedEventArgs()
-                { Status = { StatusJson = JsonConvert.SerializeObject(e) } });
+                {
+                    Status = new HtmlParserQueueingActivityStatus()
+                    {
+                        StatusJson = JsonConvert.SerializeObject(e)
+                    }
+                }); 
 
             }
         }
@@ -106,13 +111,15 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                     // we expect these messages on the work item queue
                     QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult> config;
                     var workItem = WorkItemCache.TryDequeue(out config);
-
+                    int i = 0;
                 }
                 catch (Exception ex)
                 {
 
                 }
             }
+
+            WorkQueueProcessTimer.Enabled = true;
         }
 
         #endregion private methods

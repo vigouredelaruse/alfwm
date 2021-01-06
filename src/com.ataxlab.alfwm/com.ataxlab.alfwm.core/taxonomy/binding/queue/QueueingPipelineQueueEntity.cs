@@ -21,11 +21,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 
         public QueueingPipelineQueueEntity(TEntity payload)
         {
+            this.Id = Guid.NewGuid().ToString();
             this.Payload = payload;
         }
 
         public QueueingPipelineQueueEntity()
         {
+            this.Id = Guid.NewGuid().ToString();
 
         }
 

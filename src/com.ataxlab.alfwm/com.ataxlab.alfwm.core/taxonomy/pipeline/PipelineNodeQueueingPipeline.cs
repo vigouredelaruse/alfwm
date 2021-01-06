@@ -23,6 +23,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public string PipelineDescription { get; set; }
         public IPipelineBinding PipelineInputBinding { get; set; }
         public IPipelineBinding PipelineOutputBinding { get; set; }
+
+        /// <summary>
+        /// exposes the input binding of the ingress pipelinetool 
+        /// functions as the main 'entry point' for messages 
+        /// to the pipeline
+        /// </summary>
+        public IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
+
         public IDefaultQueueingPipelineProcessDefinition ProcessDefinition { get; set; }
 
         public event EventHandler<PipelineStartedEventArgs> PipelineStarted;
@@ -38,6 +46,21 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         }
 
         /// <summary>
+        /// enforce exposure inputbinding queue of the ingress pipelinetool node
+        /// 
+        /// </summary>
+        private void EnsureIngressInputBinding()
+        {
+            // apply the rule that the first ordinal node in the 
+            // process definition list is the ingress node
+            var ingressNode = this.ProcessDefinition.QueueingPipelineNodes.First;
+
+            this.QueueingInputBinding = ingressNode.Value.QueueingPipelineTool.QueueingInputBinding;
+
+            // TODO instrument telemetry for this operation
+        }
+
+        /// <summary>
         /// linked list semantics for adding pipeline node
         /// </summary>
         /// <param name="node"></param>
@@ -46,7 +69,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         {
 
             this.ProcessDefinition.QueueingPipelineNodes.AddLast(newNode);
-
+            EnsureIngressInputBinding();
             return true;
         }
 
@@ -54,7 +77,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         {
             
             this.ProcessDefinition.QueueingPipelineNodes.AddFirst(newNode);
-
+            EnsureIngressInputBinding();
             return true;
         }
 
@@ -97,9 +120,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             }
             else
             {
+                EnsureIngressInputBinding();
                 return false;
             }
 
+            EnsureIngressInputBinding();
             return true;
         }
 

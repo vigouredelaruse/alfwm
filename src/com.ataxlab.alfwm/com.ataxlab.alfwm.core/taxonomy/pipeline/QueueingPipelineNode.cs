@@ -67,10 +67,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     //where TOutputEntity : class, new()
     //where TInputEntity : class, new()
     {
+        [Obsolete]
         public TPipelineTool PipelineTool { get; set; }
         public IQueueConsumerPipelineToolBinding<TInputEntity> PipelineToolInputBinding { get; set; }
         public IQueueProducerPipelineToolBinding<TOutputEntity> PipelineToolOutputBinding { get; set; }
         public string QueueingPipelineNodeId { get; set; }
+
+        [Obsolete]
         public IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
         public IQueueingPipelineTool QueueingPipelineTool { get; set; }
         QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> IQueueingPipelineNode.PipelineTool { get; set; }

@@ -100,7 +100,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             }
             catch (Exception ex)
             {
-                OnPipelineToolFailed(this, new PipelineToolFailedEventArgs() { Status = { StatusJson = JsonConvert.SerializeObject(ex) } });
+                OnPipelineToolFailed(this, new PipelineToolFailedEventArgs() { Status = { StatusJson = JsonConvert.SerializeObject(ex.Message) } });
             }
 
             return activityResult;
@@ -135,13 +135,15 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
                                     // dequeued configuration 
                                     var result = await EnsureHttpRequest(config.Payload);
                                     activityResult = result;
+
+                                    EnsureEgressMessage(activityResult);
                                 }
-                                catch(Exception ex)
+                                catch (Exception ex)
                                 {
                                     OnPipelineToolFailed(this, new PipelineToolFailedEventArgs()
                                     {
                                         InstanceId = this.PipelineToolInstanceId,
-                                        Status = { StatusJson = JsonConvert.SerializeObject(ex) }
+                                        Status = new HttpRequestQueueingActivityStatus { StatusJson = JsonConvert.SerializeObject(ex) }
                                     });
                                 }
 
@@ -151,29 +153,39 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
                     // execute the threadpool quque operation
                     await HttpRequestAsyncAction;
 
-                    // signal downstream
-                    foreach (var binding in this.QueueingOutputBindingCollection)
-                    {
-                        binding.InputQueue.Enqueue(new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
-                        {
-                            Payload = activityResult
-                        });
-                    }
                 }
-               
+
             }
             catch(Exception eex)
             {
                 OnPipelineToolFailed(this, new PipelineToolFailedEventArgs()
                 {
                     InstanceId = this.PipelineToolInstanceId,
-                    Status = { StatusJson = JsonConvert.SerializeObject(eex) }
+                    Status = new HttpRequestQueueingActivityStatus { StatusJson = JsonConvert.SerializeObject(eex) }
+                    
                 });
             }
 
             WorkQueueProcessTimer.Enabled = true;
         }
 
+        /// <summary>
+        /// reflect the operation result of this tool
+        /// on its output binding, for egress by downstream nodes
+        /// in the pipeline
+        /// </summary>
+        /// <param name="activityResult"></param>
+        private void EnsureEgressMessage(HttpRequestQueueingActivityResult activityResult)
+        {
+            // signal downstream
+            foreach (var binding in this.QueueingOutputBindingCollection)
+            {
+                binding.InputQueue.Enqueue(new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
+                {
+                    Payload = activityResult
+                });
+            }
+        }
 
         ConcurrentQueue<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>> WorkItemCache { get; set; }
         public System.Timers.Timer WorkQueueProcessTimer { get; private set; }
@@ -228,7 +240,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             catch(Exception e)
             {
                 OnPipelineToolFailed(this, new PipelineToolFailedEventArgs()
-                { Status = { StatusJson = JsonConvert.SerializeObject(e) } });
+                { Status = new HttpRequestQueueingActivityStatus { StatusJson = JsonConvert.SerializeObject(e) } });
             }
         }
 
