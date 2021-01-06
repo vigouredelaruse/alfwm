@@ -109,34 +109,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             }
 
             Assert.IsNull(bindEx, "failed to add pipeline tools. exception " + bindEx?.Message);
-            #region dead code
-            //var id = testPipeline.AddQueueingPipelineNode < QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>,
 
-            //var id = testPipeline.AddQueueingPipelineNode<IQueueingPipelineNode<QueueingPipelineToolBase<HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>, HttpRequestQueueingActivityConfiguration>>,
-            //     QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>,
-            //    QueueingProducerChannel<List<Tuple<String, String>>>,
-            //    HttpRequestQueueingActivityConfiguration,
-            //    List<Tuple<String, String>>,
-            //    HttpRequestQueueingActivityConfiguration>(newNode);
-
-            //var processDefinition = new QueueingPipelineProcessDefinition<(); // TODO  make a TConfiguration that uses PipelineToolVariables
-            // otherwise he linked list of the process definition becomes hardcoded to 1 configuration
-            // and the linked list must specify arbitrary pipelinetool<tconfiguration> nodes
-
-
-            //var result = testPipeline.AddTool < QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration>,
-            //    QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>,
-            //    QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>,
-            //    QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>,
-            //    HttpRequestQueueingActivityConfiguration,
-            //    HttpRequestQueueingActivityConfiguration,
-            //     HttpRequestQueueingActivityConfiguration
-            //    > (httpActivity, httpActivityConfig);
-
-
-
-            // testPipeline.AddTool<HttpRequestQueueingActivity, HttpRequestQueueingActivityConfiguration>(httpActivity, httpActivityConfig);
-            #endregion dead code
         }
 
         #endregion queueing pipeline tests

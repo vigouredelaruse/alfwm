@@ -16,7 +16,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         object Configuration { get; set; }
 
-        DateTime DeploymentTime { get; set; }
+        DateTime TimeStamp { get; set; }
 
         string ConfigurationJson { get; set; }
 

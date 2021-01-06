@@ -29,7 +29,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb.model
         string IPipelineToolConfiguration.Key { get; set; }
         string IPipelineToolConfiguration.DisplayName { get; set; }
         object IPipelineToolConfiguration.Configuration { get; set; }
-        DateTime IPipelineToolConfiguration.DeploymentTime { get; set; }
+        DateTime IPipelineToolConfiguration.TimeStamp { get; set; }
         string IPipelineToolConfiguration.ConfigurationJson { get; set; }
         string IPipelineToolConfiguration.ConfigurationJsonSchema { get; set; }
 

@@ -35,7 +35,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         public string Key { get; set; }
         public string DisplayName { get; set; }
         public object Configuration { get; set; }
-        public DateTime DeploymentTime { get; set; }
+        public DateTime TimeStamp { get; set; }
         public string ConfigurationJson { get; set; }
         public string ConfigurationJsonSchema { get; set; }
         public TEntity Payload { get; set; }

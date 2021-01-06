@@ -14,7 +14,7 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
         public HttpMethod HttpMethod { get; set; }
         public string AuthorizationToken { get; set; }
         public string DisplayName { get; set; }
-        public DateTime DeploymentTime { get; set; }
+        public DateTime TimeStamp { get; set; }
         public string ConfigurationJson { get; set; }
         public string ConfigurationJsonSchema { get; set; }
         public string Id { get; set; }

@@ -16,7 +16,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.workflow
         { }
 
         public virtual string DisplayName { get; set; }
-        public virtual DateTime DeploymentTime { get; set; }
+        public virtual DateTime TimeStamp { get; set; }
         public virtual string ConfigurationJson { get; set; }
         public virtual string ConfigurationJsonSchema { get; set; }
         public string Id { get; set; }

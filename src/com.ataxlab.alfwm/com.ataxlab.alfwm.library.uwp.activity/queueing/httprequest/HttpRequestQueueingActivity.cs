@@ -20,7 +20,14 @@ using Windows.Foundation;
 
 namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 {
-
+    /// <summary>
+    /// accepts a HttpRequeustQueueingActivityConfiguration
+    ///  that configures a HttpRequest
+    /// emits a HttpRequeustQueueingActivityResult
+    ///   with a payload of List<Tuple<String,String>>
+    ///   
+    /// dispatches the workitem on a threadpool thread
+    /// </summary>
     public class HttpRequestQueueingActivity : DefaultQueueingPipelineTool
     {
 
@@ -76,23 +83,18 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
                 var outMsg = new List<Tuple<String, String>>();
                 outMsg.Add(new Tuple<string, string>("content", content));
 
-                activityResult.ResponseHeaders = response.Headers;
+                activityResult.HttpResponseHeaders = response.Headers;
                 activityResult.ResponseStatusCode = response.StatusCode;
                 activityResult.ReasonPhrase = response.ReasonPhrase;
                 activityResult.Payload.Add(new Tuple<string, string>("content", content));
-                
+                activityResult.SourceUrl = request.RequestUri.ToString();
+                activityResult.HttpMethod = request.Method.ToString();
+                activityResult.CommandMessage = config; // encapsulate the original message
 
                 var evtMsg = new List<String>();
                 evtMsg.Add(content);
-                //var outMsgPayload = new Tuple<String, String>("content", content);
-
-                //outMsg.Add(outMsgPayload);
-
-
-                //var pipelineToolCompletedArgs = new PipelineToolCompletedEventArgs<List<String>>() { Payload = evtMsg };
-
-                //OnPipelineToolCompleted<List<String>>(this, pipelineToolCompletedArgs);
-
+           
+                // TODO fix this oddity
                 var completionArgs = new PipelineToolCompletedEventArgs<HttpRequestQueueingActivityResult>(activityResult);
                 OnPipelineToolCompleted<HttpRequestQueueingActivityResult>(this, new PipelineToolCompletedEventArgs<HttpRequestQueueingActivityResult>(activityResult));
 
@@ -100,7 +102,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             }
             catch (Exception ex)
             {
-                OnPipelineToolFailed(this, new PipelineToolFailedEventArgs() { Status = { StatusJson = JsonConvert.SerializeObject(ex.Message) } });
+                OnPipelineToolFailed(this, new PipelineToolFailedEventArgs() { Status = new HttpRequestQueueingActivityStatus { StatusJson = JsonConvert.SerializeObject(ex.Message) } });
             }
 
             return activityResult;
@@ -134,9 +136,10 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
                                     // perform the business logic using 
                                     // dequeued configuration 
                                     var result = await EnsureHttpRequest(config.Payload);
-                                    activityResult = result;
+                                    
+                                    activityResult = EnsureDecoratedEgressMessage(config, result);
 
-                                    EnsureEgressMessage(activityResult);
+                                    EnsureMessageEgressed(activityResult);
                                 }
                                 catch (Exception ex)
                                 {
@@ -169,13 +172,54 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             WorkQueueProcessTimer.Enabled = true;
         }
 
+        private static HttpRequestQueueingActivityResult EnsureDecoratedEgressMessage(QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration> config, HttpRequestQueueingActivityResult result)
+        {
+            HttpRequestQueueingActivityResult activityResult = result;
+
+            // attach the message that generated the result to the result
+            // of the activity
+            activityResult.ConfigurationJson = JsonConvert.SerializeObject(config);
+
+            // nullcheck defence
+            if (config.Payload.RequestHeaders != null)
+            {
+                foreach (var item in config.Payload.RequestHeaders)
+                {
+                    var key = item.Key;
+                    var value = item.Value.ToList<string>();
+
+                    activityResult.RequestHeaders.Add(
+                        Tuple.Create<string, List<string>>(key, value));
+
+                }
+            }
+
+
+            foreach (var item in result.HttpResponseHeaders)
+            {
+                var key = item.Key;
+                var value = item.Value.ToList<string>();
+
+                activityResult.ResponseHeaders.Add(
+
+                    Tuple.Create<string, List<string>>(key, value)
+                    );
+            }
+
+            activityResult.HttpResponseHeaders = result.HttpResponseHeaders;
+            //activityResult.SourceUrl = result.SourceUrl.ToString();
+            //activityResult.HttpMethod = result.HttpMethod;
+            //activityResult.TimeStamp = DateTime.UtcNow;
+            return activityResult;
+        }
+
         /// <summary>
         /// reflect the operation result of this tool
         /// on its output binding, for egress by downstream nodes
         /// in the pipeline
         /// </summary>
         /// <param name="activityResult"></param>
-        private void EnsureEgressMessage(HttpRequestQueueingActivityResult activityResult)
+        private void EnsureMessageEgressed(HttpRequestQueueingActivityResult activityResult)
         {
             // signal downstream
             foreach (var binding in this.QueueingOutputBindingCollection)

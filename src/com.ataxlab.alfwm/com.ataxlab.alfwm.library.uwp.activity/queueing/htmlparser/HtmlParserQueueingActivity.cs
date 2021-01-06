@@ -2,6 +2,7 @@
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest;
+using HtmlAgilityPack;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
@@ -13,6 +14,12 @@ using System.Timers;
 
 namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
 {
+    /// <summary>
+    /// accepts a HttpRequeustQueueingActivityResult
+    /// emits a HtmlParserQueueigActivityResult
+    ///   with a payload of HtmlDocument
+    ///   depeds on https://www.nuget.org/packages/HtmlAgilityPack/
+    /// </summary>
     public class HtmlParserQueueingActivity : DefaultQueueingPipelineTool
     {
         public System.Timers.Timer WorkQueueProcessTimer { get; private set; }
@@ -109,9 +116,27 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                 try
                 {
                     // we expect these messages on the work item queue
-                    QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult> config;
-                    var workItem = WorkItemCache.TryDequeue(out config);
-                    int i = 0;
+                    QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult> workitem;
+                    var dQResult = WorkItemCache.TryDequeue(out workitem);
+                    
+                    // expect a payload of tuple<string,string>
+                    if(dQResult)
+                    {
+                        var content = workitem.Payload.Payload[0];
+                        HtmlDocument doc = new HtmlDocument();
+                        doc.LoadHtml(content.Item2);
+
+
+                        //var xpath = "//text()"; // "//text()";
+                        //var textNodes = doc.DocumentNode.SelectNodes(xpath);
+
+                        //var text = textNodes
+                        //            .Where(w => w.InnerText.Trim().Length > 2)                                  
+                        //            .Select(w => w.InnerText)  
+                        //            .ToList();
+
+                        
+                    }
                 }
                 catch (Exception ex)
                 {

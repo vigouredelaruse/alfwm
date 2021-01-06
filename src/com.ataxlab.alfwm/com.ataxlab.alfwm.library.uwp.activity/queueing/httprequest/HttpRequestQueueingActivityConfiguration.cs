@@ -19,13 +19,15 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         public string Key { get; set;}
         public string DisplayName { get; set;}
         public object Configuration { get; set;}
-        public DateTime DeploymentTime { get; set;}
+        public DateTime TimeStamp { get; set;}
         public string ConfigurationJson { get; set;}
         public string ConfigurationJsonSchema { get; set;}
 
         public HttpRequestQueueingActivityConfiguration()
         {
-                       
+            this.Id = Guid.NewGuid().ToString();
+            this.TimeStamp = DateTime.UtcNow;
+            DisplayName = this.GetType().Name;
         }
     }
 }

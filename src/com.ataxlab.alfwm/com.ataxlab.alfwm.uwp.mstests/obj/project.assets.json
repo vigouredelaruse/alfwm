@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "UAP,Version=v10.0.17763": {
+      "HtmlAgilityPack/1.11.29": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        }
+      },
       "LiteDB/5.0.8": {
         "type": "package",
         "compile": {
@@ -611,6 +620,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
+          "HtmlAgilityPack": "1.11.29",
           "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -663,6 +673,15 @@
       }
     },
     "UAP,Version=v10.0.17763/win10-arm": {
+      "HtmlAgilityPack/1.11.29": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        }
+      },
       "LiteDB/5.0.8": {
         "type": "package",
         "compile": {
@@ -1534,6 +1553,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
+          "HtmlAgilityPack": "1.11.29",
           "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -1586,6 +1606,15 @@
       }
     },
     "UAP,Version=v10.0.17763/win10-arm-aot": {
+      "HtmlAgilityPack/1.11.29": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        }
+      },
       "LiteDB/5.0.8": {
         "type": "package",
         "compile": {
@@ -2500,6 +2529,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
+          "HtmlAgilityPack": "1.11.29",
           "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -2552,6 +2582,15 @@
       }
     },
     "UAP,Version=v10.0.17763/win10-arm64-aot": {
+      "HtmlAgilityPack/1.11.29": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        }
+      },
       "LiteDB/5.0.8": {
         "type": "package",
         "compile": {
@@ -3466,6 +3505,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
+          "HtmlAgilityPack": "1.11.29",
           "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -3518,6 +3558,15 @@
       }
     },
     "UAP,Version=v10.0.17763/win10-x64": {
+      "HtmlAgilityPack/1.11.29": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        }
+      },
       "LiteDB/5.0.8": {
         "type": "package",
         "compile": {
@@ -4389,6 +4438,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
+          "HtmlAgilityPack": "1.11.29",
           "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -4441,6 +4491,15 @@
       }
     },
     "UAP,Version=v10.0.17763/win10-x64-aot": {
+      "HtmlAgilityPack/1.11.29": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        }
+      },
       "LiteDB/5.0.8": {
         "type": "package",
         "compile": {
@@ -5355,6 +5414,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
+          "HtmlAgilityPack": "1.11.29",
           "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -5407,6 +5467,15 @@
       }
     },
     "UAP,Version=v10.0.17763/win10-x86": {
+      "HtmlAgilityPack/1.11.29": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        }
+      },
       "LiteDB/5.0.8": {
         "type": "package",
         "compile": {
@@ -6278,6 +6347,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
+          "HtmlAgilityPack": "1.11.29",
           "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -6330,6 +6400,15 @@
       }
     },
     "UAP,Version=v10.0.17763/win10-x86-aot": {
+      "HtmlAgilityPack/1.11.29": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/HtmlAgilityPack.dll": {}
+        }
+      },
       "LiteDB/5.0.8": {
         "type": "package",
         "compile": {
@@ -7244,6 +7323,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0.17763",
         "dependencies": {
+          "HtmlAgilityPack": "1.11.29",
           "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
           "com.ataxlab.alfwm.core": "1.0.0"
         },
@@ -7297,6 +7377,54 @@
     }
   },
   "libraries": {
+    "HtmlAgilityPack/1.11.29": {
+      "sha512": "aCMPdyDUPU7z4fwMJ+4pbsUd669BWhIbC2rCo0upxBpYyblJHXNUjg5pxnk2iyqBg1C8gWF2fSxA1XERxcVZow==",
+      "type": "package",
+      "path": "htmlagilitypack/1.11.29",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "htmlagilitypack.1.11.29.nupkg.sha512",
+        "htmlagilitypack.nuspec",
+        "lib/Net35/HtmlAgilityPack.dll",
+        "lib/Net35/HtmlAgilityPack.pdb",
+        "lib/Net35/HtmlAgilityPack.xml",
+        "lib/Net40-client/HtmlAgilityPack.dll",
+        "lib/Net40-client/HtmlAgilityPack.pdb",
+        "lib/Net40-client/HtmlAgilityPack.xml",
+        "lib/Net40/HtmlAgilityPack.XML",
+        "lib/Net40/HtmlAgilityPack.dll",
+        "lib/Net40/HtmlAgilityPack.pdb",
+        "lib/Net45/HtmlAgilityPack.XML",
+        "lib/Net45/HtmlAgilityPack.dll",
+        "lib/Net45/HtmlAgilityPack.pdb",
+        "lib/NetCore45/HtmlAgilityPack.XML",
+        "lib/NetCore45/HtmlAgilityPack.dll",
+        "lib/NetCore45/HtmlAgilityPack.pdb",
+        "lib/netstandard1.3/HtmlAgilityPack.deps.json",
+        "lib/netstandard1.3/HtmlAgilityPack.dll",
+        "lib/netstandard1.3/HtmlAgilityPack.pdb",
+        "lib/netstandard1.3/HtmlAgilityPack.xml",
+        "lib/netstandard1.6/HtmlAgilityPack.deps.json",
+        "lib/netstandard1.6/HtmlAgilityPack.dll",
+        "lib/netstandard1.6/HtmlAgilityPack.pdb",
+        "lib/netstandard1.6/HtmlAgilityPack.xml",
+        "lib/netstandard2.0/HtmlAgilityPack.deps.json",
+        "lib/netstandard2.0/HtmlAgilityPack.dll",
+        "lib/netstandard2.0/HtmlAgilityPack.pdb",
+        "lib/netstandard2.0/HtmlAgilityPack.xml",
+        "lib/portable-net45+netcore45+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.XML",
+        "lib/portable-net45+netcore45+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.dll",
+        "lib/portable-net45+netcore45+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.pdb",
+        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.XML",
+        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.dll",
+        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.pdb",
+        "lib/uap10.0/HtmlAgilityPack.XML",
+        "lib/uap10.0/HtmlAgilityPack.dll",
+        "lib/uap10.0/HtmlAgilityPack.pdb",
+        "lib/uap10.0/HtmlAgilityPack.pri"
+      ]
+    },
     "LiteDB/5.0.8": {
       "sha512": "lqwQnweoa3Lko87uo9FzZYf6BFh3AULas5yosG95LPVHIoACtJJ2BjBPQ7d7vUYDQYSV3rUco2+vMilVoBQ3WA==",
       "type": "package",
