@@ -11,7 +11,7 @@ namespace com.ataxlab.alfwm
     /// <summary>
     /// 
     /// </summary>
-    [Obsolete]
+
     public class WorkflowManager : IWorkflowManager
     {
         private IScheduler _scheduler;

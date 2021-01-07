@@ -20,7 +20,6 @@ namespace com.ataxlab.alfwm
     /// but how this occurs is not 'visible' on the Workflow Manager's external 
     /// interace
     /// </summary>
-    [Obsolete]
     public interface IWorkflowManager
     {
         IScheduler Scheduler { get; set; }
