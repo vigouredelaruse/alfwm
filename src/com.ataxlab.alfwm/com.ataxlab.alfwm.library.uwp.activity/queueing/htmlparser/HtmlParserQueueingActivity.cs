@@ -140,6 +140,9 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                             InstanceId = this.PipelineToolInstanceId,
 
                         });
+
+                        EnsureEgressMessage(doc);
+
                         //var xpath = "//text()"; // "//text()";
                         //var textNodes = doc.DocumentNode.SelectNodes(xpath);
 
@@ -158,6 +161,27 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
             }
 
             WorkQueueProcessTimer.Enabled = true;
+        }
+
+        private void EnsureEgressMessage(HtmlDocument doc)
+        {
+            var egressMsg = new HtmlParserQueueingActivityResult()
+            {
+                Payload = doc
+
+            };
+
+            var egressEntity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>(egressMsg);
+
+            foreach (var binding in this.QueueingOutputBindingCollection)
+            {
+                binding.InputQueue.Enqueue(new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
+                {
+                    Payload = egressMsg
+                });
+            }
+
+            this.QueueingOutputBinding.OutputQueue.Enqueue(egressEntity);
         }
 
         #endregion private methods

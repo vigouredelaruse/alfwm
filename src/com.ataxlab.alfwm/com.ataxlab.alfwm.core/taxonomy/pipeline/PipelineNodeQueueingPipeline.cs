@@ -37,6 +37,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// </summary>
         public IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
 
+        /// <summary>
+        /// egresses messages from the terminal node of the pipeline
+        /// </summary>
+        public IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
+
         public IDefaultQueueingPipelineProcessDefinition ProcessDefinition { get; set; }
 
         public event EventHandler<PipelineStartedEventArgs> PipelineStarted;
@@ -55,7 +60,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// enforce exposure inputbinding queue of the ingress pipelinetool node
         /// 
         /// </summary>
-        private void EnsureIngressInputBinding()
+        private void EnsurePipelineIngressEgressBindings()
         {
             // apply the rule that the first ordinal node in the 
             // process definition list is the ingress node
@@ -63,6 +68,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
             this.QueueingInputBinding = ingressNode.Value.QueueingPipelineTool.QueueingInputBinding;
 
+            var egressNode = this.ProcessDefinition.QueueingPipelineNodes.Last;
+
+            this.QueueingOutputBinding = egressNode.Value.QueueingPipelineTool.QueueingOutputBinding;
             // TODO instrument telemetry for this operation
         }
 
@@ -76,7 +84,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             EnsurePipelineToolListeners(newNode);
 
             this.ProcessDefinition.QueueingPipelineNodes.AddLast(newNode);
-            EnsureIngressInputBinding();
+            EnsurePipelineIngressEgressBindings();
             return true;
         }
 
@@ -118,7 +126,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         {
             EnsurePipelineToolListeners(newNode);
             this.ProcessDefinition.QueueingPipelineNodes.AddFirst(newNode);
-            EnsureIngressInputBinding();
+            EnsurePipelineIngressEgressBindings();
             return true;
         }
 
@@ -163,11 +171,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             }
             else
             {
-                EnsureIngressInputBinding();
+                EnsurePipelineIngressEgressBindings();
                 return false;
             }
 
-            EnsureIngressInputBinding();
+            EnsurePipelineIngressEgressBindings();
             return true;
         }
 

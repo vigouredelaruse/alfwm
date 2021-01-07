@@ -48,6 +48,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             //  , QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>>();
 
             var testPipeline = new DefaultPipelineNodeQueueingPipeline();
+            
             testPipeline.PipelineCompleted += TestPipeline_PipelineCompleted;
             testPipeline.PipelineStarted += TestPipeline_PipelineStarted;
             testPipeline.PipelineProgressUpdated += TestPipeline_PipelineProgressUpdated;
@@ -104,6 +105,9 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                 // post the test message
                 testPipeline.QueueingInputBinding.InputQueue.Enqueue(entity);
                 Thread.Sleep(30000);
+
+                var pipelineEgressMsgs = testPipeline.QueueingOutputBinding.OutputQueue.Count;
+                Assert.IsTrue(pipelineEgressMsgs > 0, "pipeline did not egress messages");
 
                 Assert.IsTrue(testPipelineDidFirePipelineProgressUpdated == true, "pipeline progress events not firing properly");
             }

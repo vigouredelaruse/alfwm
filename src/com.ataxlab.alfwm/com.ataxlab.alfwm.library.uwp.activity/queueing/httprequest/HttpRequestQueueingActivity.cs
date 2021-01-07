@@ -237,6 +237,12 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
                     Payload = activityResult
                 });
             }
+
+            this.QueueingOutputBinding.OutputQueue
+                .Enqueue(new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
+                {
+                    Payload = activityResult
+                });
         }
 
         ConcurrentQueue<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>> WorkItemCache { get; set; }
