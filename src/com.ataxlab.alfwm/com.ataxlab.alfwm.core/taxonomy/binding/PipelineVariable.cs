@@ -5,6 +5,7 @@ using Newtonsoft.Json.Schema.Generation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace com.ataxlab.alfwm.core.taxonomy.binding
 {
@@ -15,6 +16,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
     /// it's parent type
     /// and it's item collection type
     /// </summary>
+    [XmlType("PipelineVariableEntity")]
     public class PipelineVariable : IPipelineVariable
     {
         public PipelineVariable()
@@ -27,29 +29,56 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         {
             this.Payload = payload;
 
-            this.JsonValue = JsonConvert.SerializeObject(payload);
+            // doing this may cause problems serializing containing objects to xml
+            // TODO look into wire format handling for pipelinevariables,
+            // possibly by moving wireformat handling out of this class
+            this.JsonValue = JsonConvert.SerializeObject(payload, Formatting.Indented, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All
+            });
 
+            // TODO - justify the schema 
+            // given the inclusion of type information in the render JSON
             this.JsonValueSchema = JSchema.Parse(JsonValue);
-           
+
         }
 
+
+        [XmlAttribute]
         public string ID { get;  set; }
+
+        [XmlAttribute]
         public string Key { get;  set; }
-        public string JsonValue { get; set; }
+
+        [XmlElement]
  
+        public string JsonValue { get; set; }
+
+        [XmlIgnoreAttribute]
         public JSchema JsonValueSchema { get; set; }
 
+        [XmlAttribute]
         public DateTime CreateDate { get; set; }
 
+        [XmlAttribute]
         public DateTime TimeStamp { get; set; }
 
+        [XmlAttribute]
         public string DisplayName { get; set; }
+
+        [XmlAttribute]
         public string Description { get; set; }
 
+        [XmlIgnore]
         public virtual object ParentItem { get; set; }
 
+        [XmlIgnore]
         public virtual ICollection<object> Items { get; set; }
+
+
+        [XmlIgnore]
         public virtual object Payload { get; set; }
+
     }
 
     /// <summary>
@@ -69,6 +98,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         {
             this.ID = Guid.NewGuid().ToString();
             this.Payload = payload;
+            this.JsonValue = JsonConvert.SerializeObject(payload);
+
+            this.JsonValueSchema = JSchema.Parse(JsonValue);
         }
 
  

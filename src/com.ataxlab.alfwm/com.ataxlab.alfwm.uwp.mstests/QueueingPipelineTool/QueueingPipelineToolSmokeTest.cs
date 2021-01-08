@@ -25,6 +25,19 @@ using Windows.Storage.Streams;
 
 namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 {
+    public class TestDTO
+    {
+        public TestDTO()
+        {
+            id = "teststring";
+            timestamp = "newtime";
+        }
+
+        public string id { get; set; }
+
+        public string timestamp { get; set; }
+    }
+
     [TestClass]
     public class QueueingPipelineToolSmokeTest
     {
@@ -63,13 +76,41 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
         {
 
             var testPipeline = new DefaultPipelineNodeQueueingPipeline();
-            
+
+            var testPipelineVariable = new PipelineVariable(new TestDTO())
+            {
+                CreateDate = DateTime.UtcNow,
+                Description = "variable description",
+                DisplayName = "display name",
+                Key = "test1",
+                TimeStamp = DateTime.UtcNow,
+                ID = Guid.NewGuid().ToString()
+            };
+
+            var testPipelineVariable2 = new PipelineVariable(new TestDTO())
+            {
+                CreateDate = DateTime.UtcNow,
+                Description = "variable description",
+                DisplayName = "display name",
+                Key = "test1",
+                TimeStamp = DateTime.UtcNow,
+                ID = Guid.NewGuid().ToString()
+            };
+
+            List<PipelineVariable> testPipelineVariables = new List<PipelineVariable>();
+            testPipelineVariables.Add(testPipelineVariable);
+
             testPipeline.PipelineCompleted += TestPipeline_PipelineCompleted;
             testPipeline.PipelineStarted += TestPipeline_PipelineStarted;
             testPipeline.PipelineProgressUpdated += TestPipeline_PipelineProgressUpdated;
 
             var httpActivity = new HttpRequestQueueingActivity();
+            // exercise pipeline variables
+            httpActivity.PipelineToolVariables.Add(testPipelineVariable);
+
             var htmlParserActivity = new HtmlParserQueueingActivity();
+            // exercise pipeline variables
+            htmlParserActivity.PipelineToolVariables.Add(testPipelineVariable);
 
             // httpActivity.QueueHasAvailableDataEvent += Activity_QueueHasAvailableDataEvent1;
             httpActivity.QueueingInputBinding.IsQueuePollingEnabled = true;
@@ -113,7 +154,9 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                                  QueueingPipelineToolClassName = httpActivityNode.QueueingPipelineTool.GetType().AssemblyQualifiedName,
                                  DisplayName = httpActivityNode.QueueingPipelineTool.PipelineToolDisplayName,
                                  Id = httpActivityNode.QueueingPipelineTool.PipelineToolId,
-                                 Description = httpActivityNode.QueueingPipelineTool.PipelineToolDescription
+                                 Description = httpActivityNode.QueueingPipelineTool.PipelineToolDescription,
+                                PipelineVariables = new List<PipelineVariable> { testPipelineVariable }
+
                             },
                             ToolChainSlotNumber = 0
                          
@@ -133,7 +176,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                             QueueingPipelineToolClassName = htmlParserNode.QueueingPipelineTool.GetType().AssemblyQualifiedName,
                             DisplayName = htmlParserNode.QueueingPipelineTool.PipelineToolDisplayName,
                             Id = htmlParserNode.QueueingPipelineTool.PipelineToolId,
-                            Description = htmlParserNode.QueueingPipelineTool.PipelineToolDescription
+                            Description = htmlParserNode.QueueingPipelineTool.PipelineToolDescription,
+                            PipelineVariables = new List<PipelineVariable>() { testPipelineVariable2 }
                         },
                         ToolChainSlotNumber = 1
 

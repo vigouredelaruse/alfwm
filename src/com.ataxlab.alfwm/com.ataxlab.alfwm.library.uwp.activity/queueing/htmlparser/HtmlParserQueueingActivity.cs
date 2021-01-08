@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
 
             PipelineToolDisplayName = this.GetType().Name;
             PipelineToolInstanceId = Guid.NewGuid().ToString();
+            this.PipelineToolVariables = new ObservableCollection<core.taxonomy.binding.IPipelineVariable>();
 
             WorkQueueProcessTimer = new System.Timers.Timer();
             WorkQueueProcessTimer.AutoReset = false;

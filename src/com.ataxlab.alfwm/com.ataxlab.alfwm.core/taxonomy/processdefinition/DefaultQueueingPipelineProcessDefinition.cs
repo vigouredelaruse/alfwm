@@ -2,6 +2,7 @@
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
@@ -11,14 +12,18 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 {
 
     [XmlType("QueueingPipelineTool")]
+    [XmlInclude(typeof(PipelineVariable))]
+    [XmlInclude(typeof(List<PipelineVariable>))]
 
     public class QueueingPipelineToolEntity
     {
         public QueueingPipelineToolEntity()
         {
-
+            PipelineVariables = new List<PipelineVariable>();
         }
 
+        [XmlElement] 
+        public List<PipelineVariable> PipelineVariables { get; set; }
 
         [XmlAttribute]
         public string QueueingPipelineToolClassName { get; set; }
@@ -54,11 +59,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 
         public int ToolChainSlotNumber { get; set; }
 
+        [XmlElement]
         public QueueingPipelineToolEntity QueueingPipelineTool { get; set; }
 
     }
 
     [XmlType("QueueingPipelineProcessDefinition")]
+    [XmlInclude(typeof(QueueingPipelineNodeEntity))]
     public class DefaultQueueingPipelineProcessDefiniionEntity
     {
         public DefaultQueueingPipelineProcessDefiniionEntity()
@@ -66,6 +73,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
             QueueingPipelineNodes = new List<QueueingPipelineNodeEntity>();
         }
 
+        [XmlElement]
         public List<QueueingPipelineNodeEntity> QueueingPipelineNodes { get; set; }
     }
 

@@ -39,7 +39,8 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 
             PipelineToolDisplayName = this.GetType().Name;
             PipelineToolInstanceId = Guid.NewGuid().ToString();
-           
+            this.PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
+
             WorkQueueProcessTimer = new System.Timers.Timer();
             WorkQueueProcessTimer.AutoReset = false;
             WorkQueueProcessTimer.Interval = 50;
