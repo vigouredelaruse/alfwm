@@ -2,7 +2,6 @@
 using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
-using com.ataxlab.alfwm.utility.extension;
 using com.ataxlab.alfwm.core.taxonomy.processdefinition;
 using com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser;
 using com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest;
@@ -22,6 +21,7 @@ using System.Xml.Serialization;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using com.ataxlab.core.alfwm.utility.extension;
 
 namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 {

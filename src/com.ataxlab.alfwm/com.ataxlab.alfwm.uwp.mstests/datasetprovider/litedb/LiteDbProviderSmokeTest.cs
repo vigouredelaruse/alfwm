@@ -1,5 +1,5 @@
 ﻿using com.ataxlab.alfwm.core.persistence;
-using com.ataxlab.alfwm.utility.extension;
+using com.ataxlab.alfwm.core.utility.extension;
 using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.persistence.litedb.processdefinition.flowchart.grammar.verbs;
 using com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb.model;

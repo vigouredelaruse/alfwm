@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace com.ataxlab.alfwm.utility.extension
+namespace com.ataxlab.core.alfwm.utility.extension
 {
     /// <summary>
     /// as per https://stackoverflow.com/questions/2434534/serialize-an-object-to-string
@@ -30,7 +30,7 @@ namespace com.ataxlab.alfwm.utility.extension
         /// <returns></returns>
         public static T DeSerializeObject<T>(this string toDeSerialize)
         {
-            return (T)XmlDeserializeFromString(toDeSerialize, typeof(T));
+            return (T)toDeSerialize.XmlDeserializeFromString(typeof(T));
         }
 
         public static object XmlDeserializeFromString(this string objectData, Type type)
