@@ -5,7 +5,7 @@
 name: '$(Major).$(Minor).$(Year:yy)$(date:MM)$(date:dd)$(Rev:.rr)-pre'
 #name: ' $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)'
 trigger:
-- master
+- mrgnc
 
 pool:
   vmImage: 'windows-latest'
