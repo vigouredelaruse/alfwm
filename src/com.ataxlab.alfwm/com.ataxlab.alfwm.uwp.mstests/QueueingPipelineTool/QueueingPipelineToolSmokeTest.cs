@@ -199,6 +199,18 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                 // deserialize the process definition
                 var incarnateProcessDefinition = processDefinitionXML.DeSerializeObject<DefaultQueueingPipelineProcessDefiniionEntity>();
 
+                // validate we materialized the pipelinevariables
+
+                var sourceVariable = htmlParserActivity.PipelineToolVariables[0].JsonValue.Trim();
+                var materializedVariable = incarnateProcessDefinition.QueueingPipelineNodes[1].QueueingPipelineTool.PipelineVariables[0].JsonValue.Trim();
+
+                // note this is an inaccurate test
+                // TODO activate the objects and compare those
+                // var variablesMatch = sourceVariable.Equals(materializedVariable);
+
+                // validate that we persisted the pipeline tool's pipeline variables
+                // Assert.IsTrue(variablesMatch, "failed to serialize pipelinetool's pipeline variables");
+
                 // test deploying a processdefinition
                 // testPipeline.Deploy(processDefinition);
                 testPipeline.Deploy(incarnateProcessDefinition);

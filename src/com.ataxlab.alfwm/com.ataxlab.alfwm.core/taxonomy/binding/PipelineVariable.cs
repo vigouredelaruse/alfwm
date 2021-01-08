@@ -50,6 +50,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         [XmlAttribute]
         public string Key { get;  set; }
 
+        /// <summary>
+        /// the payload of this entity
+        /// a wire format entity with embedded type information
+        /// </summary>
         [XmlElement]
  
         public string JsonValue { get; set; }

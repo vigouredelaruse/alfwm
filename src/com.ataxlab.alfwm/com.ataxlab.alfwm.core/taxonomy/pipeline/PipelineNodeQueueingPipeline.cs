@@ -1,6 +1,7 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.processdefinition;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public event EventHandler<PipelineFailedEventArgs> PipelineFailed;
         public event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
 
+        /// <summary>
+        /// deploy a process definition
+        /// TODO instrument the result, perhaps via deployment error events
+        /// </summary>
+        /// <param name="processDefinition"></param>
         public void Deploy(DefaultQueueingPipelineProcessDefiniionEntity processDefinition)
         {
             // clear the process definition
@@ -72,22 +78,30 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
                     Type t = Type.GetType(node.ClassName);
                     var newNode = (QueueingPipelineNode)Activator.CreateInstance(t);
 
+                    // instantiate the pipeline tool
                     Type tTool = Type.GetType(node.QueueingPipelineTool.QueueingPipelineToolClassName);
                     var newTool = Activator.CreateInstance(tTool);
 
                     newNode.QueueingPipelineTool = (IDefaultQueueingPipelineTool)newTool;
+
+
+                    // instantiate the pipeline tool's pipeline variables
+                    foreach(var item in node.QueueingPipelineTool.PipelineVariables)
+                    {
+                        
+                        ((IDefaultQueueingPipelineTool)newTool).PipelineToolVariables.Add(item);
+                    }
 
                     // add the node to the process definition
                     if (node.ToolChainSlotNumber == 0)
                     {
                         // the first node gets special treatment
                         var result = this.AddFirstPipelineNode(newNode);
-                        int i = 0;
+
                     }
                     else
                     {
                         var result = this.AddAfterPipelineNode(node.ToolChainSlotNumber - 1, newNode);
-                        int i = 0;
                     }
                 }
             
