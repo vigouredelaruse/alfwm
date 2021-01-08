@@ -9,7 +9,12 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
-
+    /// <summary>
+    /// canonical implementation of a Queueing Pipeline
+    /// 
+    /// treat as UserControl from the WPF world, a convenience implementation
+    /// of the dependencies captured by IQueueingPipeline
+    /// </summary>
     public class DefaultPipelineNodeQueueingPipeline : IQueueingPipeline
     {
         public DefaultPipelineNodeQueueingPipeline()

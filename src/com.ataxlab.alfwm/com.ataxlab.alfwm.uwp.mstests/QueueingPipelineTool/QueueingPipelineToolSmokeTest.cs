@@ -44,22 +44,29 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
         }
 
         #region queueing pipeline tests
+
+        /// <summary>
+        /// exercises pipeline deployment operations
+        /// 
+        /// manually manipulates processdefinition collection
+        /// deploying tools
+        /// serializes it to xml
+        /// then clears process definition
+        /// and redeploys the serialized process definition
+        /// and sends the pipeline a test message
+        /// and validates the activities function as expected
+        /// consuming messages, producimg results and emitting events
+        /// surfaced by the pipeline
+        /// </summary>
         [TestMethod]
-        public async Task CanAddAndBindPipelineToolsToPipeline()
+        public void CanAddAndBindPipelineToolsToPipeline()
         {
-            //var testPipeline = new QueueingPipeline<QueueingPipelineProcessDefinition<HttpRequestQueueingActivityConfiguration, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>
-            //  , QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>>();
 
             var testPipeline = new DefaultPipelineNodeQueueingPipeline();
             
             testPipeline.PipelineCompleted += TestPipeline_PipelineCompleted;
             testPipeline.PipelineStarted += TestPipeline_PipelineStarted;
             testPipeline.PipelineProgressUpdated += TestPipeline_PipelineProgressUpdated;
-            //IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, 
-            //                        QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, 
-            //                        QueueingPipelineQueueEntity<IPipelineToolConfiguration>, 
-            //                        QueueingPipelineQueueEntity<IPipelineToolConfiguration>, 
-            //                        QueueingPipelineQueueEntity<IPipelineToolConfiguration>> httpActivity = new HttpRequestQueueingActivity2();
 
             var httpActivity = new HttpRequestQueueingActivity();
             var htmlParserActivity = new HtmlParserQueueingActivity();
@@ -86,13 +93,9 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             {
                 QueueingPipelineTool = htmlParserActivity
             };
-            // testPipeline.ProcessDefinition = processDefinition;
-            // testPipeline.ProcessDefinition.QueueingPipelineNodes.AddLast(new LinkedListNode<IQueueingPipelineNode>(httpActivityNode));
-            // testPipeline.ProcessDefinition.QueueingPipelineNodes.AddLast(new LinkedListNode<IQueueingPipelineNode>(htmlParserNode));
 
             Exception bindEx = null;
 
-            //List<QueueingPipelineNodeRecord> pipelineNodeDTO = new List<QueueingPipelineNodeRecord>();
 
             var processDefinition = new DefaultQueueingPipelineProcessDefiniionEntity();
 
@@ -146,10 +149,15 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                     Payload = activityConfig
                 };
 
+                // serialize the process definition
                 var processDefinitionXML = processDefinition.SerializeObject<DefaultQueueingPipelineProcessDefiniionEntity>();
 
+                // deserialize the process definition
+                var incarnateProcessDefinition = processDefinitionXML.DeSerializeObject<DefaultQueueingPipelineProcessDefiniionEntity>();
+
                 // test deploying a processdefinition
-                testPipeline.Deploy(processDefinition);
+                // testPipeline.Deploy(processDefinition);
+                testPipeline.Deploy(incarnateProcessDefinition);
 
                 // post the test message
                 testPipeline.QueueingInputBinding.InputQueue.Enqueue(entity);
