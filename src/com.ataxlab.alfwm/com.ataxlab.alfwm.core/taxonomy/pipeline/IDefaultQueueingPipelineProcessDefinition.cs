@@ -19,7 +19,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// to expose a ConcurrentQueue<Entity>         /// </summary>
         ConcurrentDictionary<string, IQueueingPipelineNode> PipelineToolChain { get; set; }
 
-        LinkedList<IQueueingPipelineNode> QueueingPipelineNodes { get; set; }
+        LinkedList<QueueingPipelineNode> QueueingPipelineNodes { get; set; }
 
         LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>,
                                             QueueingPipelineQueueEntity<IPipelineToolConfiguration>,

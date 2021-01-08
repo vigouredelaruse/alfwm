@@ -49,6 +49,50 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public event EventHandler<PipelineFailedEventArgs> PipelineFailed;
         public event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
 
+        public void Deploy(DefaultQueueingPipelineProcessDefiniionEntity processDefinition)
+        {
+            // clear the process definition
+            // TODO - stop the tools first
+            this.ProcessDefinition.QueueingPipelineNodes.Clear();
+
+
+            try
+            {
+                var nodes = processDefinition.QueueingPipelineNodes.OrderBy(o => o.ToolChainSlotNumber).ToList<QueueingPipelineNodeEntity>();
+
+                foreach (var node in nodes)
+                {
+                    // instantiate the node
+                    // TODO engineer management of Ids upon and after instantiation
+                    Type t = Type.GetType(node.ClassName);
+                    var newNode = (QueueingPipelineNode)Activator.CreateInstance(t);
+
+                    Type tTool = Type.GetType(node.QueueingPipelineTool.QueueingPipelineToolClassName);
+                    var newTool = Activator.CreateInstance(tTool);
+
+                    newNode.QueueingPipelineTool = (IDefaultQueueingPipelineTool)newTool;
+
+                    // add the node to the process definition
+                    if (node.ToolChainSlotNumber == 0)
+                    {
+                        // the first node gets special treatment
+                        var result = this.AddFirstPipelineNode(newNode);
+                        int i = 0;
+                    }
+                    else
+                    {
+                        var result = this.AddAfterPipelineNode(node.ToolChainSlotNumber - 1, newNode);
+                        int i = 0;
+                    }
+                }
+            
+            }
+            catch(Exception e)
+            {
+                int i = 0;
+            }
+        }
+
         public bool Bind(string SourceInstanceId, string DestinationInstanceId)
         {
             // try to wire the input channel of the destination
@@ -137,7 +181,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
             EnsurePipelineToolListeners(newNode);
             // find the node by its id
-            IQueueingPipelineNode targetNode = this.ProcessDefinition.QueueingPipelineNodes.Skip<IQueueingPipelineNode>(pipelineNodeIndex).Take(1).FirstOrDefault();
+            QueueingPipelineNode targetNode = this.ProcessDefinition.QueueingPipelineNodes.Skip<QueueingPipelineNode>(pipelineNodeIndex).Take(1).FirstOrDefault();
          
             if (targetNode != null)
             {

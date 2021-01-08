@@ -47,5 +47,8 @@
     <iot:Capability Name="systemManagement"/>
     <Capability Name="internetClient"/>
     <uap3:Capability Name="backgroundMediaPlayback"/>
+    <uap:Capability Name="userAccountInformation"/>
+    <Capability Name="codeGeneration"/>
+    <DeviceCapability Name="lowLevel"/>
   </Capabilities>
 </Package>

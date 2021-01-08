@@ -2,6 +2,7 @@
 using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
+using com.ataxlab.alfwm.utility.extension;
 using com.ataxlab.alfwm.core.taxonomy.processdefinition;
 using com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser;
 using com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest;
@@ -10,12 +11,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Streams;
@@ -42,7 +45,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
         #region queueing pipeline tests
         [TestMethod]
-        public void CanAddAndBindPipelineToolsToPipeline()
+        public async Task CanAddAndBindPipelineToolsToPipeline()
         {
             //var testPipeline = new QueueingPipeline<QueueingPipelineProcessDefinition<HttpRequestQueueingActivityConfiguration, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>
             //  , QueueingPipelineNode<HttpRequestQueueingActivity, QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>, QueueingProducerChannel<List<Tuple<String, String>>>, HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration, List<Tuple<String, String>>>>();
@@ -88,10 +91,51 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             // testPipeline.ProcessDefinition.QueueingPipelineNodes.AddLast(new LinkedListNode<IQueueingPipelineNode>(htmlParserNode));
 
             Exception bindEx = null;
+
+            //List<QueueingPipelineNodeRecord> pipelineNodeDTO = new List<QueueingPipelineNodeRecord>();
+
+            var processDefinition = new DefaultQueueingPipelineProcessDefiniionEntity();
+
             try
             {
                 testPipeline.AddFirstPipelineNode(httpActivityNode);
+
+                processDefinition.QueueingPipelineNodes.Add(
+                    new QueueingPipelineNodeEntity()
+                        {
+                            ClassName = httpActivityNode.GetType().AssemblyQualifiedName,
+                            InstanceId = httpActivityNode.QueueingPipelineTool.PipelineToolInstanceId,
+                            QueueingPipelineTool = new QueueingPipelineToolEntity()
+                            {
+                                 QueueingPipelineToolClassName = httpActivityNode.QueueingPipelineTool.GetType().AssemblyQualifiedName,
+                                 DisplayName = httpActivityNode.QueueingPipelineTool.PipelineToolDisplayName,
+                                 Id = httpActivityNode.QueueingPipelineTool.PipelineToolId,
+                                 Description = httpActivityNode.QueueingPipelineTool.PipelineToolDescription
+                            },
+                            ToolChainSlotNumber = 0
+                         
+                        }
+                    ); 
+
                 testPipeline.AddAfterPipelineNode(0, htmlParserNode);
+
+                processDefinition.QueueingPipelineNodes.Add(
+                    new QueueingPipelineNodeEntity()
+                    {
+                        ClassName = htmlParserNode.GetType().AssemblyQualifiedName,
+                        InstanceId = htmlParserNode.QueueingPipelineTool.PipelineToolInstanceId,
+                        QueueingPipelineTool = new QueueingPipelineToolEntity()
+                        {
+
+                            QueueingPipelineToolClassName = htmlParserNode.QueueingPipelineTool.GetType().AssemblyQualifiedName,
+                            DisplayName = htmlParserNode.QueueingPipelineTool.PipelineToolDisplayName,
+                            Id = htmlParserNode.QueueingPipelineTool.PipelineToolId,
+                            Description = htmlParserNode.QueueingPipelineTool.PipelineToolDescription
+                        },
+                        ToolChainSlotNumber = 1
+
+                    }
+                    );
 
                 // TODO test AddLast
 
@@ -101,6 +145,11 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                 {
                     Payload = activityConfig
                 };
+
+                var processDefinitionXML = processDefinition.SerializeObject<DefaultQueueingPipelineProcessDefiniionEntity>();
+
+                // test deploying a processdefinition
+                testPipeline.Deploy(processDefinition);
 
                 // post the test message
                 testPipeline.QueueingInputBinding.InputQueue.Enqueue(entity);

@@ -5,9 +5,70 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 {
+
+    [XmlType("QueueingPipelineTool")]
+
+    public class QueueingPipelineToolEntity
+    {
+        public QueueingPipelineToolEntity()
+        {
+
+        }
+
+
+        [XmlAttribute]
+        public string QueueingPipelineToolClassName { get; set; }
+
+
+        [XmlAttribute]
+        public string DisplayName { get; set; }
+
+
+        [XmlAttribute]
+        public string Id { get; set; }
+
+        [XmlAttribute]
+        public string Description { get; set; }
+    }
+
+    [XmlType("QueueingPipelineNode")]
+    public class QueueingPipelineNodeEntity
+    {
+        public QueueingPipelineNodeEntity()
+        {
+
+        }
+
+        [XmlAttribute]
+        public string ClassName { get; set; }
+
+        [XmlAttribute]
+
+        public string InstanceId { get; set; }
+
+        [XmlAttribute]
+
+        public int ToolChainSlotNumber { get; set; }
+
+        public QueueingPipelineToolEntity QueueingPipelineTool { get; set; }
+
+    }
+
+    [XmlType("QueueingPipelineProcessDefinition")]
+    public class DefaultQueueingPipelineProcessDefiniionEntity
+    {
+        public DefaultQueueingPipelineProcessDefiniionEntity()
+        {
+            QueueingPipelineNodes = new List<QueueingPipelineNodeEntity>();
+        }
+
+        public List<QueueingPipelineNodeEntity> QueueingPipelineNodes { get; set; }
+    }
+
 
     public class QueueingPipelineProcessDefinitionEx<TPipelineTool, TPipelineToolConfiguration, TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity>
     : IQueueingPipelineProcessDefinition<TPipelineTool,
@@ -58,12 +119,16 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
         public DefaultQueueingPipelineProcessDefinition()
         {
             PipelineToolChain = new ConcurrentDictionary<string, IQueueingPipelineNode>();
-            QueueingPipelineNodes = new LinkedList<IQueueingPipelineNode>();
+            QueueingPipelineNodes = new LinkedList<QueueingPipelineNode>();
             PipelineTools = new LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration>>();
         }
         public string Id { get; set; }
+
+        [XmlIgnoreAttribute]
         public ConcurrentDictionary<string, IQueueingPipelineNode> PipelineToolChain { get; set; }
-        public LinkedList<IQueueingPipelineNode> QueueingPipelineNodes { get; set; }
+        public LinkedList<QueueingPipelineNode> QueueingPipelineNodes { get; set; }
+
+        [XmlIgnoreAttribute]
         public LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration>> PipelineTools { get; set; }
 
         public string AddTool(QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> node)

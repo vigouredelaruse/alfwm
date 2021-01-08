@@ -6,8 +6,11 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
+
+
     public class QueueingPipelineNode : IQueueingPipelineNode
     {
+    
 
         public QueueingPipelineNode()
         {

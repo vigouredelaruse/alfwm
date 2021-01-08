@@ -29,6 +29,7 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/current/nuget/v3/index.json": {},
           "https://pkgs.dev.azure.com/electricrucible/_packaging/appstorenugets/nuget/v3/index.json": {}
         },
         "frameworks": {
@@ -101,6 +102,7 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/current/nuget/v3/index.json": {},
           "https://pkgs.dev.azure.com/electricrucible/_packaging/appstorenugets/nuget/v3/index.json": {}
         },
         "frameworks": {
@@ -174,6 +176,7 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/current/nuget/v3/index.json": {},
           "https://pkgs.dev.azure.com/electricrucible/_packaging/appstorenugets/nuget/v3/index.json": {}
         },
         "frameworks": {
@@ -256,6 +259,7 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/current/nuget/v3/index.json": {},
           "https://pkgs.dev.azure.com/electricrucible/_packaging/appstorenugets/nuget/v3/index.json": {}
         },
         "frameworks": {
