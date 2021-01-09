@@ -93,7 +93,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
         public LinkedList<TPipelineTool> PipelineTools {get; set; }
         public LinkedList<IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity>> PipelineToolChain {get; set; }
 
-        public LinkedList<QueueingPipelineNode> QueueingPipelineNodes { get; set; }
+        public LinkedList<QueueingPipelineToolNode> QueueingPipelineNodes { get; set; }
 
         public string AddAfter(string nodeId)
         {
@@ -126,15 +126,15 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 
         public DefaultQueueingPipelineProcessDefinition()
         {
-            PipelineToolChain = new ConcurrentDictionary<string, IQueueingPipelineNode>();
-            QueueingPipelineNodes = new LinkedList<QueueingPipelineNode>();
+            PipelineToolChain = new ConcurrentDictionary<string, IQueueingPipelineToolNode>();
+            QueueingPipelineNodes = new LinkedList<QueueingPipelineToolNode>();
             PipelineTools = new LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration>>();
         }
         public string Id { get; set; }
 
         [XmlIgnoreAttribute]
-        public ConcurrentDictionary<string, IQueueingPipelineNode> PipelineToolChain { get; set; }
-        public LinkedList<QueueingPipelineNode> QueueingPipelineNodes { get; set; }
+        public ConcurrentDictionary<string, IQueueingPipelineToolNode> PipelineToolChain { get; set; }
+        public LinkedList<QueueingPipelineToolNode> QueueingPipelineNodes { get; set; }
 
         [XmlIgnoreAttribute]
         public LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration>> PipelineTools { get; set; }

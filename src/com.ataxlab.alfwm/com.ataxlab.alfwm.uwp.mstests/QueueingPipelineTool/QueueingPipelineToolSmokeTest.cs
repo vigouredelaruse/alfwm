@@ -124,13 +124,13 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
 
 
-            QueueingPipelineNode httpActivityNode = new QueueingPipelineNode()
+            QueueingPipelineToolNode httpActivityNode = new QueueingPipelineToolNode()
             {
                 QueueingPipelineTool = httpActivity
             };
             
 
-            QueueingPipelineNode htmlParserNode = new QueueingPipelineNode() 
+            QueueingPipelineToolNode htmlParserNode = new QueueingPipelineToolNode() 
             {
                 QueueingPipelineTool = htmlParserActivity
             };

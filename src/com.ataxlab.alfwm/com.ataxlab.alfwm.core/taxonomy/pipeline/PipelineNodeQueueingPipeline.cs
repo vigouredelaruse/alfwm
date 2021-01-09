@@ -41,7 +41,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// functions as the main 'entry point' for messages 
         /// to the pipeline
         /// </summary>
-        public IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
+        public QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
 
         /// <summary>
         /// egresses messages from the terminal node of the pipeline
@@ -76,7 +76,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
                     // instantiate the node
                     // TODO engineer management of Ids upon and after instantiation
                     Type t = Type.GetType(node.ClassName);
-                    var newNode = (QueueingPipelineNode)Activator.CreateInstance(t);
+                    var newNode = (QueueingPipelineToolNode)Activator.CreateInstance(t);
 
                     // instantiate the pipeline tool
                     Type tTool = Type.GetType(node.QueueingPipelineTool.QueueingPipelineToolClassName);
@@ -142,7 +142,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        public bool AddLastPipelineNode(QueueingPipelineNode newNode)
+        public bool AddLastPipelineNode(QueueingPipelineToolNode newNode)
         {
             EnsurePipelineToolListeners(newNode);
 
@@ -155,7 +155,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// wire the pipeline to the added tool's events
         /// </summary>
         /// <param name="newNode"></param>
-        private void EnsurePipelineToolListeners(QueueingPipelineNode newNode)
+        private void EnsurePipelineToolListeners(QueueingPipelineToolNode newNode)
         {
             newNode.QueueingPipelineTool.PipelineToolStarted += QueueingPipelineTool_PipelineToolStarted;
             newNode.QueueingPipelineTool.PipelineToolCompleted += QueueingPipelineTool_PipelineToolCompleted;
@@ -185,7 +185,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             PipelineProgressUpdated?.Invoke(sender, new PipelineProgressUpdatedEventArgs() { ToolStartedEvent = e });
         }
 
-        public bool AddFirstPipelineNode(QueueingPipelineNode newNode)
+        public bool AddFirstPipelineNode(QueueingPipelineToolNode newNode)
         {
             EnsurePipelineToolListeners(newNode);
             this.ProcessDefinition.QueueingPipelineNodes.AddFirst(newNode);
@@ -195,20 +195,21 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
 
 
-        public bool AddAfterPipelineNode(int pipelineNodeIndex, QueueingPipelineNode newNode)
+        public bool AddAfterPipelineNode(int pipelineNodeIndex, QueueingPipelineToolNode newNode)
         {
 
             EnsurePipelineToolListeners(newNode);
             // find the node by its id
-            QueueingPipelineNode targetNode = this.ProcessDefinition.QueueingPipelineNodes.Skip<QueueingPipelineNode>(pipelineNodeIndex).Take(1).FirstOrDefault();
+            QueueingPipelineToolNode targetNode = this.ProcessDefinition.QueueingPipelineNodes.Skip<QueueingPipelineToolNode>(pipelineNodeIndex).Take(1).FirstOrDefault();
          
             if (targetNode != null)
             {
-                //newNode.QueueingPipelineTool.QueueingInputBinding
+                // wire the new node's input to it's predecessor's output
                 targetNode.QueueingPipelineTool.QueueingOutputBindingCollection.Add(
                     newNode.QueueingPipelineTool.QueueingInputBinding
                     );
-                // associate the target with its LinkedListNode container
+
+                // wire the new node's output to it's successor's input - don't break the chain
                 var targetContainer = this.ProcessDefinition.QueueingPipelineNodes.Find(targetNode);
 
                 // bind new downstream node if necessary
@@ -221,12 +222,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
                 //  }
                 if (targetContainer?.Next != null)
                 {
-                    // enforce nose-to-tail linked list binding
-                    var downstreamNode = targetContainer.Next;
-
-                    newNode.PipelineTool.QueueingOutputBindingCollection.Add(
-                        new QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>()
-                        );
+                    newNode.QueueingPipelineTool.QueueingOutputBindingCollection.Add(targetContainer.Value.QueueingPipelineTool.QueueingInputBinding);
                 }
 
                 this.ProcessDefinition.QueueingPipelineNodes.AddAfter(targetContainer, newNode);

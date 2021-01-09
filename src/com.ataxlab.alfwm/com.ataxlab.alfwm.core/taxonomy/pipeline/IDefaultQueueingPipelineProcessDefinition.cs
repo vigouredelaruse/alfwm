@@ -17,9 +17,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// 
         /// the payload is expected (by the Bind mechanism)
         /// to expose a ConcurrentQueue<Entity>         /// </summary>
-        ConcurrentDictionary<string, IQueueingPipelineNode> PipelineToolChain { get; set; }
+        ConcurrentDictionary<string, IQueueingPipelineToolNode> PipelineToolChain { get; set; }
 
-        LinkedList<QueueingPipelineNode> QueueingPipelineNodes { get; set; }
+        LinkedList<QueueingPipelineToolNode> QueueingPipelineNodes { get; set; }
 
         LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>,
                                             QueueingPipelineQueueEntity<IPipelineToolConfiguration>,

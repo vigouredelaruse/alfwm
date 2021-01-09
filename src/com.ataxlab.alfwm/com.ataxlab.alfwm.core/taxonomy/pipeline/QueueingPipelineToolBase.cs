@@ -42,8 +42,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
     public abstract class QueueingPipelineToolBase : IQueueingPipelineTool, IPipelineTool<IPipelineToolConfiguration>
     {
-        public abstract IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
-        public abstract IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
+        public abstract QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
+        public abstract QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
         //public abstract List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
         public abstract IPipelineToolConfiguration<IPipelineToolConfiguration> PipelineToolConfiguration { get; set; }
         public abstract string PipelineToolInstanceId { get; set; }
@@ -54,7 +54,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract IPipelineToolStatus PipelineToolStatus { get; set; }
         public abstract IPipelineToolContext PipelineToolContext { get; set; }
         public abstract IPipelineToolBinding PipelineToolOutputBinding { get; set; }
-        public abstract List<IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
+        public abstract List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
 
         public abstract event Func<IQueueingPipelineQueueEntity<IPipelineToolConfiguration>, IQueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueHasAvailableDataEvent;
         public abstract event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;

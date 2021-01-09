@@ -10,7 +10,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// abstract and normalize the payload of the 
     /// queueing pipeline collection
     /// </summary>
-    public interface IQueueingPipelineNode
+    public interface IQueueingPipelineToolNode
     {
         string QueueingPipelineNodeId { get; set; }
 
@@ -18,7 +18,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
      }
 
-    public interface IQueueingPipelineNode<TPipelineTool> : IQueueingPipelineNode
+    public interface IQueueingPipelineNode<TPipelineTool> : IQueueingPipelineToolNode
     {
         new TPipelineTool PipelineTool { get; set; }
 
@@ -30,14 +30,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     /// <typeparam name="TPipelineTool"></typeparam>
     /// <typeparam name="TPipelineToolConfiguration"></typeparam>
-    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration>  : IQueueingPipelineNode
+    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration>  : IQueueingPipelineToolNode
          where TPipelineToolConfiguration :  class, new()
     {
         new TPipelineTool PipelineTool { get; set; }
 
     }
 
-    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity> : IQueueingPipelineNode
+    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity> : IQueueingPipelineToolNode
 
        //where TPipelineToolConfiguration : class, new()
        //where TOutputEntity : class, new()

@@ -8,11 +8,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
 
 
-    public class QueueingPipelineNode : IQueueingPipelineNode
+    public class QueueingPipelineToolNode : IQueueingPipelineToolNode
     {
     
 
-        public QueueingPipelineNode()
+        public QueueingPipelineToolNode()
         {
             this.QueueingPipelineNodeId = Guid.NewGuid().ToString();
         }
