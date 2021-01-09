@@ -29,6 +29,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         {
             this.Payload = payload;
 
+            RenderPayloadToJson(payload);
+
+        }
+
+        private void RenderPayloadToJson(object payload)
+        {
             // doing this may cause problems serializing containing objects to xml
             // TODO look into wire format handling for pipelinevariables,
             // possibly by moving wireformat handling out of this class
@@ -40,9 +46,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
             // TODO - justify the schema 
             // given the inclusion of type information in the render JSON
             this.JsonValueSchema = JSchema.Parse(JsonValue);
-
         }
-
 
         [XmlAttribute]
         public string ID { get;  set; }
@@ -79,9 +83,25 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         [XmlIgnore]
         public virtual ICollection<object> Items { get; set; }
 
-
+        private object _payload;
         [XmlIgnore]
-        public virtual object Payload { get; set; }
+        public virtual object Payload { 
+            get
+            {
+                if(_payload == null && this.JsonValue?.Length > 0)
+                {
+                    // the payload is empty but the json exists
+                    // render the object from the json
+                    return JsonConvert.DeserializeObject<object>(this.JsonValue);
+                }
+
+                return _payload;
+            }
+            set
+            {
+                _payload = value;
+            }
+        }
 
     }
 

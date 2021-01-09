@@ -29,7 +29,8 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
         public HtmlParserQueueingActivity() : base()
         {
 
-            PipelineToolDisplayName = this.GetType().Name;
+            PipelineToolDisplayName = "Html Parser";
+            this.PipelineToolDescription = "Accepts Q Messages with a payload of List<tuple<string,string>> containing <html/> , produces HTML Agility Pack HtmlDocument";
             PipelineToolInstanceId = Guid.NewGuid().ToString();
             this.PipelineToolVariables = new ObservableCollection<core.taxonomy.binding.IPipelineVariable>();
 

@@ -77,6 +77,9 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
             var testPipeline = new DefaultPipelineNodeQueueingPipeline();
 
+
+            var testDTO = new TestDTO();
+            
             var testPipelineVariable = new PipelineVariable(new TestDTO())
             {
                 CreateDate = DateTime.UtcNow,
@@ -97,8 +100,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                 ID = Guid.NewGuid().ToString()
             };
 
-            List<PipelineVariable> testPipelineVariables = new List<PipelineVariable>();
-            testPipelineVariables.Add(testPipelineVariable);
+            
+ 
 
             testPipeline.PipelineCompleted += TestPipeline_PipelineCompleted;
             testPipeline.PipelineStarted += TestPipeline_PipelineStarted;
@@ -106,6 +109,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
             var httpActivity = new HttpRequestQueueingActivity();
             // exercise pipeline variables
+            httpActivity.PipelineToolVariables.Add(testPipelineVariable);
             httpActivity.PipelineToolVariables.Add(testPipelineVariable);
 
             var htmlParserActivity = new HtmlParserQueueingActivity();
@@ -188,6 +192,10 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
                 var activityConfig = new HttpRequestQueueingActivityConfiguration();
                 activityConfig.RequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
+                
+                // attach a pipelinevariable to the trigger message sent to the pipeline's q
+                activityConfig.PipelineVariables.Add(testPipelineVariable);
+                
                 QueueingPipelineQueueEntity<IPipelineToolConfiguration> entity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
                 {
                     Payload = activityConfig

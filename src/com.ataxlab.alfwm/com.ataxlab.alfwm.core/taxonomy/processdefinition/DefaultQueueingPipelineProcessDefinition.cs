@@ -22,7 +22,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
             PipelineVariables = new List<PipelineVariable>();
         }
 
-        [XmlElement] 
+        [XmlArray("PipelineVariables")]
+
+        [XmlArrayItem("PipelineVariable", typeof(PipelineVariable))]
         public List<PipelineVariable> PipelineVariables { get; set; }
 
         [XmlAttribute]
@@ -73,7 +75,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
             QueueingPipelineNodes = new List<QueueingPipelineNodeEntity>();
         }
 
-        [XmlElement]
+        [XmlArray("QueueingPipelineNodes")]
+
+        [XmlArrayItem("QueueingPipelineNode", typeof(QueueingPipelineNodeEntity))]
         public List<QueueingPipelineNodeEntity> QueueingPipelineNodes { get; set; }
     }
 

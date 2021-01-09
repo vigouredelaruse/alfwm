@@ -37,7 +37,8 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         public HttpRequestQueueingActivity() : base()
         {
 
-            PipelineToolDisplayName = this.GetType().Name;
+            PipelineToolDisplayName = "Http Request Activity";
+            this.PipelineToolDescription = "Accepts an entity with a payload of HttpMessage, sends the request and produces an entity with a payload of List<tuple<string,string>>";
             PipelineToolInstanceId = Guid.NewGuid().ToString();
             this.PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
 
