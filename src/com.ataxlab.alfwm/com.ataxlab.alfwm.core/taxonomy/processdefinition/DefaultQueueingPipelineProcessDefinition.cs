@@ -1,6 +1,7 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
+using com.ataxlab.core.alfwm.utility.extension;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -79,6 +80,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 
         [XmlArrayItem("QueueingPipelineNode", typeof(QueueingPipelineNodeEntity))]
         public List<QueueingPipelineNodeEntity> QueueingPipelineNodes { get; set; }
+
+        public string ToXml()
+        {
+            return this.SerializeObject<DefaultQueueingPipelineProcessDefiniionEntity>();
+        }
     }
 
 
@@ -143,15 +149,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
         [XmlIgnoreAttribute]
         public LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration>> PipelineTools { get; set; }
 
-        public string AddTool(QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration> node)
-        {
-            return string.Empty;
-        }
-
-        public bool Bind(string node1Id, string node2Id)
-        {
-            return false;
-        }
     }
 
     /// <summary>

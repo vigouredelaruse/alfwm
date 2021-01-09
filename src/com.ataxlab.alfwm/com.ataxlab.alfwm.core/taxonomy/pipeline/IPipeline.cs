@@ -19,6 +19,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         string PipelineInstanceId { get; set; }
         string PipelineDisplayName { get; set; }
         string PipelineDescription { get; set; }
+
+        event EventHandler<PipelineDeploymentFailedEventArgs> PipelineDeploymentFailed;
+        void OnPipelineDeploymentFailed(object sender, PipelineDeploymentFailedEventArgs args);
+
         event EventHandler<PipelineStartedEventArgs> PipelineStarted;
         void OnPipelineStarted(object sender, PipelineStartedEventArgs args);
 

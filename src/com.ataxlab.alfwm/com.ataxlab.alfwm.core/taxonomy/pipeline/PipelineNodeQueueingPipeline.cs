@@ -16,7 +16,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// treat as UserControl from the WPF world, a convenience implementation
     /// of the dependencies captured by IQueueingPipeline
     /// </summary>
-    public class DefaultPipelineNodeQueueingPipeline : IQueueingPipeline
+    public class DefaultPipelineNodeQueueingPipeline : IDefaultQueueingPipeline
     {
         public DefaultPipelineNodeQueueingPipeline()
         {
@@ -25,7 +25,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             this.PipelineDisplayName = this.GetType().Name;
             this.PipelineInstanceId = Guid.NewGuid().ToString();
 
-            
+
         }
 
 
@@ -54,6 +54,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
         public event EventHandler<PipelineFailedEventArgs> PipelineFailed;
         public event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
+        public event EventHandler<PipelineDeploymentFailedEventArgs> PipelineDeploymentFailed;
 
         /// <summary>
         /// deploy a process definition
@@ -86,9 +87,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
 
                     // instantiate the pipeline tool's pipeline variables
-                    foreach(var item in node.QueueingPipelineTool.PipelineVariables)
+                    foreach (var item in node.QueueingPipelineTool.PipelineVariables)
                     {
-                        
+
                         ((IDefaultQueueingPipelineTool)newTool).PipelineToolVariables.Add(item);
                     }
 
@@ -104,26 +105,24 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
                         var result = this.AddAfterPipelineNode(node.ToolChainSlotNumber - 1, newNode);
                     }
                 }
-            
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                int i = 0;
+                var args = new PipelineDeploymentFailedEventArgs()
+                { DeploymentFailureException = e };
+
+                OnPipelineDeploymentFailed(this, args);
+
             }
         }
 
-        public bool Bind(string SourceInstanceId, string DestinationInstanceId)
-        {
-            // try to wire the input channel of the destination
-            // to the output binding collection of the source
-            return false;
-        }
 
         /// <summary>
         /// enforce exposure inputbinding queue of the ingress pipelinetool node
         /// 
         /// </summary>
-        private void EnsurePipelineIngressEgressBindings()
+        public void EnsurePipelineIngressEgressBindings()
         {
             // apply the rule that the first ordinal node in the 
             // process definition list is the ingress node
@@ -155,7 +154,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// wire the pipeline to the added tool's events
         /// </summary>
         /// <param name="newNode"></param>
-        private void EnsurePipelineToolListeners(QueueingPipelineToolNode newNode)
+        public void EnsurePipelineToolListeners(QueueingPipelineToolNode newNode)
         {
             newNode.QueueingPipelineTool.PipelineToolStarted += QueueingPipelineTool_PipelineToolStarted;
             newNode.QueueingPipelineTool.PipelineToolCompleted += QueueingPipelineTool_PipelineToolCompleted;
@@ -201,7 +200,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             EnsurePipelineToolListeners(newNode);
             // find the node by its id
             QueueingPipelineToolNode targetNode = this.ProcessDefinition.QueueingPipelineNodes.Skip<QueueingPipelineToolNode>(pipelineNodeIndex).Take(1).FirstOrDefault();
-         
+
             if (targetNode != null)
             {
                 // wire the new node's input to it's predecessor's output
@@ -264,200 +263,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         public void StopPipeline(string instanceId)
         {
-            
+
+        }
+
+        public void OnPipelineDeploymentFailed(object sender, PipelineDeploymentFailedEventArgs args)
+        {
+            PipelineDeploymentFailed?.Invoke(sender, args);
         }
     }
-
-
-    public class PipelineNodeQueueingPipelineEx : PipelineNodeQueueingPipelineBaseEx
-        <
-                    IQueueingPipelineTool<
-                QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
-                QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
-                IPipelineToolConfiguration,
-                IPipelineToolConfiguration,
-                IPipelineToolConfiguration>,
-            IQueueingPipelineTool<
-                QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
-                QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
-                IPipelineToolConfiguration,
-                IPipelineToolConfiguration,
-                IPipelineToolConfiguration>,
-            QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
-            QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
-            IPipelineToolConfiguration,
-            IPipelineToolConfiguration,
-            IPipelineToolConfiguration
-        >
-
-
-
-    {
-
-        public PipelineNodeQueueingPipelineEx()
-        {
-            this.ProcessDefinition = new QueueingPipelineProcessDefinitionEx<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>, IPipelineToolConfiguration, QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration>();
-
-        }
-
-        public override QueueingPipelineProcessDefinitionEx<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>, IPipelineToolConfiguration, QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration> ProcessDefinition { get; set; }
-        public override string PipelineId { get; set; }
-        public override string PipelineInstanceId { get; set; }
-        public override string PipelineDisplayName { get; set; }
-        public override string PipelineDescription { get; set; }
-        public override IPipelineBinding PipelineInputBinding { get; set; }
-        public override IPipelineBinding PipelineOutputBinding { get; set; }
-
-        public override event EventHandler<PipelineStartedEventArgs> PipelineStarted;
-        public override event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
-        public override event EventHandler<PipelineFailedEventArgs> PipelineFailed;
-        public override event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
-
-        public override string AddTool(IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration> node)
-        {
-            int i = 0;
-            return "";
-        }
-
-        public override void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args)
-        {
-            
-        }
-
-        public override void OnPipelineFailed(object sender, PipelineFailedEventArgs args)
-        {
-            
-        }
-
-        public override void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args)
-        {
-            
-        }
-
-        public override void OnPipelineStarted(object sender, PipelineStartedEventArgs args)
-        {
-            
-        }
-
-        public override void StartPipeline(QueueingPipelineProcessDefinitionEx<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>, IPipelineToolConfiguration, QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration> configuration)
-        {
-            
-        }
-
-        public override void StopPipeline(string instanceId)
-        {
-            
-        }
-    }
-
-
-    public class PipelineNodeQueueingPipeline : PipelineNodeQueueingPipelineBase
-    {
-        public override string PipelineId { get; set; }
-        public override string PipelineInstanceId { get; set; }
-        public override string PipelineDisplayName { get; set; }
-        public override string PipelineDescription { get; set; }
-        public override IPipelineBinding PipelineInputBinding { get; set; }
-        public override IPipelineBinding PipelineOutputBinding { get; set; }
-
-        public override event EventHandler<PipelineStartedEventArgs> PipelineStarted;
-        public override event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
-        public override event EventHandler<PipelineFailedEventArgs> PipelineFailed;
-        public override event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
-
-        public override string AddTool(QueueingPipelineNode<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>> node)
-        {
-            return string.Empty;
-        }
-
-        public override void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args)
-        {
-            
-        }
-
-        public override void OnPipelineFailed(object sender, PipelineFailedEventArgs args)
-        {
-            
-        }
-
-        public override void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args)
-        {
-            
-        }
-
-        public override void OnPipelineStarted(object sender, PipelineStartedEventArgs args)
-        {
-            
-        }
-
-        public override void StartPipeline(QueueingPipelineProcessDefinition<QueueingPipelineNode<IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>, IPipelineToolConfiguration, IPipelineToolConfiguration, IPipelineToolConfiguration>>> configuration)
-        {
-            
-        }
-
-        public override void StopPipeline(string instanceId)
-        {
-            
-        }
-    }
-
-    //public class PipelineNodeQueueingPipeline<TProcessDefinition,
-    //                                            TPipelineTool,
-    //                                            TLatchingInputBinding,
-    //                                            TOutputBinding,
-    //                                            TPipelineToolConfiguration,
-    //                                            TInputEntity,
-    //                                            TOutputEntity
-    //                                            > : PipelineNodeQueueingPipelineBase
-    //    where TProcessDefinition : class, IQueueingPipelineProcessDefinition<TPipelineTool, TLatchingInputBinding, TOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity>, new()
-    //    where TPipelineTool :  IQueueingPipelineTool<TLatchingInputBinding, TOutputBinding, TInputEntity, TOutputEntity, TPipelineToolConfiguration >
-    //    where TLatchingInputBinding : class, IQueueConsumerPipelineToolBinding<TInputEntity>,  new()
-    //    where TOutputBinding : class, IQueueProducerPipelineToolBinding<TOutputEntity>, new()
-    //    where TPipelineToolConfiguration : class, IPipelineToolConfiguration, new()
-    //    where TInputEntity : class, new()
-    //    where TOutputEntity : class, new()
-    //{
-    //    public override TProcessDefinition ProcessDefinition { get; set; }
-    //    public override string PipelineId { get; set; }
-    //    public override string PipelineInstanceId { get; set; }
-    //    public override string PipelineDisplayName { get; set; }
-    //    public override string PipelineDescription { get; set; }
-    //    public override IPipelineBinding PipelineInputBinding { get; set; }
-    //    public override IPipelineBinding PipelineOutputBinding { get; set; }
-
-    //    public event EventHandler<PipelineStartedEventArgs> PipelineStarted;
-    //    public event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
-    //    public event EventHandler<PipelineFailedEventArgs> PipelineFailed;
-    //    public event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
-
-    //    public override void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-
-    //    public override void OnPipelineFailed(object sender, PipelineFailedEventArgs args)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-
-    //    public override void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-
-    //    public override void OnPipelineStarted(object sender, PipelineStartedEventArgs args)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-
-    //    public override void StartPipeline(TProcessDefinition configuration)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-
-    //    public override void StopPipeline(string instanceId)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
 }

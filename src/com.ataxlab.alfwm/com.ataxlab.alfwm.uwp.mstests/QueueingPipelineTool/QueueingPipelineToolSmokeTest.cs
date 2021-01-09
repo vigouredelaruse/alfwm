@@ -202,7 +202,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                 };
 
                 // serialize the process definition
-                var processDefinitionXML = processDefinition.SerializeObject<DefaultQueueingPipelineProcessDefiniionEntity>();
+                var processDefinitionXML = processDefinition.ToXml(); //.SerializeObject<DefaultQueueingPipelineProcessDefiniionEntity>();
 
                 // deserialize the process definition
                 var incarnateProcessDefinition = processDefinitionXML.DeSerializeObject<DefaultQueueingPipelineProcessDefiniionEntity>();

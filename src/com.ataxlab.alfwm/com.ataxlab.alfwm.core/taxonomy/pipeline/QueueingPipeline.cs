@@ -7,7 +7,8 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
-    public class QueueingPipeline : IQueueingPipeline
+    [Obsolete]
+    public class QueueingPipeline : IDefaultQueueingPipeline
     {
         public QueueingPipeline()
         {
@@ -21,11 +22,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public string PipelineDescription { get; set; }
         public IPipelineBinding PipelineInputBinding { get; set; }
         public IPipelineBinding PipelineOutputBinding { get; set; }
+        public QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public event EventHandler<PipelineStartedEventArgs> PipelineStarted;
         public event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
         public event EventHandler<PipelineFailedEventArgs> PipelineFailed;
         public event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
+        public event EventHandler<PipelineDeploymentFailedEventArgs> PipelineDeploymentFailed;
 
         public bool Bind(string SourceInstanceId, string DestinationInstanceId)
         {
@@ -88,6 +92,40 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             return true;
         }
 
+        public bool AddAfterPipelineNode(int pipelineNodeIndex, QueueingPipelineToolNode newNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddFirstPipelineNode(QueueingPipelineToolNode newNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddLastPipelineNode(QueueingPipelineToolNode newNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Deploy(DefaultQueueingPipelineProcessDefiniionEntity processDefinition)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EnsurePipelineIngressEgressBindings()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EnsurePipelineToolListeners(QueueingPipelineToolNode newNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPipelineDeploymentFailed(object sender, PipelineDeploymentFailedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public abstract class QueueingPipeline<TProcessDefinition, TPipelineNode> : IQueueingPipeline<TProcessDefinition, TPipelineNode>
@@ -104,9 +142,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public abstract event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
         public abstract event EventHandler<PipelineFailedEventArgs> PipelineFailed;
         public abstract event EventHandler<PipelineCompletedEventArgs> PipelineCompleted;
+        public abstract event EventHandler<PipelineDeploymentFailedEventArgs> PipelineDeploymentFailed;
 
         public abstract string AddTool(TPipelineNode node);
         public abstract void OnPipelineCompleted(object sender, PipelineCompletedEventArgs args);
+        public abstract void OnPipelineDeploymentFailed(object sender, PipelineDeploymentFailedEventArgs args);
         public abstract void OnPipelineFailed(object sender, PipelineFailedEventArgs args);
         public abstract void OnPipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs args);
         public abstract void OnPipelineStarted(object sender, PipelineStartedEventArgs args);

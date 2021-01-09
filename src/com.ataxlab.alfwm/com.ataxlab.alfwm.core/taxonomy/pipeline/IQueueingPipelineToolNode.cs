@@ -16,6 +16,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         IDefaultQueueingPipelineTool QueueingPipelineTool { get; set; }
 
+   
+
      }
 
     public interface IQueueingPipelineNode<TPipelineTool> : IQueueingPipelineToolNode

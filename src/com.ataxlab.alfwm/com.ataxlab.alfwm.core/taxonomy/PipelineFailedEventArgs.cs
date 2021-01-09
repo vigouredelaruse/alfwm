@@ -16,5 +16,7 @@ namespace com.ataxlab.alfwm.core.taxonomy
         public PipelineToolFailedEventArgs ToolFailedEvent { get;  set; }
         public string Id { get;  set; }
         public DateTime TimeStamp { get; set; }
+
+        public Exception FailureException { get; set; }
     }
 }

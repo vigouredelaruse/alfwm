@@ -11,25 +11,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     {
         string Id { get; set; }
 
-        /// <summary>
-        /// the Pipeline's toolchain
-        /// indexed by InstanceId
-        /// 
-        /// the payload is expected (by the Bind mechanism)
-        /// to expose a ConcurrentQueue<Entity>         /// </summary>
-        ConcurrentDictionary<string, IQueueingPipelineToolNode> PipelineToolChain { get; set; }
-
         LinkedList<QueueingPipelineToolNode> QueueingPipelineNodes { get; set; }
 
-        LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>,
-                                            QueueingPipelineQueueEntity<IPipelineToolConfiguration>,
-                                            IPipelineToolConfiguration>> PipelineTools { get; set; }
 
-        bool Bind(string node1Id, string node2Id);
-
-        string AddTool(QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>,
-                                            QueueingPipelineQueueEntity<IPipelineToolConfiguration>,
-                                            IPipelineToolConfiguration> node);
     }
 
     //public interface IQueueingPipelineProcessDefinition<TProcessDefinition>
