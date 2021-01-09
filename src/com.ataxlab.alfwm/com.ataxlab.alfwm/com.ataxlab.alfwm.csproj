@@ -11,12 +11,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\com.ataxlab.alfwm.core\com.ataxlab.alfwm.core.csproj" />
+    <Compile Remove="scheduler\**" />
+    <Compile Remove="taxonomy\**" />
+    <EmbeddedResource Remove="scheduler\**" />
+    <EmbeddedResource Remove="taxonomy\**" />
+    <None Remove="scheduler\**" />
+    <None Remove="taxonomy\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="scheduler\" />
-    <Folder Include="taxonomy\" />
+    <ProjectReference Include="..\com.ataxlab.alfwm.core\com.ataxlab.alfwm.core.csproj" />
   </ItemGroup>
 
 </Project>
