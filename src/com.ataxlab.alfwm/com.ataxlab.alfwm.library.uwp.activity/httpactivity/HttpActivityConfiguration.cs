@@ -1,4 +1,5 @@
-﻿using com.ataxlab.alfwm.core.taxonomy.pipeline;
+﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,13 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
 
     public class HttpActivityConfiguration : IPipelineToolConfiguration
     {
+        public HttpActivityConfiguration()
+        {
+            this.Id = Guid.NewGuid().ToString();
+            this.PipelineVariables = new List<PipelineVariable>();
+            this.TimeStamp = DateTime.UtcNow;
+        }
+
         public string HttpUrl { get; set; }
         public Dictionary<string, string> HttpHeaders { get; set; }
         public HttpMethod HttpMethod { get; set; }
@@ -20,6 +28,7 @@ namespace com.ataxlab.alfwm.library.activity.httpactivity
         public string Id { get; set; }
         public string Key { get; set; }
         public object Configuration { get; set; }
+        public List<PipelineVariable> PipelineVariables { get; set;}
     }
 
 }

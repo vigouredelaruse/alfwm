@@ -29,6 +29,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         {
             this.Id = Guid.NewGuid().ToString();
             TimeStamp = DateTime.UtcNow;
+            this.PipelineVariables = new List<PipelineVariable>();
         }
 
         public string Id { get; set; }
@@ -39,5 +40,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         public string ConfigurationJson { get; set; }
         public string ConfigurationJsonSchema { get; set; }
         public TEntity Payload { get; set; }
+        public List<PipelineVariable> PipelineVariables { get; set;}
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -29,6 +30,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// </summary>
         string ConfigurationJsonSchema { get; set; }
 
+        /// <summary>
+        /// permit the broadcast of 'business keys' to the toolchain
+        /// </summary>
+        List<PipelineVariable> PipelineVariables { get; set; }
 
     }
 

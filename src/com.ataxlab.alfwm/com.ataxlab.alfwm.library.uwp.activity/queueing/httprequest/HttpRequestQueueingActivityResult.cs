@@ -1,4 +1,5 @@
-﻿using com.ataxlab.alfwm.core.taxonomy.pipeline;
+﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         {
             Payload = new List<Tuple<string, string>>();
             Id = Guid.NewGuid().ToString();
+            this.PipelineVariables = new List<PipelineVariable>();
 
             ResponseHeaders = new List<Tuple<string, List<string>>>();
             RequestHeaders = new List<Tuple<string, List<string>>>();
@@ -85,5 +87,6 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 
         [JsonProperty]
         public string ReasonPhrase { get;  set; }
+        public List<PipelineVariable> PipelineVariables { get; set;}
     }
 }

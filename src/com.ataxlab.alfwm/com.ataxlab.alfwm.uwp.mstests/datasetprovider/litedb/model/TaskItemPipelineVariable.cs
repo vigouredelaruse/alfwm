@@ -13,7 +13,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb.model
     {
         public TaskItemPipelineVariable()
         {
-
+            this.PipelineVariables = new List<PipelineVariable>();
         }
 
         /// <summary>
@@ -23,8 +23,10 @@ namespace com.ataxlab.alfwm.uwp.mstests.datasetprovider.litedb.model
         /// <param name="payload"></param>
         public TaskItemPipelineVariable(TaskItem payload) : base(payload)
         {
+            this.PipelineVariables = new List<PipelineVariable>();
         }
 
+        public List<PipelineVariable> PipelineVariables { get; set;}
         string IPipelineToolConfiguration.Id { get; set; }
         string IPipelineToolConfiguration.Key { get; set; }
         string IPipelineToolConfiguration.DisplayName { get; set; }

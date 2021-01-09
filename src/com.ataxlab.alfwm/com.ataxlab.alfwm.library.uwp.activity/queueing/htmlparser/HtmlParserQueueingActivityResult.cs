@@ -1,4 +1,5 @@
-﻿using com.ataxlab.alfwm.core.taxonomy.pipeline;
+﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
         public HtmlParserQueueingActivityResult()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.PipelineVariables = new List<PipelineVariable>();
+            this.TimeStamp = DateTime.UtcNow;
         }
 
         public HtmlDocument Payload { get; set; }
@@ -24,5 +27,6 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
         public DateTime TimeStamp { get; set; }
         public string ConfigurationJson { get; set; }
         public string ConfigurationJsonSchema { get; set; }
+        public List<PipelineVariable> PipelineVariables { get; set;}
     }
 }

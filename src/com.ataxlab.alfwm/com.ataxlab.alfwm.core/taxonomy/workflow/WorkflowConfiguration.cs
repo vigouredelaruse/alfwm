@@ -13,7 +13,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.workflow
     public abstract class WorkflowConfiguration : IPipelineToolConfiguration
     {
         public WorkflowConfiguration()
-        { }
+        {
+            this.Id = Guid.NewGuid().ToString();
+            this.PipelineVariables = new List<PipelineVariable>();
+        }
 
         public virtual string DisplayName { get; set; }
         public virtual DateTime TimeStamp { get; set; }
@@ -22,5 +25,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.workflow
         public string Id { get; set; }
         public string Key { get; set; }
         public object Configuration { get; set; }
+        public abstract List<PipelineVariable> PipelineVariables { get; set; }
     }
 }

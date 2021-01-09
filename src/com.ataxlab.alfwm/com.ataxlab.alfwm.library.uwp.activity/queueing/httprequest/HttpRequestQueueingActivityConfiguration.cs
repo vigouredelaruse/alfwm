@@ -1,4 +1,5 @@
-﻿using com.ataxlab.alfwm.core.taxonomy.pipeline;
+﻿using com.ataxlab.alfwm.core.taxonomy.binding;
+using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +23,14 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         public DateTime TimeStamp { get; set;}
         public string ConfigurationJson { get; set;}
         public string ConfigurationJsonSchema { get; set;}
+        public List<PipelineVariable> PipelineVariables { get; set;}
 
         public HttpRequestQueueingActivityConfiguration()
         {
             this.Id = Guid.NewGuid().ToString();
             this.TimeStamp = DateTime.UtcNow;
             DisplayName = this.GetType().Name;
+            this.PipelineVariables = new List<PipelineVariable>();
         }
     }
 }
