@@ -22,6 +22,7 @@ using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using com.ataxlab.core.alfwm.utility.extension;
+using com.ataxlab.alfwm.core.taxonomy.pipeline.queueing;
 
 namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 {

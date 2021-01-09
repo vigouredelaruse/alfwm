@@ -8,7 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace com.ataxlab.alfwm.core.taxonomy.pipeline
+namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
 {
     /// <summary>
     /// canonical implementation of a Queueing Pipeline
@@ -20,10 +20,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     {
         public DefaultPipelineNodeQueueingPipeline()
         {
-            this.ProcessDefinition = new DefaultQueueingPipelineProcessDefinition();
-            this.PipelineId = Guid.NewGuid().ToString();
-            this.PipelineDisplayName = this.GetType().Name;
-            this.PipelineInstanceId = Guid.NewGuid().ToString();
+            ProcessDefinition = new DefaultQueueingPipelineProcessDefinition();
+            PipelineId = Guid.NewGuid().ToString();
+            PipelineDisplayName = GetType().Name;
+            PipelineInstanceId = Guid.NewGuid().ToString();
 
 
         }
@@ -65,12 +65,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         {
             // clear the process definition
             // TODO - stop the tools first
-            this.ProcessDefinition.QueueingPipelineNodes.Clear();
+            ProcessDefinition.QueueingPipelineNodes.Clear();
 
 
             try
             {
-                var nodes = processDefinition.QueueingPipelineNodes.OrderBy(o => o.ToolChainSlotNumber).ToList<QueueingPipelineNodeEntity>();
+                var nodes = processDefinition.QueueingPipelineNodes.OrderBy(o => o.ToolChainSlotNumber).ToList();
 
                 foreach (var node in nodes)
                 {
@@ -97,12 +97,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
                     if (node.ToolChainSlotNumber == 0)
                     {
                         // the first node gets special treatment
-                        var result = this.AddFirstPipelineNode(newNode);
+                        var result = AddFirstPipelineNode(newNode);
 
                     }
                     else
                     {
-                        var result = this.AddAfterPipelineNode(node.ToolChainSlotNumber - 1, newNode);
+                        var result = AddAfterPipelineNode(node.ToolChainSlotNumber - 1, newNode);
                     }
                 }
 
@@ -126,13 +126,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         {
             // apply the rule that the first ordinal node in the 
             // process definition list is the ingress node
-            var ingressNode = this.ProcessDefinition.QueueingPipelineNodes.First;
+            var ingressNode = ProcessDefinition.QueueingPipelineNodes.First;
 
-            this.QueueingInputBinding = ingressNode.Value.QueueingPipelineTool.QueueingInputBinding;
+            QueueingInputBinding = ingressNode.Value.QueueingPipelineTool.QueueingInputBinding;
 
-            var egressNode = this.ProcessDefinition.QueueingPipelineNodes.Last;
+            var egressNode = ProcessDefinition.QueueingPipelineNodes.Last;
 
-            this.QueueingOutputBinding = egressNode.Value.QueueingPipelineTool.QueueingOutputBinding;
+            QueueingOutputBinding = egressNode.Value.QueueingPipelineTool.QueueingOutputBinding;
             // TODO instrument telemetry for this operation
         }
 
@@ -145,7 +145,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         {
             EnsurePipelineToolListeners(newNode);
 
-            this.ProcessDefinition.QueueingPipelineNodes.AddLast(newNode);
+            ProcessDefinition.QueueingPipelineNodes.AddLast(newNode);
             EnsurePipelineIngressEgressBindings();
             return true;
         }
@@ -187,7 +187,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public bool AddFirstPipelineNode(QueueingPipelineToolNode newNode)
         {
             EnsurePipelineToolListeners(newNode);
-            this.ProcessDefinition.QueueingPipelineNodes.AddFirst(newNode);
+            ProcessDefinition.QueueingPipelineNodes.AddFirst(newNode);
             EnsurePipelineIngressEgressBindings();
             return true;
         }
@@ -199,7 +199,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
             EnsurePipelineToolListeners(newNode);
             // find the node by its id
-            QueueingPipelineToolNode targetNode = this.ProcessDefinition.QueueingPipelineNodes.Skip<QueueingPipelineToolNode>(pipelineNodeIndex).Take(1).FirstOrDefault();
+            QueueingPipelineToolNode targetNode = ProcessDefinition.QueueingPipelineNodes.Skip(pipelineNodeIndex).Take(1).FirstOrDefault();
 
             if (targetNode != null)
             {
@@ -209,7 +209,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
                     );
 
                 // wire the new node's output to it's successor's input - don't break the chain
-                var targetContainer = this.ProcessDefinition.QueueingPipelineNodes.Find(targetNode);
+                var targetContainer = ProcessDefinition.QueueingPipelineNodes.Find(targetNode);
 
                 // bind new downstream node if necessary
                 // TODO discover if this node is already wired somewhere else
@@ -224,7 +224,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
                     newNode.QueueingPipelineTool.QueueingOutputBindingCollection.Add(targetContainer.Value.QueueingPipelineTool.QueueingInputBinding);
                 }
 
-                this.ProcessDefinition.QueueingPipelineNodes.AddAfter(targetContainer, newNode);
+                ProcessDefinition.QueueingPipelineNodes.AddAfter(targetContainer, newNode);
 
             }
             else

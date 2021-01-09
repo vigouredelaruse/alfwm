@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace com.ataxlab.alfwm.core.taxonomy.pipeline
+namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
 {
     /// <summary>
     /// abstract and normalize the payload of the 
@@ -16,9 +16,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
         IDefaultQueueingPipelineTool QueueingPipelineTool { get; set; }
 
-   
 
-     }
+
+    }
 
     public interface IQueueingPipelineNode<TPipelineTool> : IQueueingPipelineToolNode
     {
@@ -32,8 +32,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     /// </summary>
     /// <typeparam name="TPipelineTool"></typeparam>
     /// <typeparam name="TPipelineToolConfiguration"></typeparam>
-    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration>  : IQueueingPipelineToolNode
-         where TPipelineToolConfiguration :  class, new()
+    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration> : IQueueingPipelineToolNode
+         where TPipelineToolConfiguration : class, new()
     {
         new TPipelineTool PipelineTool { get; set; }
 
@@ -41,9 +41,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
     public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity> : IQueueingPipelineToolNode
 
-       //where TPipelineToolConfiguration : class, new()
-       //where TOutputEntity : class, new()
-       //where TInputEntity : class, new()
+    //where TPipelineToolConfiguration : class, new()
+    //where TOutputEntity : class, new()
+    //where TInputEntity : class, new()
     {
         new TPipelineTool PipelineTool { get; set; }
 

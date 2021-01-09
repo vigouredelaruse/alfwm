@@ -4,17 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace com.ataxlab.alfwm.core.taxonomy.pipeline
+namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
 {
 
 
     public class QueueingPipelineToolNode : IQueueingPipelineToolNode
     {
-    
+
 
         public QueueingPipelineToolNode()
         {
-            this.QueueingPipelineNodeId = Guid.NewGuid().ToString();
+            QueueingPipelineNodeId = Guid.NewGuid().ToString();
         }
 
         public string QueueingPipelineNodeId { get; set; }
@@ -42,7 +42,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public string QueueingPipelineNodeId { get; set; }
         public IDefaultQueueingPipelineTool PipelineToolEx { get; set; }
         public IDefaultQueueingPipelineTool QueueingPipelineTool { get; set; }
-      
+
     }
 
     public class QueueingPipelineNode2<TPipelineTool, TLatchingInputBinding, TOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity> :
@@ -73,8 +73,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public IQueueConsumerPipelineToolBinding<TInputEntity> PipelineToolInputBinding { get; set; }
         public IQueueProducerPipelineToolBinding<TOutputEntity> PipelineToolOutputBinding { get; set; }
         public string QueueingPipelineNodeId { get; set; }
-        public IDefaultQueueingPipelineTool QueueingPipelineTool { get; set;}
+        public IDefaultQueueingPipelineTool QueueingPipelineTool { get; set; }
 
- 
+
     }
 }

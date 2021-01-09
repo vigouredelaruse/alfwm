@@ -5,6 +5,13 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.deployment
 {
+    /// <summary>
+    /// abstration at lowest level useful for building
+    /// 'Managers' - like WorkflowManager or Process Engine
+    /// 
+    /// when there is a need for a component that contains
+    /// and potentially participates in scheduling multiple workflow processes
+    /// </summary>
     public interface IDeploymentContainer
     {
         string ContainerId { get; set; }
@@ -17,16 +24,14 @@ namespace com.ataxlab.alfwm.core.deployment
     /// <summary>
     /// specify a mechanism for a runtimer container for deployments
     /// </summary>
-    /// <typeparam name="TProcessDefinitionItems"></typeparam>
+    /// <typeparam name="TDeployment"></typeparam>
     /// <typeparam name="TProcessDefinition"></typeparam>
     /// <typeparam name="TDeploymentStatus"></typeparam>
-    public interface IDeploymentContainer<TProcessDefinitionItems, TProcessDefinition>
+    public interface IDeploymentContainer<TDeployment, TProcessDefinition>
         : IDeploymentContainer 
-        where TProcessDefinition : class
-        where TProcessDefinitionItems : class
+        //where TProcessDefinition : class
+        //where TDeployment : class
 
     {
-        TProcessDefinitionItems Deployments { get; set; }
-
     }
 }

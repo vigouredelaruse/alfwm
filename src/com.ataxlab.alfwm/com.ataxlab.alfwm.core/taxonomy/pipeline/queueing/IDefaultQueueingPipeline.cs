@@ -7,7 +7,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 
-namespace com.ataxlab.alfwm.core.taxonomy.pipeline
+namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
 {
     /// <summary>
     /// furnish a queueing specialization of 
@@ -29,7 +29,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     public interface IQueueingPipeline<TProcessDefinition, TPipelineNode> : IPipeline<TProcessDefinition>
     {
 
-        
+
         string AddTool(TPipelineNode node);
     }
 }

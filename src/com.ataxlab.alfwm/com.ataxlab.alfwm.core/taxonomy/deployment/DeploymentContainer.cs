@@ -17,6 +17,6 @@ namespace com.ataxlab.alfwm.core.deployment
         public string ContainerId { get; set; }
         public string DisplayName { get; set; }
         public string Description { get; set; }
-        public TProcessDefinitionItems Deployments { get; set; }
+        public TProcessDefinitionItems ProcessArtifact { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
+using com.ataxlab.alfwm.core.taxonomy.pipeline.queueing;
 using com.ataxlab.core.alfwm.utility.extension;
 using System;
 using System.Collections;
