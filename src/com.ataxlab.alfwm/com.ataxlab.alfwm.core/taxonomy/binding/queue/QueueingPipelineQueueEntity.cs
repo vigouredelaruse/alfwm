@@ -1,4 +1,5 @@
-﻿using com.ataxlab.alfwm.core.taxonomy.pipeline;
+﻿using com.ataxlab.alfwm.core.taxonomy.binding.queue.routing;
+using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,17 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         where TEntity : IPipelineToolConfiguration
     {
         TEntity Payload { get; set; }
+
+        #region envelope addressing
+
+        /// <summary>
+        /// application of the routing slip pattern
+        /// </summary>
+        QueueingPipelineQueueEntityRoutingSlip RoutingSlip { get; set; }
+
+        string CurrentPipelineId { get; set; }
+
+        #endregion
     }
 
     /// <summary>
@@ -41,5 +53,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         public string ConfigurationJsonSchema { get; set; }
         public TEntity Payload { get; set; }
         public List<PipelineVariable> PipelineVariables { get; set;}
+
+        public string CurrentPipelineId { get; set; }
+        public QueueingPipelineQueueEntityRoutingSlip RoutingSlip { get; set; }
     }
 }
