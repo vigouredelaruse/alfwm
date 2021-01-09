@@ -329,8 +329,8 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
                                                                             QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult>,
                                                                             HttpRequestQueueingActivityConfiguration>
     {
-        public override List<QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>>> QueueingOutputBindingPorts { get; set; }
-        public override List<QueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>>> QueueingOutputBindingCollection {get; set; }
+        public override List<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>>> QueueingOutputBindingPorts { get; set; }
+        public override List<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>>> QueueingOutputBindingCollection {get; set; }
 
         public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
         {
@@ -353,22 +353,22 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         }
     }
 
-    public class HttpRequestQueueingActivity2 : IQueueingPipelineTool<QueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>,
-                                                                      QueueingProducerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult>>,
+    public class HttpRequestQueueingActivity2 : IQueueingPipelineTool<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>,
+                                                                      PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult>>,
                                                                                               HttpRequestQueueingActivityConfiguration,
                                                                                               HttpRequestQueueingActivityResult,
                                                                                              HttpRequestQueueingActivityConfiguration>
     {
         public HttpRequestQueueingActivity2()
         {
-            this.PipelineToolOutputBinding = new QueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>();
-            this.QueueingInputBinding = new QueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>();
+            this.PipelineToolOutputBinding = new PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>();
+            this.QueueingInputBinding = new PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>();
             this.PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
         }
 
-        public QueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>> QueueingInputBinding { get; set; }
-        public List<QueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>> QueueingOutputBindingCollection {get; set; }
-        public QueueingProducerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult>> QueueingOutputBinding { get; set; }
+        public PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>> QueueingInputBinding { get; set; }
+        public List<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>> QueueingOutputBindingCollection {get; set; }
+        public PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult>> QueueingOutputBinding { get; set; }
         public IPipelineToolConfiguration<HttpRequestQueueingActivityConfiguration> PipelineToolConfiguration {get; set; }
         public string PipelineToolInstanceId { get; set; }
         public ObservableCollection<IPipelineVariable> PipelineToolVariables {get; set; }

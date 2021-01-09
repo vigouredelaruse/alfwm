@@ -15,5 +15,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
               // where TQueueEntity : class,  new()
     {
         ConcurrentQueue<TQueueEntity> OutputQueue { get; set; }
+
+        event EventHandler<QueueDataAvailableEventArgs<TQueueEntity>> QueueHasData;
+
+        void OnQueueHasData(DateTime timestamp, TQueueEntity availableData);
     }
 }

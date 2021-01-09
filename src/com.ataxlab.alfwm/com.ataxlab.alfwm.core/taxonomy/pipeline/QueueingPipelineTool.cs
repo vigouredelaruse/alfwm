@@ -29,9 +29,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public DefaultQueueingPipelineTool()
         {
             this.PipelineToolId = Guid.NewGuid().ToString();
-            this.QueueingOutputBindingCollection = new List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>(); //  new List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>(); // new List<QueueingConsumerChannel<IQueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
-            this.QueueingInputBinding = new   QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
-            this.QueueingOutputBinding = new QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+            this.QueueingOutputBindingCollection = new List<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>(); //  new List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>(); // new List<QueueingConsumerChannel<IQueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
+            this.QueueingInputBinding = new   PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+            this.QueueingOutputBinding = new PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
             this.PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
             
         }
@@ -46,10 +46,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public virtual IPipelineToolStatus PipelineToolStatus {get; set;}
         public virtual IPipelineToolContext PipelineToolContext {get; set;}
         public virtual IPipelineToolBinding PipelineToolOutputBinding {get; set;}
-        public QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
-        public QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
+        public PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
+        public PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
         // public List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
-        public List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
+        public List<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
 
         public virtual event Func<IQueueingPipelineQueueEntity<IPipelineToolConfiguration>, IQueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueHasAvailableDataEvent;
         public virtual event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
@@ -100,8 +100,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
             where TOutputQueueEntity : class, IPipelineToolConfiguration, new()
         // where TConfiguration : IPipelineToolConfiguration //class, new()
     {
-        public override List<QueueingConsumerChannel<QueueingPipelineQueueEntity<TInputQueueEntity>>> QueueingOutputBindingPorts {get; set; }
-        public override List<QueueingConsumerChannel<QueueingPipelineQueueEntity<TInputQueueEntity>>> QueueingOutputBindingCollection {get; set; }
+        public override List<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<TInputQueueEntity>>> QueueingOutputBindingPorts {get; set; }
+        public override List<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<TInputQueueEntity>>> QueueingOutputBindingCollection {get; set; }
 
         public override event Func<TInputQueueEntity, TInputQueueEntity> QueueHasAvailableDataEvent;
         public override event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
@@ -113,8 +113,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         {
             this.PipelineToolInstanceId = Guid.NewGuid().ToString();
 
-            QueueingInputBinding = new QueueingConsumerChannel<QueueingPipelineQueueEntity<TInputQueueEntity>>();
-            QueueingOutputBinding = new QueueingProducerChannel<QueueingPipelineQueueEntity<TOutputQueueEntity>>();
+            QueueingInputBinding = new PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<TInputQueueEntity>>();
+            QueueingOutputBinding = new PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<TOutputQueueEntity>>();
             PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
 
             QueueingInputBinding.QueueHasData += QueueingInputBinding_QueueHasData; //  InputBinding_QueueHasData;
@@ -229,9 +229,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     {
 
 
-        public override QueueingConsumerChannel<QueueingPipelineQueueEntity<TQueueEntity>> QueueingInputBinding { get; set; }
-        public override List<QueueingConsumerChannel<QueueingPipelineQueueEntity<TQueueEntity>>> QueueingOutputBindingCollection { get; set; }
-        public override QueueingProducerChannel<QueueingPipelineQueueEntity<TQueueEntity>> QueueingOutputBinding { get; set; }
+        public override PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<TQueueEntity>> QueueingInputBinding { get; set; }
+        public override List<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<TQueueEntity>>> QueueingOutputBindingCollection { get; set; }
+        public override PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<TQueueEntity>> QueueingOutputBinding { get; set; }
         public override IPipelineToolConfiguration<TConfiguration> PipelineToolConfiguration { get; set; }
         public override string PipelineToolInstanceId { get; set; }
         public override ObservableCollection<IPipelineVariable> PipelineToolVariables { get; set; }
@@ -246,9 +246,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         {
             this.PipelineToolInstanceId = Guid.NewGuid().ToString();
 
-            QueueingInputBinding = new QueueingConsumerChannel<QueueingPipelineQueueEntity<TQueueEntity>>();
-            QueueingOutputBinding = new QueueingProducerChannel<QueueingPipelineQueueEntity<TQueueEntity>>();
-            this.QueueingOutputBindingCollection = new List<QueueingConsumerChannel<QueueingPipelineQueueEntity<TQueueEntity>>>();
+            QueueingInputBinding = new PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<TQueueEntity>>();
+            QueueingOutputBinding = new PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<TQueueEntity>>();
+            this.QueueingOutputBindingCollection = new List<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<TQueueEntity>>>();
         
 
             QueueingInputBinding.QueueHasData += QueueingInputBinding_QueueHasData; // InputBinding_QueueHasData;

@@ -124,8 +124,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             httpActivityConfig.RequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
             httpActivity.PipelineToolCompleted += httpActivity_PipelineToolCompleted;
 
-            var inputBinding = new QueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>();
-            var outputBinding = new QueueingProducerChannel<HttpRequestQueueingActivityResult>();
+            var inputBinding = new PipelineToolQueueingConsumerChannel<HttpRequestQueueingActivityConfiguration>();
+            var outputBinding = new PipelineToolQueueingProducerChannel<HttpRequestQueueingActivityResult>();
 
 
 
@@ -374,7 +374,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             activity.PipelineToolCompleted += httpActivity_PipelineToolCompleted;
 
             // add an output channel
-            var outputChannel = new QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+            var outputChannel = new PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
             activity.QueueingOutputBindingCollection.Add(outputChannel);
             var outputQueue = outputChannel; // activity.QueueingOutputBindingCollection.First();
 

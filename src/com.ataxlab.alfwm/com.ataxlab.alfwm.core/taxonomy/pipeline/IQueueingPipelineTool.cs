@@ -11,11 +11,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         where TInputEntity : class, IQueueingPipelineQueueEntity<IPipelineToolConfiguration>, new()
         where TOutputEntity : class, IQueueingPipelineQueueEntity<IPipelineToolConfiguration>, new()
     {
-        QueueingConsumerChannel<TInputEntity> QueueingInputBinding { get; set; }
+        PipelineToolQueueingConsumerChannel<TInputEntity> QueueingInputBinding { get; set; }
 
-        QueueingProducerChannel<TOutputEntity> QueueingOutputBinding { get; set; }
+        PipelineToolQueueingProducerChannel<TOutputEntity> QueueingOutputBinding { get; set; }
 
-        List<QueueingConsumerChannel<TOutputEntity>> QueueingOutputBindingCollection { get; set; }
+        List<PipelineToolQueueingConsumerChannel<TOutputEntity>> QueueingOutputBindingCollection { get; set; }
 
         void OnQueueHasData(object sender, TInputEntity availableData);
 
@@ -30,15 +30,15 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
     public interface IQueueingPipelineTool
     {
-        QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
+        PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
 
-        QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
+        PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
 
         void OnQueueHasData(object sender, QueueingPipelineQueueEntity<IPipelineToolConfiguration> availableData);
 
 
 
-        List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
+        List<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
 
         /// <summary>
         /// clients of the queue pipeline tool can listen to this event

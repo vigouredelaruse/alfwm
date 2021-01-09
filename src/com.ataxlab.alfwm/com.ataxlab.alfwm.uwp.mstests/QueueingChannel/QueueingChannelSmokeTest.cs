@@ -34,7 +34,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingChannel
             int itemsToSend = 10;
             List<TaskItemPipelineVariable> sentItems = new List<TaskItemPipelineVariable>();
 
-            QueueingConsumerChannel<TaskItemPipelineVariable> channel = new QueueingConsumerChannel<TaskItemPipelineVariable>(pollingInterval);
+            PipelineToolQueueingConsumerChannel<TaskItemPipelineVariable> channel = new PipelineToolQueueingConsumerChannel<TaskItemPipelineVariable>(pollingInterval);
             channel.QueueHasData += Channel_QueueHasData;
 
             // enable the channel timer

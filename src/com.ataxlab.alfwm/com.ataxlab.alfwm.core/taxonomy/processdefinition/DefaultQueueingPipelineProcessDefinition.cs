@@ -167,8 +167,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
         : IQueueingPipelineProcessDefinition<TPipelineNode>
         where TPipelineNode : QueueingPipelineNode<
                             IQueueingPipelineTool<
-                                                    QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
-                                                    QueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
+                                                    PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
+                                                    PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
                                                     IPipelineToolConfiguration,
                                                     IPipelineToolConfiguration,
                                                     IPipelineToolConfiguration

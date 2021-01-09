@@ -16,7 +16,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
     /// </summary>
     /// <typeparam name="TQueueEntity"></typeparam>
     /// <typeparam name="TPollingTimer"></typeparam>
-    public class QueueingConsumerChannel<TQueueEntity> : IQueueConsumerPipelineToolBinding<TQueueEntity>
+    public class PipelineToolQueueingConsumerChannel<TQueueEntity> : IQueueConsumerPipelineToolBinding<TQueueEntity>
               // where TQueueEntity : IPipelineToolConfiguration
     {
         /// <summary>
@@ -31,7 +31,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         /// </summary>
         private int SyncPoint = 0;
        
-        public QueueingConsumerChannel() 
+        public PipelineToolQueueingConsumerChannel() 
         {
             InputQueue = new ConcurrentQueue<TQueueEntity>();
             ConsumerPollingTimer = new System.Timers.Timer(DefaultPollingInterval);
@@ -42,7 +42,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         }
 
 
-        public QueueingConsumerChannel(double pollingInterval)
+        public PipelineToolQueueingConsumerChannel(double pollingInterval)
         {
 
             InputQueue = new ConcurrentQueue<TQueueEntity>();

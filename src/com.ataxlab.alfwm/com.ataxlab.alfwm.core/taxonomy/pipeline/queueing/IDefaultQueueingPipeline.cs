@@ -15,7 +15,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
     /// </summary>
     public interface IDefaultQueueingPipeline : IPipeline<IDefaultQueueingPipelineProcessDefinition>
     {
-        QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
+        PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
         IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
 
         bool AddAfterPipelineNode(int pipelineNodeIndex, QueueingPipelineToolNode newNode);

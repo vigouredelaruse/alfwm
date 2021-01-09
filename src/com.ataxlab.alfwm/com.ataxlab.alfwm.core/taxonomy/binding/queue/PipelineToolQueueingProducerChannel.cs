@@ -8,7 +8,7 @@ using System.Timers;
 
 namespace com.ataxlab.alfwm.core.taxonomy.binding
 {
-    public class QueueingProducerChannel<TQueueEntity> : IQueueProducerPipelineToolBinding<TQueueEntity>
+    public class PipelineToolQueueingProducerChannel<TQueueEntity> : IQueueProducerPipelineToolBinding<TQueueEntity>
               // where TQueueEntity : class,  new()
     {
 
@@ -24,7 +24,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
 
         public event EventHandler<QueueDataAvailableEventArgs<TQueueEntity>> QueueHasData;
 
-        public QueueingProducerChannel()
+        public PipelineToolQueueingProducerChannel()
         {
             OutputQueue = new ConcurrentQueue<TQueueEntity>();
             ProducerPollingTimer = new System.Timers.Timer(DefaultPollingInterval);

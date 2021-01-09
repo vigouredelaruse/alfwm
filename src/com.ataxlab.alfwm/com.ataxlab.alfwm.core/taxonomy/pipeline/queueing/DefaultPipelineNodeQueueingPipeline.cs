@@ -41,7 +41,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
         /// functions as the main 'entry point' for messages 
         /// to the pipeline
         /// </summary>
-        public QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
+        public PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
 
         /// <summary>
         /// egresses messages from the terminal node of the pipeline
