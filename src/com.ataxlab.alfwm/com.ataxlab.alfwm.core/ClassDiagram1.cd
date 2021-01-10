@@ -1,0 +1,1141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="com.ataxlab.alfwm.core.collections.TreeNode&lt;TPayload&gt;" Collapsed="true">
+    <Position X="57.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAEAAAAAAAAABAAAAAAAAAQAAA=</HashCode>
+      <FileName>collections\TreeNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.deployment.DeploymentContainer&lt;TProcessDefinitionItems, TProcessDefinition&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="43.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAgAAACAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>taxonomy\deployment\DeploymentContainer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.deployment.model.Deployment&lt;TProcessDefinition, TDeploymentStatus&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="55.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAQAAAAAIAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>taxonomy\deployment\model\Deployment.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.deployment.model.DeploymentConfiguration" Collapsed="true">
+    <Position X="57.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\deployment\model\DeploymentConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.deployment.model.DeploymentStatus" Collapsed="true">
+    <Position X="45" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\deployment\model\DeploymentStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.grammar.verbs.http.HttpStrategyRequestMessage" Collapsed="true">
+    <Position X="55.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAABAAAEAAAAA=</HashCode>
+      <FileName>grammar\verbs\http\HttpStrategyRequestMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.persistence.PersistenceProvider&lt;TProviderConfiguration, TConfigureResult&gt;">
+    <Position X="3.25" Y="29.5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAyAAAAAAAAECAAAAACCAAhgAAEAAEACAEAAAQAAICA=</HashCode>
+      <FileName>persistence\PersistenceProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.scheduler.SchedulerBase" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAACQYoCgAAAAQIAQQCABCQoEAABAwBAAACCIgA=</HashCode>
+      <FileName>scheduler\SchedulerBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.PipelineCompletedEventArgs" Collapsed="true">
+    <Position X="50.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\PipelineCompletedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.PipelineFailedEventArgs" Collapsed="true">
+    <Position X="57.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAACAAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\PipelineFailedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.PipelineProgressUpdatedEventArgs" Collapsed="true">
+    <Position X="43.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAADAAAIAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\PipelineProgressUpdatedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.PipelineStartedEventArgs" Collapsed="true">
+    <Position X="48.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAQAAAAAAAAIAAAEAAAAAAAAQAAAQAAAAIA=</HashCode>
+      <FileName>taxonomy\PipelineStartedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.PipelineToolCompletedEventArgs" Collapsed="true">
+    <Position X="55.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\PipelineToolCompletedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.PipelineToolCompletedEventArgs&lt;TPayload&gt;" Collapsed="true">
+    <Position X="57.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACEAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>taxonomy\PipelineToolCompletedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.PipelineToolFailedEventArgs" Collapsed="true">
+    <Position X="45" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>taxonomy\PipelineToolFailedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.PipelineToolProgressUpdatedEventArgs" Collapsed="true">
+    <Position X="46.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACEAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>taxonomy\PipelineToolProgressUpdatedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.PipelineToolStartEventArgs" Collapsed="true">
+    <Position X="52" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAQIA=</HashCode>
+      <FileName>taxonomy\PipelineToolStartEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.activity.Activity" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIADAAEACAAABAgEANgAIIAAIAEIEAAAAAAAIA=</HashCode>
+      <FileName>taxonomy\activity\Activity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.activity.Activity&lt;TConfiguration&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="43.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIADAAEACAAABAgEANgAIIAAIAEIEAAAAAAAIA=</HashCode>
+      <FileName>taxonomy\activity\Activity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.activity.ActivityConfiguration" Collapsed="true">
+    <Position X="46.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAIAAAAAAAAAEAAAAAAAAAEAAAA=</HashCode>
+      <FileName>taxonomy\activity\ActivityConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.activity.ActivityContext">
+    <Position X="15.5" Y="17.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\activity\ActivityContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.activity.ActivityStatus">
+    <Position X="7.75" Y="17" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\activity\ActivityStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.activity.ThreadPoolActivity" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="50.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIADAAEACAAABAgEANgAIIAAIAEIEAAAAAAAIA=</HashCode>
+      <FileName>taxonomy\activity\ThreadPoolActivity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.activity.ThreadPoolActivityScaffold" Collapsed="true">
+    <Position X="52" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\activity\ThreadPoolActivity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.activity.ThreadPoolActivityConfiguration">
+    <Position X="30" Y="4.25" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\activity\ThreadPoolActivityConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.activity.ThreadPoolActivityStartResult" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="53.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\activity\ThreadPoolActivityStartResult.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.routing.QueueingPipelineQueueEntityRoutingSlip" Collapsed="true">
+    <Position X="50.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAACAAIAAQAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\routing\QueueingPipelineQueueEntityRoutingSlip.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.routing.QueueingPipelineQueueEntityRoutingSlipStep" Collapsed="true">
+    <Position X="52" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAACA=</HashCode>
+      <FileName>taxonomy\binding\queue\routing\QueueingPipelineQueueEntityRoutingSlip.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.DefaultQueueingChannelPipelineGatewayContext" Collapsed="true">
+    <Position X="43.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\DefaultQueueingChannelPipelineGateway.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.DefaultQueueingChannelPipelineGateway" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="57.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAGAAAAAAQAAAAAAQEAAQAAAAAgAACAQAAAAAAAAIg=</HashCode>
+      <FileName>taxonomy\binding\queue\DefaultQueueingChannelPipelineGateway.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.DefaultQueueingChannelGatewaySwitchConfigurationFaultArgs" Collapsed="true">
+    <Position X="55.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\DefaultQueueingChannelPipelineToolGateway.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.DefaultQueueingChannelPipelineToolGatewayContext" Collapsed="true">
+    <Position X="46.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\DefaultQueueingChannelPipelineToolGateway.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.DefaultQueueingChannelPipelineToolGateway" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAGAAAAAAQAAAAAAQEAAQAAQAAgAACAQAAAAAAAAIg=</HashCode>
+      <FileName>taxonomy\binding\queue\DefaultQueueingChannelPipelineToolGateway.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.PipelineQueueingConsumerChannel&lt;TQueueEntity&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAIACAAAABACAAAAAAACAAEACAMACEgAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\PipelineQueueingConsumerChannel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.PipelineQueueingProducerChannel&lt;TQueueEntity&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="46.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAgAIACABAABAAAABAAAAAAAEACAMAAEAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\PipelineQueueingProducerChannel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.QueueDataAvailableEventArgs&lt;TAvailableQueuePayload&gt;" Collapsed="true">
+    <Position X="43.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\QueueDataAvailableEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.QueueingPipelineQueueEntity&lt;TEntity&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="48.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAACEACAAAAAAAQAAAIQAIAAAAAAEAAAgAAAAAAgAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\QueueingPipelineQueueEntity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.PipelineToolQueueingConsumerChannel&lt;TQueueEntity&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="48.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAgAAAIACAAAARACAAAAAACCAAAACAMACEgAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\PipelineToolQueueingConsumerChannel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.PipelineToolQueueingProducerChannel&lt;TQueueEntity&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="50.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAgAgAAACABAARAAAABAAACCAAAAAAMAAEAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\PipelineToolQueueingProducerChannel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.PipelineBinding" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="48.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAEACAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\PipelineBinding.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.PipelineBinding&lt;TDTO&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="46.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAEACAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\PipelineBinding.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.PipelineToolBinding" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="52" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAQAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\PipelineToolBinding.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.PipelineToolBinding&lt;TDTO&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="53.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAQAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\PipelineToolBinding.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.PipelineVariable&lt;T, TItems, TParent&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="55.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEACAAAAggAQAAAAQAAAAAAAAAAAAAAABAAQEAAA=</HashCode>
+      <FileName>taxonomy\binding\PipelineVariable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.PipelineVariable&lt;TPayload&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="53.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEACAAAAgiAQAAABQAAAgAAAAACAAAAABAAQEAAA=</HashCode>
+      <FileName>taxonomy\binding\PipelineVariable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.binding.PipelineVariableDictionary" Collapsed="true">
+    <Position X="57.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\PipelineVariableDictionary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.managers.workflow.WorkflowManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAACSAAAAABAAAAAEAAAAAAAAAAASAEAAA=</HashCode>
+      <FileName>taxonomy\managers\workflow\WorkflowManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.managers.workflow.WorkflowManagerContext" Collapsed="true">
+    <Position X="46.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\managers\workflow\WorkflowManagerContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.queueing.DefaultPipelineNodeQueueingPipeline" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="53.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAIAAABKQZIAgAAAAABIQECFACAgAgSAggEAQICAAIA=</HashCode>
+      <FileName>taxonomy\pipeline\queueing\DefaultPipelineNodeQueueingPipeline.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.queueing.DefaultQueueingPipelineToolNode" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="53.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAQAAAAAAAAEIAQAAAAAAAAIA=</HashCode>
+      <FileName>taxonomy\pipeline\DefaultQueueingPipelineToolNode.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.queueing.QueueingPipelineNode&lt;TPipelineTool&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAgAAAAQAAAAAAAAEIAQAAAAAAAAIA=</HashCode>
+      <FileName>taxonomy\pipeline\DefaultQueueingPipelineToolNode.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.PipelineConfiguration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="52" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAIAAAAAAAAAEAAAAAAAAAEAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\PipelineConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.PipelineContext" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="53.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAAEAAAACAAAAAAAAAAQAAAAAAAAgAAEAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\PipelineContext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.PipelineDeploymentFailedEventArgs" Collapsed="true">
+    <Position X="55.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAACAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\PipelineDeploymentFailedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.PipelineStatus" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="50.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\PipelineStatus.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.PipelineToolConfiguration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="43.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEACAAAAAAAQAAAIQAIAAAAAAEAAAAAAAAAQAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\PipelineToolConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.PipelineToolConfiguration&lt;TPayload&gt;">
+    <Position X="30" Y="0.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEACAAAAAAAQAAAIAAIAAAAAAEAAAgAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\PipelineToolConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.PipelineToolContext">
+    <Position X="18.5" Y="14.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAAAAAAACAAAAAAAAAAwAAAAAAAAgAAEAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\PipelineToolContext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.PipelineToolStatus">
+    <Position X="4.5" Y="14.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\PipelineToolStatus.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.QueueingPipelineStartResult" Collapsed="true">
+    <Position X="53.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\QueueingPipelineStartResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.DefaultQueueingPipelineTool" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="52" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBIAAAIADAAEACAAABAgGANgAoIAAIAEIEAAAAAAAIA=</HashCode>
+      <FileName>taxonomy\pipeline\QueueingPipelineTool.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.QueueingPipelineTool&lt;TInputQueueEntity, TOutputQueueEntity, TConfiguration&gt;">
+    <Position X="29" Y="36.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>EBIAAAIADAAEACAAABAgGANgAoIAAIAEIEAgAAAAIIA=</HashCode>
+      <FileName>taxonomy\pipeline\QueueingPipelineTool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.QueueingPipelineTool&lt;TQueueEntity, TConfiguration&gt;">
+    <Position X="11" Y="34.25" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAIAAAAAACAAAAACGANAAgIAAIAEAAAgAAAAIIA=</HashCode>
+      <FileName>taxonomy\pipeline\QueueingPipelineTool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.QueueingPipelineToolbase&lt;TInputQueueEntity, TOutputQueueEntity, TPipelineToolConfiguration&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="55.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBIAAAIADAAEACAAABAgGANgAoIAAIAEIEAAAAAAAIA=</HashCode>
+      <FileName>taxonomy\pipeline\QueueingPipelineToolBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.QueueingPipelineToolBase&lt;TQueueEntity, TConfiguration&gt;">
+    <Position X="29" Y="29.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>EBIAAAIADAAEACAAABAiGANgAoIAAIAEIEAAAAAAAIA=</HashCode>
+      <FileName>taxonomy\pipeline\QueueingPipelineToolBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.QueueingPipelineToolBase&lt;TInputQueueEntity, TOutputQueueEntity, TQueueConfiguration&gt;">
+    <Position X="11" Y="27.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>EBIAAAIADAAEACAAABAgGANgAoIAAIAEIEAAAAAAAIA=</HashCode>
+      <FileName>taxonomy\pipeline\QueueingPipelineToolBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.pipeline.QueueingPipelineToolConfiguration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="57.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEACAAAAAAAQAAAIAAIAAAAAAEAAAgAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\QueueingPipelineToolConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.nouns.FlowchartDataSet" Collapsed="true">
+    <Position X="46.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\processdefinition\flowchart\grammar\nouns\FlowchartDataSet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.nouns.FlowchartDocument" Collapsed="true">
+    <Position X="48.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\processdefinition\flowchart\grammar\nouns\FlowchartDocument.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.nouns.FlowchartDocumentCollection" Collapsed="true">
+    <Position X="50.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\processdefinition\flowchart\grammar\nouns\FlowchartDocumentCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.nouns.ImmediateFlowchartProcess&lt;TSequenceNode, TConfiguration&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="57.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAgAAAAAABAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>taxonomy\processdefinition\flowchart\grammar\nouns\ImmediateFlowchartProcess.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.verbs.FlowchartDataSetProvider&lt;TProviderConfig, TProviderConfigResult&gt;">
+    <Position X="1.25" Y="35" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\processdefinition\flowchart\grammar\verbs\FlowchartDataSetProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.verbs.FlowchartOutputBinder" Collapsed="true">
+    <Position X="52" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\processdefinition\flowchart\grammar\verbs\FlowchartOutputBinder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.verbs.FlowchartTerminator&lt;TPipelineTool, TConfiguration&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="53.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAgAAAAAABAAAAAABAAAAAAAAAABAI=</HashCode>
+      <FileName>taxonomy\processdefinition\flowchart\grammar\verbs\FlowchartTerminator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.QueueingPipelineToolEntity" Collapsed="true">
+    <Position X="43.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEAAAAgAgAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\processdefinition\DefaultQueueingPipelineProcessDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.QueueingPipelineNodeEntity" Collapsed="true">
+    <Position X="46.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQJA=</HashCode>
+      <FileName>taxonomy\processdefinition\DefaultQueueingPipelineProcessDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.DefaultQueueingPipelineProcessDefinitionEntity" Collapsed="true">
+    <Position X="50.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAgAAAAAAAA=</HashCode>
+      <FileName>taxonomy\processdefinition\DefaultQueueingPipelineProcessDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.DefaultQueueingPipelineProcessDefinition" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="48.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>taxonomy\processdefinition\DefaultQueueingPipelineProcessDefinition.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.trigger.CalendarTrigger" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="48.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\trigger\CalendarTrigger.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.trigger.CronTrigger" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="52" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\trigger\CronTrigger.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.trigger.ImmediateTrigger" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="43.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\trigger\ImmediateTrigger.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.trigger.TimerTrigger" Collapsed="true">
+    <Position X="55.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\trigger\TimerTrigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.workflow.SequenceWorkflow&lt;TSequenceWorkflowConfiguration&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="46.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIADAAEACAAABAgEANgAIIAAIAEIEAAAAAAAIA=</HashCode>
+      <FileName>taxonomy\workflow\SequenceWorkflow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.workflow.WorkflowConfiguration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="43.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEACAAAAAAAQAAAIAAIAAAAAAEAAAgAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\workflow\WorkflowConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.workflow.WorkflowContext">
+    <Position X="21.75" Y="17.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\workflow\WorkflowContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.taxonomy.workflow.WorkflowStatus">
+    <Position X="1.5" Y="17" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\workflow\WorkflowStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.utility.extension.CloneExtensions" Collapsed="true">
+    <Position X="50.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>utility\extension\CloneExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.alfwm.core.utility.extension.LinqTreeExtension" Collapsed="true">
+    <Position X="45" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>utility\extension\LinqTreeExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.ataxlab.core.alfwm.utility.extension.SerializationExtension" Collapsed="true">
+    <Position X="48.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAEAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>utility\extension\SerializationExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="com.ataxlab.alfwm.core.deployment.IDeploymentContainer" Collapsed="true">
+    <Position X="46.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\deployment\IDeploymentContainer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.deployment.IDeploymentContainer&lt;TDeployment, TProcessDefinition&gt;">
+    <Position X="19" Y="30.5" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAgAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\deployment\IDeploymentContainer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.deployment.model.IDeployment&lt;TProcessDefinition, TDeploymentStatus&gt;" Collapsed="true">
+    <Position X="45" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAQAAAAAIAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>taxonomy\deployment\model\IDeployment.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.grammar.verbs.IPipelineDataSetProvider&lt;TPersistenceProviderConfig, TConfigureResult&gt;">
+    <Position X="36" Y="32.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>grammar\verbs\IPipelineDataSetProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.grammar.verbs.http.IHttpStrategy&lt;TResult, TParams&gt;" Collapsed="true">
+    <Position X="48.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIBAAAAAAAAACAEAQAAAAAAAAAAAAAg=</HashCode>
+      <FileName>grammar\verbs\http\IHttpStrategy.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.persistence.IPersistenceProvider&lt;TProviderConfiguration, TConfigureResult&gt;">
+    <Position X="36" Y="29.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAECAAAAAACAABAAAAAAAACAEAAAAAAACA=</HashCode>
+      <FileName>persistence\IPersistenceProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.persistence.IPipelineDataSet&lt;T&gt;" Collapsed="true">
+    <Position X="43.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>persistence\IPipelineDataSet.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.persistence.IPipelineDataSetConfigurations" Collapsed="true">
+    <Position X="45" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAIAAAAAAAAAEAAAAAAAAAEAAAA=</HashCode>
+      <FileName>persistence\IPipelineDataSetConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.persistence.IPipelineToolDataSet&lt;T&gt;" Collapsed="true">
+    <Position X="43.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>persistence\IPipelineToolDataSet.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.persistence.IPipelineToolDataSetConfiguration" Collapsed="true">
+    <Position X="45" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAIAAAAAAAAAEAAAAAAAAAEAAAA=</HashCode>
+      <FileName>persistence\IPipelineToolDataSetConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.scheduler.IScheduler" Collapsed="true">
+    <Position X="43.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAACQYoCgAAAAQIAQQCABCQoEAABAwBAAACCIgA=</HashCode>
+      <FileName>scheduler\IScheduler.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.IDefaultQueueingChannelPipelineGateway">
+    <Position X="18.25" Y="37.5" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\DefaultQueueingChannelPipelineGateway.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.IDefaultQueueingChannelPipelineGateway&lt;TInputEntity, TOutputEntity&gt;">
+    <Position X="18.25" Y="34.5" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAQAAAAAAAAAAAAAAAAgAACAAAAAAAAAAAg=</HashCode>
+      <FileName>taxonomy\binding\queue\DefaultQueueingChannelPipelineGateway.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.IDefaultQueueingChannelPipelineToolGateway">
+    <Position X="33.25" Y="18.5" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\DefaultQueueingChannelPipelineToolGateway.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.IQueueingChannelPipelineToolGateway&lt;TInputEntity, TOutputEntity&gt;">
+    <Position X="33.25" Y="15.5" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAQAAAAAAAAAAAAAAAAgAACAAAAAAAAAAAg=</HashCode>
+      <FileName>taxonomy\binding\queue\DefaultQueueingChannelPipelineToolGateway.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.IQueueConsumerPipelineBinding&lt;TQueueEntity&gt;">
+    <Position X="26.5" Y="11.25" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAIAAAAAAAACAAAAAAAAAAAACAIAAEgAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\IQueueConsumerPipelineBinding.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.IQueueConsumerPipelineToolBinding&lt;TQueueEntity&gt;">
+    <Position X="19.5" Y="26.25" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAIAAAAAAAACAAAAAAAAAAAACAIAAEgAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\IQueueConsumerPipelineToolBinding.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.IQueueProducerPipelineBinding&lt;TQueueEntity&gt;">
+    <Position X="34.75" Y="11.25" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAgAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\IQueueProducerPipelineBinding.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.IQueueProducerPipelineToolBinding&lt;TQueueEntity&gt;">
+    <Position X="27.75" Y="26.25" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAgAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\IQueueProducerPipelineToolBinding.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.IQueueingPipelineQueueEntity&lt;TEntity&gt;" Collapsed="true">
+    <Position X="53.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\QueueingPipelineQueueEntity.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.IPipelineBinding">
+    <Position X="31.75" Y="9.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\IPipelineBinding.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.IPipelineBinding&lt;TDTO&gt;" Collapsed="true">
+    <Position X="52" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAEACAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\IPipelineBinding.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.IPipelineToolBinding">
+    <Position X="24.75" Y="24.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\IPipelineToolBinding.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.IPipelineToolBinding&lt;TDTO&gt;" Collapsed="true">
+    <Position X="52" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAQAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\IPipelineToolBinding.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.IPipelineVariable&lt;T, TItems, TParent&gt;" Collapsed="true">
+    <Position X="50.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEACAAAAggAQAAAAQAAAAAAAAAAAAAAABAAQEAAA=</HashCode>
+      <FileName>taxonomy\binding\IPipelineVariable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.binding.IPipelineVariable&lt;TPayload&gt;" Collapsed="true">
+    <Position X="48.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEACAAAAgiAQAAABQAAAAAAAAAAAAAAABAAQEAAA=</HashCode>
+      <FileName>taxonomy\binding\IPipelineVariable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.managers.pipeline.queueing.IDefaultQueueingPipelineNodePipelineManager">
+    <Position X="18.5" Y="32.75" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\managers\pipeline\queueing\IQueueingPipelineNodePipelineManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.managers.workflow.IWorkflowManager" Collapsed="true">
+    <Position X="48.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAASAAAAAAAAAAAEAAAAAAAAAAASAEAAA=</HashCode>
+      <FileName>taxonomy\managers\workflow\IWorkflowManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.queueing.IDefaultQueueingPipeline">
+    <Position X="1.5" Y="25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>EAIAAABAABAAAAAAAAAAAAAFAAAgAASAgAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\queueing\IDefaultQueueingPipeline.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.queueing.IQueueingPipeline&lt;TProcessDefinition, TPipelineNode&gt;">
+    <Position X="9.75" Y="25" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\queueing\IDefaultQueueingPipeline.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.queueing.IDefaultQueueingPipelineNode">
+    <Position X="23.75" Y="19.5" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAQAAAAAAAAEIAQAAAAAAAAIA=</HashCode>
+      <FileName>taxonomy\pipeline\queueing\IDefaultQueueingPipelineNode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.queueing.IQueueingPipelineNode&lt;TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity&gt;">
+    <Position X="19.5" Y="22.25" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAIAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\queueing\IDefaultQueueingPipelineNode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.queueing.IQueueingPipelineNode&lt;TPipelineTool, TPipelineToolConfiguration&gt;">
+    <Position X="27.75" Y="22.25" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\queueing\IDefaultQueueingPipelineNode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IDefaultQueueingPipelineProcessDefinition" Collapsed="true">
+    <Position X="43.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IDefaultQueueingPipelineProcessDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipeline" Collapsed="true">
+    <Position X="50.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipeline.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipeline&lt;TProcessDefinition&gt;">
+    <Position X="6.75" Y="19.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACQIIAgAAAAAAIQACAACAgAgAAAgEAQICAAIA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipeline.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineObsolete" Collapsed="true">
+    <Position X="46.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAQqIAAAAAAAAAQACQACAgAAAAogAAAAAAQAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipeline.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineCompletionStatus">
+    <Position X="25.75" Y="7.25" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipelineCompletionStatus.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineConfiguration" Collapsed="true">
+    <Position X="53.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipelineConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineConfiguration&lt;TConfiguration&gt;" Collapsed="true">
+    <Position X="55.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAIAAAAAAAAAEAAAAAAAAAEAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipelineConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineContext" Collapsed="true">
+    <Position X="57.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAAEAAAACAAAAAAAAAAQAAAAAAAAgAAEAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipelineContext.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineProgressUpdatedStatus">
+    <Position X="19.5" Y="7.25" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipelineProgressUpdatedStatus.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineStatus" Collapsed="true">
+    <Position X="50.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipelineStatus.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineStatus&lt;T&gt;" Collapsed="true">
+    <Position X="48.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipelineStatus.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineTool&lt;TConfiguration&gt;">
+    <Position X="4.5" Y="5.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIADAAEACAAABAgEANgAIIAAIAEIEAAAAAAAIA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipelineTool.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineToolConfiguration" Collapsed="true">
+    <Position X="55.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipelineToolConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineToolConfiguration&lt;TConfiguration&gt;" Collapsed="true">
+    <Position X="53.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEACAAAAAAAQAAAIAAIAAAAAAEAAAgAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipelineToolConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineToolContext" Collapsed="true">
+    <Position X="57.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAAAAAAACAAAAAAAAAAwAAAAAAAAgAAEAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipelineToolContext.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineToolStatus">
+    <Position X="22.5" Y="5.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipelineToolStatus.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineToolStatus&lt;T&gt;" Collapsed="true">
+    <Position X="46.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipelineToolStatus.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IPipelineVariableScope&lt;TPipelineVariables&gt;" Collapsed="true">
+    <Position X="52" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IPipelineVariableScope.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IQueueingPipelineTool&lt;TLatchingInputBinding, TOutputBinding, TQueueEntity, TConfiguration&gt;">
+    <Position X="11.75" Y="6.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>EBIAAAAAAAAAAAAAAAAACAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IQueueingPipelineTool.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IQueueingPipelineTool&lt;TInputEntity, TOutputEntity&gt;" Collapsed="true">
+    <Position X="55.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBIAAAAAAAAAAAAAAAAACAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IQueueingPipelineTool.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IQueueingPipelineTool">
+    <Position X="12" Y="11" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>EBIAAAAAAAAAAAAAAAAACAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IQueueingPipelineTool.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IQueueingPipelineTool&lt;TLatchingInputBinding, TLatchingOutputBinding, TInputQueueEntity, TOutputQueueEntity, TConfiguration&gt;" Collapsed="true">
+    <Position X="57.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBIAAAAAAAAAAAAAAAAACAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IQueueingPipelineTool.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IStartResult" Collapsed="true">
+    <Position X="45" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\IStartResult.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.pipeline.IDefaultQueueingPipelineTool">
+    <Position X="4.5" Y="12.25" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\pipeline\QueueingPipelineTool.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.verbs.IFlowchartBinaryPredicateSequenceNode&lt;TLeftInput, TRightInput, TConfiguration&gt;">
+    <Position X="2" Y="3.25" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\processdefinition\flowchart\grammar\verbs\IFlowchartBinaryPredicateSequenceNode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.verbs.IFlowchartChooseOnePredicateSequenceNode&lt;TInput, TSelectedItem, TInputNodes, TOutputNode, TFlowchartNode, TConfiguration&gt;">
+    <Position X="10.25" Y="3.25" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAABAACAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\processdefinition\flowchart\grammar\verbs\IFlowchartChooseOnePredicateSequenceNode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.verbs.IFlowchartMergeNode&lt;TFlowchartNode, TConfiguration&gt;">
+    <Position X="18.5" Y="3.25" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAABAA=</HashCode>
+      <FileName>taxonomy\processdefinition\flowchart\grammar\verbs\IFlowchartMergeNode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.verbs.IFlowchartSequenceNode&lt;TFlowchartNode, TNodeConfiguration&gt;">
+    <Position X="10.25" Y="0.5" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAgAAAAAABAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>taxonomy\processdefinition\flowchart\grammar\verbs\IFlowchartSequenceNode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.ataxlab.alfwm.core.taxonomy.trigger.ITrigger" Collapsed="true">
+    <Position X="46.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\trigger\ITrigger.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="com.ataxlab.alfwm.core.grammar.verbs.http.HttpStrategyRequestMethod" Collapsed="true">
+    <Position X="46.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIBAAAAAAAAACAEAQAAAAAAAAAAAAAg=</HashCode>
+      <FileName>grammar\verbs\http\HttpStrategyRequestMessage.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.routing.QueueingPipelineRoutingSlipDestination" Collapsed="true">
+    <Position X="48.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\routing\QueueingPipelineQueueEntityRoutingSlip.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="com.ataxlab.alfwm.core.taxonomy.binding.queue.DefaultQueueingChannelGatewaySwitchConfigurationFault" Collapsed="true">
+    <Position X="43.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\binding\queue\DefaultQueueingChannelPipelineToolGateway.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="com.ataxlab.alfwm.core.taxonomy.pipeline.queueing.DefaultQueueingPipelineNodeTypeEnum" Collapsed="true">
+    <Position X="45" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgABAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>taxonomy\pipeline\queueing\IDefaultQueueingPipelineNode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="com.ataxlab.alfwm.core.taxonomy.processdefinition.flowchart.grammar.verbs.EvaluateFlowchartNode" Collapsed="true">
+    <Position X="43.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>taxonomy\processdefinition\flowchart\grammar\verbs\IFlowchartSequenceNode.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
