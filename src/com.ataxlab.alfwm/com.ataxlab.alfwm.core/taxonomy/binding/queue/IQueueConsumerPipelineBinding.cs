@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using System.Timers;
 
 namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 {
@@ -40,7 +41,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         ///
         /// presumably you configure the timer cancels firing during processing of a tuple
         /// </summary>
-        System.Timers.Timer ConsumerPollingTimer { get; set; }
+        Timer ConsumerPollingTimer { get; set; }
 
         /// <summary>
         /// called when the queue poller determines (via Peek not DeQueue)

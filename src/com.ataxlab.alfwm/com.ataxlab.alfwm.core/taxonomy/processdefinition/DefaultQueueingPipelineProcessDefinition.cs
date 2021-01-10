@@ -88,45 +88,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
         }
     }
 
-
-    public class QueueingPipelineProcessDefinitionEx<TPipelineTool, TPipelineToolConfiguration, TLatchingInputBinding, TLatchingOutputBinding, TInputEntity, TOutputEntity>
-    : IQueueingPipelineProcessDefinition<TPipelineTool,
-                                                    TLatchingInputBinding, TLatchingOutputBinding, TPipelineToolConfiguration, TInputEntity, TOutputEntity>
-    //where TPipelineToolConfiguration : class, new()
-    //where TPipelineToolConfiguration : class, IPipelineToolConfiguration, new()
-    // where TInputEntity : class, IPipelineToolConfiguration, new()
-    // where TOutputEntity : class, IPipelineToolConfiguration, new()
-    // where TPipelineTool : class,  new()
-    // where TLatchingInputBinding : class, new() // class, IQueueConsumerPipelineToolBinding<QueueingPipelineQueueEntity<TInputEntity>>, new()
-     // where TLatchingOutputBinding : class, new() // class, IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<TOutputEntity>>, new()
-    {
-        public string Id {get; set; }
-        public LinkedList<TPipelineTool> PipelineTools {get; set; }
-        public LinkedList<IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity>> PipelineToolChain {get; set; }
-
-        public LinkedList<QueueingPipelineToolNode> QueueingPipelineNodes { get; set; }
-
-        public string AddAfter(string nodeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string AddFirstNode(TPipelineTool node)
-        {
-            int i = 0;
-            return "";
-        }
-
-        public string AddLastNode(TPipelineTool node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Bind(string node1Id, string node2Id)
-        {
-            throw new NotImplementedException();
-        }
-    }
     /// <summary>
     /// a dictionary of specialized IPipelineTools
     /// </summary>
@@ -137,56 +98,19 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 
         public DefaultQueueingPipelineProcessDefinition()
         {
-            PipelineToolChain = new ConcurrentDictionary<string, IQueueingPipelineToolNode>();
-            QueueingPipelineNodes = new LinkedList<QueueingPipelineToolNode>();
+            PipelineToolChain = new ConcurrentDictionary<string, IDefaultQueueingPipelineNode>();
+            QueueingPipelineNodes = new LinkedList<DefaultQueueingPipelineToolNode>();
             PipelineTools = new LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration>>();
         }
         public string Id { get; set; }
 
         [XmlIgnoreAttribute]
-        public ConcurrentDictionary<string, IQueueingPipelineToolNode> PipelineToolChain { get; set; }
-        public LinkedList<QueueingPipelineToolNode> QueueingPipelineNodes { get; set; }
+        public ConcurrentDictionary<string, IDefaultQueueingPipelineNode> PipelineToolChain { get; set; }
+        public LinkedList<DefaultQueueingPipelineToolNode> QueueingPipelineNodes { get; set; }
 
         [XmlIgnoreAttribute]
         public LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration>> PipelineTools { get; set; }
 
     }
 
-    /// <summary>
-    /// Queue Process Definition implememted as a linked list
-    /// of IQueueingPipelineNodes, where each node has an IPipelineTool
-    /// and an Input binding and an Output binding
-    /// </summary>
-    /// <typeparam name="TPipelineTool"></typeparam>
-    /// <typeparam name="TLatchingInputBinding"></typeparam>
-    /// <typeparam name="TOutputBinding"></typeparam>
-    /// <typeparam name="TPipelineToolConfiguration"></typeparam>
-    /// <typeparam name="TInputEntity"></typeparam>
-    /// <typeparam name="TOutputEntity"></typeparam>
-    public class QueueingPipelineProcessDefinition<TPipelineNode>
-        : IQueueingPipelineProcessDefinition<TPipelineNode>
-        where TPipelineNode : QueueingPipelineNode<
-                            IQueueingPipelineTool<
-                                                    PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
-                                                    PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>,
-                                                    IPipelineToolConfiguration,
-                                                    IPipelineToolConfiguration,
-                                                    IPipelineToolConfiguration
-                                                  >
-                                        >
-    {
-        public QueueingPipelineProcessDefinition()
-        {
-            this.PipelineTools = new LinkedList<TPipelineNode>();
-            this.Id = Guid.NewGuid().ToString();
-        }
-
-        public string Id { get; set;}
-        public LinkedList<TPipelineNode> PipelineTools { get; set;}
-
-        public bool Bind(string node1Id, string node2Id)
-        {
-            return false;
-        }
-    }
 }

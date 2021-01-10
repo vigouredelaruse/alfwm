@@ -4,6 +4,7 @@ using com.ataxlab.alfwm.core.taxonomy.processdefinition;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -49,6 +50,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
         public IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
 
         public IDefaultQueueingPipelineProcessDefinition ProcessDefinition { get; set; }
+        public ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingPipelineInputs {get; set; }
+        public ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingPipelineOutputs {get; set; }
 
         public event EventHandler<PipelineStartedEventArgs> PipelineStarted;
         public event EventHandler<PipelineProgressUpdatedEventArgs> PipelineProgressUpdated;
@@ -77,7 +80,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
                     // instantiate the node
                     // TODO engineer management of Ids upon and after instantiation
                     Type t = Type.GetType(node.ClassName);
-                    var newNode = (QueueingPipelineToolNode)Activator.CreateInstance(t);
+                    var newNode = (DefaultQueueingPipelineToolNode)Activator.CreateInstance(t);
 
                     // instantiate the pipeline tool
                     Type tTool = Type.GetType(node.QueueingPipelineTool.QueueingPipelineToolClassName);
@@ -141,7 +144,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        public bool AddLastPipelineNode(QueueingPipelineToolNode newNode)
+        public bool AddLastPipelineNode(DefaultQueueingPipelineToolNode newNode)
         {
             EnsurePipelineToolListeners(newNode);
 
@@ -154,7 +157,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
         /// wire the pipeline to the added tool's events
         /// </summary>
         /// <param name="newNode"></param>
-        public void EnsurePipelineToolListeners(QueueingPipelineToolNode newNode)
+        public void EnsurePipelineToolListeners(DefaultQueueingPipelineToolNode newNode)
         {
             newNode.QueueingPipelineTool.PipelineToolStarted += QueueingPipelineTool_PipelineToolStarted;
             newNode.QueueingPipelineTool.PipelineToolCompleted += QueueingPipelineTool_PipelineToolCompleted;
@@ -184,7 +187,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
             PipelineProgressUpdated?.Invoke(sender, new PipelineProgressUpdatedEventArgs() { ToolStartedEvent = e });
         }
 
-        public bool AddFirstPipelineNode(QueueingPipelineToolNode newNode)
+        public bool AddFirstPipelineNode(DefaultQueueingPipelineToolNode newNode)
         {
             EnsurePipelineToolListeners(newNode);
             ProcessDefinition.QueueingPipelineNodes.AddFirst(newNode);
@@ -194,12 +197,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
 
 
 
-        public bool AddAfterPipelineNode(int pipelineNodeIndex, QueueingPipelineToolNode newNode)
+        public bool AddAfterPipelineNode(int pipelineNodeIndex, DefaultQueueingPipelineToolNode newNode)
         {
 
             EnsurePipelineToolListeners(newNode);
             // find the node by its id
-            QueueingPipelineToolNode targetNode = ProcessDefinition.QueueingPipelineNodes.Skip(pipelineNodeIndex).Take(1).FirstOrDefault();
+            DefaultQueueingPipelineToolNode targetNode = ProcessDefinition.QueueingPipelineNodes.Skip(pipelineNodeIndex).Take(1).FirstOrDefault();
 
             if (targetNode != null)
             {

@@ -7,20 +7,37 @@ using System.Text;
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
 {
     /// <summary>
+    /// enforce a process definition schema
+    /// that at a minimum can only be of 1 kind at a time
+    /// </summary>
+    public enum DefaultQueueingPipelineNodeTypeEnum
+    {
+        IsPipelineNode,
+        IsPipelineNodeGatewayNode,
+        IsPipelineToolNode,
+        IsPipelineToolGatewayNode
+    }
+
+    /// <summary>
     /// abstract and normalize the payload of the 
     /// queueing pipeline collection
     /// </summary>
-    public interface IQueueingPipelineToolNode
+    public interface IDefaultQueueingPipelineNode
     {
         string QueueingPipelineNodeId { get; set; }
 
+        DefaultQueueingPipelineNodeTypeEnum QueueingPipelineNodeType { get; set; }
+
         IDefaultQueueingPipelineTool QueueingPipelineTool { get; set; }
 
+        IDefaultQueueingPipeline QueueingPipeline { get; set; }
 
+        IDefaultQueueingChannelPipelineToolGateway QueueingPipelineToolGateway { get; set; }
 
+        IDefaultQueueingChannelPipelineGateway QueueingPipelineGateway { get; set; }
     }
 
-    public interface IQueueingPipelineNode<TPipelineTool> : IQueueingPipelineToolNode
+    public interface IQueueingPipelineNode<TPipelineTool> : IDefaultQueueingPipelineNode
     {
         new TPipelineTool PipelineTool { get; set; }
 
@@ -32,14 +49,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
     /// </summary>
     /// <typeparam name="TPipelineTool"></typeparam>
     /// <typeparam name="TPipelineToolConfiguration"></typeparam>
-    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration> : IQueueingPipelineToolNode
+    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration> : IDefaultQueueingPipelineNode
          where TPipelineToolConfiguration : class, new()
     {
         new TPipelineTool PipelineTool { get; set; }
 
     }
 
-    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity> : IQueueingPipelineToolNode
+    public interface IQueueingPipelineNode<TPipelineTool, TPipelineToolConfiguration, TInputEntity, TOutputEntity> : IDefaultQueueingPipelineNode
 
     //where TPipelineToolConfiguration : class, new()
     //where TOutputEntity : class, new()

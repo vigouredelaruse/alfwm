@@ -5,6 +5,7 @@ using Newtonsoft.Json.Schema.Generation;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
@@ -15,15 +16,22 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
     /// </summary>
     public interface IDefaultQueueingPipeline : IPipeline<IDefaultQueueingPipelineProcessDefinition>
     {
+        #region pipeline toolchain input
         PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
         IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
+        #endregion pipeline toolchain input
 
-        bool AddAfterPipelineNode(int pipelineNodeIndex, QueueingPipelineToolNode newNode);
-        bool AddFirstPipelineNode(QueueingPipelineToolNode newNode);
-        bool AddLastPipelineNode(QueueingPipelineToolNode newNode);
+        #region pipeline interconnects
+        ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingPipelineInputs { get; set; }
+        ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingPipelineOutputs { get; set; }
+        #endregion pipeline interconnects
+
+        bool AddAfterPipelineNode(int pipelineNodeIndex, DefaultQueueingPipelineToolNode newNode);
+        bool AddFirstPipelineNode(DefaultQueueingPipelineToolNode newNode);
+        bool AddLastPipelineNode(DefaultQueueingPipelineToolNode newNode);
         void Deploy(DefaultQueueingPipelineProcessDefiniionEntity processDefinition);
         void EnsurePipelineIngressEgressBindings();
-        void EnsurePipelineToolListeners(QueueingPipelineToolNode newNode);
+        void EnsurePipelineToolListeners(DefaultQueueingPipelineToolNode newNode);
     }
 
     public interface IQueueingPipeline<TProcessDefinition, TPipelineNode> : IPipeline<TProcessDefinition>

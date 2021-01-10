@@ -1,5 +1,4 @@
-﻿using com.ataxlab.alfwm.core.taxonomy.binding.queue;
-using com.ataxlab.alfwm.core.taxonomy.pipeline;
+﻿using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -7,23 +6,28 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Text;
 
-namespace com.ataxlab.alfwm.core.taxonomy.binding
+namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 {
-    public interface IDefaultQueueingChannelGateway : IQueueingChannelGateway<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>>
+    /// <summary>
+    /// specify a gateway that interfaces pipelinetools
+    /// </summary>
+    public interface IDefaultQueueingChannelPipelineToolGateway : 
+        IQueueingChannelPipelineToolGateway<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, 
+            QueueingPipelineQueueEntity<IPipelineToolConfiguration>>
     {
-        DefaultQueueingChannelGatewayContext GatewayContext { get; set; }
+        DefaultQueueingChannelPipelineToolGatewayContext GatewayContext { get; set; }
     }
 
-    public interface IQueueingChannelGateway<TInputEntity, TOutputEntity>
+    public interface IQueueingChannelPipelineToolGateway<TInputEntity, TOutputEntity>
     {
-        String Id { get; set; }
+        string Id { get; set; }
         ObservableCollection<PipelineToolQueueingConsumerChannel<TOutputEntity>> OutputPorts { get; set; }
 
         ObservableCollection<PipelineToolQueueingProducerChannel<TOutputEntity>> InputPorts { get; set; }
 
-        void HandleInputPortsCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs e);
+        void HandleInputPortsCollectionChanged(NotifyCollectionChangedEventArgs e);
 
-        void HandleOutputPortsCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs e);
+        void HandleOutputPortsCollectionChanged(NotifyCollectionChangedEventArgs e);
     }
 
 
@@ -41,15 +45,15 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
     /// <summary>
     /// the gateway needs information about its environment
     /// </summary>
-    public class DefaultQueueingChannelGatewayContext
+    public class DefaultQueueingChannelPipelineToolGatewayContext
     {
-        public DefaultQueueingChannelGatewayContext()
+        public DefaultQueueingChannelPipelineToolGatewayContext()
         {
 
         }
 
-        public Int64 MessageCount { get; set; }
-        public String CurrentPipelineId { get; set; }
+        public long MessageCount { get; set; }
+        public string CurrentPipelineId { get; set; }
     }
 
     /// <summary>
@@ -57,13 +61,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
     /// 
     /// applies seperation of routing and message delivery concerns
     /// </summary>
-    public class DefaultQueueingChannelGateway : IDefaultQueueingChannelGateway
+    public class DefaultQueueingChannelPipelineToolGateway : IDefaultQueueingChannelPipelineToolGateway
     {
-        public DefaultQueueingChannelGateway()
+        public DefaultQueueingChannelPipelineToolGateway()
         {
 
             Id = Guid.NewGuid().ToString();
-            GatewayContext = new DefaultQueueingChannelGatewayContext();
+            GatewayContext = new DefaultQueueingChannelPipelineToolGatewayContext();
 
             OutputPorts = new ObservableCollection<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
             InputPorts = new ObservableCollection<PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
@@ -76,9 +80,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         /// the preferred constructor
         /// </summary>
         /// <param name="ctx"></param>
-        public DefaultQueueingChannelGateway(DefaultQueueingChannelGatewayContext ctx) :base()
+        public DefaultQueueingChannelPipelineToolGateway(DefaultQueueingChannelPipelineToolGatewayContext ctx) : base()
         {
-            this.GatewayContext = ctx;
+            GatewayContext = ctx;
         }
 
         /// <summary>
@@ -103,9 +107,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
 
         private void HandleSwitching(QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
         {
-            foreach (var channel in this.OutputPorts)
+            foreach (var channel in OutputPorts)
             {
-                
+
             }
         }
 
@@ -126,27 +130,27 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         /// <param name="e"></param>
         private void ConsumerQueueingChannelGateway_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
         {
-            
+
         }
 
 
-        private void InputPorts_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void InputPorts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             HandleInputPortsCollectionChanged(e);
         }
 
-        private void OutputPorts_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void OutputPorts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             HandleOutputPortsCollectionChanged(e);
         }
 
         public ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> DeadLetters { get; set; }
-        public String Id { get; set; }
+        public string Id { get; set; }
 
         public ObservableCollection<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> OutputPorts { get; set; }
 
         public ObservableCollection<PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> InputPorts { get; set; }
-        public DefaultQueueingChannelGatewayContext GatewayContext { get; set; }
+        public DefaultQueueingChannelPipelineToolGatewayContext GatewayContext { get; set; }
 
         public event EventHandler<DefaultQueueingChannelGatewaySwitchConfigurationFaultArgs> SwitchConfigurationFaultEvent;
 
@@ -154,10 +158,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         {
             switch (e.Action)
             {
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                case NotifyCollectionChangedAction.Add:
                     {
                         // listen to queue arrival events
-                        foreach(var item in e.NewItems)
+                        foreach (var item in e.NewItems)
                         {
                             ((PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += ProducerQueueingChannelGateway_QueueHasData;
                         }
@@ -165,12 +169,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
                         break;
                     }
 
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                case NotifyCollectionChangedAction.Remove:
                     {
                         break;
                     }
 
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                case NotifyCollectionChangedAction.Replace:
                     {
 
                         // unlisten to queue arrival events
@@ -188,12 +192,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
                         break;
                     }
 
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                case NotifyCollectionChangedAction.Reset:
                     {
                         break;
                     }
 
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+                case NotifyCollectionChangedAction.Move:
                     {
                         break;
                     }
@@ -210,7 +214,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         {
             switch (e.Action)
             {
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                case NotifyCollectionChangedAction.Add:
                     {
 
                         // listen to queue arrival events
@@ -221,22 +225,22 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
                         break;
                     }
 
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                case NotifyCollectionChangedAction.Remove:
                     {
                         break;
                     }
 
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                case NotifyCollectionChangedAction.Replace:
                     {
                         break;
                     }
 
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                case NotifyCollectionChangedAction.Reset:
                     {
                         break;
                     }
 
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+                case NotifyCollectionChangedAction.Move:
                     {
                         break;
                     }

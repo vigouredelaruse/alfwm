@@ -12,7 +12,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
     {
         string Id { get; set; }
 
-        LinkedList<QueueingPipelineToolNode> QueueingPipelineNodes { get; set; }
+        LinkedList<DefaultQueueingPipelineToolNode> QueueingPipelineNodes { get; set; }
 
 
     }
