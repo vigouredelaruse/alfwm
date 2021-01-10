@@ -64,7 +64,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
         /// TODO instrument the result, perhaps via deployment error events
         /// </summary>
         /// <param name="processDefinition"></param>
-        public void Deploy(DefaultQueueingPipelineProcessDefiniionEntity processDefinition)
+        public void Deploy(DefaultQueueingPipelineProcessDefinitionEntity processDefinition)
         {
             // clear the process definition
             // TODO - stop the tools first

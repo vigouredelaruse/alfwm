@@ -143,7 +143,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             Exception bindEx = null;
 
 
-            var processDefinition = new DefaultQueueingPipelineProcessDefiniionEntity();
+            var processDefinition = new DefaultQueueingPipelineProcessDefinitionEntity();
 
             try
             {
@@ -206,7 +206,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                 var processDefinitionXML = processDefinition.ToXml(); //.SerializeObject<DefaultQueueingPipelineProcessDefiniionEntity>();
 
                 // deserialize the process definition
-                var incarnateProcessDefinition = processDefinitionXML.DeSerializeObject<DefaultQueueingPipelineProcessDefiniionEntity>();
+                var incarnateProcessDefinition = processDefinitionXML.DeSerializeObject<DefaultQueueingPipelineProcessDefinitionEntity>();
 
                 // validate we materialized the pipelinevariables
 

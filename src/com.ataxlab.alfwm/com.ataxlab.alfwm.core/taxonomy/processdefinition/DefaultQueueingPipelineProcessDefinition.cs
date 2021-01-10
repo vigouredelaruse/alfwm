@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -70,9 +71,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 
     [XmlType("QueueingPipelineProcessDefinition")]
     [XmlInclude(typeof(QueueingPipelineNodeEntity))]
-    public class DefaultQueueingPipelineProcessDefiniionEntity
+    public class DefaultQueueingPipelineProcessDefinitionEntity
     {
-        public DefaultQueueingPipelineProcessDefiniionEntity()
+        public DefaultQueueingPipelineProcessDefinitionEntity()
         {
             QueueingPipelineNodes = new List<QueueingPipelineNodeEntity>();
         }
@@ -84,7 +85,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 
         public string ToXml()
         {
-            return this.SerializeObject<DefaultQueueingPipelineProcessDefiniionEntity>();
+            return this.SerializeObject<DefaultQueueingPipelineProcessDefinitionEntity>();
         }
     }
 
@@ -98,18 +99,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 
         public DefaultQueueingPipelineProcessDefinition()
         {
-            PipelineToolChain = new ConcurrentDictionary<string, IDefaultQueueingPipelineNode>();
+
             QueueingPipelineNodes = new LinkedList<DefaultQueueingPipelineToolNode>();
-            PipelineTools = new LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration>>();
         }
         public string Id { get; set; }
 
-        [XmlIgnoreAttribute]
-        public ConcurrentDictionary<string, IDefaultQueueingPipelineNode> PipelineToolChain { get; set; }
         public LinkedList<DefaultQueueingPipelineToolNode> QueueingPipelineNodes { get; set; }
-
-        [XmlIgnoreAttribute]
-        public LinkedList<QueueingPipelineToolBase<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, QueueingPipelineQueueEntity<IPipelineToolConfiguration>, IPipelineToolConfiguration>> PipelineTools { get; set; }
 
     }
 

@@ -29,7 +29,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
         bool AddAfterPipelineNode(int pipelineNodeIndex, DefaultQueueingPipelineToolNode newNode);
         bool AddFirstPipelineNode(DefaultQueueingPipelineToolNode newNode);
         bool AddLastPipelineNode(DefaultQueueingPipelineToolNode newNode);
-        void Deploy(DefaultQueueingPipelineProcessDefiniionEntity processDefinition);
+        void Deploy(DefaultQueueingPipelineProcessDefinitionEntity processDefinition);
         void EnsurePipelineIngressEgressBindings();
         void EnsurePipelineToolListeners(DefaultQueueingPipelineToolNode newNode);
     }
