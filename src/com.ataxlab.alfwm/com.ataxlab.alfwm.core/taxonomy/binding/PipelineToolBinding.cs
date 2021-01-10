@@ -17,6 +17,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         public virtual string PipelineToolBindingDisplayName { get; set; }
         public virtual string PipelineToolBindingKey { get; set; }
         public virtual PipelineVariableDictionary PipelineToolBindingValue { get; set; }
+        public string Id { get; set; }
     }
 
     public abstract class PipelineToolBinding<TDTO> : IPipelineToolBinding where TDTO : JObject
@@ -27,5 +28,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         public virtual string PipelineToolBindingDisplayName { get; set; }
         public virtual string PipelineToolBindingKey { get; set; }
         public virtual PipelineVariableDictionary PipelineToolBindingValue { get; set; }
+        public string Id { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Text;
 using System.Timers;
 
@@ -33,7 +34,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     }
 
 
-    public enum DefaultQueueingChannelGatewaySwitchConfigurationFault { CurrentPipelineNotSet }
+    public enum DefaultQueueingChannelGatewaySwitchConfigurationFault { CurrentPipelineNotSet, InputQueueEventArrivalHandlerException }
     public class DefaultQueueingChannelGatewaySwitchConfigurationFaultArgs : EventArgs
     {
         public DefaultQueueingChannelGatewaySwitchConfigurationFaultArgs()
@@ -42,6 +43,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         }
 
         public DefaultQueueingChannelGatewaySwitchConfigurationFault Fault { get; set; }
+        public Exception FaultException { get; set; }
     }
 
     /// <summary>
@@ -98,17 +100,37 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         /// <param name="e"></param>
         private void InputQueue_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
         {
-            // the gateway treats a null routingslip 
-            // as a deliver to nobody scenario, ergo deadletter
-            if (IsDeadLetter(e))
+            try
             {
-                GatewayContext.DeadLetterCount++;
-                HandleDeadLetter(e);
+                // the gateway treats a null routingslip 
+                // as a deliver to nobody scenario, ergo deadletter
+                if (IsDeadLetter(e))
+                {
+                    // dequeue the message
+                    var firingChannel = this.InputPorts.Where(w => w.Id.Equals(e.SourceChannelId)).FirstOrDefault();
+                    QueueingPipelineQueueEntity<IPipelineToolConfiguration> msg;
+                    firingChannel?.OutputQueue.TryDequeue(out msg);
+                    GatewayContext.DeadLetterCount++;
+                    HandleDeadLetter(e);
+                }
+                else
+                {
+                    // dequeue the message
+                    var firingChannel = this.InputPorts.Where(w => w.Id.Equals(e.SourceChannelId)).FirstOrDefault();
+                    QueueingPipelineQueueEntity<IPipelineToolConfiguration> msg;
+                    firingChannel?.OutputQueue.TryDequeue(out msg);
+                    GatewayContext.MessageCount++;
+                    HandleSwitching(e);
+                    int i = 0;
+                }
             }
-            else
+            catch(Exception ex)
             {
-                GatewayContext.MessageCount++;
-                HandleSwitching(e);
+                this.SwitchConfigurationFaultEvent?.Invoke(this, new DefaultQueueingChannelGatewaySwitchConfigurationFaultArgs()
+                {
+                    Fault = DefaultQueueingChannelGatewaySwitchConfigurationFault.InputQueueEventArrivalHandlerException,
+                    FaultException = ex
+                });
             }
         }
 

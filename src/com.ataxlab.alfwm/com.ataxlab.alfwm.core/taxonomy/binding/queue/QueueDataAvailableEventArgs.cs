@@ -17,5 +17,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 
         public TAvailableQueuePayload EventPayload { get; set; }
         public DateTime TimeStamp { get; internal set; }
+        public string SourceChannelId { get; internal set; }
     }
 }

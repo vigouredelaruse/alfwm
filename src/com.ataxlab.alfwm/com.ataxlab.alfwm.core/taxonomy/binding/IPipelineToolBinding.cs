@@ -12,6 +12,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         /// the base of another specification for
         /// ingress/egress
         /// </summary>
+        string Id { get; set; }
         string PipelineToolBindingDisplayName { get; set; }
         string PipelineToolBindingKey { get; set; }
         PipelineVariableDictionary PipelineToolBindingValue { get; set; }

@@ -24,6 +24,7 @@ using Windows.Storage.Streams;
 using com.ataxlab.core.alfwm.utility.extension;
 using com.ataxlab.alfwm.core.taxonomy.pipeline.queueing;
 using Windows.UI.WebUI;
+using com.ataxlab.alfwm.core.taxonomy.binding.queue.routing;
 
 namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 {
@@ -291,7 +292,32 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
                 Thread.Sleep(30000);
                 Assert.IsTrue(testGateway.DeadLetters.Count > 0, "gateway did not manage dead letter - entity has missing routing slip");
-                Assert.IsTrue(consumerChannel.InputQueue.Count > 0, "gateway did not egress input data");
+              
+                var routingSlipStep = new QueueingPipelineQueueEntityRoutingSlipStep()
+                {
+                    DestinationPipeline =
+                                    new Tuple<QueueingPipelineRoutingSlipDestination, string>(QueueingPipelineRoutingSlipDestination.Pipeline, Guid.NewGuid().ToString()),
+                    DestinationSlot = new Tuple<QueueingPipelineRoutingSlipDestination, int>(QueueingPipelineRoutingSlipDestination.PipelineSlot, 0)
+                };
+
+                var node = new LinkedListNode<QueueingPipelineQueueEntityRoutingSlipStep>(routingSlipStep);
+
+                QueueingPipelineQueueEntityRoutingSlip routingSlip = new QueueingPipelineQueueEntityRoutingSlip();
+                routingSlip.RoutingSteps.AddFirst(
+                       node
+                    );
+
+                // add the routingslip to the entity and enqueue it again
+                newEntity.RoutingSlip = routingSlip;
+                producerChannel.OutputQueue.Enqueue(newEntity);
+
+                Thread.Sleep(5000);
+                // expect the gateway state is 1 dead letter
+                Assert.IsTrue(PipelineToolGatewaySmokeTestDidFireQueueHasData == true, "gateway propagated enqueued entity");
+                Assert.IsTrue(testGateway.DeadLetters.Count == 1, "gateway did not manage dead letter - entity has required routing slip");
+
+
+                Assert.IsTrue(consumerChannel.InputQueue.Count == 0, "invalid gateway state - consumer channel queue should be dehydrated by event notification on a consumer channel");
 
             }
             catch (Exception ex)
@@ -304,10 +330,12 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
          }
 
         bool PipelineToolGatewaySmokeTestDidFireQueueHasData = false;
+        int PipelineToolGatewaySmokeTestDidFireQueueHasData_DequeuedMessages = 0;
 
         private void ConsumerChannel_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
         {
             PipelineToolGatewaySmokeTestDidFireQueueHasData = true;
+            PipelineToolGatewaySmokeTestDidFireQueueHasData_DequeuedMessages++;
         }
 
         /// <summary>

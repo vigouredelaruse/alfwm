@@ -33,6 +33,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
        
         public PipelineToolQueueingConsumerChannel() 
         {
+            this.Id = Guid.NewGuid().ToString();
             InputQueue = new ConcurrentQueue<TQueueEntity>();
             ConsumerPollingTimer = new System.Timers.Timer(DefaultPollingInterval);
             ConsumerPollingTimer.Elapsed += ConsumerPollingTimer_Elapsed;
@@ -96,6 +97,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         public string PipelineToolBindingDisplayName { get; set; }
         public string PipelineToolBindingKey { get; set; }
         public PipelineVariableDictionary PipelineToolBindingValue { get; set; }
+        public string Id {get; set; }
 
         public event EventHandler<QueueDataAvailableEventArgs<TQueueEntity>> QueueHasData;
 

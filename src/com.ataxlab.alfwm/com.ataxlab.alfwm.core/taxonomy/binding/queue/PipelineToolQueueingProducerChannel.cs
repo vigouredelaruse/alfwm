@@ -38,11 +38,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         public string PipelineToolBindingDisplayName {get; set;}
         public string PipelineToolBindingKey {get; set;}
         public PipelineVariableDictionary PipelineToolBindingValue {get; set;}
+        public string Id {get; set; }
 
         public event EventHandler<QueueDataAvailableEventArgs<TQueueEntity>> QueueHasData;
 
         public PipelineToolQueueingProducerChannel()
         {
+            this.Id = Guid.NewGuid().ToString();
+
             OutputQueue = new ConcurrentQueue<TQueueEntity>();
             ProducerPollingTimer = new System.Timers.Timer(DefaultPollingInterval);
             ProducerPollingTimer.Elapsed += ProducerPollingTimer_Elapsed;
@@ -98,7 +101,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
                 TQueueEntity newEntity = default(TQueueEntity);
                 this.OutputQueue.TryPeek(out newEntity);
 
-                QueueHasData?.Invoke(this, new QueueDataAvailableEventArgs<TQueueEntity>(newEntity));
+                QueueHasData?.Invoke(this, new QueueDataAvailableEventArgs<TQueueEntity>(newEntity)
+                {
+                    SourceChannelId = this.Id
+                });
             }
         }
 
