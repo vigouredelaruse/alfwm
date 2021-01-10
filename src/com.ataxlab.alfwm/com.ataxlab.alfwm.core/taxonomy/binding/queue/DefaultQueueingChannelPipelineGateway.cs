@@ -1,5 +1,6 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -15,6 +16,19 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
                                                 QueueingPipelineQueueEntity<IPipelineToolConfiguration>>
     {
         DefaultQueueingChannelPipelineGatewayContext GatewayContext { get; set; }
+        ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> DeadLetters { get; }
+    }
+
+    public interface IDefaultQueueingChannelPipelineGateway<TInputEntity, TOutputEntity>
+    {
+        string Id { get; set; }
+        ObservableCollection<PipelineQueueingConsumerChannel<TOutputEntity>> OutputPorts { get; set; }
+
+        ObservableCollection<PipelineQueueingProducerChannel<TOutputEntity>> InputPorts { get; set; }
+
+        void HandleInputPortsCollectionChanged(NotifyCollectionChangedEventArgs e);
+
+        void HandleOutputPortsCollectionChanged(NotifyCollectionChangedEventArgs e);
     }
 
     /// <summary>
@@ -30,15 +44,137 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         public long MessageCount { get; set; }
         public ObservableCollection<string> SeenPipelineIds { get; set; }
     }
-    public interface IDefaultQueueingChannelPipelineGateway<TInputEntity, TOutputEntity>
+
+    public class DefaultQueueingChannelPipelineGateway : IDefaultQueueingChannelPipelineGateway
     {
-        string Id { get; set; }
-        ObservableCollection<PipelineQueueingConsumerChannel<TOutputEntity>> OutputPorts { get; set; }
+        public DefaultQueueingChannelPipelineGateway()
+        {
+            Id = Guid.NewGuid().ToString();
+            GatewayContext = new DefaultQueueingChannelPipelineGatewayContext();
+            DeadLetters = new ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+            OutputPorts = new ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
+            InputPorts = new ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
 
-        ObservableCollection<PipelineQueueingProducerChannel<TOutputEntity>> InputPorts { get; set; }
+            OutputPorts.CollectionChanged += OutputPorts_CollectionChanged;
+            InputPorts.CollectionChanged += InputPorts_CollectionChanged;
+        }
 
-        void HandleInputPortsCollectionChanged(NotifyCollectionChangedEventArgs e);
+        private void InputPorts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            HandleInputPortsCollectionChanged(e);
+        }
 
-        void HandleOutputPortsCollectionChanged(NotifyCollectionChangedEventArgs e);
+        private void OutputPorts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            HandleOutputPortsCollectionChanged(e);
+        }
+
+        public DefaultQueueingChannelPipelineGatewayContext GatewayContext {get; set; }
+        public ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> DeadLetters { get; private set; }
+        public string Id {get; set; }
+        public ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> OutputPorts {get; set; }
+        public ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> InputPorts {get; set; }
+
+        public void HandleInputPortsCollectionChanged(NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    {
+                        // listen to queue arrival events
+                        foreach (var item in e.NewItems)
+                        {
+                            ((PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += InputQueue_QueueHasData;
+                        }
+
+                        break;
+                    }
+
+                case NotifyCollectionChangedAction.Remove:
+                    {
+                        break;
+                    }
+
+                case NotifyCollectionChangedAction.Replace:
+                    {
+
+                        // unlisten to queue arrival events
+                        foreach (var item in e.OldItems)
+                        {
+                            // todo remove listeners
+                        }
+
+                        // listen to queue arrival events
+                        foreach (var item in e.NewItems)
+                        {
+                            ((PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += InputQueue_QueueHasData;
+                        }
+
+                        break;
+                    }
+
+                case NotifyCollectionChangedAction.Reset:
+                    {
+                        break;
+                    }
+
+                case NotifyCollectionChangedAction.Move:
+                    {
+                        break;
+                    }
+
+                default:
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void InputQueue_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        {
+            // the gateway treats a null routingslip 
+            // as a deliver to nobody scenario, ergo deadletter
+            if (IsDeadLetter(e))
+            {
+                HandleDeadLetter(e);
+            }
+            else
+            {
+                GatewayContext.MessageCount++;
+                HandleSwitching(e);
+            }
+        }
+
+        /// <summary>
+        /// todo 
+        /// route discovery is a hard problem and is deferred to switch logic
+        /// for switching between pipelinegateways
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        private void HandleSwitching(QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        {
+            foreach (var channel in OutputPorts)
+            {
+                channel.InputQueue.Enqueue(e.EventPayload);
+            }
+        }
+
+        private void HandleDeadLetter(QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        {
+            DeadLetters.Enqueue(e.EventPayload);
+        }
+
+        public void HandleOutputPortsCollectionChanged(NotifyCollectionChangedEventArgs e)
+        {
+            // currently we don't really care about this as it's a downstream node concern
+            // if these queues are hydrated
+        }
+
+        private bool IsDeadLetter(QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        {
+            return e.EventPayload.RoutingSlip == null;
+        }
+
     }
 }

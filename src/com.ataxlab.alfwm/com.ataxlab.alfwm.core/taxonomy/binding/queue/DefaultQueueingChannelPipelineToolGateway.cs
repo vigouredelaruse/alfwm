@@ -16,6 +16,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
             QueueingPipelineQueueEntity<IPipelineToolConfiguration>>
     {
         DefaultQueueingChannelPipelineToolGatewayContext GatewayContext { get; set; }
+        ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> DeadLetters { get; set; }
     }
 
     public interface IQueueingChannelPipelineToolGateway<TInputEntity, TOutputEntity>
@@ -68,6 +69,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 
             Id = Guid.NewGuid().ToString();
             GatewayContext = new DefaultQueueingChannelPipelineToolGatewayContext();
+            DeadLetters = new ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
 
             OutputPorts = new ObservableCollection<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
             InputPorts = new ObservableCollection<PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
@@ -90,7 +92,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ProducerQueueingChannelGateway_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        private void InputQueue_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
         {
             // the gateway treats a null routingslip 
             // as a deliver to nobody scenario, ergo deadletter
@@ -109,7 +111,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         {
             foreach (var channel in OutputPorts)
             {
-
+                channel.InputQueue.Enqueue(e.EventPayload);
             }
         }
 
@@ -122,17 +124,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         {
             return e.EventPayload.RoutingSlip == null;
         }
-
-        /// <summary>
-        /// observe downstream queue
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ConsumerQueueingChannelGateway_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
-        {
-
-        }
-
 
         private void InputPorts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -163,7 +154,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
                         // listen to queue arrival events
                         foreach (var item in e.NewItems)
                         {
-                            ((PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += ProducerQueueingChannelGateway_QueueHasData;
+                            ((PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += InputQueue_QueueHasData;
                         }
 
                         break;
@@ -186,7 +177,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
                         // listen to queue arrival events
                         foreach (var item in e.NewItems)
                         {
-                            ((PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += ProducerQueueingChannelGateway_QueueHasData;
+                            ((PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += InputQueue_QueueHasData;
                         }
 
                         break;
@@ -210,6 +201,20 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         }
 
 
+        // maybe listen to queue arrival events
+        // but since we likely put that data there we don't really care
+        // and it's downstream which is the downstream node's concern
+        // we certainly don't want to dequeue anytyhing
+        ///// <summary>
+        ///// observe downstream queue
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void ConsumerQueueingChannelGateway_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        //{
+
+        //}
+
         public void HandleOutputPortsCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
@@ -217,11 +222,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
                 case NotifyCollectionChangedAction.Add:
                     {
 
-                        // listen to queue arrival events
-                        foreach (var item in e.NewItems)
-                        {
-                            ((PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += ConsumerQueueingChannelGateway_QueueHasData;
-                        }
+                        // maybe listen to queue arrival events
+                        // but since we likely put that data there we don't really care
+                        // and it's downstream which is the downstream node's concern
+                        // we certainly don't want to dequeue anytyhing
+                        //foreach (var item in e.NewItems)
+                        //{
+                        //    ((PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += ConsumerQueueingChannelGateway_QueueHasData;
+                        //}
                         break;
                     }
 
