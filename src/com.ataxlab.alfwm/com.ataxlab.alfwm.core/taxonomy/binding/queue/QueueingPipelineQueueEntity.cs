@@ -31,9 +31,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         where TEntity : IPipelineToolConfiguration
     {
 
-        public QueueingPipelineQueueEntity(TEntity payload) : base()
+        public QueueingPipelineQueueEntity(TEntity payload) : this()
         {
-            this.Id = Guid.NewGuid().ToString();
+
             this.Payload = payload;
         }
 

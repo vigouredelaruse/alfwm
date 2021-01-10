@@ -23,6 +23,7 @@ using Windows.Storage;
 using Windows.Storage.Streams;
 using com.ataxlab.core.alfwm.utility.extension;
 using com.ataxlab.alfwm.core.taxonomy.pipeline.queueing;
+using Windows.UI.WebUI;
 
 namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 {
@@ -259,6 +260,56 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
         #endregion queueing pipeline tests
         #region default queueing tool tests
+
+        /// <summary>
+        /// test 
+        /// </summary>
+        [TestMethod]
+        public void PipelineToolGatewaySmokeTest()
+        {
+            Exception e = null;
+            try
+            {
+                // gateway under test egresses entities from pipeline tools
+                DefaultQueueingChannelPipelineToolGateway testGateway =
+                    new DefaultQueueingChannelPipelineToolGateway(new DefaultQueueingChannelPipelineToolGatewayContext()
+                    { CurrentPipelineId = Guid.NewGuid().ToString() });
+
+                // create producer and consumer channels and wire them to the gateway
+                var producerChannel = new PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+                var consumerChannel = new PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+                testGateway.InputPorts.Add(producerChannel);
+                testGateway.OutputPorts.Add(consumerChannel);
+
+                consumerChannel.QueueHasData += ConsumerChannel_QueueHasData;
+
+                var newItem = this.GetNewQueueEntity(1);
+                // enqueue the item without a routing slip
+                // we expect this entity to appear on the dead letter queue
+                var newEntity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>(newItem);
+                producerChannel.OutputQueue.Enqueue(newEntity);
+
+                Thread.Sleep(30000);
+                Assert.IsTrue(testGateway.DeadLetters.Count > 0, "gateway did not manage dead letter - entity has missing routing slip");
+                Assert.IsTrue(consumerChannel.InputQueue.Count > 0, "gateway did not egress input data");
+
+            }
+            catch (Exception ex)
+            {
+                e = ex;
+            }
+
+            Assert.IsTrue(PipelineToolGatewaySmokeTestDidFireQueueHasData == true, "did not egress input entity");
+            Assert.IsTrue(e == null, "test threw exception " + e?.Message);
+         }
+
+        bool PipelineToolGatewaySmokeTestDidFireQueueHasData = false;
+
+        private void ConsumerChannel_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        {
+            PipelineToolGatewaySmokeTestDidFireQueueHasData = true;
+        }
+
         /// <summary>
         /// initialize a queueing pipeline tool
         /// post some messages to its input

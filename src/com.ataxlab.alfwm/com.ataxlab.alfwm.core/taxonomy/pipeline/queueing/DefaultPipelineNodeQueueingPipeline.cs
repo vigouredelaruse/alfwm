@@ -77,6 +77,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
 
                 foreach (var node in nodes)
                 {
+
                     // instantiate the node
                     // TODO engineer management of Ids upon and after instantiation
                     Type t = Type.GetType(node.ClassName);

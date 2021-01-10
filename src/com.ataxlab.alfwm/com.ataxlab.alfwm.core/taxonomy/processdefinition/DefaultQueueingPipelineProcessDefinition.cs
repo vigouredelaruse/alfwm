@@ -102,9 +102,15 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 
             QueueingPipelineNodes = new LinkedList<DefaultQueueingPipelineToolNode>();
         }
+
         public string Id { get; set; }
 
         public LinkedList<DefaultQueueingPipelineToolNode> QueueingPipelineNodes { get; set; }
+
+        /// <summary>
+        /// enforce the idea that the enum defines the applicable payload properties
+        /// </summary>
+        public LinkedList<Tuple<DefaultQueueingPipelineNodeTypeEnum, DefaultQueueingPipelineToolNode>> QueueingPipelineTuples { get; set; }
 
     }
 

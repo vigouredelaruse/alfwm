@@ -1,4 +1,5 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.binding.queue;
+using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -13,7 +14,23 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
     {
 
         private double DefaultPollingInterval = 50;
-        public bool IsQueuePollingEnabled { get; set; }
+
+        /// <summary>
+        /// this property mutates the behavoiur of the timer
+        /// </summary>
+        private bool _IsQueuePollingEnabled = false;
+        public bool IsQueuePollingEnabled 
+        { 
+            get
+            {
+                return _IsQueuePollingEnabled;
+            }
+            set
+            {
+                this._IsQueuePollingEnabled = value;
+                this.ProducerPollingTimer.Enabled = value;
+            }
+        }
         private int SyncPoint = 0;
 
         public virtual ConcurrentQueue<TQueueEntity> OutputQueue {get; set;}
@@ -31,6 +48,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
             ProducerPollingTimer.Elapsed += ProducerPollingTimer_Elapsed;
 
             IsQueuePollingEnabled = true;
+
         }
 
         public void Dispose()
@@ -77,7 +95,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         {
             if(OutputQueue.Count > 0)
             {
+                TQueueEntity newEntity = default(TQueueEntity);
+                this.OutputQueue.TryPeek(out newEntity);
 
+                QueueHasData?.Invoke(this, new QueueDataAvailableEventArgs<TQueueEntity>(newEntity));
             }
         }
 

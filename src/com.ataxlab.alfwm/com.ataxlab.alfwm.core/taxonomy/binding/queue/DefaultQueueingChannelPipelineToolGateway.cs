@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Text;
+using System.Timers;
 
 namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 {
@@ -55,6 +56,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 
         public long MessageCount { get; set; }
         public string CurrentPipelineId { get; set; }
+        public int DeadLetterCount { get; internal set; }
     }
 
     /// <summary>
@@ -76,13 +78,15 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 
             OutputPorts.CollectionChanged += OutputPorts_CollectionChanged;
             InputPorts.CollectionChanged += InputPorts_CollectionChanged;
+
+            
         }
 
         /// <summary>
         /// the preferred constructor
         /// </summary>
         /// <param name="ctx"></param>
-        public DefaultQueueingChannelPipelineToolGateway(DefaultQueueingChannelPipelineToolGatewayContext ctx) : base()
+        public DefaultQueueingChannelPipelineToolGateway(DefaultQueueingChannelPipelineToolGatewayContext ctx) : this()
         {
             GatewayContext = ctx;
         }
@@ -98,6 +102,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
             // as a deliver to nobody scenario, ergo deadletter
             if (IsDeadLetter(e))
             {
+                GatewayContext.DeadLetterCount++;
                 HandleDeadLetter(e);
             }
             else
