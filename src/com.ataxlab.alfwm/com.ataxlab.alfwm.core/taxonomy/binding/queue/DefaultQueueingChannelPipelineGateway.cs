@@ -50,9 +50,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     {
         public DefaultQueueingChannelPipelineGateway()
         {
-            Id = Guid.NewGuid().ToString();
-            GatewayContext = new DefaultQueueingChannelPipelineGatewayContext();
-            
+            Id = Guid.NewGuid().ToString();           
             DeadLetters = new ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
             OutputPorts = new ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
             InputPorts = new ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();

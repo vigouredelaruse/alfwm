@@ -11,11 +11,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     public class PipelineQueueingConsumerChannel<TQueueEntity> : IQueueConsumerPipelineBinding<TQueueEntity>
     {
         private int SyncPoint;
+        double defaultPollingInterval = 50;
 
         public PipelineQueueingConsumerChannel()
         {
+            DefaultPollingInterval = defaultPollingInterval;
+
             InputQueue = new ConcurrentQueue<TQueueEntity>();
-            ConsumerPollingTimer = new System.Timers.Timer(DefaultPollingInterval);
+            ConsumerPollingTimer = new System.Timers.Timer(defaultPollingInterval);
             ConsumerPollingTimer.Elapsed += ConsumerPollingTimer_Elapsed;
 
             IsQueuePollingEnabled = true;

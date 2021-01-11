@@ -294,6 +294,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                 var producerChannel_PipelineGatewaySmokeTest = new PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
                 var consumerChannel_PipelineGatewaySmokeTest = new PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
                 testGateway.InputPorts.Add(producerChannel_PipelineGatewaySmokeTest);
+
                 testGateway.OutputPorts.Add(consumerChannel_PipelineGatewaySmokeTest);
 
                 consumerChannel_PipelineGatewaySmokeTest.QueueHasData += ConsumerChannel_PipelineGatewaySmokeTest_QueueHasData;

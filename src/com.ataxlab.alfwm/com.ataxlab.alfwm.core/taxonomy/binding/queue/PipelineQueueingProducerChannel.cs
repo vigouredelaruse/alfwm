@@ -14,13 +14,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     /// <typeparam name="TQueueEntity"></typeparam>
     public class PipelineQueueingProducerChannel<TQueueEntity> : IQueueProducerPipelineBinding<TQueueEntity>
     {
+        private int default_polling_interval = 50;
         public String Id { get; set; }
         private int SyncPoint = 0;
         public PipelineQueueingProducerChannel()
         {
             Id = Guid.NewGuid().ToString();
             OutputQueue = new ConcurrentQueue<TQueueEntity>();
-            ProducerPollingTimer = new System.Timers.Timer(DefaultPollingInterval);
+            ProducerPollingTimer = new System.Timers.Timer(default_polling_interval);
             ProducerPollingTimer.Elapsed += ProducerPollingTimer_Elapsed;
 
             IsQueuePollingEnabled = true;
