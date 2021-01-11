@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
@@ -38,9 +39,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     {
         public DefaultQueueingChannelPipelineGatewayContext()
         {
-
+            SeenPipelineIds = new ObservableCollection<string>();
         }
-
+        public long DeadLetterCount { get; set; }
         public long MessageCount { get; set; }
         public ObservableCollection<string> SeenPipelineIds { get; set; }
     }
@@ -51,12 +52,18 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         {
             Id = Guid.NewGuid().ToString();
             GatewayContext = new DefaultQueueingChannelPipelineGatewayContext();
+            
             DeadLetters = new ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
             OutputPorts = new ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
             InputPorts = new ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
 
             OutputPorts.CollectionChanged += OutputPorts_CollectionChanged;
             InputPorts.CollectionChanged += InputPorts_CollectionChanged;
+        }
+
+        public DefaultQueueingChannelPipelineGateway(DefaultQueueingChannelPipelineGatewayContext ctx) :this()
+        {
+            this.GatewayContext = ctx;
         }
 
         private void InputPorts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -136,10 +143,19 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
             // as a deliver to nobody scenario, ergo deadletter
             if (IsDeadLetter(e))
             {
+                // dequeue the message
+                var firingChannel = this.InputPorts.Where(w => w.Id.Equals(e.SourceChannelId)).FirstOrDefault();
+                QueueingPipelineQueueEntity<IPipelineToolConfiguration> msg;
+                firingChannel?.OutputQueue.TryDequeue(out msg);
+                GatewayContext.DeadLetterCount++;
                 HandleDeadLetter(e);
             }
             else
             {
+                // dequeue the message
+                var firingChannel = this.InputPorts.Where(w => w.Id.Equals(e.SourceChannelId)).FirstOrDefault();
+                QueueingPipelineQueueEntity<IPipelineToolConfiguration> msg;
+                firingChannel?.OutputQueue.TryDequeue(out msg);
                 GatewayContext.MessageCount++;
                 HandleSwitching(e);
             }

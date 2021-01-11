@@ -14,9 +14,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     /// <typeparam name="TQueueEntity"></typeparam>
     public class PipelineQueueingProducerChannel<TQueueEntity> : IQueueProducerPipelineBinding<TQueueEntity>
     {
+        public String Id { get; set; }
         private int SyncPoint = 0;
         public PipelineQueueingProducerChannel()
         {
+            Id = Guid.NewGuid().ToString();
             OutputQueue = new ConcurrentQueue<TQueueEntity>();
             ProducerPollingTimer = new System.Timers.Timer(DefaultPollingInterval);
             ProducerPollingTimer.Elapsed += ProducerPollingTimer_Elapsed;
@@ -67,6 +69,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         {
             QueueDataAvailableEventArgs<TQueueEntity> eventArgs = new QueueDataAvailableEventArgs<TQueueEntity>(availableData);
             eventArgs.TimeStamp = timestamp;
+            eventArgs.SourceChannelId = this.Id;
 
             // race condition mitigation
             EventHandler<QueueDataAvailableEventArgs<TQueueEntity>> listeners = this.QueueHasData;

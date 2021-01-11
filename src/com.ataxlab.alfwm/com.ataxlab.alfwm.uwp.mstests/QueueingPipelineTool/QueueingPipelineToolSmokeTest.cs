@@ -144,6 +144,13 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
             Exception bindEx = null;
 
+            QueueingPipelineNodeEntity builderBuiltEntity = new QueueingPipelineNodeBuilder()                
+                                                .buildPipelineTool.withPipelineToolClassName(httpActivityNode.GetType().AssemblyQualifiedName)
+                                                .buildPipelineTool.withPipelineToolDisplayName(httpActivityNode.QueueingPipelineTool.PipelineToolDisplayName)
+                                                .buildPipelineTool.withPipelineToolId(httpActivityNode.QueueingPipelineTool.PipelineToolId)
+                                                .buildPipelineTool.withPipelineToolInstanceId(httpActivityNode.QueueingPipelineTool.PipelineToolInstanceId)
+                                                .withToolChainSlotNumber(0)
+                                                .Build();
 
             var processDefinition = new DefaultQueueingPipelineProcessDefinitionEntity();
 
@@ -261,9 +268,89 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
         #endregion queueing pipeline tests
         #region default queueing tool tests
+        /// <summary>
+        /// test pipeline tool gateway
+        /// </summary>
+        [TestMethod]
+        public void PipelineGatewaySmokeTest()
+        {
+            Exception e = null;
+            string testPipelineId = Guid.NewGuid().ToString();
+            DefaultQueueingChannelPipelineGatewayContext testCtx = new DefaultQueueingChannelPipelineGatewayContext();
+            testCtx.SeenPipelineIds.Add(testPipelineId);
+            try
+            {
+                // gateway under test egresses entities from pipeline tools
+                DefaultQueueingChannelPipelineGateway testGateway =
+                    new DefaultQueueingChannelPipelineGateway(testCtx);
+
+                // create producer and consumer channels and wire them to the gateway
+                var producerChannel_PipelineGatewaySmokeTest = new PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+                var consumerChannel_PipelineGatewaySmokeTest = new PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+                testGateway.InputPorts.Add(producerChannel_PipelineGatewaySmokeTest);
+                testGateway.OutputPorts.Add(consumerChannel_PipelineGatewaySmokeTest);
+
+                consumerChannel_PipelineGatewaySmokeTest.QueueHasData += ConsumerChannel_PipelineGatewaySmokeTest_QueueHasData;
+
+                var newItem = this.GetNewQueueEntity(1);
+                // enqueue the item without a routing slip
+                // we expect this entity to appear on the dead letter queue
+                var newEntity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>(newItem);
+                producerChannel_PipelineGatewaySmokeTest.OutputQueue.Enqueue(newEntity);
+
+                Thread.Sleep(30000);
+                Assert.IsTrue(testGateway.DeadLetters.Count > 0, "gateway did not manage dead letter - entity has missing routing slip");
+
+
+                string destinationPipelineId = Guid.NewGuid().ToString();
+                var routingSlipStep = new QueueingPipelineQueueEntityRoutingSlipStep()
+                {
+                    DestinationPipeline =
+                                    new Tuple<QueueingPipelineRoutingSlipDestination, string>(QueueingPipelineRoutingSlipDestination.Pipeline, destinationPipelineId),
+                    DestinationSlot = new Tuple<QueueingPipelineRoutingSlipDestination, int>(QueueingPipelineRoutingSlipDestination.PipelineSlot, 0)
+                };
+
+                var node = new LinkedListNode<QueueingPipelineQueueEntityRoutingSlipStep>(routingSlipStep);
+
+                QueueingPipelineQueueEntityRoutingSlip routingSlip = new QueueingPipelineQueueEntityRoutingSlip();
+                routingSlip.RoutingSteps.AddFirst(
+                       node
+                    );
+
+                // add the routingslip to the entity and enqueue it again
+                newEntity.RoutingSlip = routingSlip;
+                producerChannel_PipelineGatewaySmokeTest.OutputQueue.Enqueue(newEntity);
+
+                Thread.Sleep(5000);
+
+                // expect the gateway state is 1 dead letter
+                Assert.IsTrue(PipelineToolGatewaySmokeTestDidFireQueueHasData == true, "gateway propagated enqueued entity");
+                Assert.IsTrue(testGateway.DeadLetters.Count == 1, "gateway did not manage dead letter - entity has required routing slip");
+
+
+                Assert.IsTrue(consumerChannel_PipelineGatewaySmokeTest.InputQueue.Count == 0, "invalid gateway state - consumer channel queue should be dehydrated by event notification on a consumer channel");
+
+                Assert.IsTrue(testGateway.GatewayContext.MessageCount == 1, "invalid gateway state - gateway context has incorrect switched message count");
+                Assert.IsTrue(testGateway.GatewayContext.DeadLetterCount == 1, "invalid gateway state - gateway context has incorrect deadletter count");
+            }
+            catch(Exception ex)
+            {
+                e = ex;
+            }
+
+
+            Assert.IsTrue(PipelineGatewaySmokeTestDidFireQueueHasData == true, "did not egress input entity");
+            Assert.IsTrue(e == null, "test threw exception " + e?.Message);
+        }
+
+        private void ConsumerChannel_PipelineGatewaySmokeTest_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        {
+            PipelineGatewaySmokeTestDidFireQueueHasData = true;
+            PipelineGatewaySmokeTestDidFireQueueHasData_DequeuedMessages++;
+        }
 
         /// <summary>
-        /// test 
+        /// test pipeline tool gateway
         /// </summary>
         [TestMethod]
         public void PipelineToolGatewaySmokeTest()
@@ -292,11 +379,12 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
                 Thread.Sleep(30000);
                 Assert.IsTrue(testGateway.DeadLetters.Count > 0, "gateway did not manage dead letter - entity has missing routing slip");
-              
+
+                string destinationPipelineId = Guid.NewGuid().ToString();
                 var routingSlipStep = new QueueingPipelineQueueEntityRoutingSlipStep()
                 {
                     DestinationPipeline =
-                                    new Tuple<QueueingPipelineRoutingSlipDestination, string>(QueueingPipelineRoutingSlipDestination.Pipeline, Guid.NewGuid().ToString()),
+                                    new Tuple<QueueingPipelineRoutingSlipDestination, string>(QueueingPipelineRoutingSlipDestination.Pipeline, destinationPipelineId),
                     DestinationSlot = new Tuple<QueueingPipelineRoutingSlipDestination, int>(QueueingPipelineRoutingSlipDestination.PipelineSlot, 0)
                 };
 
@@ -319,6 +407,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
                 Assert.IsTrue(consumerChannel.InputQueue.Count == 0, "invalid gateway state - consumer channel queue should be dehydrated by event notification on a consumer channel");
 
+                Assert.IsTrue(testGateway.GatewayContext.MessageCount == 1, "invalid gateway state - gateway context has incorrect switched message count");
+                Assert.IsTrue(testGateway.GatewayContext.DeadLetterCount == 1, "invalid gateway state - gateway context has incorrect deadletter count");
             }
             catch (Exception ex)
             {
@@ -509,6 +599,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
         bool didFireQueueHasAvailableDataEvent = false;
         bool didfirePipelineToolCompleted = false;
         private bool testPipelineDidFirePipelineProgressUpdated;
+        private bool PipelineGatewaySmokeTestDidFireQueueHasData;
+        private int PipelineGatewaySmokeTestDidFireQueueHasData_DequeuedMessages;
 
         private HttpRequestQueueingActivityConfiguration Activity_QueueHasAvailableDataEvent1(HttpRequestQueueingActivityConfiguration arg)
         {
