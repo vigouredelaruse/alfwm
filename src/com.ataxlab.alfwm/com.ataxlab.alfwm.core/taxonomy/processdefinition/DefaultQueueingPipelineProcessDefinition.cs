@@ -13,6 +13,36 @@ using System.Xml.Serialization;
 
 namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 {
+    public enum QueueingPipelineNodeType { PipelineTool, PipelineToolGateway}
+
+    [XmlType("DefaultQueueingChannelPipelineToolGatewayContext")]
+    public class DefaultQueueingChannelPipelineToolGatewayContextEntity
+    {
+        public DefaultQueueingChannelPipelineToolGatewayContextEntity()
+        {
+
+        }
+
+        [XmlAttribute]
+        public long MessageCount { get; set; }
+        [XmlAttribute]
+        public string CurrentPipelineId { get; set; }
+        [XmlAttribute]
+        public int DeadLetterCount { get; set; }
+    }
+
+    [XmlType("DefaultQueueingChannelPipelineToolGateway")]
+    [XmlInclude(typeof(DefaultQueueingChannelPipelineToolGatewayContextEntity))]
+    public class DefaultQueueingChannelPipelineToolGatewayEntity
+    {
+        public DefaultQueueingChannelPipelineToolGatewayEntity()
+        {
+
+        }
+
+        [XmlElement]
+        public DefaultQueueingChannelPipelineToolGatewayContextEntity GatewayContext { get; set; }
+    }
 
     [XmlType("QueueingPipelineTool")]
     [XmlInclude(typeof(PipelineVariable))]
@@ -24,6 +54,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
         {
             PipelineVariables = new List<PipelineVariable>();
         }
+
 
         [XmlArray("PipelineVariables")]
 
@@ -54,6 +85,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
         }
 
         [XmlAttribute]
+        public QueueingPipelineNodeType NodeType { get; set; }
+
+        [XmlAttribute]
         public string ClassName { get; set; }
 
         [XmlAttribute]
@@ -66,6 +100,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 
         [XmlElement]
         public QueueingPipelineToolEntity QueueingPipelineTool { get; set; }
+
+        [XmlElement]
+        public DefaultQueueingChannelPipelineToolGatewayEntity QueueingPipelineToolGateway { get; set; }
 
     }
 

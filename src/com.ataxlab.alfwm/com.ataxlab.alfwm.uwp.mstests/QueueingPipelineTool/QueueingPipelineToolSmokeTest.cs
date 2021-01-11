@@ -143,14 +143,20 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             };
 
             Exception bindEx = null;
+            bool isMustResetBuilder = true;
 
-            QueueingPipelineNodeEntity builderBuiltEntity = new QueueingPipelineNodeBuilder()                
-                                                .buildPipelineTool.withPipelineToolClassName(httpActivityNode.GetType().AssemblyQualifiedName)
-                                                .buildPipelineTool.withPipelineToolDisplayName(httpActivityNode.QueueingPipelineTool.PipelineToolDisplayName)
-                                                .buildPipelineTool.withPipelineToolId(httpActivityNode.QueueingPipelineTool.PipelineToolId)
-                                                .buildPipelineTool.withPipelineToolInstanceId(httpActivityNode.QueueingPipelineTool.PipelineToolInstanceId)
-                                                .withToolChainSlotNumber(0)
-                                                .Build();
+            var builder = new DefaultQueueingPipelineProcessDefinitionBuilder();
+            var testEntity = builder
+                    .pipelineNodeBuilder.buildPipelineTool.withPipelineToolClassName(httpActivityNode.GetType().AssemblyQualifiedName)
+                    .pipelineNodeBuilder.buildPipelineTool.withPipelineToolDisplayName(httpActivityNode.QueueingPipelineTool.PipelineToolDisplayName)
+                    .pipelineNodeBuilder.buildPipelineTool.withPipelineToolId(httpActivityNode.QueueingPipelineTool.PipelineToolId)
+                    //.buildPipelineTool.withPipelineToolInstanceId(httpActivityNode.QueueingPipelineTool.PipelineToolInstanceId)
+                    .pipelineNodeBuilder.buildPipelineTool.withPipelineToolPipelineVariable(testPipelineVariable)
+                    .pipelineNodeBuilder.withToolChainSlotNumber(0)
+                    .NextPipelineToolNode()
+                    .Build(isMustResetBuilder);
+
+            var testXml = testEntity.ToXml();
 
             var processDefinition = new DefaultQueueingPipelineProcessDefinitionEntity();
 
