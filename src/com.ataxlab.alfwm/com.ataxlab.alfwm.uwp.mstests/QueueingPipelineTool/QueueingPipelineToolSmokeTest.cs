@@ -331,7 +331,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                 Thread.Sleep(5000);
 
                 // expect the gateway state is 1 dead letter
-                Assert.IsTrue(PipelineToolGatewaySmokeTestDidFireQueueHasData == true, "gateway propagated enqueued entity");
+                Assert.IsTrue(PipelineGatewaySmokeTestDidFireQueueHasData == true, "gateway propagated enqueued entity");
                 Assert.IsTrue(testGateway.DeadLetters.Count == 1, "gateway did not manage dead letter - entity has required routing slip");
 
 

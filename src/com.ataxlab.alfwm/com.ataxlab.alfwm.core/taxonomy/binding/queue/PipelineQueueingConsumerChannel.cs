@@ -81,9 +81,38 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 
         }
         public ConcurrentQueue<TQueueEntity> InputQueue { get; set;}
-        public double PollingintervalMilliseconds { get; set;}
-        public bool IsAutoResetPollingTimer { get; set;}
-        public bool IsQueuePollingEnabled { get; set;}
+        public double PollingintervalMilliseconds 
+        {
+            get
+            {
+                return this.ConsumerPollingTimer.Interval;
+            }
+            set
+            {
+                this.ConsumerPollingTimer.Interval = value;
+            }
+        }
+        public bool IsAutoResetPollingTimer 
+        {
+            get
+            {
+                return this.ConsumerPollingTimer.AutoReset;
+            }
+            set
+            {
+                this.ConsumerPollingTimer.AutoReset = value;
+            }
+        }
+        public bool IsQueuePollingEnabled { 
+            get
+            {
+                return this.ConsumerPollingTimer.Enabled;
+            }
+            set
+            {
+                this.ConsumerPollingTimer.Enabled = value;
+            }
+        }
         public System.Timers.Timer ConsumerPollingTimer { get; set;}
         public string PipelineBindingDisplayName { get; set;}
         public string PipelineBindingKey { get; set;}

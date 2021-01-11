@@ -162,6 +162,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
                 // for our current implementation we 
                 // will discard these timer events
                 // as there is low risk of data loss
+                int i = 0;
+                // renable the timer
+                this.ConsumerPollingTimer.Enabled = true;
+                this.IsQueuePollingEnabled = true;
             }
 
         }

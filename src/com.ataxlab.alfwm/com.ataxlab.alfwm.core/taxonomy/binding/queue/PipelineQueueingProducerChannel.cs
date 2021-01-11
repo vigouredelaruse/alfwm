@@ -38,7 +38,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
                 this.IsQueuePollingEnabled = false;
 
                 // manage the queue / dequeue / notifylisteners operation
-                // HandleTimerElapsedNotOverlapping();
+                HandleTimerElapsedNotOverlapping();
 
                 // reset the sync point
                 SyncPoint = 0;
@@ -53,6 +53,28 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
                 // for our current implementation we 
                 // will discard these timer events
                 // as there is low risk of data loss
+                this.IsQueuePollingEnabled = true;
+            }
+        }
+
+        private void HandleTimerElapsedNotOverlapping()
+        {
+            // examine the queue
+            TQueueEntity newEntity = default(TQueueEntity);
+            OutputQueue.TryPeek(out newEntity);
+
+            if (newEntity != null)
+            {
+
+                // create the notification event and notify listeners
+                // note this algorithm produces a firehose
+                // listeners probably want to build their own private 
+                // queue of work items
+                this.OnQueueHasData(DateTime.UtcNow, newEntity);
+
+                TQueueEntity dequeuedEntity;
+                // remove the item at the top of the queue
+                OutputQueue.TryDequeue(out dequeuedEntity);
             }
         }
 
@@ -61,8 +83,22 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         public string PipelineBindingDisplayName { get; set;}
         public string PipelineBindingKey { get; set;}
         public PipelineVariableDictionary PipelineBindingValue { get; set;}
-        public double DefaultPollingInterval { get; private set; }
-        public bool IsQueuePollingEnabled { get; private set; }
+        public double DefaultPollingInterval { get; set; }
+
+        bool _isQueuePollingEnabled = false;
+        public bool IsQueuePollingEnabled 
+        { 
+            get
+            {
+                return this.ProducerPollingTimer.Enabled;
+            }
+            set
+
+            {
+                _isQueuePollingEnabled = value;
+                this.ProducerPollingTimer.Enabled = _isQueuePollingEnabled;
+            }
+        }
 
         public event EventHandler<QueueDataAvailableEventArgs<TQueueEntity>> QueueHasData;
 

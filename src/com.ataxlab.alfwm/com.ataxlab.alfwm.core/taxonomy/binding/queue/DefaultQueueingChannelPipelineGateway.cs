@@ -89,7 +89,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
                         // listen to queue arrival events
                         foreach (var item in e.NewItems)
                         {
-                            ((PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += InputQueue_QueueHasData;
+                            ((PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += InputQueue_QueueHasData;
                         }
 
                         break;
@@ -156,6 +156,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
                 firingChannel?.OutputQueue.TryDequeue(out msg);
                 GatewayContext.MessageCount++;
                 HandleSwitching(e);
+
             }
         }
 
