@@ -51,7 +51,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
             ConsumerPollingTimer = new System.Timers.Timer(pollingInterval);
             this.PollingintervalMilliseconds = pollingInterval;
             ConsumerPollingTimer.Elapsed += ConsumerPollingTimer_Elapsed;
-
+            ConsumerPollingTimer.AutoReset = false;
             IsQueuePollingEnabled = true;
         }
 
@@ -162,7 +162,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
                 // for our current implementation we 
                 // will discard these timer events
                 // as there is low risk of data loss
-                int i = 0;
+                // reset the sync point
+                SyncPoint = 0;
                 // renable the timer
                 this.ConsumerPollingTimer.Enabled = true;
                 this.IsQueuePollingEnabled = true;

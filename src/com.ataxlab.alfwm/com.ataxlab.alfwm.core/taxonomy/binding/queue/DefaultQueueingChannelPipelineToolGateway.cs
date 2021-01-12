@@ -1,4 +1,5 @@
-﻿using com.ataxlab.alfwm.core.taxonomy.pipeline;
+﻿using com.ataxlab.alfwm.core.taxonomy.binding.queue.routing;
+using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -17,22 +18,29 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         IQueueingChannelPipelineToolGateway<QueueingPipelineQueueEntity<IPipelineToolConfiguration>, 
             QueueingPipelineQueueEntity<IPipelineToolConfiguration>>
     {
+
         DefaultQueueingChannelPipelineToolGatewayContext GatewayContext { get; set; }
-        ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> DeadLetters { get; set; }
+
     }
 
     public interface IQueueingChannelPipelineToolGateway<TInputEntity, TOutputEntity>
     {
         string Id { get; set; }
         ObservableCollection<PipelineToolQueueingConsumerChannel<TOutputEntity>> OutputPorts { get; set; }
-
+        ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> DeadLetters { get; set; }
         ObservableCollection<PipelineToolQueueingProducerChannel<TOutputEntity>> InputPorts { get; set; }
+        ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> PipelineEgressPort { get; set; }
+
+        event EventHandler<EgressQueueHasDataEventArgs> EgressQueueHasData;
 
         void HandleInputPortsCollectionChanged(NotifyCollectionChangedEventArgs e);
 
         void HandleOutputPortsCollectionChanged(NotifyCollectionChangedEventArgs e);
     }
 
+    public class EgressQueueHasDataEventArgs
+    {
+    }
 
     public enum DefaultQueueingChannelGatewaySwitchConfigurationFault { CurrentPipelineNotSet, InputQueueEventArrivalHandlerException }
     public class DefaultQueueingChannelGatewaySwitchConfigurationFaultArgs : EventArgs
@@ -77,6 +85,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 
             OutputPorts = new ObservableCollection<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
             InputPorts = new ObservableCollection<PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
+            PipelineEgressPort = new ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
 
             OutputPorts.CollectionChanged += OutputPorts_CollectionChanged;
             InputPorts.CollectionChanged += InputPorts_CollectionChanged;
@@ -136,10 +145,77 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 
         private void HandleSwitching(QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
         {
-            foreach (var channel in OutputPorts)
+            bool isMustEgressEntity = DetectExternalPipelineDestination(e);
+
+            // filter messages for different pipelines
+            if (!isMustEgressEntity)
             {
-                channel.InputQueue.Enqueue(e.EventPayload);
+                // here because we are delivering to the current pipeline
+                foreach (var channel in OutputPorts)
+                {
+                    channel.InputQueue.Enqueue(e.EventPayload);
+                }
             }
+            else
+            {
+                // here because we are delivering to a different pipeline
+                // egress the entity
+                this.PipelineEgressPort.Enqueue(e.EventPayload);
+                EgressQueueHasData?.Invoke(this, new EgressQueueHasDataEventArgs());
+            }
+
+        }
+
+        private bool DetectExternalPipelineDestination(QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        {
+            var isMustEgressEntity = false;
+
+            if (e.EventPayload?.RoutingSlip != null)
+            {
+                LinkedListNode<QueueingPipelineQueueEntityRoutingSlipStep> candidateRoutingStepForFiltering = ParseRoutingSlip(e);
+
+                try
+                {
+                    if (candidateRoutingStepForFiltering != null)
+                    {
+                        // defensive code - we expect not to be here with invalid routing slips
+                        // TODO - test handling null candidates or their equivalent
+                        isMustEgressEntity = EvaluateRoutingFilterPredicate(candidateRoutingStepForFiltering);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // you are here because of invalid router state evaluation a real bad scene
+                    throw new InvalidQueueingPipelineToolGatewayStateException(ex);
+                }
+            }
+            else
+            {
+                isMustEgressEntity = false;
+            }
+
+            return isMustEgressEntity;
+        }
+
+        private LinkedListNode<QueueingPipelineQueueEntityRoutingSlipStep> ParseRoutingSlip(QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        {
+            // parse the routingslip
+            return e.EventPayload?.RoutingSlip?.RoutingSteps?.First;
+        }
+
+        private bool EvaluateRoutingFilterPredicate(LinkedListNode<QueueingPipelineQueueEntityRoutingSlipStep> firstRoutingStep)
+        {
+            bool isMustEgressEntity = false;
+            // is the next step for the current pipeline
+            var destinationType = firstRoutingStep.Value.DestinationPipeline.Item1;
+            var destinationId = firstRoutingStep.Value.DestinationPipeline.Item2;
+            if (destinationType == QueueingPipelineRoutingSlipDestination.Pipeline && !destinationId.Equals(this.GatewayContext.CurrentPipelineId))
+            {
+                // here because the first routing slip step is a pipeline and is not the current pipeline
+                isMustEgressEntity = true;
+            }
+
+            return isMustEgressEntity;
         }
 
         private void HandleDeadLetter(QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
@@ -168,9 +244,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         public ObservableCollection<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> OutputPorts { get; set; }
 
         public ObservableCollection<PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> InputPorts { get; set; }
+        public ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> PipelineEgressPort { get; set; }
         public DefaultQueueingChannelPipelineToolGatewayContext GatewayContext { get; set; }
 
         public event EventHandler<DefaultQueueingChannelGatewaySwitchConfigurationFaultArgs> SwitchConfigurationFaultEvent;
+        public event EventHandler<EgressQueueHasDataEventArgs> EgressQueueHasData;
 
         public void HandleInputPortsCollectionChanged(NotifyCollectionChangedEventArgs e)
         {

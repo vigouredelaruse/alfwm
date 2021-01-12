@@ -18,6 +18,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     {
         DefaultQueueingChannelPipelineGatewayContext GatewayContext { get; set; }
         ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> DeadLetters { get; }
+        ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> PipelineEgressPort { get; }
     }
 
     public interface IDefaultQueueingChannelPipelineGateway<TInputEntity, TOutputEntity>
@@ -52,6 +53,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         {
             Id = Guid.NewGuid().ToString();           
             DeadLetters = new ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+ 
             OutputPorts = new ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
             InputPorts = new ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
 
@@ -79,6 +81,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         public string Id {get; set; }
         public ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> OutputPorts {get; set; }
         public ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> InputPorts {get; set; }
+
+        public ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> PipelineEgressPort { get; set; }
 
         public void HandleInputPortsCollectionChanged(NotifyCollectionChangedEventArgs e)
         {

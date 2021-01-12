@@ -282,6 +282,9 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
         {
             Exception e = null;
             string testPipelineId = Guid.NewGuid().ToString();
+            string destinationPipelineId = Guid.NewGuid().ToString();
+            int destinationSlot = 0;
+
             DefaultQueueingChannelPipelineGatewayContext testCtx = new DefaultQueueingChannelPipelineGatewayContext();
             testCtx.SeenPipelineIds.Add(testPipelineId);
             try
@@ -308,14 +311,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                 Thread.Sleep(30000);
                 Assert.IsTrue(testGateway.DeadLetters.Count > 0, "gateway did not manage dead letter - entity has missing routing slip");
 
-
-                string destinationPipelineId = Guid.NewGuid().ToString();
-                var routingSlipStep = new QueueingPipelineQueueEntityRoutingSlipStep()
-                {
-                    DestinationPipeline =
-                                    new Tuple<QueueingPipelineRoutingSlipDestination, string>(QueueingPipelineRoutingSlipDestination.Pipeline, destinationPipelineId),
-                    DestinationSlot = new Tuple<QueueingPipelineRoutingSlipDestination, int>(QueueingPipelineRoutingSlipDestination.PipelineSlot, 0)
-                };
+                QueueingPipelineQueueEntityRoutingSlipStep routingSlipStep = GetRoutingSlipStep(testPipelineId, destinationSlot);
 
                 var node = new LinkedListNode<QueueingPipelineQueueEntityRoutingSlipStep>(routingSlipStep);
 
@@ -339,8 +335,10 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
                 Assert.IsTrue(testGateway.GatewayContext.MessageCount == 1, "invalid gateway state - gateway context has incorrect switched message count");
                 Assert.IsTrue(testGateway.GatewayContext.DeadLetterCount == 1, "invalid gateway state - gateway context has incorrect deadletter count");
+
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 e = ex;
             }
@@ -348,6 +346,16 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
             Assert.IsTrue(PipelineGatewaySmokeTestDidFireQueueHasData == true, "did not egress input entity");
             Assert.IsTrue(e == null, "test threw exception " + e?.Message);
+        }
+
+        private static QueueingPipelineQueueEntityRoutingSlipStep GetRoutingSlipStep(string destinationPipelineId, int destinationSlot)
+        {
+            return new QueueingPipelineQueueEntityRoutingSlipStep()
+            {
+                DestinationPipeline =
+                                new Tuple<QueueingPipelineRoutingSlipDestination, string>(QueueingPipelineRoutingSlipDestination.Pipeline, destinationPipelineId),
+                DestinationSlot = new Tuple<QueueingPipelineRoutingSlipDestination, int>(QueueingPipelineRoutingSlipDestination.PipelineSlot, destinationSlot)
+            };
         }
 
         private void ConsumerChannel_PipelineGatewaySmokeTest_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
@@ -362,20 +370,24 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
         [TestMethod]
         public void PipelineToolGatewaySmokeTest()
         {
+            string testPipelineId = Guid.NewGuid().ToString();
+            string destinationPipelineId = Guid.NewGuid().ToString();
+            int destinationSlot = 0;
+
             Exception e = null;
             try
             {
                 // gateway under test egresses entities from pipeline tools
                 DefaultQueueingChannelPipelineToolGateway testGateway =
                     new DefaultQueueingChannelPipelineToolGateway(new DefaultQueueingChannelPipelineToolGatewayContext()
-                    { CurrentPipelineId = Guid.NewGuid().ToString() });
+                    { CurrentPipelineId = testPipelineId });
 
                 // create producer and consumer channels and wire them to the gateway
                 var producerChannel = new PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
                 var consumerChannel = new PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
                 testGateway.InputPorts.Add(producerChannel);
                 testGateway.OutputPorts.Add(consumerChannel);
-
+                testGateway.EgressQueueHasData += TestGateway_EgressQueueHasData;
                 consumerChannel.QueueHasData += ConsumerChannel_QueueHasData;
 
                 var newItem = this.GetNewQueueEntity(1);
@@ -384,31 +396,16 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                 var newEntity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>(newItem);
                 producerChannel.OutputQueue.Enqueue(newEntity);
 
-                Thread.Sleep(30000);
+                Thread.Sleep(5000);
                 Assert.IsTrue(testGateway.DeadLetters.Count > 0, "gateway did not manage dead letter - entity has missing routing slip");
 
-                string destinationPipelineId = Guid.NewGuid().ToString();
-                var routingSlipStep = new QueueingPipelineQueueEntityRoutingSlipStep()
-                {
-                    DestinationPipeline =
-                                    new Tuple<QueueingPipelineRoutingSlipDestination, string>(QueueingPipelineRoutingSlipDestination.Pipeline, destinationPipelineId),
-                    DestinationSlot = new Tuple<QueueingPipelineRoutingSlipDestination, int>(QueueingPipelineRoutingSlipDestination.PipelineSlot, 0)
-                };
-
-                var node = new LinkedListNode<QueueingPipelineQueueEntityRoutingSlipStep>(routingSlipStep);
-
-                QueueingPipelineQueueEntityRoutingSlip routingSlip = new QueueingPipelineQueueEntityRoutingSlip();
-                routingSlip.RoutingSteps.AddFirst(
-                       node
-                    );
-
-                // add the routingslip to the entity and enqueue it again
-                newEntity.RoutingSlip = routingSlip;
-                producerChannel.OutputQueue.Enqueue(newEntity);
+                string externalDestinationPipelineId = Guid.NewGuid().ToString();
+                QueueingPipelineQueueEntity<IPipelineToolConfiguration> testEntity = GetItemWithRoutingSlip(testPipelineId, destinationSlot);
+                producerChannel.OutputQueue.Enqueue(testEntity);
 
                 Thread.Sleep(5000);
                 // expect the gateway state is 1 dead letter
-                Assert.IsTrue(PipelineToolGatewaySmokeTestDidFireQueueHasData == true, "gateway propagated enqueued entity");
+                Assert.IsTrue(PipelineToolGatewaySmokeTestDidFireQueueHasData == true, "gateway did not propagate enqueued entity");
                 Assert.IsTrue(testGateway.DeadLetters.Count == 1, "gateway did not manage dead letter - entity has required routing slip");
 
 
@@ -416,15 +413,54 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
                 Assert.IsTrue(testGateway.GatewayContext.MessageCount == 1, "invalid gateway state - gateway context has incorrect switched message count");
                 Assert.IsTrue(testGateway.GatewayContext.DeadLetterCount == 1, "invalid gateway state - gateway context has incorrect deadletter count");
+
+                // expect the gateway to have 1 egress message - the destination pipeline is not the current pipeline
+                // listen for gateway pipeline egress message events
+                //testGateway.EgressQueueHasData += TestPipelineToolGateway_EgressQueueHasData1;
+                QueueingPipelineQueueEntity<IPipelineToolConfiguration> newerEntity = GetItemWithRoutingSlip(destinationPipelineId, destinationSlot);
+                producerChannel.OutputQueue.Enqueue(newerEntity);
+
+                Thread.Sleep(5000);
+                var egressPortEntityCount = testGateway.PipelineEgressPort.Count;
+
+                // did the egress event fire on the gateway
+                Assert.IsTrue(TestPipelineToolGatewayDidEgressExternalPipelineData == true,"pipeline tool gateway did not fire egress event for external pipeline destination");
+                Assert.IsTrue(egressPortEntityCount == 1, "pipeline tool gateway did not fire egress event for external pipeline destination");
+                int i = 0;
             }
             catch (Exception ex)
             {
                 e = ex;
             }
-
-            Assert.IsTrue(PipelineToolGatewaySmokeTestDidFireQueueHasData == true, "did not egress input entity");
             Assert.IsTrue(e == null, "test threw exception " + e?.Message);
+            Assert.IsTrue(PipelineToolGatewaySmokeTestDidFireQueueHasData == true, "did not egress input entity");
+
          }
+
+
+        private QueueingPipelineQueueEntity<IPipelineToolConfiguration> GetItemWithRoutingSlip(string destinationPipelineId, int destinationSlot)
+        {
+            // test delivery of entities to external pipelines
+            // expect the test gateway to deliver such nodes to 
+            // the egress queue and fire the relevant event
+            // test entity delivery to external pipelines
+            var newerItem = this.GetNewQueueEntity(1);
+            var newerEntity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>(newerItem);
+            QueueingPipelineQueueEntityRoutingSlipStep newerroutingSlipStep = GetRoutingSlipStep(destinationPipelineId, destinationSlot);
+            var newerNode = new LinkedListNode<QueueingPipelineQueueEntityRoutingSlipStep>(newerroutingSlipStep);
+            QueueingPipelineQueueEntityRoutingSlip newerroutingSlip = new QueueingPipelineQueueEntityRoutingSlip();
+            newerroutingSlip.RoutingSteps.AddFirst(
+                   newerNode
+                );
+
+            newerEntity.RoutingSlip = newerroutingSlip;
+            return newerEntity;
+        }
+
+        private void TestGateway_EgressQueueHasData(object sender, EgressQueueHasDataEventArgs e)
+        {
+            TestPipelineToolGatewayDidEgressExternalPipelineData = true;
+        }
 
         bool PipelineToolGatewaySmokeTestDidFireQueueHasData = false;
         int PipelineToolGatewaySmokeTestDidFireQueueHasData_DequeuedMessages = 0;
@@ -608,6 +644,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
         private bool testPipelineDidFirePipelineProgressUpdated;
         private bool PipelineGatewaySmokeTestDidFireQueueHasData;
         private int PipelineGatewaySmokeTestDidFireQueueHasData_DequeuedMessages;
+        private bool TestGateway_EgressQueueHasData_DidFire;
+        private bool TestPipelineToolGatewayDidEgressExternalPipelineData;
 
         private HttpRequestQueueingActivityConfiguration Activity_QueueHasAvailableDataEvent1(HttpRequestQueueingActivityConfiguration arg)
         {

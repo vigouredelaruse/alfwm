@@ -18,16 +18,16 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         /// <summary>
         /// this property mutates the behavoiur of the timer
         /// </summary>
-        private bool _IsQueuePollingEnabled = false;
+
         public bool IsQueuePollingEnabled 
         { 
             get
             {
-                return _IsQueuePollingEnabled;
+                return this.ProducerPollingTimer.Enabled;
             }
             set
             {
-                this._IsQueuePollingEnabled = value;
+
                 this.ProducerPollingTimer.Enabled = value;
             }
         }
@@ -49,7 +49,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
             OutputQueue = new ConcurrentQueue<TQueueEntity>();
             ProducerPollingTimer = new System.Timers.Timer(DefaultPollingInterval);
             ProducerPollingTimer.Elapsed += ProducerPollingTimer_Elapsed;
-
+            ProducerPollingTimer.AutoReset = false;
             IsQueuePollingEnabled = true;
 
         }
@@ -86,6 +86,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
                 // for our current implementation we 
                 // will discard these timer events
                 // as there is low risk of data loss
+                // renable the timer
+                this.ProducerPollingTimer.Enabled = true;
+                this.IsQueuePollingEnabled = true;
+                SyncPoint = 0;
             }
         }
 
