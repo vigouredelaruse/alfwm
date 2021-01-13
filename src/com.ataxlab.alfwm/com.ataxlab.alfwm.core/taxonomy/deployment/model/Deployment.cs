@@ -22,9 +22,8 @@ namespace com.ataxlab.alfwm.core.deployment.model
     /// </summary>
     /// <typeparam name="TProcessDefinition"></typeparam>
     /// <typeparam name="TDeploymentStatus"></typeparam>
-    public class Deployment<TProcessDefinition, TDeploymentStatus> : IDeployment<TProcessDefinition, TDeploymentStatus>
+    public class Deployment<TProcessDefinition, TDeploymentStatus> : IDeployment<TProcessDefinition>
         where TProcessDefinition : class
-        where TDeploymentStatus : class
 
     {
         public string InstanceId { get; set; }
