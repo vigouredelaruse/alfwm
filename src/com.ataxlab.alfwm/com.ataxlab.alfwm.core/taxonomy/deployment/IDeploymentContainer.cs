@@ -1,10 +1,17 @@
 ﻿using com.ataxlab.alfwm.core.deployment.model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace com.ataxlab.alfwm.core.deployment
 {
+    public interface IDeploymentNode<TDeployment, TProcessDefinition>
+    {
+        Tuple<TDeployment, TProcessDefinition> Value { get; set; }
+
+    }
+
     /// <summary>
     /// abstration at lowest level useful for building
     /// 'Managers' - like WorkflowManager or Process Engine
@@ -12,6 +19,7 @@ namespace com.ataxlab.alfwm.core.deployment
     /// when there is a need for a component that contains
     /// and potentially participates in scheduling multiple workflow processes
     /// </summary>
+    /// 
     public interface IDeploymentContainer
     {
         string ContainerId { get; set; }
@@ -33,5 +41,6 @@ namespace com.ataxlab.alfwm.core.deployment
         //where TDeployment : class
 
     {
+        ObservableCollection<IDeploymentNode<TDeployment, TProcessDefinition>> Deployments { get; set; }
     }
 }
