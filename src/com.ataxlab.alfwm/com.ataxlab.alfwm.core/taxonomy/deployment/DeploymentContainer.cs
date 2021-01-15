@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace com.ataxlab.alfwm.core.deployment
@@ -18,5 +19,6 @@ namespace com.ataxlab.alfwm.core.deployment
         public string DisplayName { get; set; }
         public string Description { get; set; }
         public TProcessDefinitionItems ProcessArtifact { get; set; }
+        public ObservableCollection<IDeploymentNode<TProcessDefinitionItems, TProcessDefinition>> Deployments { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

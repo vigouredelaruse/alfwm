@@ -16,7 +16,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         /// <summary>
         /// specify the mechanism whereby pipelines can send messages to each other
         /// </summary>
-        DefaultQueueingChannelPipelineGateway PipelineGateway { get; set;s }
+        DefaultQueueingChannelPipelineGateway PipelineGateway { get; set; }
     }
 
     /// <summary>
@@ -29,6 +29,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         public string ContainerId { get; set; }
         public string DisplayName { get; set; }
         public string Description { get; set; }
-        public DefaultQueueingChannelPipelineGateway PipelineGateway { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DefaultQueueingChannelPipelineGateway PipelineGateway {get; set; }
     }
 }

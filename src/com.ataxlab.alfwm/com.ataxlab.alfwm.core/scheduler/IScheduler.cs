@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace com.ataxlab.alfwm.core.scheduler
 {
+    [Obsolete]
     public interface IScheduler
     {
 
