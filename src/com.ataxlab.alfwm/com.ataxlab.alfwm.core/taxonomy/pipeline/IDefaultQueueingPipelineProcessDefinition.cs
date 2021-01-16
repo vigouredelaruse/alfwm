@@ -5,12 +5,16 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
     public interface IDefaultQueueingPipelineProcessDefinition
     {
+        [XmlAttribute]
         string Id { get; set; }
+
+        [XmlElement]
 
         LinkedList<DefaultQueueingPipelineToolNode> QueueingPipelineNodes { get; set; }
 

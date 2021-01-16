@@ -1,20 +1,26 @@
 ﻿using com.ataxlab.alfwm.core.deployment.model;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using com.ataxlab.alfwm.core.taxonomy.pipeline.queueing;
+using com.ataxlab.core.alfwm.utility.extension;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
 {
     public class DefaultQueueingPipelineNodeDeploymentContext
     {
+
         public DefaultQueueingPipelineNodeDeploymentContext()
         {
-
+            DeploymentTime = DateTime.UtcNow;
         }
 
+        [XmlAttribute]
         public string CurrentDeploymentContainerId { get; set; }
+
+        [XmlAttribute]
 
         public DateTime DeploymentTime { get; set; }
 
@@ -24,6 +30,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
     {
 
         DefaultQueueingPipelineNodeDeploymentContext DeploymentContext { get; set; }
+
+        String ToXml();
 
     }
 
@@ -39,10 +47,27 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             InstanceId = Guid.NewGuid().ToString();
         }
 
+        public DefaultQueueingPipelineNodeDeployment(DefaultQueueingPipelineNodeDeploymentContext ctx) : this()
+        {
+            this.DeploymentContext = ctx;
+        }
+
+        [XmlAttribute]
         public DefaultQueueingPipelineNodeDeploymentContext DeploymentContext { get; set;}
+
+        [XmlElement]
         public IDefaultQueueingPipelineProcessDefinition ProcessDefinition { get; set;}
+
+        [XmlAttribute]
         public string DeploymentId { get; set;}
+
+        [XmlAttribute]
         public string InstanceId { get; set;}
+
+        public string ToXml()
+        {
+            return this.SerializeObject<DefaultQueueingPipelineNodeDeployment>();
+        }
     }
 
 

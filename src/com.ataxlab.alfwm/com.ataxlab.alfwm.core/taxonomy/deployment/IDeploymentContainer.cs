@@ -12,6 +12,17 @@ namespace com.ataxlab.alfwm.core.deployment
 
     }
 
+    public class DefaultDeploymentNode<TDeployment, TProcessDefinition> : IDeploymentNode<TDeployment, TProcessDefinition>
+    {
+
+        public DefaultDeploymentNode()
+        {
+
+        }
+
+        public Tuple<TDeployment, TProcessDefinition> Value {get; set;}
+    }
+
     /// <summary>
     /// abstration at lowest level useful for building
     /// 'Managers' - like WorkflowManager or Process Engine
