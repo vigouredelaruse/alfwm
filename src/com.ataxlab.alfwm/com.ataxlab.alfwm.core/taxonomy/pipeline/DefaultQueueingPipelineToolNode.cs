@@ -3,6 +3,7 @@ using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
 {
@@ -17,13 +18,24 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
             QueueingPipelineNodeId = Guid.NewGuid().ToString();
         }
 
+        [XmlAttribute]
         public string QueueingPipelineNodeId { get; set; }
 
-
+        [XmlElement]
         public IDefaultQueueingPipelineTool QueueingPipelineTool { get; set; }
+
+        [XmlAttribute]
         public DefaultQueueingPipelineNodeTypeEnum QueueingPipelineNodeType { get; set; }
+
+        [XmlElement]
         public IDefaultQueueingPipeline QueueingPipeline { get; set; }
+
+
+        [XmlElement]
         public IDefaultQueueingChannelPipelineToolGateway QueueingPipelineToolGateway { get; set; }
+
+
+        [XmlElement]
         public IDefaultQueueingChannelPipelineGateway QueueingPipelineGateway { get; set; }
     }
 

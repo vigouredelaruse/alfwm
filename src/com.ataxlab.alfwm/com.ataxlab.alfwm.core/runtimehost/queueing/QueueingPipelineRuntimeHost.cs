@@ -1,10 +1,12 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.deployment.queueing;
+using com.ataxlab.core.alfwm.utility.extension;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace com.ataxlab.alfwm.core.runtimehost.queueing
 {
@@ -25,9 +27,16 @@ namespace com.ataxlab.alfwm.core.runtimehost.queueing
             this.Context = ctx;
         }
 
+        [XmlAttribute]
         public string RuntimeHostId { get; set; }
+
+        [XmlAttribute]
         public string RuntimeHostDisplayName { get; set; }
+
+        [XmlElement]
         public IRuntimeHostContext Context { get; set; }
+
+        [XmlElement]
         public ConcurrentDictionary<string, IDefaultQueueingPipelineNodeDeploymentContainer> DeployedContainers { get; set; }
 
         public event EventHandler<RuntimeHostDeploymentFailedEventArgs> DeploymentFailed;
@@ -36,6 +45,7 @@ namespace com.ataxlab.alfwm.core.runtimehost.queueing
         /// <summary>
         /// expose the gateways deployed in the runtime host
         /// </summary>
+        [XmlIgnore]
         public List<IDefaultQueueingChannelPipelineGateway> DeployedGateways
         {
             get
@@ -44,6 +54,7 @@ namespace com.ataxlab.alfwm.core.runtimehost.queueing
             }
         }
 
+        [XmlElement]
         /// <summary>
         /// provides messaging interconnect between deployed pipelines
         /// </summary>
@@ -93,6 +104,10 @@ namespace com.ataxlab.alfwm.core.runtimehost.queueing
             return container == null;
         }
 
+        public string ToXml()
+        {
+            return this.SerializeObject<QueueingPipelineRuntimeHost>();
+        }
     }
 
 
@@ -125,6 +140,8 @@ namespace com.ataxlab.alfwm.core.runtimehost.queueing
 
         event EventHandler<RuntimeHostDeploymentFailedEventArgs> DeploymentFailed;
         event EventHandler<RuntimeHostDeploymentSuceededEventArgs> DeploymenSuceeded;
+
+        string ToXml();
 
     }
 

@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 {
@@ -99,8 +100,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
             HandleOutputPortsCollectionChanged(e);
         }
 
+        [XmlElement]
         public DefaultQueueingChannelPipelineGatewayContext GatewayContext {get; set; }
         public ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> DeadLetters { get; private set; }
+
+        [XmlAttribute]
         public string Id {get; set; }
         public ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> OutputPorts {get; set; }
         public ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> InputPorts {get; set; }
