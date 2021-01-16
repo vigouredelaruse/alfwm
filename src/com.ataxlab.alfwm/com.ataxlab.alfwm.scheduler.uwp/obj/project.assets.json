@@ -8725,11 +8725,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj",
+      "projectUniqueName": "C:\\Users\\hacker\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj",
       "projectName": "com.ataxlab.alfwm.scheduler.uwp",
-      "projectPath": "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj",
+      "projectPath": "C:\\Users\\hacker\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\com.ataxlab.alfwm.scheduler.uwp.csproj",
       "packagesPath": "C:\\Users\\hacker\\.nuget\\packages\\",
-      "outputPath": "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\obj\\",
+      "outputPath": "C:\\Users\\hacker\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.scheduler.uwp\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -8737,7 +8737,7 @@
         "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
       ],
       "configFilePaths": [
-        "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\NuGet.Config",
+        "C:\\Users\\hacker\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\NuGet.Config",
         "C:\\Users\\hacker\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -8747,21 +8747,19 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://pkgs.dev.azure.com/ataxlab/ALFWM/_packaging/current/nuget/v3/index.json": {},
-        "https://pkgs.dev.azure.com/electricrucible/_packaging/appstorenugets/nuget/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "uap10.0.17763": {
           "projectReferences": {
-            "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj": {
-              "projectPath": "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj"
+            "C:\\Users\\hacker\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj": {
+              "projectPath": "C:\\Users\\hacker\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.core\\com.ataxlab.alfwm.core.csproj"
             },
-            "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj": {
-              "projectPath": "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj"
+            "C:\\Users\\hacker\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj": {
+              "projectPath": "C:\\Users\\hacker\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm.library.activity\\com.ataxlab.alfwm.library.activity.csproj"
             },
-            "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj": {
-              "projectPath": "C:\\src\\alfwm\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj"
+            "C:\\Users\\hacker\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj": {
+              "projectPath": "C:\\Users\\hacker\\Source\\Repos\\vigouredelaruse\\alfwm\\src\\com.ataxlab.alfwm\\com.ataxlab.alfwm\\com.ataxlab.alfwm.csproj"
             }
           }
         }

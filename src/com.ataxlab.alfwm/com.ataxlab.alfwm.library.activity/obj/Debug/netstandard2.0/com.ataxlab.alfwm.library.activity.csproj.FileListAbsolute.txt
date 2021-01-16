@@ -78,3 +78,17 @@ C:\src\alfwm\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\
 C:\src\alfwm\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.csproj.CopyComplete
 C:\src\alfwm\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.dll
 C:\src\alfwm\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.pdb
+C:\Users\hacker\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.deps.json
+C:\Users\hacker\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.dll
+C:\Users\hacker\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.pdb
+C:\Users\hacker\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Debug\netstandard2.0\com.ataxlab.alfwm.core.dll
+C:\Users\hacker\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Debug\netstandard2.0\com.ataxlab.alfwm.dll
+C:\Users\hacker\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Debug\netstandard2.0\com.ataxlab.alfwm.core.pdb
+C:\Users\hacker\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\bin\Debug\netstandard2.0\com.ataxlab.alfwm.pdb
+C:\Users\hacker\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.csprojAssemblyReference.cache
+C:\Users\hacker\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.AssemblyInfoInputs.cache
+C:\Users\hacker\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.AssemblyInfo.cs
+C:\Users\hacker\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.csproj.CoreCompileInputs.cache
+C:\Users\hacker\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.csproj.CopyComplete
+C:\Users\hacker\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.dll
+C:\Users\hacker\Source\Repos\vigouredelaruse\alfwm\src\com.ataxlab.alfwm\com.ataxlab.alfwm.library.activity\obj\Debug\netstandard2.0\com.ataxlab.alfwm.library.activity.pdb

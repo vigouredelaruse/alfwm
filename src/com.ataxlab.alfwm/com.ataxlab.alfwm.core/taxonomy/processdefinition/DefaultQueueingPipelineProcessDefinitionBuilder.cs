@@ -8,35 +8,35 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
     public class DefaultQueueingPipelineProcessDefinitionBuilder
     {
         private DefaultQueueingPipelineProcessDefinitionEntity processDefinition;
-        public QueueingPipelineNodeBuilder pipelineNodeBuilder;
+        public QueueingPipelineNodeBuilder UsePipelineNodeBuilder;
 
         public DefaultQueueingPipelineProcessDefinitionBuilder()
         {
             processDefinition = new DefaultQueueingPipelineProcessDefinitionEntity();
 
-            pipelineNodeBuilder = new QueueingPipelineNodeBuilder(this);
+            UsePipelineNodeBuilder = new QueueingPipelineNodeBuilder(this);
         }
 
 
         public DefaultQueueingPipelineProcessDefinitionBuilder NextPipelineToolNode()
         {
-            var node = pipelineNodeBuilder.Build();
+            var node = UsePipelineNodeBuilder.Build();
             processDefinition.QueueingPipelineNodes.Add(node);
 
             // reset the builder
-            pipelineNodeBuilder.Reset();
+            UsePipelineNodeBuilder.Reset();
             return this;
         }
 
         public DefaultQueueingPipelineProcessDefinitionEntity Build(bool isMustResetBuilder)
         {
-            var node = pipelineNodeBuilder.Build();
+            var node = UsePipelineNodeBuilder.Build();
             processDefinition.QueueingPipelineNodes.Add(node);
 
             if(isMustResetBuilder)
             {
                 // reset the builder
-                pipelineNodeBuilder.Reset();
+                UsePipelineNodeBuilder.Reset();
             }
 
             return processDefinition;
@@ -47,7 +47,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
             private DefaultQueueingPipelineProcessDefinitionBuilder _parentBuilder;
 
             private QueueingPipelineNodeEntity node;
-            public readonly QueueingPipelineToolBuilder buildPipelineTool;
+            public readonly QueueingPipelineToolBuilder ToBuildPipelineTool;
             private QueueingPipelineToolEntity tool;
             private DefaultQueueingChannelPipelineToolGatewayContextEntity gateway;
 
@@ -56,7 +56,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
                 _parentBuilder = parentBuilder;
                 node = new QueueingPipelineNodeEntity();
                 tool = new QueueingPipelineToolEntity();
-                buildPipelineTool = new QueueingPipelineToolBuilder(parentBuilder);
+                ToBuildPipelineTool = new QueueingPipelineToolBuilder(parentBuilder);
             }
 
 
@@ -95,34 +95,34 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 
                 public DefaultQueueingPipelineProcessDefinitionBuilder withPipelineToolDisplayName(string displayName)
                 {
-                    _parentBuilder.pipelineNodeBuilder.tool.DisplayName = displayName;
-                    _parentBuilder.pipelineNodeBuilder.node.NodeType = QueueingPipelineNodeType.PipelineTool;
+                    _parentBuilder.UsePipelineNodeBuilder.tool.DisplayName = displayName;
+                    _parentBuilder.UsePipelineNodeBuilder.node.NodeType = QueueingPipelineNodeType.PipelineTool;
                     return _parentBuilder;
                 }
 
                 public DefaultQueueingPipelineProcessDefinitionBuilder withPipelineToolId(string id)
                 {
-                    _parentBuilder.pipelineNodeBuilder.tool.Id = id;
+                    _parentBuilder.UsePipelineNodeBuilder.tool.Id = id;
 
-                    _parentBuilder.pipelineNodeBuilder.node.NodeType = QueueingPipelineNodeType.PipelineTool;
+                    _parentBuilder.UsePipelineNodeBuilder.node.NodeType = QueueingPipelineNodeType.PipelineTool;
                     return _parentBuilder;
                 }
 
 
                 public DefaultQueueingPipelineProcessDefinitionBuilder withPipelineToolClassName(string classname)
                 {
-                    _parentBuilder.pipelineNodeBuilder.node.ClassName = classname;
-                    _parentBuilder.pipelineNodeBuilder.tool.QueueingPipelineToolClassName = classname;
+                    _parentBuilder.UsePipelineNodeBuilder.node.ClassName = classname;
+                    _parentBuilder.UsePipelineNodeBuilder.tool.QueueingPipelineToolClassName = classname;
 
-                    _parentBuilder.pipelineNodeBuilder.node.NodeType = QueueingPipelineNodeType.PipelineTool;
+                    _parentBuilder.UsePipelineNodeBuilder.node.NodeType = QueueingPipelineNodeType.PipelineTool;
                     return _parentBuilder;
                 }
 
                 public DefaultQueueingPipelineProcessDefinitionBuilder withPipelineToolDescription(string description)
                 {
-                    _parentBuilder.pipelineNodeBuilder.tool.Description = description;
+                    _parentBuilder.UsePipelineNodeBuilder.tool.Description = description;
 
-                    _parentBuilder.pipelineNodeBuilder.node.NodeType = QueueingPipelineNodeType.PipelineTool;
+                    _parentBuilder.UsePipelineNodeBuilder.node.NodeType = QueueingPipelineNodeType.PipelineTool;
                     return _parentBuilder;
                 }
 
@@ -135,17 +135,17 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
                 /// <returns></returns>
                 private DefaultQueueingPipelineProcessDefinitionBuilder withPipelineToolInstanceId(string id)
                 {
-                    _parentBuilder.pipelineNodeBuilder.node.InstanceId = id;
+                    _parentBuilder.UsePipelineNodeBuilder.node.InstanceId = id;
 
-                    _parentBuilder.pipelineNodeBuilder.node.NodeType = QueueingPipelineNodeType.PipelineTool;
+                    _parentBuilder.UsePipelineNodeBuilder.node.NodeType = QueueingPipelineNodeType.PipelineTool;
                     return _parentBuilder;
                 }
 
                 public DefaultQueueingPipelineProcessDefinitionBuilder withPipelineToolPipelineVariable(PipelineVariable variables)
                 {
-                    _parentBuilder.pipelineNodeBuilder.tool.PipelineVariables.Add(variables);
+                    _parentBuilder.UsePipelineNodeBuilder.tool.PipelineVariables.Add(variables);
 
-                    _parentBuilder.pipelineNodeBuilder.node.NodeType = QueueingPipelineNodeType.PipelineTool;
+                    _parentBuilder.UsePipelineNodeBuilder.node.NodeType = QueueingPipelineNodeType.PipelineTool;
                     return _parentBuilder;
                 }
             }
