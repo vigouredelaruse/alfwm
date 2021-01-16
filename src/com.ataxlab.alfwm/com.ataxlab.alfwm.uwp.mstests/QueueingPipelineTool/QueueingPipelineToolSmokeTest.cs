@@ -1,5 +1,4 @@
-﻿using com.ataxlab.alfwm.core.collections;
-using com.ataxlab.alfwm.core.taxonomy.binding;
+﻿using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using com.ataxlab.alfwm.core.taxonomy.processdefinition;
@@ -10,20 +9,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using com.ataxlab.core.alfwm.utility.extension;
 using com.ataxlab.alfwm.core.taxonomy.pipeline.queueing;
-using Windows.UI.WebUI;
 using com.ataxlab.alfwm.core.taxonomy.binding.queue.routing;
 
 namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
@@ -147,12 +142,12 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
 
             var builder = new DefaultQueueingPipelineProcessDefinitionBuilder();
             var testEntity = builder
-                    .pipelineNodeBuilder.buildPipelineTool.withPipelineToolClassName(httpActivityNode.GetType().AssemblyQualifiedName)
-                    .pipelineNodeBuilder.buildPipelineTool.withPipelineToolDisplayName(httpActivityNode.QueueingPipelineTool.PipelineToolDisplayName)
-                    .pipelineNodeBuilder.buildPipelineTool.withPipelineToolId(httpActivityNode.QueueingPipelineTool.PipelineToolId)
+                    .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolClassName(httpActivityNode.GetType().AssemblyQualifiedName)
+                    .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDisplayName(httpActivityNode.QueueingPipelineTool.PipelineToolDisplayName)
+                    .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolId(httpActivityNode.QueueingPipelineTool.PipelineToolId)
                     //.buildPipelineTool.withPipelineToolInstanceId(httpActivityNode.QueueingPipelineTool.PipelineToolInstanceId)
-                    .pipelineNodeBuilder.buildPipelineTool.withPipelineToolPipelineVariable(testPipelineVariable)
-                    .pipelineNodeBuilder.withToolChainSlotNumber(0)
+                    .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolPipelineVariable(testPipelineVariable)
+                    .UsePipelineNodeBuilder.withToolChainSlotNumber(0)
                     .NextPipelineToolNode()
                     .Build(isMustResetBuilder);
 
