@@ -9,6 +9,28 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 {
+
+    /// <summary>
+    /// provides a ay to connect the gateway to other gateways via gateway hubs
+    /// </summary>
+    public interface IDefaultQueueingPipelineGatewayUplink<TEntity>
+    {
+        PipelineQueueingProducerChannel<TEntity> OutputPort { get; set; }
+
+        PipelineQueueingConsumerChannel<TEntity> InputPort { get; set; }
+    }
+
+    public class DefaultQueueingPipelineGatewayUplink : IDefaultQueueingPipelineGatewayUplink<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>
+    {
+        public DefaultQueueingPipelineGatewayUplink()
+        {
+
+        }
+
+        public PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> OutputPort { get; set; }
+        public PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> InputPort { get; set; }
+    }
+
     /// <summary>
     /// specify a gateway that interfaces pipelines
     /// </summary>
@@ -19,6 +41,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         DefaultQueueingChannelPipelineGatewayContext GatewayContext { get; set; }
         ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> DeadLetters { get; }
         ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> PipelineEgressPort { get; }
+        DefaultQueueingPipelineGatewayUplink FullDuplexUplinkChannel { get; set; }
     }
 
     public interface IDefaultQueueingChannelPipelineGateway<TInputEntity, TOutputEntity>
@@ -83,6 +106,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         public ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> InputPorts {get; set; }
 
         public ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> PipelineEgressPort { get; set; }
+        public DefaultQueueingPipelineGatewayUplink FullDuplexUplinkChannel { get; set; }
 
         public void HandleInputPortsCollectionChanged(NotifyCollectionChangedEventArgs e)
         {

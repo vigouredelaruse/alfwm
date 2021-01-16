@@ -23,12 +23,19 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
     /// a deployment container maps to a BPMN process
     /// and its subprocesses
     /// </summary>
-    public class DefaultQueueingPipelineNodeDeploymentContainer : IDefaultQueueingPipelineNodeDeploymentContainer
+	public class DefaultQueueingPipelineNodeDeploymentContainer : IDefaultQueueingPipelineNodeDeploymentContainer
     {
+        public DefaultQueueingPipelineNodeDeploymentContainer()
+        {
+            Deployments = new ObservableCollection<IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessDefinition>>();
+            ContainerId = Guid.NewGuid().ToString();
+            PipelineGateway = new DefaultQueueingChannelPipelineGateway();
+        }
+
         public ObservableCollection<IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessDefinition>> Deployments { get; set; }
         public string ContainerId { get; set; }
         public string DisplayName { get; set; }
         public string Description { get; set; }
-        public DefaultQueueingChannelPipelineGateway PipelineGateway {get; set; }
+        public DefaultQueueingChannelPipelineGateway PipelineGateway { get; set; }
     }
 }
