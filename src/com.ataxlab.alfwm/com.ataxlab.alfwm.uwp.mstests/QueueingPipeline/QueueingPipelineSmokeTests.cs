@@ -38,7 +38,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolClassName(typeof(HttpRequestQueueingActivity).GetType().AssemblyQualifiedName)
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDisplayName("test http queueing request activity");
 
-                                        
+            int i = 0;                             
         }
     }
 }
