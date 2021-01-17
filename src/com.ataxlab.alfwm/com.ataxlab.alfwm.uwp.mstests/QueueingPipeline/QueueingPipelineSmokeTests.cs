@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool;
 
 namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
 {
@@ -33,10 +34,35 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
         public void TestProcessDefinitionBuilder()
         {
             var builder = new DefaultQueueingPipelineProcessDefinitionBuilder();
+            var testPipelineVariable = new PipelineVariable(new TestDTO())
+            {
+                CreateDate = DateTime.UtcNow,
+                Description = "variable description",
+                DisplayName = "display name",
+                Key = "test1",
+                TimeStamp = DateTime.UtcNow,
+                ID = Guid.NewGuid().ToString()
+            };
 
+            bool isMustResetBuilder = true;
+
+            // exercise the process definition builder
             var testSerializedProcessDefinition = builder
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolClassName(typeof(HttpRequestQueueingActivity).GetType().AssemblyQualifiedName)
-                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDisplayName("test http queueing request activity");
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDisplayName("test http queueing request activity")
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolId(Guid.NewGuid().ToString())
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolPipelineVariable(testPipelineVariable)
+                        .UsePipelineNodeBuilder.withToolChainSlotNumber(0)
+                        .NextPipelineToolNode()
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolClassName(typeof(HtmlParserQueueingActivity).GetType().AssemblyQualifiedName)
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDisplayName("test html parser queueing request activity")
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolId(Guid.NewGuid().ToString())
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolPipelineVariable(testPipelineVariable)
+                        .UsePipelineNodeBuilder.withToolChainSlotNumber(1)
+                        .NextPipelineToolNode()
+                        .Build(isMustResetBuilder).ToXml();
+
+            var incarnateProcessDefinition = testSerializedProcessDefinition.DeSerializeObject<DefaultQueueingPipelineProcessDefinitionEntity>();
 
             int i = 0;                             
         }
