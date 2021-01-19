@@ -22,14 +22,24 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
 
         void ProvisionDeployment(IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessDefinition> deployment);
 
+        event EventHandler<QueueingPipelineNodeContainerDeploymentSuccededEventArgs> DeploymentSucceded;
+
         string ToXMl();
+    }
+
+    public class QueueingPipelineNodeContainerDeploymentSuccededEventArgs : EventArgs
+    {
+        public QueueingPipelineNodeContainerDeploymentSuccededEventArgs()
+        {
+
+        }
     }
 
     /// <summary>
     /// a deployment container maps to a BPMN process
     /// and its subprocesses
     /// </summary>
-	public class DefaultQueueingPipelineNodeDeploymentContainer : IDefaultQueueingPipelineNodeDeploymentContainer
+    public class DefaultQueueingPipelineNodeDeploymentContainer : IDefaultQueueingPipelineNodeDeploymentContainer
     {
         public DefaultQueueingPipelineNodeDeploymentContainer()
         {
@@ -55,9 +65,22 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         [XmlElement]
         public DefaultQueueingChannelPipelineGateway PipelineGateway { get; set; }
 
+        public event EventHandler<QueueingPipelineNodeContainerDeploymentSuccededEventArgs> DeploymentSucceded;
+
         public void ProvisionDeployment(IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessDefinition> deployment)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                // TODO distinguish between deployments and redeployments
+                Deployments.Add(deployment);
+                var eventArgs = new QueueingPipelineNodeContainerDeploymentSuccededEventArgs() { };
+                DeploymentSucceded?.Invoke(this, eventArgs);
+            }
+            catch(Exception e)
+            {
+                // TODO deployments can fail
+            }
         }
 
         public string ToXMl()
