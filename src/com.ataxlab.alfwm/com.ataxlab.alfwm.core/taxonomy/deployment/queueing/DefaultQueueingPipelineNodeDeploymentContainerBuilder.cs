@@ -7,7 +7,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
     public class DefaultQueueingPipelineNodeDeploymentContainerBuilder
     {
         private DefaultQueueingPipelineNodeDeploymentContainer container;
-        DefaultQueueingPipelineNodeDeploymentBuilder UseDeploymentBuilder;
+        public DefaultQueueingPipelineNodeDeploymentBuilder UseDeploymentBuilder;
 
         public DefaultQueueingPipelineNodeDeploymentContainerBuilder()
         {

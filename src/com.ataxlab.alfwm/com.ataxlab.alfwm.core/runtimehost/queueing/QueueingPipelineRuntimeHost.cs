@@ -15,7 +15,13 @@ namespace com.ataxlab.alfwm.core.runtimehost.queueing
     {
         public QueueingPipelineRuntimeHost()
         {
-            Context = new DefaultQueueingPipelineRuntimeHostContext();
+            // TODO introduce the MAC address into the context
+            Context = new DefaultQueueingPipelineRuntimeHostContext()
+            {
+                HostStartedAt = DateTime.UtcNow
+                
+                
+            };
             RuntimeHostId = Guid.NewGuid().ToString();
             DeployedContainers = new ConcurrentDictionary<string, IDefaultQueueingPipelineNodeDeploymentContainer>();
             GatewayHub = new DefaultQueueingChannelPipelineGateway();

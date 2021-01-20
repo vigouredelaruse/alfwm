@@ -149,7 +149,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                     .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolPipelineVariable(testPipelineVariable)
                     .UsePipelineNodeBuilder.withToolChainSlotNumber(0)
                     .NextPipelineToolNode()
-                    .Build(isMustResetBuilder);
+                    .BuildProcessDefinitionEntitiy(isMustResetBuilder);
 
             var testXml = testEntity.ToXml();
 

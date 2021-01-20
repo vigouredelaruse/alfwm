@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool;
+using com.ataxlab.alfwm.core.taxonomy.deployment.queueing;
 
 namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
 {
@@ -60,10 +61,11 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolPipelineVariable(testPipelineVariable)
                         .UsePipelineNodeBuilder.withToolChainSlotNumber(1)
                         .NextPipelineToolNode()
-                        .Build(isMustResetBuilder).ToXml();
+                        .BuildProcessDefinitionEntitiy(isMustResetBuilder).ToXml();
 
             var incarnateProcessDefinition = testSerializedProcessDefinition.DeSerializeObject<DefaultQueueingPipelineProcessDefinitionEntity>();
 
+            var testDeployment = new DefaultQueueingPipelineNodeDeploymentContainerBuilder();
             int i = 0;                             
         }
     }

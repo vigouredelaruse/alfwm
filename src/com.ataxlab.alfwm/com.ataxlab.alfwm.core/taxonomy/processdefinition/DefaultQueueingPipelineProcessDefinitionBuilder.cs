@@ -20,7 +20,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 
         public DefaultQueueingPipelineProcessDefinitionBuilder NextPipelineToolNode()
         {
-            var node = UsePipelineNodeBuilder.Build();
+            var node = UsePipelineNodeBuilder.BuildPipelineNodeEntity();
             processDefinition.QueueingPipelineNodes.Add(node);
 
             // reset the builder
@@ -28,9 +28,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
             return this;
         }
 
-        public DefaultQueueingPipelineProcessDefinitionEntity Build(bool isMustResetBuilder)
+        public DefaultQueueingPipelineProcessDefinitionEntity BuildProcessDefinitionEntitiy(bool isMustResetBuilder)
         {
-            var node = UsePipelineNodeBuilder.Build();
+            var node = UsePipelineNodeBuilder.BuildPipelineNodeEntity();
             processDefinition.QueueingPipelineNodes.Add(node);
 
             if(isMustResetBuilder)
@@ -40,6 +40,21 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
             }
 
             return processDefinition;
+        }
+
+        public DefaultQueueingPipelineProcessDefinition BuildProcessDefinition(bool isMustResetBuilder)
+        {
+            var retVal = new DefaultQueueingPipelineProcessDefinition();
+            var currentNode = UsePipelineNodeBuilder.BuildPipelineNodeEntity();
+            processDefinition.QueueingPipelineNodes.Add(currentNode);
+
+            if (isMustResetBuilder)
+            {
+                // reset the builder
+                UsePipelineNodeBuilder.Reset();
+            }
+
+            return retVal;
         }
 
         public class QueueingPipelineNodeBuilder
@@ -69,7 +84,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
             }
 
 
-            public QueueingPipelineNodeEntity Build()
+            public QueueingPipelineNodeEntity BuildPipelineNodeEntity()
             {
                 // add the nested classes
                 node.QueueingPipelineTool = tool;
