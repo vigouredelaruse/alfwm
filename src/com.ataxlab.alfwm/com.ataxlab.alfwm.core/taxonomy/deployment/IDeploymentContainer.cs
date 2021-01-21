@@ -1,4 +1,6 @@
 ﻿using com.ataxlab.alfwm.core.deployment.model;
+using com.ataxlab.alfwm.core.taxonomy.deployment.queueing;
+using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,13 +8,23 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.deployment
 {
-    public interface IDeploymentNode<TDeployment, TProcessDefinition>
+    public interface IDeploymentNode<TDeployment, TProcessInstance>
     {
-        Tuple<TDeployment, TProcessDefinition> Value { get; set; }
+        Tuple<TDeployment, TProcessInstance> Value { get; set; }
 
     }
 
-    public class DefaultDeploymentNode<TDeployment, TProcessDefinition> : IDeploymentNode<TDeployment, TProcessDefinition>
+    public interface IDefaultDeploymentNode : IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>
+    {
+
+    }
+
+    public class DefaultDeploymentNode : IDefaultDeploymentNode
+    {
+        public Tuple<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance> Value { get; set; }
+    }
+
+    public class DefaultDeploymentNode<TDeployment, TProcessInstance> : IDeploymentNode<TDeployment, TProcessInstance>
     {
 
         public DefaultDeploymentNode()
@@ -20,7 +32,7 @@ namespace com.ataxlab.alfwm.core.deployment
 
         }
 
-        public Tuple<TDeployment, TProcessDefinition> Value {get; set;}
+        public Tuple<TDeployment, TProcessInstance> Value {get; set;}
     }
 
     /// <summary>
@@ -44,14 +56,20 @@ namespace com.ataxlab.alfwm.core.deployment
     /// specify a mechanism for a runtimer container for deployments
     /// </summary>
     /// <typeparam name="TDeployment"></typeparam>
-    /// <typeparam name="TProcessDefinition"></typeparam>
+    /// <typeparam name="TProcessInstance"></typeparam>
     /// <typeparam name="TDeploymentStatus"></typeparam>
-    public interface IDeploymentContainer<TDeployment, TProcessDefinition>
+    public interface IDeploymentContainer<TDeployment, TProcessInstance>
         : IDeploymentContainer 
         //where TProcessDefinition : class
         //where TDeployment : class
 
     {
-        ObservableCollection<IDeploymentNode<TDeployment, TProcessDefinition>> Deployments { get; set; }
+        ObservableCollection<IDeploymentNode<TDeployment, TProcessInstance>> Deployments { get; set; }
     }
+
+    public interface IDeploymentContainer<TDeploymentContainerNode> : IDeploymentContainer
+    {
+        ObservableCollection<TDeploymentContainerNode> Deployments { get; set; }
+    }
+
 }

@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool;
 using com.ataxlab.alfwm.core.taxonomy.deployment.queueing;
 using AutoMapper;
+using com.ataxlab.alfwm.core.deployment;
 
 namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
 {
@@ -49,7 +50,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
             bool isMustResetBuilder = true;
 
             // exercise the process definition builder
-            var testSerializedProcessDefinition = builder
+            var testProcessdefinition = builder
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolClassName(typeof(HttpRequestQueueingActivity).GetType().AssemblyQualifiedName)
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDisplayName("test http queueing request activity")
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolId(Guid.NewGuid().ToString())
@@ -62,9 +63,23 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolPipelineVariable(testPipelineVariable)
                         .UsePipelineNodeBuilder.withToolChainSlotNumber(1)
                         .NextPipelineToolNode()
-                        .BuildProcessDefinitionEntitiy(isMustResetBuilder).ToXml();
+                        .BuildProcessDefinitionEntitiy(isMustResetBuilder);
 
-            var testDeployment = new DefaultQueueingPipelineNodeDeploymentContainerBuilder();
+            // spin up a deployment to encapsulate the process definition
+            var testDeployment = new DefaultQueueingPipelineNodeDeployment();
+
+            testDeployment.DeployProcessDefinition(testProcessdefinition);
+
+            // spin up a deployment node
+            DefaultDeploymentNode deploymentNode = new DefaultDeploymentNode();
+            deploymentNode.Value = new Tuple<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>(
+                testDeployment, testDeployment.ProcessDefinitionInstance
+                ); 
+            // spin up a deployment container to encapsulate multiple process definitions
+            var testContainer = new DefaultQueueingPipelineNodeDeploymentContainer();
+            testContainer.ProvisionDeployment(testDeployment);
+
+            testContainer.ProvisionDeployment(deploymentNode);
             int i = 0;                             
         }
     }

@@ -1,6 +1,7 @@
 ﻿using com.ataxlab.alfwm.core.deployment.model;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using com.ataxlab.alfwm.core.taxonomy.pipeline.queueing;
+using com.ataxlab.alfwm.core.taxonomy.processdefinition;
 using com.ataxlab.core.alfwm.utility.extension;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
     {
 
         DefaultQueueingPipelineNodeDeploymentContext DeploymentContext { get; set; }
+        DefaultPipelineNodeQueueingPipeline DeployedPipeline { get; set; }
+         
+        DefaultQueueingPipelineProcessDefinitionEntity DeployedProcessDefinition { get; set; }
+
+        void DeployProcessDefinition(DefaultQueueingPipelineProcessDefinitionEntity processDefinition);
 
         String ToXml();
 
@@ -43,6 +49,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         public DefaultQueueingPipelineNodeDeployment()
         {
             DeploymentContext = new DefaultQueueingPipelineNodeDeploymentContext();
+            DeployedPipeline = new DefaultPipelineNodeQueueingPipeline();
             DeploymentId = Guid.NewGuid().ToString();
             InstanceId = Guid.NewGuid().ToString();
         }
@@ -52,17 +59,35 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             this.DeploymentContext = ctx;
         }
 
+
+        [XmlElement]
+        public DefaultPipelineNodeQueueingPipeline DeployedPipeline { get; set; }
+
+
         [XmlAttribute]
         public DefaultQueueingPipelineNodeDeploymentContext DeploymentContext { get; set;}
 
         [XmlElement]
-        public IDefaultQueueingPipelineProcessInstance ProcessDefinition { get; set;}
+        public IDefaultQueueingPipelineProcessInstance ProcessDefinitionInstance { get; set;}
 
         [XmlAttribute]
         public string DeploymentId { get; set;}
 
         [XmlAttribute]
         public string InstanceId { get; set;}
+
+        [XmlElement]
+        public DefaultQueueingPipelineProcessDefinitionEntity DeployedProcessDefinition { get; set;}
+
+        /// <summary>
+        /// primary api for deploying process definitions to pipelines
+        /// </summary>
+        /// <param name="processDefinition"></param>
+        public void DeployProcessDefinition(DefaultQueueingPipelineProcessDefinitionEntity processDefinition)
+        {
+            // TODO - here we must apply auditing to events coming from the pipeline
+            this.DeployedPipeline?.Deploy(processDefinition);
+        }
 
         public string ToXml()
         {

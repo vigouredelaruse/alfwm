@@ -1,6 +1,7 @@
 ﻿using com.ataxlab.alfwm.core.deployment;
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
+using com.ataxlab.alfwm.core.taxonomy.processdefinition;
 using com.ataxlab.core.alfwm.utility.extension;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,15 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
     /// <summary>
     /// specifies the interface for a container of 1 or more Process definition deployments
     /// </summary>
-    public interface IDefaultQueueingPipelineNodeDeploymentContainer : IDeploymentContainer<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>
+    public interface IDefaultQueueingPipelineNodeDeploymentContainer : IDeploymentContainer<IDefaultDeploymentNode>//  IDeploymentContainer<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>
     {
         /// <summary>
         /// specify the mechanism whereby pipelines can send messages to each other
         /// </summary>
         DefaultQueueingChannelPipelineGateway PipelineGateway { get; set; }
 
-        void ProvisionDeployment(IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance> deployment);
+
+        void ProvisionDeployment(IDefaultDeploymentNode deployment);
 
         event EventHandler<QueueingPipelineNodeContainerDeploymentSuccededEventArgs> DeploymentSucceded;
 
@@ -43,14 +45,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
     {
         public DefaultQueueingPipelineNodeDeploymentContainer()
         {
-            Deployments = new ObservableCollection<IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>>();
+            Deployments = new ObservableCollection<IDefaultDeploymentNode>();
             ContainerId = Guid.NewGuid().ToString();
             PipelineGateway = new DefaultQueueingChannelPipelineGateway();
         }
 
 
-        [XmlElement]
-        public ObservableCollection<IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>> Deployments { get; set; }
+        //[XmlElement]
+        //public ObservableCollection<IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>> Deployments { get; set; }
 
         [XmlAttribute]
         public string ContainerId { get; set; }
@@ -64,28 +66,55 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
 
         [XmlElement]
         public DefaultQueueingChannelPipelineGateway PipelineGateway { get; set; }
+        public ObservableCollection<IDefaultDeploymentNode> Deployments { get; set; }
 
         public event EventHandler<QueueingPipelineNodeContainerDeploymentSuccededEventArgs> DeploymentSucceded;
 
-        public void ProvisionDeployment(IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance> deployment)
+        public string ToXMl()
+        {
+            return this.SerializeObject<DefaultQueueingPipelineNodeDeploymentContainer>();
+        }
+
+
+        public void ProvisionDeployment(IDefaultDeploymentNode deployment)
         {
 
             try
             {
                 // TODO distinguish between deployments and redeployments
+                // wire gateway to deployed pipeline
                 Deployments.Add(deployment);
                 var eventArgs = new QueueingPipelineNodeContainerDeploymentSuccededEventArgs() { };
                 DeploymentSucceded?.Invoke(this, eventArgs);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 // TODO deployments can fail
             }
         }
 
-        public string ToXMl()
+
+        public void ProvisionDeployment(DefaultQueueingPipelineNodeDeployment deployment)
         {
-            return this.SerializeObject<DefaultQueueingPipelineNodeDeploymentContainer>();
+            try
+            {                
+                
+                // TODO distinguish between deployments and redeployments
+                // wire gateway to deployed pipeline
+                var deploymentNode = new DefaultDeploymentNode()
+                {
+                    Value = new Tuple<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>(deployment, deployment.ProcessDefinitionInstance)
+                };
+
+                // TODO distinguish between deployments and redeployments
+                Deployments.Add(deploymentNode);
+                var eventArgs = new QueueingPipelineNodeContainerDeploymentSuccededEventArgs() { };
+                DeploymentSucceded?.Invoke(this, eventArgs);
+            }
+            catch (Exception e)
+            {
+                // TODO deployments can fail
+            }
         }
     }
 }

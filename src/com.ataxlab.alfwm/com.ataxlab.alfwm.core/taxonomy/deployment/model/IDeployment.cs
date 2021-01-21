@@ -1,8 +1,8 @@
 ﻿namespace com.ataxlab.alfwm.core.deployment.model
 {
-    public interface IDeployment<TProcessDefinition>
+    public interface IDeployment<TProcessInstance>
     {
-        TProcessDefinition ProcessDefinition { get; set; }
+        TProcessInstance ProcessDefinitionInstance { get; set; }
         string DeploymentId { get; set; }
         string InstanceId { get; set; }
     }

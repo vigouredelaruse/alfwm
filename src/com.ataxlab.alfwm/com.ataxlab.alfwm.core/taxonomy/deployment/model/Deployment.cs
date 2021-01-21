@@ -32,7 +32,7 @@ namespace com.ataxlab.alfwm.core.deployment.model
         /// a suitable collection of process definition elements
         /// probably a tree or even a linked list
         /// </summary>
-        public TProcessDefinition ProcessDefinition { get; set; }
+        public TProcessDefinition ProcessDefinitionInstance { get; set; }
 
         public TDeploymentStatus DeploymentStatus { get; set; }
         public string DeploymentId { get; set; }
