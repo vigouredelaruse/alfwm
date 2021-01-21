@@ -50,7 +50,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             return _parentBuilder;
         }
 
-        public DefaultQueueingPipelineNodeDeploymentContainerBuilder WithProcessDefinition(IDefaultQueueingPipelineProcessDefinition processDefinition)
+        public DefaultQueueingPipelineNodeDeploymentContainerBuilder WithProcessDefinition(IDefaultQueueingPipelineProcessInstance processDefinition)
         {
             deployment.ProcessDefinition = processDefinition;
             return _parentBuilder;

@@ -13,14 +13,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
     /// <summary>
     /// specifies the interface for a container of 1 or more Process definition deployments
     /// </summary>
-    public interface IDefaultQueueingPipelineNodeDeploymentContainer : IDeploymentContainer<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessDefinition>
+    public interface IDefaultQueueingPipelineNodeDeploymentContainer : IDeploymentContainer<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>
     {
         /// <summary>
         /// specify the mechanism whereby pipelines can send messages to each other
         /// </summary>
         DefaultQueueingChannelPipelineGateway PipelineGateway { get; set; }
 
-        void ProvisionDeployment(IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessDefinition> deployment);
+        void ProvisionDeployment(IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance> deployment);
 
         event EventHandler<QueueingPipelineNodeContainerDeploymentSuccededEventArgs> DeploymentSucceded;
 
@@ -43,14 +43,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
     {
         public DefaultQueueingPipelineNodeDeploymentContainer()
         {
-            Deployments = new ObservableCollection<IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessDefinition>>();
+            Deployments = new ObservableCollection<IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>>();
             ContainerId = Guid.NewGuid().ToString();
             PipelineGateway = new DefaultQueueingChannelPipelineGateway();
         }
 
 
         [XmlElement]
-        public ObservableCollection<IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessDefinition>> Deployments { get; set; }
+        public ObservableCollection<IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>> Deployments { get; set; }
 
         [XmlAttribute]
         public string ContainerId { get; set; }
@@ -67,7 +67,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
 
         public event EventHandler<QueueingPipelineNodeContainerDeploymentSuccededEventArgs> DeploymentSucceded;
 
-        public void ProvisionDeployment(IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessDefinition> deployment)
+        public void ProvisionDeployment(IDeploymentNode<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance> deployment)
         {
 
             try

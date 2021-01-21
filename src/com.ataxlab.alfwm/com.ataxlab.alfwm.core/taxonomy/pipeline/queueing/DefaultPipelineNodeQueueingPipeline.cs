@@ -21,7 +21,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
     {
         public DefaultPipelineNodeQueueingPipeline()
         {
-            ProcessDefinition = new DefaultQueueingPipelineProcessDefinition();
+            ProcessDefinition = new DefaultQueueingPipelineProcessInstance();
             PipelineId = Guid.NewGuid().ToString();
             PipelineDisplayName = GetType().Name;
             PipelineInstanceId = Guid.NewGuid().ToString();
@@ -49,7 +49,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
         /// </summary>
         public IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
 
-        public IDefaultQueueingPipelineProcessDefinition ProcessDefinition { get; set; }
+        public IDefaultQueueingPipelineProcessInstance ProcessDefinition { get; set; }
         public ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingPipelineInputs {get; set; }
         public ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingPipelineOutputs {get; set; }
 
@@ -91,7 +91,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
 
 
                     // instantiate the pipeline tool's pipeline variables
-                    foreach (var item in node.QueueingPipelineTool.PipelineVariables)
+                    foreach (var item in node.QueueingPipelineTool.PipelineToolVariables)
                     {
 
                         ((IDefaultQueueingPipelineTool)newTool).PipelineToolVariables.Add(item);
@@ -261,7 +261,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
             PipelineStarted?.Invoke(sender, args);
         }
 
-        public void StartPipeline(IDefaultQueueingPipelineProcessDefinition configuration)
+        public void StartPipeline(IDefaultQueueingPipelineProcessInstance configuration)
         {
         }
 

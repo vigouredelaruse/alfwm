@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -52,28 +53,28 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
     {
         public QueueingPipelineToolEntity()
         {
-            PipelineVariables = new List<PipelineVariable>();
+            PipelineToolVariables = new ObservableCollection<PipelineVariable>();
         }
 
 
         [XmlArray("PipelineVariables")]
 
         [XmlArrayItem("PipelineVariable", typeof(PipelineVariable))]
-        public List<PipelineVariable> PipelineVariables { get; set; }
+        public ObservableCollection<PipelineVariable> PipelineToolVariables { get; set; }
 
         [XmlAttribute]
         public string QueueingPipelineToolClassName { get; set; }
 
 
         [XmlAttribute]
-        public string DisplayName { get; set; }
+        public string PipelineToolDisplayName { get; set; }
 
 
         [XmlAttribute]
-        public string Id { get; set; }
+        public string PipelineToolId { get; set; }
 
         [XmlAttribute]
-        public string Description { get; set; }
+        public string PipelineToolDescription { get; set; }
     }
 
     [XmlType("QueueingPipelineNode")]
@@ -115,6 +116,16 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
             QueueingPipelineNodes = new List<QueueingPipelineNodeEntity>();
         }
 
+        [XmlAttribute]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// enforce the idea that the enum defines the applicable payload properties
+        /// </summary>
+        [XmlIgnore]
+        public LinkedList<Tuple<DefaultQueueingPipelineNodeTypeEnum, DefaultQueueingPipelineToolNode>> QueueingPipelineTuples { get; set; }
+
+
         [XmlArray("QueueingPipelineNodes")]
 
         [XmlArrayItem("QueueingPipelineNode", typeof(QueueingPipelineNodeEntity))]
@@ -130,11 +141,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
     /// a dictionary of specialized IPipelineTools
     /// </summary>
     /// <typeparam name="TConfiguration"></typeparam>
-    public class DefaultQueueingPipelineProcessDefinition : IDefaultQueueingPipelineProcessDefinition
+    public class DefaultQueueingPipelineProcessInstance : IDefaultQueueingPipelineProcessInstance
 
     {
 
-        public DefaultQueueingPipelineProcessDefinition()
+        public DefaultQueueingPipelineProcessInstance()
         {
 
             QueueingPipelineNodes = new LinkedList<DefaultQueueingPipelineToolNode>();

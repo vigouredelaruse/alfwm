@@ -14,7 +14,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
     /// furnish a queueing specialization of 
     /// the pipeline interface
     /// </summary>
-    public interface IDefaultQueueingPipeline : IPipeline<IDefaultQueueingPipelineProcessDefinition>
+    public interface IDefaultQueueingPipeline : IPipeline<IDefaultQueueingPipelineProcessInstance>
     {
         #region pipeline toolchain input
         PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }

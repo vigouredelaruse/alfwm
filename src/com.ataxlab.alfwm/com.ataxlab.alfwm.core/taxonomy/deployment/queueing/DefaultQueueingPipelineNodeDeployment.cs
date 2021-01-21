@@ -26,7 +26,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
 
     }
 
-    public interface IDefaultQueueingPipelineNodeDeployment : IDeployment<IDefaultQueueingPipelineProcessDefinition>
+    public interface IDefaultQueueingPipelineNodeDeployment : IDeployment<IDefaultQueueingPipelineProcessInstance>
     {
 
         DefaultQueueingPipelineNodeDeploymentContext DeploymentContext { get; set; }
@@ -56,7 +56,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         public DefaultQueueingPipelineNodeDeploymentContext DeploymentContext { get; set;}
 
         [XmlElement]
-        public IDefaultQueueingPipelineProcessDefinition ProcessDefinition { get; set;}
+        public IDefaultQueueingPipelineProcessInstance ProcessDefinition { get; set;}
 
         [XmlAttribute]
         public string DeploymentId { get; set;}

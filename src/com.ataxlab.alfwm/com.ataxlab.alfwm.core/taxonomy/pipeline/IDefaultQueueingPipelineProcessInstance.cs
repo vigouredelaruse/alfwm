@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 {
-    public interface IDefaultQueueingPipelineProcessDefinition
+    public interface IDefaultQueueingPipelineProcessInstance
     {
         [XmlAttribute]
         string Id { get; set; }

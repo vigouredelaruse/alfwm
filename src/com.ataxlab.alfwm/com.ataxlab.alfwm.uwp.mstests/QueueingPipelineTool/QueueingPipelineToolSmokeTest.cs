@@ -167,10 +167,10 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                             QueueingPipelineTool = new QueueingPipelineToolEntity()
                             {
                                  QueueingPipelineToolClassName = httpActivityNode.QueueingPipelineTool.GetType().AssemblyQualifiedName,
-                                 DisplayName = httpActivityNode.QueueingPipelineTool.PipelineToolDisplayName,
-                                 Id = httpActivityNode.QueueingPipelineTool.PipelineToolId,
-                                 Description = httpActivityNode.QueueingPipelineTool.PipelineToolDescription,
-                                PipelineVariables = new List<PipelineVariable> { testPipelineVariable }
+                                 PipelineToolDisplayName = httpActivityNode.QueueingPipelineTool.PipelineToolDisplayName,
+                                 PipelineToolId = httpActivityNode.QueueingPipelineTool.PipelineToolId,
+                                 PipelineToolDescription = httpActivityNode.QueueingPipelineTool.PipelineToolDescription,
+                                PipelineToolVariables = new System.Collections.ObjectModel.ObservableCollection<PipelineVariable> { testPipelineVariable }
 
                             },
                             ToolChainSlotNumber = 0
@@ -189,10 +189,10 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                         {
 
                             QueueingPipelineToolClassName = htmlParserNode.QueueingPipelineTool.GetType().AssemblyQualifiedName,
-                            DisplayName = htmlParserNode.QueueingPipelineTool.PipelineToolDisplayName,
-                            Id = htmlParserNode.QueueingPipelineTool.PipelineToolId,
-                            Description = htmlParserNode.QueueingPipelineTool.PipelineToolDescription,
-                            PipelineVariables = new List<PipelineVariable>() { testPipelineVariable2 }
+                            PipelineToolDisplayName = htmlParserNode.QueueingPipelineTool.PipelineToolDisplayName,
+                            PipelineToolId = htmlParserNode.QueueingPipelineTool.PipelineToolId,
+                            PipelineToolDescription = htmlParserNode.QueueingPipelineTool.PipelineToolDescription,
+                            PipelineToolVariables = new System.Collections.ObjectModel.ObservableCollection<PipelineVariable> { testPipelineVariable2 }
                         },
                         ToolChainSlotNumber = 1
 
@@ -221,7 +221,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                 // validate we materialized the pipelinevariables
 
                 var sourceVariable = htmlParserActivity.PipelineToolVariables[0].JsonValue.Trim();
-                var materializedVariable = incarnateProcessDefinition.QueueingPipelineNodes[1].QueueingPipelineTool.PipelineVariables[0].JsonValue.Trim();
+                var materializedVariable = incarnateProcessDefinition.QueueingPipelineNodes[1].QueueingPipelineTool.PipelineToolVariables[0].JsonValue.Trim();
 
                 // note this is an inaccurate test
                 // TODO activate the objects and compare those

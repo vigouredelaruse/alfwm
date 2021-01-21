@@ -8,7 +8,7 @@ using System.Text;
 namespace com.ataxlab.alfwm.core.taxonomy.managers.pipeline.queueing
 {
     public interface IDefaultQueueingPipelineNodePipelineManager : 
-        IDeploymentContainer<IDefaultQueueingPipeline, IDefaultQueueingPipelineProcessDefinition>
+        IDeploymentContainer<IDefaultQueueingPipeline, IDefaultQueueingPipelineProcessInstance>
     {
         Dictionary<string, IDefaultQueueingPipeline> Pipelines { get; set; }
     }
