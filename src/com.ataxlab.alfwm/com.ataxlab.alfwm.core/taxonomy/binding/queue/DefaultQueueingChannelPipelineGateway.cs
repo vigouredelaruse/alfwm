@@ -25,7 +25,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     {
         public DefaultQueueingPipelineGatewayUplink()
         {
-
+            OutputPort = new PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+            InputPort = new PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
         }
 
         public PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> OutputPort { get; set; }
@@ -77,7 +78,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         {
             Id = Guid.NewGuid().ToString();           
             DeadLetters = new ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
- 
+            PipelineEgressPort = new ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+            FullDuplexUplinkChannel = new DefaultQueueingPipelineGatewayUplink();
+            GatewayContext = new DefaultQueueingChannelPipelineGatewayContext();
+
             OutputPorts = new ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
             InputPorts = new ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
 

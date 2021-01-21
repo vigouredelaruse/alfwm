@@ -10,7 +10,7 @@ namespace com.ataxlab.alfwm.core.deployment
 {
     public interface IDeploymentNode<TDeployment, TProcessInstance>
     {
-        Tuple<TDeployment, TProcessInstance> Value { get; set; }
+        Tuple<TDeployment, TProcessInstance> Payload { get; set; }
 
     }
 
@@ -19,9 +19,12 @@ namespace com.ataxlab.alfwm.core.deployment
 
     }
 
+    /// <summary>
+    /// furnish a materialized DeploymentNode with a convenience interface specification
+    /// </summary>
     public class DefaultDeploymentNode : IDefaultDeploymentNode
     {
-        public Tuple<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance> Value { get; set; }
+        public Tuple<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance> Payload { get; set; }
     }
 
     public class DefaultDeploymentNode<TDeployment, TProcessInstance> : IDeploymentNode<TDeployment, TProcessInstance>
@@ -32,7 +35,7 @@ namespace com.ataxlab.alfwm.core.deployment
 
         }
 
-        public Tuple<TDeployment, TProcessInstance> Value {get; set;}
+        public Tuple<TDeployment, TProcessInstance> Payload {get; set;}
     }
 
     /// <summary>

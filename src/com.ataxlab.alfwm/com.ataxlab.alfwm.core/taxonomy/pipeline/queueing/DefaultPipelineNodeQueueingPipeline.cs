@@ -47,7 +47,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
         /// <summary>
         /// egresses messages from the terminal node of the pipeline
         /// </summary>
-        public IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
+        public PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
 
         public IDefaultQueueingPipelineProcessInstance ProcessDefinition { get; set; }
         public ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingPipelineInputs {get; set; }

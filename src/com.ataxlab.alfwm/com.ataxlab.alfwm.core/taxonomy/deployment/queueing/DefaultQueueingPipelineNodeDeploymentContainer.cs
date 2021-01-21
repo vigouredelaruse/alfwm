@@ -83,6 +83,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             {
                 // TODO distinguish between deployments and redeployments
                 // wire gateway to deployed pipeline
+                // set container id
+                deployment.Payload.Item1.DeploymentContext.CurrentDeploymentContainerId = this.ContainerId;
+                // this.PipelineGateway.OutputPorts.Add(deployment.Payload.Item1.DeployedPipeline.QueueingInputBinding);
                 Deployments.Add(deployment);
                 var eventArgs = new QueueingPipelineNodeContainerDeploymentSuccededEventArgs() { };
                 DeploymentSucceded?.Invoke(this, eventArgs);
@@ -103,7 +106,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
                 // wire gateway to deployed pipeline
                 var deploymentNode = new DefaultDeploymentNode()
                 {
-                    Value = new Tuple<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>(deployment, deployment.ProcessDefinitionInstance)
+                    Payload = new Tuple<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>(deployment, deployment.ProcessDefinitionInstance)
                 };
 
                 // TODO distinguish between deployments and redeployments

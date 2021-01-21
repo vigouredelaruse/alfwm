@@ -19,6 +19,7 @@ using com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool;
 using com.ataxlab.alfwm.core.taxonomy.deployment.queueing;
 using AutoMapper;
 using com.ataxlab.alfwm.core.deployment;
+using com.ataxlab.alfwm.core.runtimehost.queueing;
 
 namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
 {
@@ -36,7 +37,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
         [TestMethod]
         public void TestProcessDefinitionBuilder()
         {
-            var builder = new DefaultQueueingPipelineProcessDefinitionBuilder();
+            var testProcessDefinitionBuilder = new DefaultQueueingPipelineProcessDefinitionBuilder();
             var testPipelineVariable = new PipelineVariable(new TestDTO())
             {
                 CreateDate = DateTime.UtcNow,
@@ -50,36 +51,58 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
             bool isMustResetBuilder = true;
 
             // exercise the process definition builder
-            var testProcessdefinition = builder
+            var testProcessdefinition = testProcessDefinitionBuilder
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolClassName(typeof(HttpRequestQueueingActivity).GetType().AssemblyQualifiedName)
-                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDisplayName("test http queueing request activity")
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDisplayName("test http queueing request activity displayname")
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDescription("test http queueing request activity description")
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolId(Guid.NewGuid().ToString())
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolPipelineVariable(testPipelineVariable)
                         .UsePipelineNodeBuilder.withToolChainSlotNumber(0)
                         .NextPipelineToolNode()
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolClassName(typeof(HtmlParserQueueingActivity).GetType().AssemblyQualifiedName)
-                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDisplayName("test html parser queueing request activity")
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDisplayName("test html parser queueing request activity displayname")
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDescription("test html parser queueing request activity description")
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolId(Guid.NewGuid().ToString())
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolPipelineVariable(testPipelineVariable)
                         .UsePipelineNodeBuilder.withToolChainSlotNumber(1)
                         .NextPipelineToolNode()
                         .BuildProcessDefinitionEntitiy(isMustResetBuilder);
 
+            Assert.IsNotNull(testProcessdefinition, "process definition builder failed - null process definition");
+            Assert.IsTrue(testProcessdefinition.QueueingPipelineNodes.Count == 2, "process builder failed - incorrect number of pipelinetool nodes");
+
+           
             // spin up a deployment to encapsulate the process definition
             var testDeployment = new DefaultQueueingPipelineNodeDeployment();
 
             testDeployment.DeployProcessDefinition(testProcessdefinition);
 
             // spin up a deployment node
-            DefaultDeploymentNode deploymentNode = new DefaultDeploymentNode();
-            deploymentNode.Value = new Tuple<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>(
-                testDeployment, testDeployment.ProcessDefinitionInstance
-                ); 
+            DefaultDeploymentNode testDeploymentNode = new DefaultDeploymentNode()
+            {
+                Payload = new Tuple<IDefaultQueueingPipelineNodeDeployment, IDefaultQueueingPipelineProcessInstance>
+                                (testDeployment, testDeployment.ProcessDefinitionInstance)
+            };
+            
             // spin up a deployment container to encapsulate multiple process definitions
-            var testContainer = new DefaultQueueingPipelineNodeDeploymentContainer();
-            testContainer.ProvisionDeployment(testDeployment);
+            var testContainer = new DefaultQueueingPipelineNodeDeploymentContainer()
+            {
+                 Description = "test deployment container description",
+                 DisplayName = "test deployment container display name"
+            };
+            //testContainer.ProvisionDeployment(testDeployment);
 
-            testContainer.ProvisionDeployment(deploymentNode);
+            testContainer.ProvisionDeployment(testDeploymentNode);
+
+            // validate the deployment container context is valid
+            Assert.IsTrue(testDeployment.DeploymentContext.CurrentDeploymentContainerId.Equals(testContainer.ContainerId)
+                , "deployment failed - incorrect container context");
+
+            var testRunHost = new QueueingPipelineRuntimeHost()
+            {
+                RuntimeHostDisplayName = "Test Runtime Host"
+            };
+
             int i = 0;                             
         }
     }

@@ -32,8 +32,6 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
 
         public DefaultQueueingPipelineProcessDefinitionEntity BuildProcessDefinitionEntitiy(bool isMustResetBuilder)
         {
-            var node = UsePipelineNodeBuilder.BuildPipelineNodeEntity();
-            processDefinition.QueueingPipelineNodes.Add(node);
 
             if(isMustResetBuilder)
             {

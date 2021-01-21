@@ -18,7 +18,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
     {
         #region pipeline toolchain input
         PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingInputBinding { get; set; }
-        IQueueProducerPipelineToolBinding<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
+        PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
         #endregion pipeline toolchain input
 
         #region pipeline interconnects

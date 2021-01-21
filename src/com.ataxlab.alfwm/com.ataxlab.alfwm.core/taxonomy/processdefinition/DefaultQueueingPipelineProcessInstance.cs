@@ -38,7 +38,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
     {
         public DefaultQueueingChannelPipelineToolGatewayEntity()
         {
-
+            GatewayContext = new DefaultQueueingChannelPipelineToolGatewayContextEntity();
         }
 
         [XmlElement]
@@ -54,6 +54,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
         public QueueingPipelineToolEntity()
         {
             PipelineToolVariables = new ObservableCollection<PipelineVariable>();
+            PipelineToolId = Guid.NewGuid().ToString();
         }
 
 
@@ -82,7 +83,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
     {
         public QueueingPipelineNodeEntity()
         {
-
+            InstanceId = Guid.NewGuid().ToString();
+            QueueingPipelineToolGateway = new DefaultQueueingChannelPipelineToolGatewayEntity();
         }
 
         [XmlAttribute]
@@ -114,6 +116,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.processdefinition
         public DefaultQueueingPipelineProcessDefinitionEntity()
         {
             QueueingPipelineNodes = new List<QueueingPipelineNodeEntity>();
+            Id = Guid.NewGuid().ToString();
         }
 
         [XmlAttribute]

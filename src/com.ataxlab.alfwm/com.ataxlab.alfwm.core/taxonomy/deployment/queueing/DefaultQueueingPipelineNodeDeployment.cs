@@ -86,7 +86,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         public void DeployProcessDefinition(DefaultQueueingPipelineProcessDefinitionEntity processDefinition)
         {
             // TODO - here we must apply auditing to events coming from the pipeline
+            // deploy the process definition to the pipeline
             this.DeployedPipeline?.Deploy(processDefinition);
+            // cache the process definition
+            this.DeployedProcessDefinition = processDefinition;
         }
 
         public string ToXml()
