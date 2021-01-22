@@ -95,9 +95,9 @@ namespace com.ataxlab.alfwm.core.runtimehost.queueing
 
             // wire the deployed container's gateway input port to the output ports collection of the hub gateway
             // and vice versa
-            this.GatewayHub.OutputPorts.Add(container.PipelineGateway.FullDuplexUplinkChannel.InputPort);
+            //this.GatewayHub.OutputPorts.Add(container.PipelineGateway.FullDuplexUplinkChannel.InputPort);
 
-            this.GatewayHub.InputPorts.Add(container.PipelineGateway.FullDuplexUplinkChannel.OutputPort);
+            //this.GatewayHub.InputPorts.Add(container.PipelineGateway.FullDuplexUplinkChannel.OutputPort);
         }
 
         /// <summary>

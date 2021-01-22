@@ -289,8 +289,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
                     new DefaultQueueingChannelPipelineGateway(testCtx);
 
                 // create producer and consumer channels and wire them to the gateway
-                var producerChannel_PipelineGatewaySmokeTest = new PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
-                var consumerChannel_PipelineGatewaySmokeTest = new PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+                var producerChannel_PipelineGatewaySmokeTest = new PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+                var consumerChannel_PipelineGatewaySmokeTest = new PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
                 testGateway.InputPorts.Add(producerChannel_PipelineGatewaySmokeTest);
 
                 testGateway.OutputPorts.Add(consumerChannel_PipelineGatewaySmokeTest);

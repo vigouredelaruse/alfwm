@@ -35,6 +35,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         {
 
         }
+
+        public DateTime DeploymentSucceededAt { get; set; }
     }
 
     /// <summary>
@@ -76,7 +78,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         }
 
 
-        public void ProvisionDeployment(IDefaultDeploymentNode deployment)
+        public void ProvisionDeployment(IDefaultDeploymentNode deploymentNode)
         {
 
             try
@@ -84,11 +86,13 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
                 // TODO distinguish between deployments and redeployments
                 // wire gateway to deployed pipeline
                 // set container id
-                deployment.Payload.Item1.DeploymentContext.CurrentDeploymentContainerId = this.ContainerId;
-                // this.PipelineGateway.OutputPorts.Add(deployment.Payload.Item1.DeployedPipeline.QueueingInputBinding);
-                Deployments.Add(deployment);
-                var eventArgs = new QueueingPipelineNodeContainerDeploymentSuccededEventArgs() { };
-                DeploymentSucceded?.Invoke(this, eventArgs);
+                deploymentNode.Payload.Item1.DeploymentContext.CurrentDeploymentContainerId = this.ContainerId;
+
+                EnsureDeploymentNodeBindings(deploymentNode);
+
+                Deployments.Add(deploymentNode);
+
+                OnDeploymentSuceeded();
             }
             catch (Exception e)
             {
@@ -96,6 +100,46 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             }
         }
 
+        private void OnDeploymentSuceeded(QueueingPipelineNodeContainerDeploymentSuccededEventArgs eventArgs = null)
+        {
+            if (eventArgs == null)
+            {
+                eventArgs = new QueueingPipelineNodeContainerDeploymentSuccededEventArgs() { DeploymentSucceededAt = DateTime.UtcNow };
+            }
+
+            DeploymentSucceded?.Invoke(this, eventArgs);
+        }
+
+        private void EnsureDeploymentNodeBindings(IDefaultDeploymentNode deploymentNode)
+        {
+
+            // wire deployed pipeline to the container's gateway
+            this.PipelineGateway.OutputPorts.Add(deploymentNode.Payload.Item1.DeployedPipeline.QueueingInputBinding);
+            deploymentNode.Payload.Item1.DeployedPipeline.QueueingInputBinding.QueueHasData += DeployedPipelineInputBinding_QueueHasData;
+
+            this.PipelineGateway.InputPorts.Add(deploymentNode.Payload.Item1.DeployedPipeline.QueueingOutputBinding);
+            deploymentNode.Payload.Item1.DeployedPipeline.QueueingOutputBinding.QueueHasData += DeployedPipelineOutputBinding_QueueHasData;
+        }
+
+        /// <summary>
+        /// switch data sent from pipelines
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeployedPipelineOutputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        {
+            int i = 0;
+        }
+
+        /// <summary>
+        /// observe data sent to pipelines
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeployedPipelineInputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        {
+            int i = 0;
+        }
 
         public void ProvisionDeployment(DefaultQueueingPipelineNodeDeployment deployment)
         {
@@ -111,8 +155,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
 
                 // TODO distinguish between deployments and redeployments
                 Deployments.Add(deploymentNode);
-                var eventArgs = new QueueingPipelineNodeContainerDeploymentSuccededEventArgs() { };
-                DeploymentSucceded?.Invoke(this, eventArgs);
+
+                EnsureDeploymentNodeBindings(deploymentNode);
+
+                OnDeploymentSuceeded();
             }
             catch (Exception e)
             {

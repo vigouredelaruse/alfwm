@@ -49,9 +49,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     public interface IDefaultQueueingChannelPipelineGateway<TInputEntity, TOutputEntity>
     {
         string Id { get; set; }
-        ObservableCollection<PipelineQueueingConsumerChannel<TOutputEntity>> OutputPorts { get; set; }
+        ObservableCollection<PipelineToolQueueingConsumerChannel<TOutputEntity>> OutputPorts { get; set; }
 
-        ObservableCollection<PipelineQueueingProducerChannel<TOutputEntity>> InputPorts { get; set; }
+        ObservableCollection<PipelineToolQueueingProducerChannel<TOutputEntity>> InputPorts { get; set; }
 
         void HandleInputPortsCollectionChanged(NotifyCollectionChangedEventArgs e);
 
@@ -82,8 +82,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
             FullDuplexUplinkChannel = new DefaultQueueingPipelineGatewayUplink();
             GatewayContext = new DefaultQueueingChannelPipelineGatewayContext();
 
-            OutputPorts = new ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
-            InputPorts = new ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
+            OutputPorts = new ObservableCollection<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
+            InputPorts = new ObservableCollection<PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
 
             OutputPorts.CollectionChanged += OutputPorts_CollectionChanged;
             InputPorts.CollectionChanged += InputPorts_CollectionChanged;
@@ -110,8 +110,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 
         [XmlAttribute]
         public string Id {get; set; }
-        public ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> OutputPorts {get; set; }
-        public ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> InputPorts {get; set; }
+        public ObservableCollection<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> OutputPorts {get; set; }
+        public ObservableCollection<PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> InputPorts {get; set; }
 
         public ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> PipelineEgressPort { get; set; }
         public DefaultQueueingPipelineGatewayUplink FullDuplexUplinkChannel { get; set; }
@@ -125,7 +125,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
                         // listen to queue arrival events
                         foreach (var item in e.NewItems)
                         {
-                            ((PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += InputQueue_QueueHasData;
+                            try
+                            {
+                                ((PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += InputQueue_QueueHasData;
+                            }
+                            catch(Exception ex)
+                            {
+                                int i = 0;
+                            }
                         }
 
                         break;
@@ -148,7 +155,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
                         // listen to queue arrival events
                         foreach (var item in e.NewItems)
                         {
-                            ((PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += InputQueue_QueueHasData;
+                            ((PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>)item).QueueHasData += InputQueue_QueueHasData;
                         }
 
                         break;
