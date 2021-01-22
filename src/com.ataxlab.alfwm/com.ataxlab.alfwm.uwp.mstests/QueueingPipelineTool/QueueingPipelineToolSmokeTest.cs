@@ -530,7 +530,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             ToolAWorkItemQueue.Enqueue(e.EventPayload);
         }
 
-        private TaskItemPipelineVariable GetNewQueueEntity(int i)
+        public  TaskItemPipelineVariable GetNewQueueEntity(int i)
         {
             // initialize some test data
             TaskItem payload = new TaskItem()

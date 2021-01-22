@@ -34,6 +34,25 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
 
         }
 
+
+        public TaskItemPipelineVariable GetNewQueueEntity(int i)
+        {
+            // initialize some test data
+            TaskItem payload = new TaskItem()
+            {
+                EndTime = DateTime.UtcNow.AddDays(1),
+                StartTimme = DateTime.UtcNow,
+                Id = Guid.NewGuid().ToString(),
+                TaskName = "Task Name" + i,
+                TaskSummary = "Task Summary. This is the task summary " + i
+            };
+
+            TaskItemPipelineVariable queueEntity = new TaskItemPipelineVariable(payload);
+            queueEntity.ID = Guid.NewGuid().ToString();
+            queueEntity.TimeStamp = DateTime.UtcNow;
+            return queueEntity;
+        }
+
         [TestMethod]
         public void TestProcessDefinitionBuilder()
         {
@@ -103,7 +122,18 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
                 RuntimeHostDisplayName = "Test Runtime Host"
             };
 
-            int i = 0;                             
+            var newItem = this.GetNewQueueEntity(1);
+            // enqueue the item without a routing slip
+            // we expect this entity to appear on the dead letter queue
+            var newEntity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>(newItem);
+ 
+            // spin up a producer channel and add it to the test container's gateway
+            var testProducerChannel = new PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+            testContainer.PipelineGateway.InputPorts.Add(testProducerChannel);
+
+            testProducerChannel.OutputQueue.Enqueue(newEntity);
+
+            int i = 0;
         }
     }
 }

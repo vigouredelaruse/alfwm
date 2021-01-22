@@ -50,6 +50,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             Deployments = new ObservableCollection<IDefaultDeploymentNode>();
             ContainerId = Guid.NewGuid().ToString();
             PipelineGateway = new DefaultQueueingChannelPipelineGateway();
+
+            // listen to traffic coming into the gateway
+            
         }
 
 
