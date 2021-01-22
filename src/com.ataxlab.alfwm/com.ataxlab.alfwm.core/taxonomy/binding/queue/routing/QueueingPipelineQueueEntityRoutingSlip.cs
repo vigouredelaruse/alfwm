@@ -52,6 +52,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue.routing
 
         }
 
+        /// <summary>
+        /// TODO - modify setters to enforce the QueueingPipelineRoutingSlipDestination for a given property 
+        /// </summary>
+        public Tuple<QueueingPipelineRoutingSlipDestination, String> DestinationRuntimehost { get; set; }
+        public Tuple<QueueingPipelineRoutingSlipDestination, String> DestinationContainer { get; set; }
+
+        public Tuple<QueueingPipelineRoutingSlipDestination, String> DestinationDeployment { get; set; }
+
         public Tuple<QueueingPipelineRoutingSlipDestination, String> DestinationPipeline { get; set; }
 
         public Tuple<QueueingPipelineRoutingSlipDestination, int> DestinationSlot { get; set; }
@@ -60,7 +68,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue.routing
     /// <summary>
     /// encapsulates a routing step destination
     /// </summary>
-    public enum QueueingPipelineRoutingSlipDestination { Pipeline, PipelineSlot };
+    public enum QueueingPipelineRoutingSlipDestination { RuntimeHost, Container, Deployment, Pipeline, PipelineSlot };
 
 
 }

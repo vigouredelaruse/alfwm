@@ -39,6 +39,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
         public string PipelineToolBindingKey {get; set;}
         public PipelineVariableDictionary PipelineToolBindingValue {get; set;}
         public string Id {get; set; }
+        public string HostComponentId { get; set; }
 
         public event EventHandler<QueueDataAvailableEventArgs<TQueueEntity>> QueueHasData;
 
@@ -51,7 +52,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
             ProducerPollingTimer.Elapsed += ProducerPollingTimer_Elapsed;
             ProducerPollingTimer.AutoReset = false;
             IsQueuePollingEnabled = true;
-
+            HostComponentId = String.Empty;
         }
 
         public void Dispose()
@@ -107,8 +108,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
 
                 QueueHasData?.Invoke(this, new QueueDataAvailableEventArgs<TQueueEntity>(newEntity)
                 {
+                    TimeStamp = DateTime.UtcNow,
                     SourceChannelId = this.Id
-                });
+                }) ;
             }
         }
 

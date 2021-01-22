@@ -212,10 +212,26 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         /// <param name="e"></param>
         private void HandleSwitching(QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
         {
-            foreach (var channel in OutputPorts)
+            var destinationComponentId = e.EventPayload.RoutingSlip.RoutingSteps
+                            .Where(w => w.DestinationPipeline.Item1 == routing.QueueingPipelineRoutingSlipDestination.Pipeline)
+                            .Select(s => s.DestinationPipeline.Item2)
+                            .FirstOrDefault();
+
+            // note this is currently only switching for one destination
+            var destinationChannel = OutputPorts.Where(w => w.HostComponentId.Equals(destinationComponentId)).FirstOrDefault();
+
+            if(destinationChannel != null)
             {
-                channel.InputQueue.Enqueue(e.EventPayload);
+                destinationChannel.InputQueue.Enqueue(e.EventPayload);
             }
+            else
+            {
+                foreach (var channel in OutputPorts)
+                {
+                    channel.InputQueue.Enqueue(e.EventPayload);
+                }
+            }
+
         }
 
         private void HandleDeadLetter(QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)

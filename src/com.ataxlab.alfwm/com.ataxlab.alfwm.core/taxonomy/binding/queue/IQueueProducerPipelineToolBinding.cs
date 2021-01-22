@@ -14,6 +14,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     public interface IQueueProducerPipelineToolBinding<TQueueEntity> : IPipelineToolBinding
               // where TQueueEntity : class,  new()
     {
+        String HostComponentId { get; set; }
         ConcurrentQueue<TQueueEntity> OutputQueue { get; set; }
 
         event EventHandler<QueueDataAvailableEventArgs<TQueueEntity>> QueueHasData;

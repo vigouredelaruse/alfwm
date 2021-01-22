@@ -19,6 +19,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
     public class PipelineToolQueueingConsumerChannel<TQueueEntity> : IQueueConsumerPipelineToolBinding<TQueueEntity>
               // where TQueueEntity : IPipelineToolConfiguration
     {
+        public string HostComponentId { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -37,7 +38,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
             InputQueue = new ConcurrentQueue<TQueueEntity>();
             ConsumerPollingTimer = new System.Timers.Timer(DefaultPollingInterval);
             ConsumerPollingTimer.Elapsed += ConsumerPollingTimer_Elapsed;
-
+            HostComponentId = String.Empty;
             IsQueuePollingEnabled = true;
 
         }
@@ -118,7 +119,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding
             // prepare the eventArgs
             QueueDataAvailableEventArgs<TQueueEntity> eventArgs = new QueueDataAvailableEventArgs<TQueueEntity>(availableData);
             eventArgs.TimeStamp = timestamp;
-
+            eventArgs.SourceChannelId = this.Id;
             // race condition mitigation
             EventHandler<QueueDataAvailableEventArgs<TQueueEntity>> listeners = this.QueueHasData;
             
