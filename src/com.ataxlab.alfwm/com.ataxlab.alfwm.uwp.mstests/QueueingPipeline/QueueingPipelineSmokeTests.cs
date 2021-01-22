@@ -129,11 +129,6 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
             Assert.IsTrue(testDeployment.DeploymentContext.CurrentDeploymentContainerId.Equals(testContainer.ContainerId)
                 , "deployment failed - incorrect container context");
 
-            var testRunHost = new QueueingPipelineRuntimeHost()
-            {
-                RuntimeHostDisplayName = "Test Runtime Host"
-            };
-
             var newItem = this.GetNewQueueEntity(1);
             // enqueue the item without a routing slip
             // we expect this entity to appear on the dead letter queue
@@ -173,6 +168,13 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
 
             Assert.IsTrue(testContainer.PipelineGateway.DeadLetters.Count == 1, "container gateway state issue did not properly handle entity with valid routing slip");
 
+            // spin up a runtime host
+            var testRunHost = new QueueingPipelineRuntimeHost()
+            {
+                RuntimeHostDisplayName = "Test Runtime Host"
+            };
+
+            testRunHost.Deploy(testContainer);
             int i = 0;
         }
     }

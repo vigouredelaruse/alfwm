@@ -23,6 +23,7 @@ namespace com.ataxlab.alfwm.core.runtimehost.queueing
                 
             };
             RuntimeHostId = Guid.NewGuid().ToString();
+            RuntimeHostInstanceId = Guid.NewGuid().ToString();
             DeployedContainers = new ConcurrentDictionary<string, IDefaultQueueingPipelineNodeDeploymentContainer>();
             GatewayHub = new DefaultQueueingChannelPipelineGateway();
 
@@ -35,7 +36,7 @@ namespace com.ataxlab.alfwm.core.runtimehost.queueing
 
         [XmlAttribute]
         public string RuntimeHostId { get; set; }
-
+        public string RuntimeHostInstanceId { get; private set; }
         [XmlAttribute]
         public string RuntimeHostDisplayName { get; set; }
 

@@ -72,6 +72,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         [XmlElement]
         public DefaultQueueingChannelPipelineGateway PipelineGateway { get; set; }
         public ObservableCollection<IDefaultDeploymentNode> Deployments { get; set; }
+        public string ContainerInstanceId { get; set; }
 
         public event EventHandler<QueueingPipelineNodeContainerDeploymentSuccededEventArgs> DeploymentSucceded;
 
