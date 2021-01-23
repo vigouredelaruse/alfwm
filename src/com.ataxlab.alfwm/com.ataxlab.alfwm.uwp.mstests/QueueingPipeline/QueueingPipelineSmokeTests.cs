@@ -20,6 +20,7 @@ using com.ataxlab.alfwm.core.taxonomy.deployment.queueing;
 using AutoMapper;
 using com.ataxlab.alfwm.core.deployment;
 using com.ataxlab.alfwm.core.runtimehost.queueing;
+using System.Threading;
 
 namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
 {
@@ -52,6 +53,17 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
             queueEntity.TimeStamp = DateTime.UtcNow;
             return queueEntity;
         }
+
+        public QueueingPipelineQueueEntityRoutingSlipStep GetRoutingSlipStep(string destinationPipelineId, int destinationSlot)
+        {
+            return new QueueingPipelineQueueEntityRoutingSlipStep()
+            {
+                DestinationPipeline =
+                                new Tuple<QueueingPipelineRoutingSlipDestination, string>(QueueingPipelineRoutingSlipDestination.Pipeline, destinationPipelineId),
+                DestinationSlot = new Tuple<QueueingPipelineRoutingSlipDestination, int>(QueueingPipelineRoutingSlipDestination.PipelineSlot, destinationSlot)
+            };
+        }
+
 
         [TestMethod]
         public void TestProcessDefinitionBuilder()
@@ -117,11 +129,6 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
             Assert.IsTrue(testDeployment.DeploymentContext.CurrentDeploymentContainerId.Equals(testContainer.ContainerId)
                 , "deployment failed - incorrect container context");
 
-            var testRunHost = new QueueingPipelineRuntimeHost()
-            {
-                RuntimeHostDisplayName = "Test Runtime Host"
-            };
-
             var newItem = this.GetNewQueueEntity(1);
             // enqueue the item without a routing slip
             // we expect this entity to appear on the dead letter queue
@@ -131,8 +138,43 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
             var testProducerChannel = new PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
             testContainer.PipelineGateway.InputPorts.Add(testProducerChannel);
 
+            // run one pass without a routing slip
+            // expect dead letter
             testProducerChannel.OutputQueue.Enqueue(newEntity);
 
+            // wait for the message to propageate on the queue
+            Thread.Sleep(5000);
+
+            Assert.IsTrue(testContainer.PipelineGateway.DeadLetters.Count == 1, "container gateway did not properly dead letter without routing slip");
+
+            // add a routing slip
+            QueueingPipelineQueueEntityRoutingSlipStep routingSlipStep = GetRoutingSlipStep(testDeployment.DeployedPipeline.PipelineInstanceId, 0);
+
+            var node = new LinkedListNode<QueueingPipelineQueueEntityRoutingSlipStep>(routingSlipStep);
+
+            QueueingPipelineQueueEntityRoutingSlip routingSlip = new QueueingPipelineQueueEntityRoutingSlip();
+            routingSlip.RoutingSteps.AddFirst(
+                   node
+                );
+
+            // add the routingslip to the entity and enqueue it again
+            newEntity.RoutingSlip = routingSlip;
+
+            // enqueue a routable valid entity
+            testProducerChannel.OutputQueue.Enqueue(newEntity);
+
+            // wait for the message to propageate on the queue
+            Thread.Sleep(5000);
+
+            Assert.IsTrue(testContainer.PipelineGateway.DeadLetters.Count == 1, "container gateway state issue did not properly handle entity with valid routing slip");
+
+            // spin up a runtime host
+            var testRunHost = new QueueingPipelineRuntimeHost()
+            {
+                RuntimeHostDisplayName = "Test Runtime Host"
+            };
+
+            testRunHost.Deploy(testContainer);
             int i = 0;
         }
     }

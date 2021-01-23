@@ -26,6 +26,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
             PipelineDisplayName = GetType().Name;
             PipelineInstanceId = Guid.NewGuid().ToString();
 
+            QueueingPipelineInputs = new ObservableCollection<PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
+            QueueingPipelineOutputs = new ObservableCollection<PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
+
+            QueueingInputBinding = new PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+            QueueingInputBinding.HostComponentId = this.PipelineInstanceId;
+
+            QueueingOutputBinding = new PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+            QueueingOutputBinding.HostComponentId = this.PipelineInstanceId;
 
         }
 

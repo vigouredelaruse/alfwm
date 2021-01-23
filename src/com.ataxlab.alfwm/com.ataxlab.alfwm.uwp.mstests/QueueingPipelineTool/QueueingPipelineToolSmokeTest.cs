@@ -343,7 +343,7 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             Assert.IsTrue(e == null, "test threw exception " + e?.Message);
         }
 
-        private static QueueingPipelineQueueEntityRoutingSlipStep GetRoutingSlipStep(string destinationPipelineId, int destinationSlot)
+        public static QueueingPipelineQueueEntityRoutingSlipStep GetRoutingSlipStep(string destinationPipelineId, int destinationSlot)
         {
             return new QueueingPipelineQueueEntityRoutingSlipStep()
             {

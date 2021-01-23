@@ -32,6 +32,7 @@ namespace com.ataxlab.alfwm.core.runtimehost
         String RuntimeHostDisplayName { get; set; }
 
         IRuntimeHostContext Context { get; set; }
+        string RuntimeHostInstanceId { get; }
     }
 
 

@@ -50,6 +50,8 @@ namespace com.ataxlab.alfwm.core.deployment
     {
         string ContainerId { get; set; }
 
+        string ContainerInstanceId { get; set; }
+
         string DisplayName { get; set; }
 
         string Description { get; set; }

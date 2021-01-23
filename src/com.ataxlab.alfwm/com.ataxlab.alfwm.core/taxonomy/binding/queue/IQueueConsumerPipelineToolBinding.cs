@@ -18,6 +18,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
     public interface IQueueConsumerPipelineToolBinding<TQueueEntity> : IPipelineToolBinding, IDisposable
         // where TQueueEntity : class,  new()
     {
+        String HostComponentId { get; set; }
+
         ConcurrentQueue<TQueueEntity> InputQueue { get; set; }
          
         /// <summary>
