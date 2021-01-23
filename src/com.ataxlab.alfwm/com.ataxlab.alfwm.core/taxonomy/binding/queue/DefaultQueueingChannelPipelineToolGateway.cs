@@ -95,8 +95,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 
         /// <summary>
         /// the preferred constructor
-        /// </summary>
-        /// <param name="ctx"></param>
+        /// </summary>        /// <param name="ctx"></param>
         public DefaultQueueingChannelPipelineToolGateway(DefaultQueueingChannelPipelineToolGatewayContext ctx) : this()
         {
             GatewayContext = ctx;
