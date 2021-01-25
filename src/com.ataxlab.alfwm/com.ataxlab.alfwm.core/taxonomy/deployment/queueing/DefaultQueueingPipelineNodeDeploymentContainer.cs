@@ -70,19 +70,19 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         public string Description { get; set; }
 
         [XmlElement]
-        public DefaultQueueingChannelPipelineGateway PipelineGateway { get; set; }
-        public ObservableCollection<IDefaultDeploymentNode> Deployments { get; set; }
+        public virtual DefaultQueueingChannelPipelineGateway PipelineGateway { get; set; }
+        public virtual ObservableCollection<IDefaultDeploymentNode> Deployments { get; set; }
         public string ContainerInstanceId { get; set; }
 
-        public event EventHandler<QueueingPipelineNodeContainerDeploymentSuccededEventArgs> DeploymentSucceded;
+        public virtual event EventHandler<QueueingPipelineNodeContainerDeploymentSuccededEventArgs> DeploymentSucceded;
 
-        public string ToXMl()
+        public virtual string ToXMl()
         {
             return this.SerializeObject<DefaultQueueingPipelineNodeDeploymentContainer>();
         }
 
 
-        public void ProvisionDeployment(IDefaultDeploymentNode deploymentNode)
+        public virtual void ProvisionDeployment(IDefaultDeploymentNode deploymentNode)
         {
 
             try
@@ -104,7 +104,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             }
         }
 
-        private void OnDeploymentSuceeded(QueueingPipelineNodeContainerDeploymentSuccededEventArgs eventArgs = null)
+        public virtual void OnDeploymentSuceeded(QueueingPipelineNodeContainerDeploymentSuccededEventArgs eventArgs = null)
         {
             if (eventArgs == null)
             {
@@ -114,7 +114,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             DeploymentSucceded?.Invoke(this, eventArgs);
         }
 
-        private void EnsureDeploymentNodeBindings(IDefaultDeploymentNode deploymentNode)
+        public virtual void EnsureDeploymentNodeBindings(IDefaultDeploymentNode deploymentNode)
         {
 
             // wire deployed pipeline to the container's gateway
@@ -130,7 +130,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DeployedPipelineOutputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        public virtual void DeployedPipelineOutputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
         {
             int i = 0;
         }
@@ -140,12 +140,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DeployedPipelineInputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        public virtual void DeployedPipelineInputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
         {
             int i = 0;
         }
 
-        public void ProvisionDeployment(DefaultQueueingPipelineNodeDeployment deployment)
+        public virtual void ProvisionDeployment(DefaultQueueingPipelineNodeDeployment deployment)
         {
             try
             {                
