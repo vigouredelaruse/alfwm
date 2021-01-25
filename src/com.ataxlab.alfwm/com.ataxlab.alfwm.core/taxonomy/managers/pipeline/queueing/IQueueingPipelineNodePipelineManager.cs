@@ -7,6 +7,9 @@ using System.Text;
 
 namespace com.ataxlab.alfwm.core.taxonomy.managers.pipeline.queueing
 {
+    /// <summary>
+    /// furnishing a pipeline manager that IS a deployment container
+    /// </summary>
     public interface IDefaultQueueingPipelineNodePipelineManager : 
         IDeploymentContainer<IDefaultQueueingPipeline, IDefaultQueueingPipelineProcessInstance>
     {
