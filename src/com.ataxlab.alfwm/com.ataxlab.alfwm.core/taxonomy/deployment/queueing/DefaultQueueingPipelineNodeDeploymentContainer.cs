@@ -1,6 +1,7 @@
 ﻿using com.ataxlab.alfwm.core.deployment;
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
+using com.ataxlab.alfwm.core.taxonomy.pipeline.queueing;
 using com.ataxlab.alfwm.core.taxonomy.processdefinition;
 using com.ataxlab.core.alfwm.utility.extension;
 using System;
@@ -26,6 +27,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
 
         event EventHandler<QueueingPipelineNodeContainerDeploymentSuccededEventArgs> DeploymentSucceded;
 
+        ObservableCollection<Tuple< IDefaultQueueingPipeline, List<IDefaultDeploymentNode>>> DeployedPipelines { get; set; }
         string ToXMl();
     }
 
@@ -50,9 +52,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             Deployments = new ObservableCollection<IDefaultDeploymentNode>();
             ContainerId = Guid.NewGuid().ToString();
             PipelineGateway = new DefaultQueueingChannelPipelineGateway();
-
+            DeployedPipelines = new ObservableCollection<Tuple<IDefaultQueueingPipeline, List<IDefaultDeploymentNode>>>();
             // listen to traffic coming into the gateway
-            
+
         }
 
 
@@ -73,6 +75,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         public virtual DefaultQueueingChannelPipelineGateway PipelineGateway { get; set; }
         public virtual ObservableCollection<IDefaultDeploymentNode> Deployments { get; set; }
         public string ContainerInstanceId { get; set; }
+
+        public ObservableCollection<Tuple<IDefaultQueueingPipeline, List<IDefaultDeploymentNode>>> DeployedPipelines { get; set; }
 
         public virtual event EventHandler<QueueingPipelineNodeContainerDeploymentSuccededEventArgs> DeploymentSucceded;
 
@@ -95,6 +99,21 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
                 EnsureDeploymentNodeBindings(deploymentNode);
 
                 Deployments.Add(deploymentNode);
+
+                // spin up a pieline and assign a deployment to it
+                // TODO permit >1 deployment per pipeline
+
+                List<IDefaultDeploymentNode> deployedNodes = new List<IDefaultDeploymentNode>();
+                deployedNodes.Add(deploymentNode);
+
+                DefaultPipelineNodeQueueingPipeline deployedPipeline = new DefaultPipelineNodeQueueingPipeline();
+                deployedPipeline.Deploy(deploymentNode.Payload.Item1.DeployedProcessDefinition);
+
+                Tuple<IDefaultQueueingPipeline, List<IDefaultDeploymentNode>> pipelineDeployment =
+                    new Tuple<IDefaultQueueingPipeline, List<IDefaultDeploymentNode>>(deployedPipeline, deployedNodes);
+
+                DeployedPipelines.Add(pipelineDeployment);
+
 
                 OnDeploymentSuceeded();
             }

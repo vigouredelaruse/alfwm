@@ -1,6 +1,7 @@
 ﻿using com.ataxlab.alfwm.core.deployment.model;
 using com.ataxlab.alfwm.core.taxonomy.deployment.queueing;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
+using com.ataxlab.alfwm.core.taxonomy.pipeline.queueing;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -75,6 +76,7 @@ namespace com.ataxlab.alfwm.core.deployment
     public interface IDeploymentContainer<TDeploymentContainerNode> : IDeploymentContainer
     {
         ObservableCollection<TDeploymentContainerNode> Deployments { get; set; }
+
     }
 
 }
