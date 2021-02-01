@@ -27,8 +27,20 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
 
         event EventHandler<QueueingPipelineNodeContainerDeploymentSuccededEventArgs> DeploymentSucceded;
 
+        event EventHandler<QueueingPipelineNodeContainerDeploymentFailedEventArgs> DeploymentFailed;
+
         ObservableCollection<Tuple< IDefaultQueueingPipeline, List<IDefaultDeploymentNode>>> DeployedPipelines { get; set; }
         string ToXMl();
+    }
+
+    public class QueueingPipelineNodeContainerDeploymentFailedEventArgs
+    {
+        public QueueingPipelineNodeContainerDeploymentFailedEventArgs()
+        {
+
+        }
+
+        public Exception FailingException { get; set; }
     }
 
     public class QueueingPipelineNodeContainerDeploymentSuccededEventArgs : EventArgs
@@ -79,6 +91,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         public ObservableCollection<Tuple<IDefaultQueueingPipeline, List<IDefaultDeploymentNode>>> DeployedPipelines { get; set; }
 
         public virtual event EventHandler<QueueingPipelineNodeContainerDeploymentSuccededEventArgs> DeploymentSucceded;
+        public event EventHandler<QueueingPipelineNodeContainerDeploymentFailedEventArgs> DeploymentFailed;
 
         public virtual string ToXMl()
         {
@@ -109,6 +122,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
                 DefaultPipelineNodeQueueingPipeline deployedPipeline = new DefaultPipelineNodeQueueingPipeline();
                 deployedPipeline.Deploy(deploymentNode.Payload.Item1.DeployedProcessDefinition);
 
+                // wire the pipeline to the container's gateway
+                this.PipelineGateway.InputPorts.Add(deployedPipeline.QueueingOutputBinding);
+                this.PipelineGateway.OutputPorts.Add(deployedPipeline.QueueingInputBinding);
+
                 Tuple<IDefaultQueueingPipeline, List<IDefaultDeploymentNode>> pipelineDeployment =
                     new Tuple<IDefaultQueueingPipeline, List<IDefaultDeploymentNode>>(deployedPipeline, deployedNodes);
 
@@ -120,6 +137,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             catch (Exception e)
             {
                 // TODO deployments can fail
+                int i = 0;
+                DeploymentFailed?.Invoke(this, new QueueingPipelineNodeContainerDeploymentFailedEventArgs() { FailingException = e });
             }
         }
 

@@ -89,7 +89,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
                     // instantiate the node
                     // TODO engineer management of Ids upon and after instantiation
                     Type t = Type.GetType(node.ClassName);
-                    var newNode = (DefaultQueueingPipelineToolNode)Activator.CreateInstance(t);
+                    var newNode = new DefaultQueueingPipelineToolNode(); // (DefaultQueueingPipelineToolNode)Activator.CreateInstance(t);
 
                     // instantiate the pipeline tool
                     Type tTool = Type.GetType(node.QueueingPipelineTool.QueueingPipelineToolClassName);
@@ -118,6 +118,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
                     }
                 }
 
+                // TODO register deployment success
             }
             catch (Exception e)
             {

@@ -182,7 +182,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             WorkQueueProcessTimer.Enabled = true;
         }
 
-        private static HttpRequestQueueingActivityResult EnsureDecoratedEgressMessage(QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration> config, HttpRequestQueueingActivityResult result)
+        private HttpRequestQueueingActivityResult EnsureDecoratedEgressMessage(QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration> config, HttpRequestQueueingActivityResult result)
         {
             HttpRequestQueueingActivityResult activityResult = result;
 

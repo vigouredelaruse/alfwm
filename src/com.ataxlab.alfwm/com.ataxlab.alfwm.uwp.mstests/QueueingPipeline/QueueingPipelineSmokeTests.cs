@@ -81,16 +81,16 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
 
             bool isMustResetBuilder = true;
 
-            // exercise the process definition builder
+            // exercise the process definition builder 
             var testProcessdefinition = testProcessDefinitionBuilder
-                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolClassName(typeof(HttpRequestQueueingActivity).GetType().AssemblyQualifiedName)
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolClassName(typeof(HttpRequestQueueingActivity).AssemblyQualifiedName)
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDisplayName("test http queueing request activity displayname")
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDescription("test http queueing request activity description")
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolId(Guid.NewGuid().ToString())
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolPipelineVariable(testPipelineVariable)
                         .UsePipelineNodeBuilder.withToolChainSlotNumber(0)
                         .NextPipelineToolNode()
-                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolClassName(typeof(HtmlParserQueueingActivity).GetType().AssemblyQualifiedName)
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolClassName(typeof(HtmlParserQueueingActivity).AssemblyQualifiedName)
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDisplayName("test html parser queueing request activity displayname")
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDescription("test html parser queueing request activity description")
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolId(Guid.NewGuid().ToString())

@@ -28,6 +28,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
         public DefaultQueueingPipelineNodeTypeEnum QueueingPipelineNodeType { get; set; }
 
         [XmlElement]
+        [Obsolete]
         public IDefaultQueueingPipeline QueueingPipeline { get; set; }
 
 
