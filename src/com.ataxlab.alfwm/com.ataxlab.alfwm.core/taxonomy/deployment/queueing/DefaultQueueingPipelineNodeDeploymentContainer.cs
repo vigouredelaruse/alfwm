@@ -125,7 +125,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
                 // wire the pipeline to the container's gateway
                 this.PipelineGateway.InputPorts.Add(deployedPipeline.QueueingOutputBinding);
                 this.PipelineGateway.OutputPorts.Add(deployedPipeline.QueueingInputBinding);
-
+                
                 Tuple<IDefaultQueueingPipeline, List<IDefaultDeploymentNode>> pipelineDeployment =
                     new Tuple<IDefaultQueueingPipeline, List<IDefaultDeploymentNode>>(deployedPipeline, deployedNodes);
 
@@ -170,6 +170,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         /// <param name="e"></param>
         public virtual void DeployedPipelineOutputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
         {
+            /// massive TODO 
+            /// ensure that messages do not arrive here from
+            /// pipeline tools without routing slips
+            /// then direct them to the container's gateway
+            /// for disposition according to the gateway's
+            /// connections
             int i = 0;
         }
 

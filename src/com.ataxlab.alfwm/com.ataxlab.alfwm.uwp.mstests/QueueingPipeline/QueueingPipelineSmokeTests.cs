@@ -21,6 +21,7 @@ using AutoMapper;
 using com.ataxlab.alfwm.core.deployment;
 using com.ataxlab.alfwm.core.runtimehost.queueing;
 using System.Threading;
+using System.Net.Http;
 
 namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
 {
@@ -35,6 +36,21 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
 
         }
 
+        public QueueingPipelineQueueEntity<IPipelineToolConfiguration> GetNewQueueEntity()
+        {
+            var activityConfig = new HttpRequestQueueingActivityConfiguration();
+            activityConfig.RequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
+
+            // attach a pipelinevariable to the trigger message sent to the pipeline's q
+            // activityConfig.PipelineVariables.Add(testPipelineVariable);
+
+            QueueingPipelineQueueEntity<IPipelineToolConfiguration> entity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
+            {
+                Payload = activityConfig
+            };
+
+            return entity;
+        }
 
         public TaskItemPipelineVariable GetNewQueueEntity(int i)
         {
@@ -157,6 +173,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
                    node
                 );
 
+            // update the entity 
+            newEntity = GetNewQueueEntity();
             // add the routingslip to the entity and enqueue it again
             newEntity.RoutingSlip = routingSlip;
 
@@ -166,6 +184,9 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
             // wait for the message to propageate on the queue
             Thread.Sleep(5000);
 
+            /// this test is failing here because 
+            /// the tools in this toolchain do not produce 
+            /// messages with proper routing slips
             Assert.IsTrue(testContainer.PipelineGateway.DeadLetters.Count == 1, "container gateway state issue did not properly handle entity with valid routing slip");
 
             // spin up a runtime host

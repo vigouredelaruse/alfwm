@@ -1,5 +1,6 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy;
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
+using com.ataxlab.alfwm.core.taxonomy.binding.queue.routing;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest;
 using HtmlAgilityPack;
@@ -170,7 +171,10 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
         {
             var egressMsg = new HtmlParserQueueingActivityResult()
             {
-                Payload = doc
+                Payload = doc,
+                Id = Guid.NewGuid().ToString(),
+                DisplayName = "Html Parser Activity Result",
+                TimeStamp = DateTime.UtcNow
 
             };
 
@@ -180,8 +184,13 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
             {
                 binding.InputQueue.Enqueue(new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
                 {
-                    Payload = egressMsg
-                });
+                    Payload = egressMsg,
+                    Id = Guid.NewGuid().ToString(),
+                    DisplayName = "Html Parser Activity Result", 
+                    TimeStamp = DateTime.UtcNow,
+                    RoutingSlip = new core.taxonomy.binding.queue.routing.QueueingPipelineQueueEntityRoutingSlip()
+                   
+                }) ;
             }
 
             this.QueueingOutputBinding.OutputQueue.Enqueue(egressEntity);
