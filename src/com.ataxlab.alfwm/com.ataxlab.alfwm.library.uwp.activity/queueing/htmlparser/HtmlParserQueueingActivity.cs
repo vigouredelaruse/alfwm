@@ -88,6 +88,12 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                 {
                     Payload = typedData
                 });
+
+                OnPipelineToolProgressUpdated(this, new PipelineToolProgressUpdatedEventArgs()
+                {
+                    InstanceId = Guid.NewGuid().ToString(),
+                    TimeStamp = DateTime.UtcNow
+                }); ;
             }
             catch (Exception e)
             {
@@ -95,7 +101,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                 {
                     Status = new HtmlParserQueueingActivityStatus()
                     {
-                        StatusJson = JsonConvert.SerializeObject(e)
+                        StatusJson = JsonConvert.SerializeObject(e),
                     }
                 }); 
 
@@ -175,10 +181,12 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                 Id = Guid.NewGuid().ToString(),
                 DisplayName = "Html Parser Activity Result",
                 TimeStamp = DateTime.UtcNow
-
             };
 
             var egressEntity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>(egressMsg);
+            egressEntity.RoutingSlip = new QueueingPipelineQueueEntityRoutingSlip() { IsIgnoreRoutingSlipSteps = true };
+            egressEntity.CurrentPipelineId = this.CurrentPipelineId;
+
 
             foreach (var binding in this.QueueingOutputBindingCollection)
             {
@@ -186,11 +194,14 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                 {
                     Payload = egressMsg,
                     Id = Guid.NewGuid().ToString(),
-                    DisplayName = "Html Parser Activity Result", 
+                    DisplayName = "Html Parser Activity Result",
                     TimeStamp = DateTime.UtcNow,
-                    RoutingSlip = new core.taxonomy.binding.queue.routing.QueueingPipelineQueueEntityRoutingSlip()
-                   
-                }) ;
+                    RoutingSlip = new QueueingPipelineQueueEntityRoutingSlip()
+                    {
+                        IsIgnoreRoutingSlipSteps = true
+                    },
+                    CurrentPipelineId = this.CurrentPipelineId
+                }); 
             }
 
             this.QueueingOutputBinding.OutputQueue.Enqueue(egressEntity);

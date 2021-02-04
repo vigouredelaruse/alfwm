@@ -11,6 +11,7 @@ namespace com.ataxlab.alfwm.core.taxonomy
         public PipelineToolCompletedEventArgs()
         {
             TimeStamp = DateTime.UtcNow;
+            InstanceId = Guid.NewGuid().ToString();
         }
 
         public object Payload { get; set; }

@@ -91,31 +91,42 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
                     Type t = Type.GetType(node.ClassName);
                     var newNode = new DefaultQueueingPipelineToolNode(); // (DefaultQueueingPipelineToolNode)Activator.CreateInstance(t);
 
-                    // instantiate the pipeline tool
-                    Type tTool = Type.GetType(node.QueueingPipelineTool.QueueingPipelineToolClassName);
-                    var newTool = Activator.CreateInstance(tTool);
-
-                    newNode.QueueingPipelineTool = (IDefaultQueueingPipelineTool)newTool;
-
-
-                    // instantiate the pipeline tool's pipeline variables
-                    foreach (var item in node.QueueingPipelineTool.PipelineToolVariables)
+                    try
                     {
+                        // instantiate the pipeline tool
+                        Type tTool = Type.GetType(node.QueueingPipelineTool.QueueingPipelineToolClassName);
+                        var newTool = (IDefaultQueueingPipelineTool)Activator.CreateInstance(tTool);
+                        newTool.CurrentPipelineId = this.PipelineInstanceId;
 
-                        ((IDefaultQueueingPipelineTool)newTool).PipelineToolVariables.Add(item);
+
+                        newNode.QueueingPipelineTool = (IDefaultQueueingPipelineTool)newTool;
+
+
+                        // instantiate the pipeline tool's pipeline variables
+                        foreach (var item in node.QueueingPipelineTool.PipelineToolVariables)
+                        {
+
+                            ((IDefaultQueueingPipelineTool)newTool).PipelineToolVariables.Add(item);
+                        }
+
+                        // add the node to the process definition
+                        if (node.ToolChainSlotNumber == 0)
+                        {
+                            // the first node gets special treatment
+                            var result = AddFirstPipelineNode(newNode);
+
+                        }
+                        else
+                        {
+                            var result = AddAfterPipelineNode(node.ToolChainSlotNumber - 1, newNode);
+                        }
+                    }
+                    catch(Exception activatorException)
+                    {
+                        int i = 0;
+
                     }
 
-                    // add the node to the process definition
-                    if (node.ToolChainSlotNumber == 0)
-                    {
-                        // the first node gets special treatment
-                        var result = AddFirstPipelineNode(newNode);
-
-                    }
-                    else
-                    {
-                        var result = AddAfterPipelineNode(node.ToolChainSlotNumber - 1, newNode);
-                    }
                 }
 
                 // TODO register deployment success
@@ -188,13 +199,19 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline.queueing
 
         private void QueueingPipelineTool_PipelineToolCompleted(object sender, PipelineToolCompletedEventArgs e)
         {
-            PipelineProgressUpdated?.Invoke(sender, new PipelineProgressUpdatedEventArgs() { ToolCompletedEvent = e });
-
+              PipelineCompleted?.Invoke(sender, new PipelineCompletedEventArgs() { Payload = e });
         }
 
         private void QueueingPipelineTool_PipelineToolStarted(object sender, PipelineToolStartEventArgs e)
         {
-            PipelineProgressUpdated?.Invoke(sender, new PipelineProgressUpdatedEventArgs() { ToolStartedEvent = e });
+            PipelineStarted?.Invoke(sender, new PipelineStartedEventArgs() 
+            { 
+                SourceEvent = e,
+                EventId = Guid.NewGuid().ToString(),
+                EventTimeStamp = DateTime.UtcNow,
+                PipelineDisplayName = this.PipelineDisplayName, 
+                PipelineId = this.PipelineId   
+            });
         }
 
         public bool AddFirstPipelineNode(DefaultQueueingPipelineToolNode newNode)

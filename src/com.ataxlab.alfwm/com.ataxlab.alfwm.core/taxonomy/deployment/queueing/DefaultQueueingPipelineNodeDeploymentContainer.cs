@@ -119,8 +119,14 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
                 List<IDefaultDeploymentNode> deployedNodes = new List<IDefaultDeploymentNode>();
                 deployedNodes.Add(deploymentNode);
 
-                DefaultPipelineNodeQueueingPipeline deployedPipeline = new DefaultPipelineNodeQueueingPipeline();
-                deployedPipeline.Deploy(deploymentNode.Payload.Item1.DeployedProcessDefinition);
+                // pick up the pipeline contained in the deployment
+                DefaultPipelineNodeQueueingPipeline deployedPipeline = deploymentNode.Payload.Item1.DeployedPipeline; // new DefaultPipelineNodeQueueingPipeline();
+                
+                // GIANT TODO
+                // compare the process definition deployed to the pipeline 
+                // with the process definition in the incoming payload
+                // this enables container reuse, process definition redeployments
+                // deployedPipeline.Deploy(deploymentNode.Payload.Item1.DeployedProcessDefinition);
 
                 // wire the pipeline to the container's gateway
                 this.PipelineGateway.InputPorts.Add(deployedPipeline.QueueingOutputBinding);

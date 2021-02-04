@@ -1,6 +1,7 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy;
 using com.ataxlab.alfwm.core.taxonomy.binding;
 using com.ataxlab.alfwm.core.taxonomy.binding.queue;
+using com.ataxlab.alfwm.core.taxonomy.binding.queue.routing;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
 using com.ataxlab.alfwm.library.activity.httpactivity;
 using Newtonsoft.Json;
@@ -73,8 +74,10 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             }
 
             HttpRequestQueueingActivityResult activityResult = new HttpRequestQueueingActivityResult();
+            
             try
             {
+                httpClient = new HttpClient();
                 var request = config.RequestMessage;
                 httpClient.Timeout = TimeSpan.FromSeconds(30);
                 var _cancelTokenSource = new CancellationTokenSource();
@@ -97,9 +100,10 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 
                 var evtMsg = new List<String>();
                 evtMsg.Add(content);
-           
+                
                 // TODO fix this oddity
                 var completionArgs = new PipelineToolCompletedEventArgs<HttpRequestQueueingActivityResult>(activityResult);
+           
                 OnPipelineToolCompleted<HttpRequestQueueingActivityResult>(this, new PipelineToolCompletedEventArgs<HttpRequestQueueingActivityResult>(activityResult));
 
                 return activityResult;
@@ -217,6 +221,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             }
 
             activityResult.HttpResponseHeaders = result.HttpResponseHeaders;
+            
             //activityResult.SourceUrl = result.SourceUrl.ToString();
             //activityResult.HttpMethod = result.HttpMethod;
             //activityResult.TimeStamp = DateTime.UtcNow;
@@ -236,14 +241,24 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             {
                 binding.InputQueue.Enqueue(new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
                 {
-                    Payload = activityResult
+                    Payload = activityResult,
+                    RoutingSlip = new QueueingPipelineQueueEntityRoutingSlip()
+                    {
+                        IsIgnoreRoutingSlipSteps = true
+                    },
+                    CurrentPipelineId = this.CurrentPipelineId
                 });
             }
 
             this.QueueingOutputBinding.OutputQueue
                 .Enqueue(new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
                 {
-                    Payload = activityResult
+                    Payload = activityResult,
+                    RoutingSlip = new QueueingPipelineQueueEntityRoutingSlip()
+                    {
+                        IsIgnoreRoutingSlipSteps = true
+                    },
+                    CurrentPipelineId = this.CurrentPipelineId
                 });
         }
 
@@ -296,6 +311,13 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
                 {
                     Payload = typedData
                 });
+
+                OnPipelineToolProgressUpdated(this, new PipelineToolProgressUpdatedEventArgs()
+                {
+                    InstanceId = Guid.NewGuid().ToString(),
+                    TimeStamp = DateTime.UtcNow
+                }); 
+
             }
             catch(Exception e)
             {
@@ -323,104 +345,5 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 
     }
 
-    [Obsolete]
-    public class HttpRequestQueueingActivityEx : QueueingPipelineToolBase<
-                                                                            QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>,
-                                                                            QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult>,
-                                                                            HttpRequestQueueingActivityConfiguration>
-    {
-        public override List<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>>> QueueingOutputBindingPorts { get; set; }
-        public override List<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>>> QueueingOutputBindingCollection {get; set; }
 
-        public override void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args)
-        {
-            
-        }
-
-        public override void OnQueueHasData(object sender, QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration> availableData)
-        {
-            
-        }
-
-        public override void StartPipelineTool(HttpRequestQueueingActivityConfiguration configuration, Action<HttpRequestQueueingActivityConfiguration> callback)
-        {
-            
-        }
-
-        public override StopResult StopPipelineTool<StopResult>(string instanceId)
-        {
-            return default(StopResult);
-        }
-    }
-
-
-    [Obsolete]
-    public class HttpRequestQueueingActivity2 : IQueueingPipelineTool<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>,
-                                                                      PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult>>,
-                                                                                              HttpRequestQueueingActivityConfiguration,
-                                                                                              HttpRequestQueueingActivityResult,
-                                                                                             HttpRequestQueueingActivityConfiguration>
-    {
-        public HttpRequestQueueingActivity2()
-        {
-            this.PipelineToolOutputBinding = new PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>();
-            this.QueueingInputBinding = new PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>();
-            this.PipelineToolVariables = new ObservableCollection<IPipelineVariable>();
-        }
-
-        public PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>> QueueingInputBinding { get; set; }
-        public List<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>> QueueingOutputBindingCollection {get; set; }
-        public PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult>> QueueingOutputBinding { get; set; }
-        public IPipelineToolConfiguration<HttpRequestQueueingActivityConfiguration> PipelineToolConfiguration {get; set; }
-        public string PipelineToolInstanceId { get; set; }
-        public ObservableCollection<IPipelineVariable> PipelineToolVariables {get; set; }
-        public string PipelineToolId { get; set; }
-        public string PipelineToolDisplayName {get; set; }
-        public string PipelineToolDescription { get; set; }
-        public IPipelineToolStatus PipelineToolStatus {get; set; }
-        public IPipelineToolContext PipelineToolContext { get; set; }
-        public IPipelineToolBinding PipelineToolOutputBinding {get; set; }
-
-        public event Func<HttpRequestQueueingActivityConfiguration, HttpRequestQueueingActivityConfiguration> QueueHasAvailableDataEvent;
-        public event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;
-        public event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
-        public event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
-        public event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
-
-        public void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class, new()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnPipelineToolFailed(object sender, PipelineToolFailedEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnPipelineToolProgressUpdated(object sender, PipelineToolProgressUpdatedEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnPipelineToolStarted(object sender, PipelineToolStartEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnQueueHasData(object sender, HttpRequestQueueingActivityConfiguration availableData)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void StartPipelineTool(HttpRequestQueueingActivityConfiguration configuration, Action<HttpRequestQueueingActivityConfiguration> callback)
-        {
-            throw new NotImplementedException();
-        }
-
-        public StopResult StopPipelineTool<StopResult>(string instanceId) where StopResult : IPipelineToolStatus, new()
-        {
-            throw new NotImplementedException();
-        }
-    }
-  
 }

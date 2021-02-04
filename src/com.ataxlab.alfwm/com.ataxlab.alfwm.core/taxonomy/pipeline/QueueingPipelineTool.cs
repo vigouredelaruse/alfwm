@@ -15,7 +15,10 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
 
     public interface IDefaultQueueingPipelineTool : IQueueingPipelineTool, IPipelineTool<IPipelineToolConfiguration>
     {
-
+        /// <summary>
+        /// TODO - move this to a pipeline tool context
+        /// </summary>
+        string CurrentPipelineId { get; set; }
     }
 
     /// <summary>
@@ -50,6 +53,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueingOutputBinding { get; set; }
         // public List<QueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
         public List<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> QueueingOutputBindingCollection { get; set; }
+        public string CurrentPipelineId { get; set; }
 
         public virtual event Func<IQueueingPipelineQueueEntity<IPipelineToolConfiguration>, IQueueingPipelineQueueEntity<IPipelineToolConfiguration>> QueueHasAvailableDataEvent;
         public virtual event EventHandler<PipelineToolStartEventArgs> PipelineToolStarted;

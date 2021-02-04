@@ -14,6 +14,6 @@ namespace com.ataxlab.alfwm.core.taxonomy
         public IPipelineToolStatus Status { get; set; }
         public ObservableCollection<IPipelineVariable> OutputVariables { get; set; }
         public string InstanceId { get; set; }
-        public DateTime TimeStamp { get; private set; }
+        public DateTime TimeStamp { get; set; }
     }
 }

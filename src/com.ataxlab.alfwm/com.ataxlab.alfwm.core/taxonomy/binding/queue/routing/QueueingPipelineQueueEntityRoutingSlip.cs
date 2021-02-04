@@ -126,7 +126,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue.routing
 
             SourceAddress = new QueueingPipelineRoutingAddress();
             DestinationAddress = new QueueingPipelineRoutingAddress();
+
+            IsIgnoreRoutingSlipSteps = false;
         }
+
+        public Boolean IsIgnoreRoutingSlipSteps { get; set; }
 
         public QueueingPipelineRoutingAddress SourceAddress { get; set; }
 
@@ -154,9 +158,28 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue.routing
         /// </summary>
         public QueueingPipelineQueueEntityRoutingSlipStep()
         {
-
+            IsIgnoreRoutingSlip = false;
         }
 
+        public Boolean IsIgnoreRoutingSlip { get; set; }
+
+        /// <summary>
+        /// returns a routing slip for a pipeline id and slot
+        /// GIANT synchronization ANTI-PATTERN TODO
+        /// move this and similar code to a builder that must be instantiated
+        /// </summary>
+        /// <param name="destinationPipelineId"></param>
+        /// <param name="destinationSlot"></param>
+        /// <returns></returns>
+        public static QueueingPipelineQueueEntityRoutingSlipStep GetRoutingSlipStep(string destinationPipelineId, int destinationSlot)
+        {
+            return new QueueingPipelineQueueEntityRoutingSlipStep()
+            {
+                DestinationPipeline =
+                                new Tuple<QueueingPipelineRoutingSlipDestination, string>(QueueingPipelineRoutingSlipDestination.Pipeline, destinationPipelineId),
+                DestinationSlot = new Tuple<QueueingPipelineRoutingSlipDestination, int>(QueueingPipelineRoutingSlipDestination.PipelineSlot, destinationSlot)
+            };
+        }
         /// <summary>
         /// TODO - modify setters to enforce the QueueingPipelineRoutingSlipDestination for a given property 
         /// </summary>

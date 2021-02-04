@@ -19,6 +19,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         PipelineQueueingProducerChannel<TEntity> OutputPort { get; set; }
 
         PipelineQueueingConsumerChannel<TEntity> InputPort { get; set; }
+
     }
 
     public class DefaultQueueingPipelineGatewayUplink : IDefaultQueueingPipelineGatewayUplink<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>
@@ -31,7 +32,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 
         public PipelineQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> OutputPort { get; set; }
         public PipelineQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> InputPort { get; set; }
-    }
+     }
 
     /// <summary>
     /// specify a gateway that interfaces pipelines
@@ -70,6 +71,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         public long DeadLetterCount { get; set; }
         public long MessageCount { get; set; }
         public ObservableCollection<string> SeenPipelineIds { get; set; }
+        public string GatewayId { get;  set; }
     }
 
     public class DefaultQueueingChannelPipelineGateway : IDefaultQueueingChannelPipelineGateway
@@ -80,7 +82,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
             DeadLetters = new ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
             PipelineEgressPort = new ConcurrentQueue<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
             FullDuplexUplinkChannel = new DefaultQueueingPipelineGatewayUplink();
-            GatewayContext = new DefaultQueueingChannelPipelineGatewayContext();
+            GatewayContext = new DefaultQueueingChannelPipelineGatewayContext() { GatewayId = this.Id };
 
             OutputPorts = new ObservableCollection<PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
             InputPorts = new ObservableCollection<PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
@@ -198,8 +200,25 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
                 QueueingPipelineQueueEntity<IPipelineToolConfiguration> msg;
                 firingChannel?.OutputQueue.TryDequeue(out msg);
                 GatewayContext.MessageCount++;
-                HandleSwitching(e);
 
+                if (e.EventPayload.RoutingSlip.IsIgnoreRoutingSlipSteps)
+                {
+                    // here we want to filter messages that have 
+                    // originated from deployed pipelines and 
+                    // are the outputs of pipelines
+                    // for disposition at the client's liesure
+                    // and do not need to be switched
+                    var currentOutputMessagesWithThisId = PipelineEgressPort.Where(w => w.Id != e.EventPayload.Id).ToList();
+                    
+                    if(currentOutputMessagesWithThisId.Count == 0)
+                    {
+                        PipelineEgressPort.Enqueue(e.EventPayload); 
+                    }
+                }
+                else
+                {
+                    HandleSwitching(e);
+                }
             }
         }
 
@@ -247,7 +266,28 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 
         private bool IsDeadLetter(QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
         {
-            return e.EventPayload.RoutingSlip == null;
+            bool ret = false;
+            //return e.EventPayload.RoutingSlip == null || e.EventPayload.RoutingSlip.IsIgnoreRoutingSlipSteps == true;
+
+            if(e.EventPayload.RoutingSlip == null)
+            {
+                ret = true;
+                return ret;
+            }
+
+            if(e.EventPayload.RoutingSlip.IsIgnoreRoutingSlipSteps == false)
+            {
+                ret = false;
+                return ret;
+            }
+
+            if (e.EventPayload.RoutingSlip.IsIgnoreRoutingSlipSteps == true)
+            {
+                ret = false;
+                return ret;
+            }
+
+            return ret;
         }
 
     }
