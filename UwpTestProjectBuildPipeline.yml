@@ -16,7 +16,7 @@ variables:
   buildConfiguration: 'Release'
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
   major : '0'
-  minor : '2'
+  minor : '3'
   patch : '$(Build.BuildNumber)'
 
 steps:
@@ -171,3 +171,17 @@ steps:
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'internal'
     publishVstsFeed: '78cc214a-dbb8-48cf-b259-cd57eb9653f6/3a1ed579-4813-4659-9c65-93e08a6b3005'
+
+- task: PublishSymbols@2
+  inputs:
+    indexSources: true # Optional
+    publishSymbols: true # Optional
+    symbolServerType: 'teamServices' # Required when publishSymbols == True# Options:  , teamServices, fileShare
+    #symbolsPath: # Optional
+    #compressSymbols: false # Required when symbolServerType == FileShare
+    detailedLog: true # Optional
+    #treatNotIndexedAsWarning: false # Optional
+    #symbolsMaximumWaitTime: # Optional
+    #symbolsProduct: # Optional
+    #symbolsVersion: # Optional
+    #symbolsArtifactName: 'Symbols_$(BuildConfiguration)' # Optional
