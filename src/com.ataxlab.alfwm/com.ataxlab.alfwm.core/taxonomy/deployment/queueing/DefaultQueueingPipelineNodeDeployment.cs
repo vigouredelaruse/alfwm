@@ -53,9 +53,25 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             DeploymentContext = new DefaultQueueingPipelineNodeDeploymentContext();
             DeployedPipeline = new DefaultPipelineNodeQueueingPipeline();
             DeployedPipeline.PipelineCompleted += DeployedPipeline_PipelineCompleted;
+            DeployedPipeline.PipelineProgressUpdated += DeployedPipeline_PipelineProgressUpdated;
+            // listen to output from the deployed pipeline
+            DeployedPipeline.QueueingOutputBinding.QueueHasData += QueueingOutputBinding_QueueHasData;
             DeploymentId = Guid.NewGuid().ToString();
             InstanceId = Guid.NewGuid().ToString();
-            DeployedPipelineOutput = new ConcurrentDictionary<string, PipelineCompletedEventArgs>();
+            DeployedPipelineCompletionEvents = new ConcurrentDictionary<string, PipelineCompletedEventArgs>();
+            DeployedPipelineQueueOutput = new ConcurrentDictionary<string, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
+        }
+
+        
+        private void QueueingOutputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
+        {
+            DeployedPipelineQueueOutput.TryAdd(e.EventPayload.Id, e);
+        }
+
+        private void DeployedPipeline_PipelineProgressUpdated(object sender, PipelineProgressUpdatedEventArgs e)
+        {
+            var payload = e.ToolProgressUpdatedEvent.InstanceId;
+
         }
 
         private void DeployedPipeline_PipelineCompleted(object sender, PipelineCompletedEventArgs e)
@@ -64,7 +80,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             var payload = e.Payload;
             if (e.Payload != null)
             {
-                DeployedPipelineOutput.TryAdd(payload.InstanceId, e);
+                DeployedPipelineCompletionEvents.TryAdd(payload.InstanceId, e);
             }
         }
 
@@ -91,8 +107,8 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
         public string InstanceId { get; set;}
 
         [XmlElement]
-        public ConcurrentDictionary<string, PipelineCompletedEventArgs> DeployedPipelineOutput { get; set; }
-
+        public ConcurrentDictionary<string, PipelineCompletedEventArgs> DeployedPipelineCompletionEvents { get; set; }
+        public ConcurrentDictionary<string, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>> DeployedPipelineQueueOutput { get; set; }
         [XmlElement]
         public DefaultQueueingPipelineProcessDefinitionEntity DeployedProcessDefinition { get; set;}
 
@@ -105,6 +121,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             // TODO - here we must apply auditing to events coming from the pipeline
             // deploy the process definition to the pipeline
             this.DeployedPipeline?.Deploy(processDefinition);
+            
             // cache the process definition
             this.DeployedProcessDefinition = processDefinition;
             if(this.DeployedProcessDefinition.Id == null || this.DeployedProcessDefinition.Id == string.Empty)
