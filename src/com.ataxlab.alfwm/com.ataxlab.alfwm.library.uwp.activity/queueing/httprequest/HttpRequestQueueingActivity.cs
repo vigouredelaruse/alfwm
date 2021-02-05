@@ -195,9 +195,9 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             activityResult.ConfigurationJson = JsonConvert.SerializeObject(config);
 
             // nullcheck defence
-            if (config.Payload.RequestHeaders != null)
+            if (config?.Payload?.RequestHeaders != null)
             {
-                foreach (var item in config.Payload.RequestHeaders)
+                foreach (var item in config?.Payload?.RequestHeaders)
                 {
                     var key = item.Key;
                     var value = item.Value.ToList<string>();
@@ -209,7 +209,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             }
 
 
-            foreach (var item in result.HttpResponseHeaders)
+            foreach (var item in result?.HttpResponseHeaders)
             {
                 var key = item.Key;
                 var value = item.Value.ToList<string>();
