@@ -16,7 +16,7 @@ variables:
   buildConfiguration: 'Release'
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
   major : '0'
-  minor : '2'
+  minor : '3'
   patch : '$(Build.BuildNumber)'
 
 steps:
