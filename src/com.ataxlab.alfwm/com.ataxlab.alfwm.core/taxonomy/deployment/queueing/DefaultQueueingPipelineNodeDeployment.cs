@@ -107,6 +107,16 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             this.DeployedPipeline?.Deploy(processDefinition);
             // cache the process definition
             this.DeployedProcessDefinition = processDefinition;
+            if(this.DeployedProcessDefinition.Id == null || this.DeployedProcessDefinition.Id == string.Empty)
+            {
+                this.DeployedProcessDefinition.Id = Guid.NewGuid().ToString();
+            }
+            // surface the materialized process definition
+            this.ProcessDefinitionInstance = new DefaultQueueingPipelineProcessInstance()
+            {
+                 Id = this.DeployedPipeline.ProcessDefinition.Id,
+                 QueueingPipelineNodes = this.DeployedPipeline.ProcessDefinition.QueueingPipelineNodes
+            };
         }
 
         public string ToXml()
