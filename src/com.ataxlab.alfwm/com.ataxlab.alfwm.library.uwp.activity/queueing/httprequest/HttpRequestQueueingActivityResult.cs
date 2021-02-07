@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 {
@@ -24,6 +25,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
 
             ResponseHeaders = new List<Tuple<string, List<string>>>();
             RequestHeaders = new List<Tuple<string, List<string>>>();
+            HttpResponseHeaderCollection = new List<KeyValuePair<string, IEnumerable<string>>>();
 
             DisplayName = this.GetType().Name;
             TimeStamp = DateTime.UtcNow;
@@ -84,6 +86,9 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         /// because HttpResponseHeaders do not serialize without exception
         /// </summary>
         public System.Net.Http.Headers.HttpResponseHeaders HttpResponseHeaders { get; set; }
+
+        [JsonProperty]
+        public List<KeyValuePair<String, IEnumerable<String>>> HttpResponseHeaderCollection { get; set; }
 
         [JsonProperty]
         public string ReasonPhrase { get;  set; }

@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
@@ -90,7 +91,9 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
                 var outMsg = new List<Tuple<String, String>>();
                 outMsg.Add(new Tuple<string, string>("content", content));
 
-                activityResult.HttpResponseHeaders = response.Headers;
+                activityResult.HttpResponseHeaderCollection = response.Headers.ToList < KeyValuePair<String, IEnumerable<String>>>();
+               
+                // activityResult.HttpResponseHeaders = response.Headers
                 activityResult.ResponseStatusCode = response.StatusCode;
                 activityResult.ReasonPhrase = response.ReasonPhrase;
                 activityResult.Payload.Add(new Tuple<string, string>("content", content));
@@ -209,7 +212,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             }
 
 
-            foreach (var item in result?.HttpResponseHeaders)
+            foreach (var item in result?.HttpResponseHeaderCollection)
             {
                 var key = item.Key;
                 var value = item.Value.ToList<string>();
