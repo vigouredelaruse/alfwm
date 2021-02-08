@@ -136,6 +136,7 @@
     <Compile Include="queueing\httprequest\HttpRequestQueueingActivityConfiguration.cs" />
     <Compile Include="queueing\httprequest\HttpRequestQueueingActivityResult.cs" />
     <Compile Include="queueing\httprequest\HttpRequestQueueingActivityStatus.cs" />
+    <Compile Include="queueing\messagelogger\MessageLoggerActivity.cs" />
     <EmbeddedResource Include="Properties\com.ataxlab.alfwm.library.uwp.activity.rd.xml" />
   </ItemGroup>
   <ItemGroup>

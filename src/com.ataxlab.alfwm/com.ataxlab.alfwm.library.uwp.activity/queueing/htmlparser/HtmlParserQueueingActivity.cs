@@ -124,7 +124,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
         /// <param name="e"></param>
         private void WorkQueueProcessTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-           if(WorkItemCache.Count > 0)
+           while(WorkItemCache.Count > 0)
             {
                 try
                 {
@@ -166,7 +166,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                 }
                 catch (Exception ex)
                 {
-
+                    WorkQueueProcessTimer.Enabled = true;
                 }
             }
 

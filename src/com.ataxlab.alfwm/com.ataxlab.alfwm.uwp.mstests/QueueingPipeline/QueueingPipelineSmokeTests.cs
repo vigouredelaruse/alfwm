@@ -22,6 +22,7 @@ using com.ataxlab.alfwm.core.deployment;
 using com.ataxlab.alfwm.core.runtimehost.queueing;
 using System.Threading;
 using System.Net.Http;
+using com.ataxlab.alfwm.library.uwp.activity.queueing.messagelogger;
 
 namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
 {
@@ -105,10 +106,17 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
                         .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolPipelineVariable(testPipelineVariable)
                         .UsePipelineNodeBuilder.withToolChainSlotNumber(1)
                         .NextPipelineToolNode()
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolClassName(typeof(MessageLoggerActivity).AssemblyQualifiedName)
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDisplayName("test html parser queueing request activity displayname")
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolDescription("test html parser queueing request activity description")
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolId(Guid.NewGuid().ToString())
+                        .UsePipelineNodeBuilder.ToBuildPipelineTool.withPipelineToolPipelineVariable(testPipelineVariable)
+                        .UsePipelineNodeBuilder.withToolChainSlotNumber(2)
+                        .NextPipelineToolNode()
                         .BuildProcessDefinitionEntitiy(isMustResetBuilder);
 
             Assert.IsNotNull(testProcessdefinition, "process definition builder failed - null process definition");
-            Assert.IsTrue(testProcessdefinition.QueueingPipelineNodes.Count == 2, "process builder failed - incorrect number of pipelinetool nodes");
+            Assert.IsTrue(testProcessdefinition.QueueingPipelineNodes.Count == 3, "process builder failed - incorrect number of pipelinetool nodes");
 
            
             // spin up a deployment to encapsulate the process definition
