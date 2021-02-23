@@ -40,7 +40,11 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
         public QueueingPipelineQueueEntity<IPipelineToolConfiguration> GetNewQueueEntity()
         {
             var activityConfig = new HttpRequestQueueingActivityConfiguration();
-            activityConfig.RequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
+
+            // initialize the trigger message for the activity
+            HttpRequestMessage httpRequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
+            activityConfig.RequestMessage = httpRequestMessage;
+
 
             // attach a pipelinevariable to the trigger message sent to the pipeline's q
             // activityConfig.PipelineVariables.Add(testPipelineVariable);
@@ -49,6 +53,10 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
             {
                 Payload = activityConfig
             };
+
+
+            /// put the trigger message into pipeline variable scope
+            entity.PipelineVariables.Add(new PipelineVariable(httpRequestMessage));
 
             return entity;
         }

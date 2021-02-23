@@ -573,10 +573,13 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipelineTool
             var activityConfig = new HttpRequestQueueingActivityConfiguration();
             activityConfig.RequestMessage = new System.Net.Http.HttpRequestMessage() { Method = HttpMethod.Get, RequestUri = new Uri("https://www.cnn.com") };
 
-             QueueingPipelineQueueEntity<IPipelineToolConfiguration> entity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
+            QueueingPipelineQueueEntity<IPipelineToolConfiguration> entity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
             {
                 Payload = activityConfig
             };
+
+            // add the queue trigger message to pipeline variable scope
+            entity.PipelineVariables.Add(new PipelineVariable(activityConfig.RequestMessage));
 
             activity.PipelineToolCompleted += httpActivity_PipelineToolCompleted;
 

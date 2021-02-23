@@ -1,5 +1,6 @@
 ﻿using com.ataxlab.alfwm.core.taxonomy.binding.queue.routing;
 using com.ataxlab.alfwm.core.taxonomy.pipeline;
+using com.ataxlab.alfwm.core.utility.extension;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,6 +21,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 
         string CurrentPipelineId { get; set; }
 
+        /// <summary>
+        /// support propagation of variables in scope
+        /// </summary>
+        /// <param name="sourceEntity"></param>
+        void PopulatePipelineVariables(TEntity sourceEntity);
         #endregion
     }
 
@@ -56,5 +62,17 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
 
         public string CurrentPipelineId { get; set; }
         public QueueingPipelineQueueEntityRoutingSlip RoutingSlip { get; set; }
+
+        /// <summary>
+        /// support propagation of pipeline variable scope
+        /// </summary>
+        /// <param name="sourceEntity"></param>
+        public void PopulatePipelineVariables(TEntity sourceEntity)
+        {
+            foreach (IPipelineVariable pipelineVariable in sourceEntity.PipelineVariables)
+            {
+                this.PipelineVariables.Add(pipelineVariable.CloneObject<PipelineVariable>());
+            }
+        }
     }
 }

@@ -192,7 +192,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         private HttpRequestQueueingActivityResult EnsureDecoratedEgressMessage(QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration> config, HttpRequestQueueingActivityResult result)
         {
             HttpRequestQueueingActivityResult activityResult = result;
-
+           
             // attach the message that generated the result to the result
             // of the activity
             activityResult.ConfigurationJson = JsonConvert.SerializeObject(config);
@@ -308,12 +308,18 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         {
             try
             {
-                var jsonData = JsonConvert.SerializeObject(availableData.Payload);
-                HttpRequestQueueingActivityConfiguration typedData = JsonConvert.DeserializeObject<HttpRequestQueueingActivityConfiguration>(jsonData);
-                WorkItemCache.Enqueue(new QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>()
-                {
-                    Payload = typedData
-                });
+                //var jsonData = JsonConvert.SerializeObject(availableData.Payload);
+                //HttpRequestQueueingActivityConfiguration typedData = JsonConvert.DeserializeObject<HttpRequestQueueingActivityConfiguration>(jsonData);
+                //WorkItemCache.Enqueue(new QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>()
+                //{
+                //    Payload = typedData
+                //});
+
+                var jsondata = JsonConvert.SerializeObject(availableData);
+                QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration> typedData =
+                    JsonConvert.DeserializeObject<QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration>>(jsondata);
+
+                WorkItemCache.Enqueue(typedData);
 
                 OnPipelineToolProgressUpdated(this, new PipelineToolProgressUpdatedEventArgs()
                 {
