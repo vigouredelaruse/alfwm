@@ -150,7 +150,24 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
                                     
                                     activityResult = EnsureDecoratedEgressMessage(config, result);
 
-                                    EnsureMessageEgressed(activityResult);
+                                    var egressEntity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
+                                    {
+                                        Payload = activityResult,
+                                        RoutingSlip = new QueueingPipelineQueueEntityRoutingSlip()
+                                        {
+                                            IsIgnoreRoutingSlipSteps = true
+                                        },
+                                        CurrentPipelineId = this.CurrentPipelineId
+                                    };
+
+                                    // copy the pipeline variables
+                                    // from the ingress entity 
+                                    // to the egress entity
+                                    // supporting pipeline variable scope
+                                    // egressEntity.PopulatePipelineVariables(config);
+                                    this.EnsureMessageEgressed(config, egressEntity);
+
+                                    // EnsureMessageEgressed(activityResult);
 
                                     PipelineToolCompleted?.Invoke(this, new PipelineToolCompletedEventArgs()
                                     {
@@ -189,6 +206,12 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
             WorkQueueProcessTimer.Enabled = true;
         }
 
+        /// <summary>
+        /// this code moved to QueueingPipelineTool, base class of this
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
         private HttpRequestQueueingActivityResult EnsureDecoratedEgressMessage(QueueingPipelineQueueEntity<HttpRequestQueueingActivityConfiguration> config, HttpRequestQueueingActivityResult result)
         {
             HttpRequestQueueingActivityResult activityResult = result;
@@ -237,6 +260,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.httprequest
         /// in the pipeline
         /// </summary>
         /// <param name="activityResult"></param>
+        [Obsolete]
         private void EnsureMessageEgressed(HttpRequestQueueingActivityResult activityResult)
         {
             // signal downstream

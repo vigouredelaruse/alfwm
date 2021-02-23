@@ -19,6 +19,12 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         /// TODO - move this to a pipeline tool context
         /// </summary>
         string CurrentPipelineId { get; set; }
+
+        /// <summary>
+        /// support BPMN style activity completion semantics
+        /// </summary>
+        /// <param name="egressMsg"></param>
+        void EnsureMessageEgressed(IPipelineToolConfiguration triggerMessage, QueueingPipelineQueueEntity<IPipelineToolConfiguration> egressMsg);
     }
 
     /// <summary>
@@ -60,6 +66,25 @@ namespace com.ataxlab.alfwm.core.taxonomy.pipeline
         public virtual event EventHandler<PipelineToolProgressUpdatedEventArgs> PipelineToolProgressUpdated;
         public virtual event EventHandler<PipelineToolFailedEventArgs> PipelineToolFailed;
         public virtual event EventHandler<PipelineToolCompletedEventArgs> PipelineToolCompleted;
+
+        /// <summary>
+        /// support BPMN activity completion style semantics
+        /// </summary>
+        /// <param name="egressMsg"></param>
+        public void EnsureMessageEgressed(IPipelineToolConfiguration triggerMessage, QueueingPipelineQueueEntity<IPipelineToolConfiguration> egressMsg)
+        {
+            egressMsg.CurrentPipelineId = this.CurrentPipelineId;
+
+            // propagate pipeline variable scope
+            egressMsg.PopulatePipelineVariables(triggerMessage);
+
+            foreach(var binding in this.QueueingOutputBindingCollection)
+            {
+                binding.InputQueue.Enqueue(egressMsg);
+            }
+
+            this.QueueingOutputBinding.OutputQueue.Enqueue(egressMsg);
+        }
 
         public virtual void OnPipelineToolCompleted<TPayload>(object sender, PipelineToolCompletedEventArgs<TPayload> args) where TPayload : class, new()
         {

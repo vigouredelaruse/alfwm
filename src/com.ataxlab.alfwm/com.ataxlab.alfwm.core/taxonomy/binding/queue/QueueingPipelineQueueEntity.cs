@@ -69,9 +69,9 @@ namespace com.ataxlab.alfwm.core.taxonomy.binding.queue
         /// <param name="sourceEntity"></param>
         public void PopulatePipelineVariables(TEntity sourceEntity)
         {
-            foreach (IPipelineVariable pipelineVariable in sourceEntity.PipelineVariables)
+            foreach (PipelineVariable pipelineVariable in sourceEntity.PipelineVariables)
             {
-                this.PipelineVariables.Add(pipelineVariable.CloneObject<PipelineVariable>());
+                this.PipelineVariables.Add(pipelineVariable);
             }
         }
     }
