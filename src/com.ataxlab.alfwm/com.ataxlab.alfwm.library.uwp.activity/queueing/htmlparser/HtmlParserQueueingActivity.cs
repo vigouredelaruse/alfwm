@@ -137,22 +137,40 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                     // we expect these messages on the work item queue
                     QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult> workitem;
                     var dQResult = WorkItemCache.TryDequeue(out workitem);
-                    
-                    // expect a payload of tuple<string,string>
+
                     if(dQResult)
                     {
                         var content = workitem.Payload.Payload[0];
                         HtmlDocument doc = new HtmlDocument();
                         doc.LoadHtml(content.Item2);
 
+                        var egressMsg = new HtmlParserQueueingActivityResult()
+                        {
+                            Payload = doc,
+                            Id = Guid.NewGuid().ToString(),
+                            DisplayName = "Html Parser Activity Result",
+                            TimeStamp = DateTime.UtcNow
+                        };
+
+                        var egressEntity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
+                        {
+                            Payload = egressMsg,
+                            RoutingSlip = new QueueingPipelineQueueEntityRoutingSlip()
+                            {
+                                IsIgnoreRoutingSlipSteps = true
+                            },
+                            CurrentPipelineId = this.CurrentPipelineId
+                        };
+
+                        this.EnsureMessageEgressed(workitem, egressEntity);
+
+                        // EnsureEgressMessage(doc);
+
                         PipelineToolCompleted?.Invoke(this, new PipelineToolCompletedEventArgs()
                         {
                             InstanceId = this.PipelineToolInstanceId,
 
                         });
-
-                        EnsureEgressMessage(doc);
-
                         //var xpath = "//text()"; // "//text()";
                         //var textNodes = doc.DocumentNode.SelectNodes(xpath);
 
@@ -166,6 +184,14 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                 }
                 catch (Exception ex)
                 {
+
+                    OnPipelineToolFailed(this, new PipelineToolFailedEventArgs()
+                    {
+                        InstanceId = this.PipelineToolInstanceId,
+                        Status = new HttpRequestQueueingActivityStatus { StatusJson = JsonConvert.SerializeObject(ex) }
+
+                    });
+
                     WorkQueueProcessTimer.Enabled = true;
                 }
             }
