@@ -162,6 +162,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
  
             // spin up a producer channel and add it to the test container's gateway
             var testProducerChannel = new PipelineToolQueueingProducerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+            var testConsumerChannel = new PipelineToolQueueingConsumerChannel<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>();
+
             testContainer.PipelineGateway.InputPorts.Add(testProducerChannel);
 
             // run one pass without a routing slip
@@ -216,6 +218,8 @@ namespace com.ataxlab.alfwm.uwp.mstests.QueueingPipeline
             };
 
             testRunHost.Deploy(testContainer);
+
+            var seenMessages = testConsumerChannel.InputQueue.Count; 
             int i = 0;
         }
 
