@@ -126,6 +126,9 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
         {
            while(WorkItemCache.Count > 0)
             {
+                // we expect these messages on the work item queue
+                QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult> workitem = new QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult>();
+
                 try
                 {
 
@@ -134,8 +137,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                         InstanceId = this.PipelineToolInstanceId
                     });
 
-                    // we expect these messages on the work item queue
-                    QueueingPipelineQueueEntity<HttpRequestQueueingActivityResult> workitem;
+
                     var dQResult = WorkItemCache.TryDequeue(out workitem);
 
                     if(dQResult)
@@ -193,6 +195,32 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
 
                     });
 
+                    // egress messages even if the pipeline failed
+                    HtmlDocument doc = new HtmlDocument();
+                    doc.CreateComment("html parser threw error: excception " + ex.Message);
+
+
+                    var egressMsg = new HtmlParserQueueingActivityResult()
+                    {
+                        Payload = doc,
+                        Id = Guid.NewGuid().ToString(),
+                        DisplayName = "Html Parser Activity Result",
+                        TimeStamp = DateTime.UtcNow
+                    };
+
+                    var egressEntity = new QueueingPipelineQueueEntity<IPipelineToolConfiguration>()
+                    {
+                        Payload = egressMsg,
+                        RoutingSlip = new QueueingPipelineQueueEntityRoutingSlip()
+                        {
+                            IsIgnoreRoutingSlipSteps = true
+                        },
+                        CurrentPipelineId = this.CurrentPipelineId
+                    };
+
+
+                    this.EnsureMessageEgressed(workitem, egressEntity);
+
                     WorkQueueProcessTimer.Enabled = true;
                 }
             }
@@ -200,6 +228,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
             WorkQueueProcessTimer.Enabled = true;
         }
 
+        [Obsolete]
         private void EnsureEgressMessage(HtmlDocument doc)
         {
             var egressMsg = new HtmlParserQueueingActivityResult()
