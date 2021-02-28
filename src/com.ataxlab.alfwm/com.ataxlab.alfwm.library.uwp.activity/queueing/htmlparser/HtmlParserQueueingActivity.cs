@@ -144,6 +144,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                         HtmlDocument doc = new HtmlDocument();
                         doc.LoadHtml(content.Item2);
 
+
                         var egressMsg = new HtmlParserQueueingActivityResult()
                         {
                             Payload = doc,
@@ -169,7 +170,7 @@ namespace com.ataxlab.alfwm.library.uwp.activity.queueing.htmlparser
                         PipelineToolCompleted?.Invoke(this, new PipelineToolCompletedEventArgs()
                         {
                             InstanceId = this.PipelineToolInstanceId,
-
+                            Payload = egressEntity
                         });
                         //var xpath = "//text()"; // "//text()";
                         //var textNodes = doc.DocumentNode.SelectNodes(xpath);

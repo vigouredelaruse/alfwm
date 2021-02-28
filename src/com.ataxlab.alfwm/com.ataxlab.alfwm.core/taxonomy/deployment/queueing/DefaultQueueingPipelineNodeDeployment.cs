@@ -54,6 +54,7 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             DeployedPipeline = new DefaultPipelineNodeQueueingPipeline();
             DeployedPipeline.PipelineCompleted += DeployedPipeline_PipelineCompleted;
             DeployedPipeline.PipelineProgressUpdated += DeployedPipeline_PipelineProgressUpdated;
+            DeployedPipeline.PipelineFailed += DeployedPipeline_PipelineFailed;
             // listen to output from the deployed pipeline
             DeployedPipeline.QueueingOutputBinding.QueueHasData += QueueingOutputBinding_QueueHasData;
             DeploymentId = Guid.NewGuid().ToString();
@@ -62,7 +63,11 @@ namespace com.ataxlab.alfwm.core.taxonomy.deployment.queueing
             DeployedPipelineQueueOutput = new ConcurrentDictionary<string, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>>>();
         }
 
-        
+        private void DeployedPipeline_PipelineFailed(object sender, PipelineFailedEventArgs e)
+        {
+            // manage pipeline failures
+        }
+
         private void QueueingOutputBinding_QueueHasData(object sender, QueueDataAvailableEventArgs<QueueingPipelineQueueEntity<IPipelineToolConfiguration>> e)
         {
             DeployedPipelineQueueOutput.TryAdd(e.EventPayload.Id, e);
